@@ -1,22 +1,20 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ChevronDown, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Header = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
   const toggleSidebar = () => setSidebarVisible(!isSidebarVisible);
-  const toggleDropdown = (menu: string) => {
-    setOpenDropdown((prev) => (prev === menu ? null : menu));
-  };
 
   return (
-    <header className="bg-[#4c5f4e] flex flex-row items-center justify-between py-4 px-6 lg:px-24 z-40">
-      <Link href="/">
-        <img src="/logo.png" alt="EkoStudy logo" className="h-10" />
+    <header className="bg-[#4c5f4e] flex flex-row items-center justify-between py-2 px-6 lg:px-24 z-40">
+      <Link href="/" className="w-32 lg:w-40 relative m-0">
+        <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
       </Link>
 
       <nav className="hidden lg:flex gap-8">
@@ -43,20 +41,32 @@ const Header = () => {
           { label: "CONTACT", href: "/contact" },
           { label: "BLOG", href: "/blog" },
         ].map((item, index) => (
-          <div key={index} className="relative group">
+          <div key={index} className="relative">
             <Link
               href={item.href || "#"}
-              className="text-white font-bold flex items-center gap-2 py-3"
+              className="text-white font-bold flex items-center gap-2 py-8"
+              onMouseEnter={() => setHoveredMenu(item.label)}
+              onMouseLeave={() => setHoveredMenu(null)}
             >
               {item.label}
-              {item.submenu && <ChevronDown size={18} className="group-hover:rotate-180 transition" />}
+              {item.submenu && (
+                <ChevronDown
+                  size={18}
+                  className={`transition duration-300 font-bold ${
+                    hoveredMenu === item.label ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              )}
             </Link>
-            {item.submenu && (
+
+            {item.submenu && hoveredMenu === item.label && (
               <motion.ul
-                initial={{ y: -10 }}
-                animate={{ y: 0 }}
-                exit={{ y: -10 }}
-                className="absolute opacity-0 group-hover:opacity-100 left-0 top-6 mt-2 w-48 bg-[#4c5f4e] shadow-lg border-t-2 border-[#ffca0d] rounded-md overflow-hidden"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute left-0 top-20 mt-2 w-48 bg-[#4c5f4e] shadow-lg border-t-2 border-[#ffca0d] overflow-hidden"
+                onMouseEnter={() => setHoveredMenu(item.label)}
+                onMouseLeave={() => setHoveredMenu(null)}
               >
                 {item.submenu.map((sub, subIndex) => (
                   <li key={subIndex} className="py-2 px-4 text-white hover:text-[#ffca0d] transition">
@@ -68,26 +78,36 @@ const Header = () => {
           </div>
         ))}
       </nav>
-        <Link href="/auth/signup" className="hidden lg:block px-4 py-3 text-white border-2 border-white ml-auto">
-            Get Started
-        </Link>
+
+      <Link
+        href="/auth/signup"
+        className="hidden lg:block px-4 py-3 text-white border-2 border-white uppercase font-semibold"
+      >
+        Get Started
+      </Link>
 
       <button className="lg:hidden text-white" onClick={toggleSidebar}>
-         <Menu size={28} />
+        <Menu size={28} />
       </button>
 
       {isSidebarVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={toggleSidebar} />
+        <div className="block lg:hidden fixed inset-0 bg-black/50 z-40" onClick={toggleSidebar} />
       )}
+
       <motion.aside
         initial={{ x: "-100%" }}
         animate={{ x: isSidebarVisible ? "0%" : "-100%" }}
         transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 h-full w-3/4 bg-[#4c5f4e] p-6 z-50"
+        className="block lg:hidden fixed top-0 left-0 h-full w-3/4 bg-[#4c5f4e] p-6 z-50"
       >
-        <button className="text-white mb-6" onClick={toggleSidebar}>
-          <X size={28} />
-        </button>
+        <div className="relative flex flex-row items-start justify-between py-4">
+          <Link href="/" className="w-32">
+            <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
+          </Link>
+          <button className="text-white mb-6" onClick={toggleSidebar}>
+            <X size={28} />
+          </button>
+        </div>
         <ul className="space-y-4">
           {[
             { label: "HOME", href: "/" },
@@ -115,19 +135,19 @@ const Header = () => {
             <div key={index}>
               <div
                 className="flex justify-between items-center text-white font-bold cursor-pointer"
-                onClick={() => toggleDropdown(item.label)}
+                onClick={() => setHoveredMenu(hoveredMenu === item.label ? null : item.label)}
               >
                 {item.label}
                 {item.submenu && (
                   <motion.div
-                    animate={{ rotate: openDropdown === item.label ? 45 : 0 }}
-                    transition={{ duration: 0.2 }}
+                    animate={{ rotate: hoveredMenu === item.label ? 135 : 0 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <Plus size={18} />
+                    <Plus size={24} className="font-normal" />
                   </motion.div>
                 )}
               </div>
-              {openDropdown === item.label && item.submenu && (
+              {hoveredMenu === item.label && item.submenu && (
                 <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pl-4 mt-2">
                   {item.submenu.map((sub, subIndex) => (
                     <li key={subIndex} className="py-1 text-white hover:text-[#ffca0d] transition">

@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Onest;
+h1, h2, h3, h4, h5, h6 {
+  font-family: Merriweather, serif;
+}
+
+body, p, input, textarea, select, label, button {
+  font-family: Outfit, sans-serif;
 }
 
 @layer base {

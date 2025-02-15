@@ -18,6 +18,11 @@ export default {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
+			//   green: '#4c5f4e',
+			green:'#92b76d',
+			  secondary: '#e8ede6',
+			  yellow: '#ffca0d',
+			  background: '#e6e1d1',
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
@@ -52,12 +57,6 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		},
-  		fontFamily: {
-  			onest: [
-  				'var(--font-onest)',
-  				'sans-serif'
-  			]
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
