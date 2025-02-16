@@ -1,41 +1,43 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import Header from '@/components/Header';
-import Banner from '@/components/Banner';
-import Footer from '@/components/Footer';
+import { useEffect } from "react";
+import Header from "@/components/Header";
+import Banner from "@/components/Banner";
+import Footer from "@/components/Footer";
 
-const BlogPage = () => {
+export default function BlogPage() {
   useEffect(() => {
-    const blogHandyScript = document.createElement('script');
-    blogHandyScript.src = 'https://www.bloghandy.com/api/bh_blogengine.js';
+    const blogHandyScript = document.createElement("script");
+    blogHandyScript.src = "https://www.bloghandy.com/api/bh_blogengine.js";
     blogHandyScript.async = true;
-    blogHandyScript.onload = () => {
-      (window as any).bh_id = '609HmCqwe4Qx6DNDIxNA';
-    };
     document.body.appendChild(blogHandyScript);
 
-    const aclibScript = document.createElement('script');
-    aclibScript.type = 'text/javascript';
+    const aclibScript = document.createElement("script");
+    aclibScript.type = "text/javascript";
     aclibScript.innerHTML = `
-      aclib.runAutoTag({
-        zoneId: 'z7tk79idot',
-      });
+      if (window.aclib) {
+        window.aclib.runAutoTag({ zoneId: 'z7tk79idot' });
+      }
     `;
     document.body.appendChild(aclibScript);
 
+    // Cleanup function
     return () => {
-      document.body.removeChild(blogHandyScript);
-      document.body.removeChild(aclibScript);
+      if (blogHandyScript.parentNode) {
+        blogHandyScript.parentNode.removeChild(blogHandyScript);
+      }
+      if (aclibScript.parentNode) {
+        aclibScript.parentNode.removeChild(aclibScript);
+      }
     };
   }, []);
 
   const page = {
-    title: 'Blog',
+    title: "Posts",
     breadcrumb: [
-      { name: 'Blog', path: '/blog' },
-      { name: 'Posts', path: '/blog/in-blog' },
-    ]
+      { name: "Blog", path: "/blog" },
+      { name: "Posts", path: "/blog/post" },
+    ],
   };
 
   return (
@@ -46,6 +48,4 @@ const BlogPage = () => {
       <Footer />
     </div>
   );
-};
-
-export default BlogPage;
+}
