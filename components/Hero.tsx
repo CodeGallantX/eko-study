@@ -5,20 +5,27 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <div className="relative w-full h-screen flex flex-col items-center justify-center text-center px-6 lg:px-20 bg-[#e8ede6] dark:bg-[#1a1a1a]">
-      {/* Background Graphics */}
+    <div className="relative w-full h-screen flex flex-col items-center justify-center text-center px-6 lg:px-20 bg-[#e8ede6] dark:bg-[#1a1a1a] overflow-hidden">
+      
+      {/* Background Blurry Blobs */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }} 
-          animate={{ opacity: 1, scale: 1 }} 
-          transition={{ duration: 1 }}
-          className="absolute bg-[#e6e1d1] dark:bg-[#333] w-[250px] h-[250px] rotate-45 top-10 right-10 opacity-40"
+          className="absolute w-[300px] h-[300px] bg-[#e6e1d1] dark:bg-[#333] rounded-full filter blur-3xl opacity-50"
+          initial={{ x: "-30%", y: "-20%", scale: 1 }}
+          animate={{ x: ["-20%", "10%", "-10%"], y: ["-10%", "20%", "-10%"], scale: [1, 1.2, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div 
-          initial={{ opacity: 0, scale: 0.8 }} 
-          animate={{ opacity: 1, scale: 1 }} 
-          transition={{ duration: 1.2 }}
-          className="absolute bg-[#e6e1d1] dark:bg-[#444] w-[100px] h-[100px] rotate-45 bottom-10 left-10 opacity-40"
+          className="absolute w-[200px] h-[200px] bg-[#92B76D] dark:bg-[#444] rounded-full filter blur-3xl opacity-50 bottom-10 right-10"
+          initial={{ x: "30%", y: "20%", scale: 1 }}
+          animate={{ x: ["20%", "-10%", "15%"], y: ["10%", "-15%", "10%"], scale: [1, 1.3, 1] }}
+          transition={{ duration:4 , repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div 
+          className="absolute w-[250px] h-[250px] bg-[#ffca0d] dark:bg-[#555] rounded-full filter blur-3xl opacity-50 top-20 left-20"
+          initial={{ x: "-20%", y: "30%", scale: 1 }}
+          animate={{ x: ["-15%", "15%", "-10%"], y: ["30%", "10%", "20%"], scale: [1, 1.1, 1] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 

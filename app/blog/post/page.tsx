@@ -1,43 +1,41 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import Header from "@/components/Header";
-import Banner from "@/components/Banner";
-import Footer from "@/components/Footer";
+import { useEffect } from 'react';
+import Header from '@/components/Header';
+import Banner from '@/components/Banner';
+import Footer from '@/components/Footer';
 
-export default function BlogPage() {
+const BlogPage = () => {
   useEffect(() => {
-    const blogHandyScript = document.createElement("script");
-    blogHandyScript.src = "https://www.bloghandy.com/api/bh_blogengine.js";
+    const blogHandyScript = document.createElement('script');
+    blogHandyScript.src = 'https://www.bloghandy.com/api/bh_blogengine.js';
     blogHandyScript.async = true;
+    blogHandyScript.onload = () => {
+      (window as any).bh_id = '609HmCqwe4Qx6DNDIxNA';
+    };
     document.body.appendChild(blogHandyScript);
 
-    const aclibScript = document.createElement("script");
-    aclibScript.type = "text/javascript";
+    const aclibScript = document.createElement('script');
+    aclibScript.type = 'text/javascript';
     aclibScript.innerHTML = `
-      if (window.aclib) {
-        window.aclib.runAutoTag({ zoneId: 'z7tk79idot' });
-      }
+      aclib.runAutoTag({
+        zoneId: 'z7tk79idot',
+      });
     `;
     document.body.appendChild(aclibScript);
 
-    // Cleanup function
     return () => {
-      if (blogHandyScript.parentNode) {
-        blogHandyScript.parentNode.removeChild(blogHandyScript);
-      }
-      if (aclibScript.parentNode) {
-        aclibScript.parentNode.removeChild(aclibScript);
-      }
+      document.body.removeChild(blogHandyScript);
+      document.body.removeChild(aclibScript);
     };
   }, []);
 
   const page = {
-    title: "Posts",
+    title: 'Blog',
     breadcrumb: [
-      { name: "Blog", path: "/blog" },
-      { name: "Posts", path: "/blog/post" },
-    ],
+      { name: 'Blog', path: '/blog' },
+      { name: 'Posts', path: '/blog/in-blog' },
+    ]
   };
 
   return (
@@ -48,4 +46,6 @@ export default function BlogPage() {
       <Footer />
     </div>
   );
-}
+};
+
+export default BlogPage;
