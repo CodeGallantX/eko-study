@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { Menu, X, ChevronDown, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -65,7 +65,7 @@ const Header = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="absolute left-0 top-20 mt-2 w-48 bg-[#4c5f4e] shadow-lg border-t-2 border-[#ffca0d] overflow-hidden"
+                className="absolute left-0 top-20 mt-2 w-48 bg-[#4c5f4e] shadow-lg border-t-2 border-[#ffca0d] overflow-hidden z-40"
                 onMouseEnter={() => setHoveredMenu(item.label)}
                 onMouseLeave={() => setHoveredMenu(null)}
               >
@@ -108,7 +108,7 @@ const Header = () => {
           <Link href="/" className="w-32" onClick={toggleSidebar}>
             <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
           </Link>
-          <button className="text-white mb-6" onClick={toggleSidebar}>
+          <button className="text-white mb-6 hover:rotate-135 transition-all duration-200 ease-in-out" onClick={toggleSidebar}>
             <X size={28} />
           </button>
         </div>
@@ -148,8 +148,8 @@ const Header = () => {
                 </Link>
                 {item.submenu && (
                   <motion.div
-                    animate={{ rotate: hoveredMenu === item.label ? 150 : 0 }}
-                    transition={{ duration: 0.3 }}
+                    animate={{ rotate: hoveredMenu === item.label ? 135 : 0 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <Plus size={24} className="font-normal" />
                   </motion.div>

@@ -2,11 +2,11 @@ import Head from "next/head";
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "About Us - EkoStudy",
+  title: "About EkoStudy - Our Mission & Vision",
   description:
-    "Get in touch with EkoStudy for support, inquiries, or feedback. We are here to help LASUSTECH students with all their academic needs.",
+    "Learn about EkoStudy’s mission to empower LASUSTECH students with top-quality academic resources, interactive learning tools, and expert study support.",
   keywords:
-    "About EkoStudy, LASUSTECH support, student inquiries, academic assistance, help desk, educational support",
+    "About EkoStudy, EkoStudy mission, LASUSTECH education platform, student learning resources, academic support, study tools, online education, university success, learning innovation",
 };
 
 type AboutLayoutProps = {
