@@ -1,12 +1,23 @@
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
-// import Hero from "@/components/Hero"
+import Banner from "@/components/Banner"
 
-export default function App () {
+export default function App() {
+  const page = {
+      title: "About",
+      breadcrumb: [
+        {
+          name: "About",
+          path: "/about",
+        }
+      ]
+    }
+  
+
   return (
     <div>
       <Header />
-      {/* <Hero /> */}
+      <Banner page={page} />
       <Footer />
     </div>
   )
