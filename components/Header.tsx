@@ -17,6 +17,7 @@ const Header = () => {
         <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
       </Link>
 
+      {/* Desktop Navigation */}
       <nav className="hidden lg:flex gap-8">
         {[
           { label: "HOME", href: "/" },
@@ -86,14 +87,17 @@ const Header = () => {
         Get Started
       </Link>
 
+      {/* Mobile Menu Button */}
       <button className="lg:hidden text-white" onClick={toggleSidebar}>
         <Menu size={28} />
       </button>
 
+      {/* Mobile Sidebar Overlay */}
       {isSidebarVisible && (
         <div className="block lg:hidden fixed inset-0 bg-black/50 z-40" onClick={toggleSidebar} />
       )}
 
+      {/* Mobile Sidebar Navigation */}
       <motion.aside
         initial={{ x: "-100%" }}
         animate={{ x: isSidebarVisible ? "0%" : "-100%" }}
@@ -101,13 +105,15 @@ const Header = () => {
         className="block lg:hidden fixed top-0 left-0 h-full w-3/4 bg-[#4c5f4e] p-6 z-50"
       >
         <div className="relative flex flex-row items-start justify-between py-4">
-          <Link href="/" className="w-32">
+          <Link href="/" className="w-32" onClick={toggleSidebar}>
             <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
           </Link>
           <button className="text-white mb-6" onClick={toggleSidebar}>
             <X size={28} />
           </button>
         </div>
+
+        {/* Mobile Nav Links */}
         <ul className="space-y-4">
           {[
             { label: "HOME", href: "/" },
@@ -137,21 +143,26 @@ const Header = () => {
                 className="flex justify-between items-center text-white font-bold cursor-pointer"
                 onClick={() => setHoveredMenu(hoveredMenu === item.label ? null : item.label)}
               >
-                {item.label}
+                <Link href={item.href || "#"} onClick={toggleSidebar}>
+                  {item.label}
+                </Link>
                 {item.submenu && (
                   <motion.div
-                    animate={{ rotate: hoveredMenu === item.label ? 135 : 0 }}
+                    animate={{ rotate: hoveredMenu === item.label ? 150 : 0 }}
                     transition={{ duration: 0.3 }}
                   >
                     <Plus size={24} className="font-normal" />
                   </motion.div>
                 )}
               </div>
+
               {hoveredMenu === item.label && item.submenu && (
                 <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="pl-4 mt-2">
                   {item.submenu.map((sub, subIndex) => (
                     <li key={subIndex} className="py-1 text-white hover:text-[#ffca0d] transition">
-                      <Link href={sub.href}>{sub.label}</Link>
+                      <Link href={sub.href} onClick={toggleSidebar}>
+                        {sub.label}
+                      </Link>
                     </li>
                   ))}
                 </motion.ul>
