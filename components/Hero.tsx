@@ -49,7 +49,7 @@ export default function Hero() {
             <motion.button 
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-[#4c5f4e] text-white rounded-full shadow-lg hover:bg-[#92B76D] transition-all duration-300"
+              className="px-6 py-3 bg-[#4c5f4e] text-white shadow-lg hover:bg-[#92B76D] transition-all duration-300"
             >
               Browse Courses
             </motion.button>
@@ -58,7 +58,7 @@ export default function Hero() {
             <motion.button 
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-[#e6e1d1] dark:bg-gray-700 text-[#4c5f4e] dark:text-white rounded-full shadow-lg hover:bg-[#ffca0d] transition-all duration-300"
+              className="px-6 py-3 bg-[#e6e1d1] dark:bg-gray-700 text-[#4c5f4e] dark:text-white shadow-lg hover:bg-[#ffca0d] transition-all duration-300"
             >
               Learn More
             </motion.button>
