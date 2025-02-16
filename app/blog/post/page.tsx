@@ -34,7 +34,7 @@ const BlogPage = () => {
     title: 'Blog',
     breadcrumb: [
       { name: 'Blog', path: '/blog' },
-      { name: 'Posts', path: '/blog/in-blog' },
+      { name: 'Posts', path: '/blog/post' },
     ]
   };
 
