@@ -1,19 +1,37 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-// import Image from "next/image";
 import { Menu, X, ChevronDown, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 
-const Header = () => {
+export default function Header() {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
   const toggleSidebar = () => setSidebarVisible(!isSidebarVisible);
 
+  // Close sidebar on "Escape" key
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSidebarVisible(false);
+      }
+    };
+
+    if (isSidebarVisible) {
+      document.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isSidebarVisible]);
+
   return (
     <header className="bg-[#4c5f4e] flex flex-row items-center justify-between py-2 px-6 lg:px-24 z-40">
-      <Link href="/" className="w-32 lg:w-40 relative m-0">
+      <Link href="/" className="w-32 lg:w-40">
         <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
       </Link>
 
@@ -174,5 +192,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

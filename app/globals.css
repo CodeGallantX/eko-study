@@ -6,7 +6,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Merriweather, serif;
 }
 
-body, p, input, textarea, select, label, button {
+body, div, section, a, p, input, textarea, select, label, button {
   font-family: Outfit, sans-serif;
 }
 
