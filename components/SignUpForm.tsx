@@ -1,15 +1,15 @@
 'use client';
 
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { Lock, Eye, EyeOff, CheckCircle, Circle, Loader2 } from 'lucide-react';
+import { Eye, EyeOff, CheckCircle, Circle, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 const colleges = {
-  'College of Engineering': ['Architecture', 'Mechanical Engineering', 'Electrical Engineering', 'Mechatronics Engineering'],
+  'College of Engineering': ['Architecture', 'Electrical and Electronics Engineering', 'Mechatronics Engineering', 'Computer Engineering'],
   'College of Basic Sciences': ['Mathematics', "Computer Science", 'Industrial Mathematics', 'Physics with electronics', 'Chemistry', "Industrial Chemistry", "Statistics"],
-  'College of Arts and Design': ['Accounting', 'Marketing', 'Finance']
+  'College of Environmental and Design': ['Art & Design', 'Marketing', 'Finance']
 };
 
 interface FormData {
@@ -66,7 +66,7 @@ const SignupForm = () => {
       
       <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className='w-full lg:w-1/2 max-w-ld bg-white shadow-lg rounded-lg p-8'>
         <h1 className='text-4xl font-bold text-center text-green'>Create Account</h1>
-        <p className='text-center mt-2'>Already have an account? <Link href='/signin' className='text-green hover:text-yellow transition'>Sign in</Link></p>
+        <p className='text-center mt-2'>Already have an account? <Link href='/auth/signin' className='text-green hover:text-yellow transition'>Sign in</Link></p>
         
         <form onSubmit={handleSubmit} className='flex flex-col gap-6 mt-6'>
           <div className='flex gap-4'>

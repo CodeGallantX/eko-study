@@ -1,14 +1,14 @@
-import SignUpForm from '@/components/SignUpForm';
-import SignUpMobile from "@/components/SignUpMobile";
+import SignInForm from '@/components/SignInForm';
+import SignInMobile from "@/components/SignInMobile";
 
-export default function SignUp()  {
+export default function SignIn()  {
   return (
     <>
     <div className="hidden sm:block">
-      <SignUpForm />
+      <SignInForm />
     </div>
     <div className="block sm:hidden">
-      <SignUpMobile />
+      <SignInMobile />
     </div>
     </>
   );
