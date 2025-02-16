@@ -61,7 +61,7 @@ const SignupForm = () => {
   return (
     <div className='flex flex-col lg:flex-row items-center justify-center min-h-screen p-10 bg-gray-100'>
       <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className='hidden lg:block w-1/2'>
-        <Image src='/signup-illustration.png' alt='Sign Up Illustration' width={500} height={500} className='mx-auto' />
+        <Image src='/illustration.jpg' alt='Sign Up Illustration' width={500} height={500} className='mx-auto' />
       </motion.div>
       
       <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className='w-full lg:w-1/2 max-w-ld bg-white shadow-lg rounded-lg p-8'>
