@@ -36,56 +36,58 @@ const SigninForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulating authentication process
     setTimeout(() => {
       console.log('Form submitted:', formData);
       setIsSubmitting(false);
-      router.push('/dashboard'); // Redirecting to dashboard
+      router.push('/dashboard');
     }, 2000);
   };
 
   return (
-    <div className="relative flex flex-col lg:flex-row items-center justify-center min-h-screen bg-gray-100">
-      <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="hidden lg:block w-full absolute top-0 left-0 h-full">
-        <Image src="/illustration.jpg" alt="Study" width={500} height={500} className="w-full h-full object-cover" />
-      </motion.div>
+    <div className="relative flex items-center justify-center min-h-screen bg-gray-900">
+      {/* Background Image */}
+      <Image src="/study.jpg" alt="Study" layout="fill" objectFit="cover" className="absolute inset-0 w-full h-full -z-10 opacity-50" />
 
-      <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="z-10 absolute top-20 right-10 w-full lg:w-1/2 max-w-lg bg-gray-50/50 backdrop-blur-md border border-gray-500 shadow-lg rounded-lg p-8">
-        <h1 className="text-4xl font-bold text-center text-green">Sign In</h1>
-        <p className="text-center mt-2">
-          Don&apos;t have an account? <Link href="/signup" className="text-green hover:text-yellow transition">Sign up</Link>
+      {/* Glassmorphic Form */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="w-full lg:w-1/3 max-w-lg bg-white bg-opacity-10 backdrop-blur-md shadow-lg rounded-lg p-8 border border-white/20"
+      >
+        <h1 className="text-4xl font-bold text-center text-white">Sign In</h1>
+        <p className="text-center mt-2 text-gray-200">
+          Don&apos;t have an account? <Link href="/signup" className="text-yellow-400 hover:text-yellow-500 transition">Sign up</Link>
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6">
-          <input className="bg-none border p-2 rounded focus:ring-2 outline-none focus:ring-green" type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+          <input className="border p-2 rounded bg-transparent text-white placeholder-gray-300 border-white/30 focus:ring-2 focus:ring-yellow-400 outline-none" type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
 
           <div className="relative">
-            <input className="bg-none border p-2 rounded focus:ring-2 outline-none focus:ring-green w-full pr-10" type={passwordVisible ? 'text' : 'password'} name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-            <button type="button" className="absolute inset-y-0 right-3 flex items-center" onClick={() => setPasswordVisible(!passwordVisible)}>
+            <input className="border p-2 rounded bg-transparent text-white placeholder-gray-300 border-white/30 focus:ring-2 focus:ring-yellow-400 outline-none w-full pr-10" type={passwordVisible ? 'text' : 'password'} name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+            <button type="button" className="absolute inset-y-0 right-3 flex items-center text-white" onClick={() => setPasswordVisible(!passwordVisible)}>
               {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
-          <div className="flex justify-end items-center">
-            <Link href="/forgot-password" className="text-sm text-green hover:text-yellow transition">Forgot Password?</Link>
+          <div className="flex justify-between items-center text-sm text-gray-300">
+            <Link href="/forgot-password" className="hover:text-yellow-400 transition">Forgot Password?</Link>
           </div>
 
-          <button className="w-full bg-green hover:bg-yellow transition text-white py-3 rounded flex items-center justify-center" type="submit" disabled={isSubmitting}>
+          <button className="w-full bg-yellow-400 hover:bg-yellow-500 transition text-black py-3 rounded flex items-center justify-center font-bold" type="submit" disabled={isSubmitting}>
             {isSubmitting && <Loader2 className="animate-spin mr-2" size={20} />}
             {isSubmitting ? 'Signing in...' : 'Sign In'}
           </button>
 
-          <div className="flex items-center my-2">
-            <hr className="w-full border-gray-100" />
-            <span className="px-4 text-gray-300">or</span>
-            <hr className="w-full border-gray-100" />
+          <div className="flex items-center my-2 text-gray-300">
+            <hr className="w-full border-gray-400" />
+            <span className="px-4">or</span>
+            <hr className="w-full border-gray-400" />
           </div>
 
-          <div className="flex flex-col">
-            <button className="text-gray-100 flex items-center justify-center gap-3 border p-2 rounded hover:bg-gray-800 transition">
-              <FaGoogle size={20} /> Continue with Google
-            </button>
-          </div>
+          <button className="flex items-center justify-center gap-3 border border-white/30 p-2 rounded bg-transparent text-white hover:bg-white/20 transition">
+            <FaGoogle size={20} /> Continue with Google
+          </button>
         </form>
       </motion.div>
     </div>
