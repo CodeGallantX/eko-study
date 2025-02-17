@@ -14,10 +14,10 @@ export default {
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
+  			// secondary: {
+  			// 	DEFAULT: 'hsl(var(--secondary))',
+  			// 	foreground: 'hsl(var(--secondary-foreground))'
+  			// },
 			//   green: '#4c5f4e',
 			green:'#92b76d',
 			  secondary: '#e8ede6',
@@ -27,7 +27,7 @@ export default {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
   			},
-  			background: 'hsl(var(--background))',
+  			// background: 'hsl(var(--background))',
   			black: '#000000',
   			white: '#ffffff',
   			foreground: 'hsl(var(--foreground))',
@@ -65,5 +65,5 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+//   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
