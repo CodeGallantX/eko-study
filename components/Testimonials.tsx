@@ -37,7 +37,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="relative w-full py-16 bg-[#e8ede6] dark:bg-[#1a1a1a] overflow-hidden">
+    <section className="relative w-full py-16 bg-[#e6e1d1]/50 overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#4c5f4e] to-[#e8ede6] opacity-10 blur-3xl"></div>
 
@@ -70,7 +70,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <SwiperSlide key={index}>
               <motion.div
-                className="relative bg-white/80 dark:bg-black/30 backdrop-blur-lg shadow-lg rounded-2xl p-8 text-center transition-all flex flex-col items-center"
+                className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-8 text-center transition-all flex flex-col items-center"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
