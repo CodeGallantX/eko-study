@@ -66,6 +66,10 @@ const Register = () => {
       <h1 className="text-2xl font-bold text-black text-left">
         Register To Start Your Journey
       </h1>
+      <p className="text-gray-600 mt-2">
+        Already have an account?{" "}
+        <Link href="/auth/signin" className="text-green hover:text-yellow transition">Sign in</Link>
+      </p>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mt-8">
         {[{ label: "Name", name: "name", type: "text", placeholder: "Enter your name" },
           { label: "Email Address", name: "email", type: "email", placeholder: "Enter your email address" }

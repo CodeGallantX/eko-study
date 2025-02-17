@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import GetStartedBtn from './GetStartedBtn';
 
 export default function FooterBanner () {

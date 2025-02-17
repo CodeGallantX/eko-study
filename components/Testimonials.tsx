@@ -87,7 +87,7 @@ export default function Testimonials() {
 
                 {/* Feedback */}
                 <p className="text-lg text-gray-800 dark:text-gray-200 italic">
-                  "{testimonial.feedback}"
+                  &ldquo;{testimonial.feedback}&rdquo;
                 </p>
 
                 {/* Name & Level */}
