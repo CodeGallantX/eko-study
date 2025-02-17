@@ -3,6 +3,7 @@ import Header from "@/components/Header"
 import Hero from "@/components/Hero"
 import AboutSection from "@/components/AboutSection"
 import Features from "@/components/Features"
+import Testimonials from "@/components/Testimonials"
 import Footer from "@/components/Footer"
 
 export default function App () {
@@ -14,6 +15,7 @@ export default function App () {
       <Hero />
       <AboutSection />
       <Features />
+      <Testimonials />
       <Footer />
     </div>
     </>
