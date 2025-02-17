@@ -85,7 +85,7 @@ const Register = () => {
               name={name}
               id={name}
               placeholder={placeholder}
-              value={typeof formData[name as keyof typeof formData] === "boolean" ? "" : formData[name as keyof typeof formData]} // Ensure only string values are assigned to value
+              value={typeof formData[name as keyof typeof formData] === "boolean" ? "" : formData[name as keyof typeof formData]}
               onChange={handleChange}
               required
             />
