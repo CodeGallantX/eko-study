@@ -14,20 +14,20 @@ export default {
   				DEFAULT: 'hsl(var(--primary))',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
-  			// secondary: {
-  			// 	DEFAULT: 'hsl(var(--secondary))',
-  			// 	foreground: 'hsl(var(--secondary-foreground))'
-  			// },
+  			secondary: {
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
+  			},
 			//   green: '#4c5f4e',
 			green:'#92b76d',
-			  secondary: '#e8ede6',
+			//   secondary: '#e8ede6',
 			  yellow: '#ffca0d',
-			  background: '#e6e1d1',
+			//   background: '#e6e1d1',
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
   			},
-  			// background: 'hsl(var(--background))',
+  			background: 'hsl(var(--background))',
   			black: '#000000',
   			white: '#ffffff',
   			foreground: 'hsl(var(--foreground))',
