@@ -6,11 +6,11 @@ import Footer from "@/components/Footer"
 export default function App() {
 
   const page = {
-    title: "Courses",
+    title: "Departments",
     breadcrumb: [
       {
-        name: "Courses",
-        path: "/courses",
+        name: "Departments",
+        path: "/departments",
       }
     ]
   }
