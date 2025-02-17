@@ -5,17 +5,17 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft, Eye, EyeOff, Circle, CheckCircle } from "lucide-react";
 
-const colleges = {
-  'College of Engineering': ['Architecture', 'Mechanical Engineering', 'Electrical Engineering', 'Mechatronics Engineering'],
-  'College of Basic Sciences': ['Mathematics', "Computer Science", 'Industrial Mathematics', 'Physics with electronics', 'Chemistry', "Industrial Chemistry", "Statistics"],
-  'College of Arts and Design': ['Accounting', 'Marketing', 'Finance']
+const colleges: Record<string, string[]> = {
+  "College of Engineering": ["Architecture", "Mechanical Engineering", "Electrical Engineering", "Mechatronics Engineering"],
+  "College of Basic Sciences": ["Mathematics", "Computer Science", "Industrial Mathematics", "Physics with electronics", "Chemistry", "Industrial Chemistry", "Statistics"],
+  "College of Arts and Design": ["Accounting", "Marketing", "Finance"]
 };
+
 
 interface FormData {
   name: string;
   email: string;
   password: string;
-  tel: string;
   college: string;
   department: string;
   agree: boolean;
@@ -26,7 +26,6 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    tel: "",
     college: "",
     department: "",
     agree: false,
@@ -52,7 +51,6 @@ const Register = () => {
     if (!formData.name.trim()) newErrors.name = "Name is required.";
     if (!formData.email.trim()) newErrors.email = "Email is required.";
     if (!formData.password) newErrors.password = "Password is required.";
-    if (!formData.tel) newErrors.tel = "Phone number is required.";
     if (!formData.college) newErrors.college = "College is required.";
     if (!formData.department) newErrors.department = "Department is required.";
     if (!formData.agree) newErrors.agree = "You must agree to the terms.";
@@ -117,8 +115,11 @@ const Register = () => {
           <label htmlFor="department" className="text-black">Department</label>
           <select name="department" value={formData.department} onChange={handleChange} className="w-full border p-3 rounded-lg bg-gray-100 text-gray-600 outline-none focus:border-green" required>
             <option value="">Select Department</option>
-            {formData.college && colleges[formData.college]?.map(dept => <option key={dept} value={dept}>{dept}</option>)}
+            {formData.college && colleges[formData.college as keyof typeof colleges]?.map(dept => (
+              <option key={dept} value={dept}>{dept}</option>
+            ))}
           </select>
+
           {errors.department && <small className="text-red-500">{errors.department}</small>}
         </fieldset>
 
