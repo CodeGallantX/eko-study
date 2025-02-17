@@ -49,7 +49,7 @@ export default function Hero() {
             <motion.button 
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-[#4c5f4e] text-white shadow-lg hover:bg-[#92B76D] transition-all duration-300"
+              className="text-lg text-white font-bold px-8 py-4 bg-[#4c5f4e] leading-none hover:bg-[#ffca0d] transition-all duration-300 ease-in-out"
             >
               Browse Courses
             </motion.button>

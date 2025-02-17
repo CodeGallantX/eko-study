@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Preloader from "@/components/Preloader";
 import Banner from "@/components/Banner";
 import Link from 'next/link';
 
@@ -16,6 +17,8 @@ export default function App() {
 
 
   return (
+    <>
+    <Preloader />
     <div>
       <Header />
       <Banner page={page} />
@@ -99,5 +102,6 @@ export default function App() {
       </main>
       <Footer />
     </div>
+    </>
   )
 }

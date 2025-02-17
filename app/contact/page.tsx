@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
+import Preloader from "@/components/Preloader";
 import { FaXTwitter, FaFacebookF, FaYoutube, FaEnvelope, FaPhone } from "react-icons/fa6";
 
 export default function App() {
@@ -10,6 +11,8 @@ export default function App() {
   };
 
   return (
+    <>
+    <Preloader />
     <div>
       <Header />
       <Banner page={page} />
@@ -85,5 +88,6 @@ export default function App() {
       </section>
       <Footer />
     </div>
+    </>
   );
 }

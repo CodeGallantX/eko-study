@@ -1,13 +1,15 @@
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
-// import Hero from "@/components/Hero"
+import Preloader from "@/components/Preloader"
 
 export default function App () {
   return (
+    <>
+      <Preloader />
     <div>
       <Header />
-      {/* <Hero /> */}
       <Footer />
     </div>
+    </>
   )
 }
