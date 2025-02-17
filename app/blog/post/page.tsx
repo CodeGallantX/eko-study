@@ -11,7 +11,7 @@ const BlogPage = () => {
     blogHandyScript.src = 'https://www.bloghandy.com/api/bh_blogengine.js';
     blogHandyScript.async = true;
     blogHandyScript.onload = () => {
-      (window as any).bh_id = '609HmCqwe4Qx6DNDIxNA';
+      (window as unknown as { bh_id: string }).bh_id = '609HmCqwe4Qx6DNDIxNA';
     };
     document.body.appendChild(blogHandyScript);
 
