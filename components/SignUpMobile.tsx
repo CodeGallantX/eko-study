@@ -29,14 +29,14 @@ const Register = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const checked = e.target instanceof HTMLInputElement && e.target.type === "checkbox" ? e.target.checked : undefined;
-  
+
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
       ...(name === "college" ? { department: "" } : {}),
     }));
   };
-  
+
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -75,7 +75,7 @@ const Register = () => {
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mt-8">
         {[{ label: "Name", name: "name", type: "text", placeholder: "Enter your name" },
-          { label: "Email Address", name: "email", type: "email", placeholder: "Enter your email address" }
+        { label: "Email Address", name: "email", type: "email", placeholder: "Enter your email address" }
         ].map(({ label, name, type, placeholder }) => (
           <fieldset key={name} className="flex flex-col">
             <label htmlFor={name} className="text-black">{label}</label>
@@ -85,10 +85,11 @@ const Register = () => {
               name={name}
               id={name}
               placeholder={placeholder}
-              value={formData[name as keyof typeof formData]}
+              value={typeof formData[name as keyof typeof formData] === "boolean" ? "" : formData[name as keyof typeof formData]} // Ensure only string values are assigned to value
               onChange={handleChange}
               required
             />
+
             {errors[name] && <small className="text-red-500">{errors[name]}</small>}
           </fieldset>
         ))}
@@ -153,6 +154,20 @@ const Register = () => {
           </select>
           {errors.department && <small className="text-red-500">{errors.department}</small>}
         </fieldset>
+        <fieldset className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            name="agree"
+            id="agree"
+            checked={formData.agree} // Use checked instead of value
+            onChange={handleChange}
+          />
+          <label htmlFor="agree" className="text-gray-600">
+            I agree to the terms and conditions
+          </label>
+          {errors.agree && <small className="text-red-500">{errors.agree}</small>}
+        </fieldset>
+
 
         <button className="w-full bg-green text-white py-3 rounded-lg mt-3">
           Register
