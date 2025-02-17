@@ -51,29 +51,29 @@ const SigninForm = () => {
         transition={{ duration: 0.5 }}
         className="hidden lg:block w-full absolute top-0 left-0 h-full"
       >
-        <Image src="/illustration.jpg" alt="Study" layout="fill" objectFit="cover" className="opacity-40" />
+        <Image src="/illustration.jpg" alt="Study" layout="fill" objectFit="cover" />
       </motion.div>
 
       <motion.div 
         initial={{ opacity: 0, scale: 0.9 }} 
         animate={{ opacity: 1, scale: 1 }} 
         transition={{ duration: 0.5 }}
-        className="z-10 absolute top-20 right-10 w-full lg:w-1/2 max-w-lg bg-white/30 backdrop-blur-xl border border-gray-400 shadow-lg rounded-lg p-8"
+        className="z-10 absolute top-20 right-10 w-full lg:w-1/2 max-w-lg bg-gray-900/50 backdrop-blur-xl border-2 border-gray-300 hover:border-green shadow-lg rounded-2xl p-8 transition-all duration-300 ease-in-out"
       >
         <h1 className="text-4xl font-bold text-center text-white">Sign In</h1>
         <p className="text-center mt-2 text-gray-300">
-          Don&apos;t have an account? <Link href="/signup" className="text-yellow-400 hover:text-yellow-300 transition">Sign up</Link>
+          Don&apos;t have an account? <Link href="/auth/signup" className="text-green hover:text-yellow transition">Sign up</Link>
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6">
           <input 
-            className="bg-transparent border border-gray-300 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-yellow-400 transition" 
+            className="bg-transparent border border-gray-300 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:border-2 focus:border-green transition" 
             type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required 
           />
 
           <div className="relative">
             <input 
-              className="bg-transparent border border-gray-300 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 focus:ring-yellow-400 transition w-full pr-10" 
+              className="bg-transparent border border-gray-300 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:border-2 focus:border-green transition w-full pr-10" 
               type={passwordVisible ? 'text' : 'password'} name="password" placeholder="Password" value={formData.password} onChange={handleChange} required 
             />
             <button 
@@ -86,7 +86,7 @@ const SigninForm = () => {
           </div>
 
           <div className="flex justify-end items-center">
-            <Link href="/forgot-password" className="text-sm text-yellow-400 hover:text-yellow-300 transition">Forgot Password?</Link>
+            <Link href="/forgot-password" className="text-sm text-green hover:text-yellow transition">Forgot Password?</Link>
           </div>
 
           <button 
