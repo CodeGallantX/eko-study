@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ChevronLeft, Eye, EyeOff } from "lucide-react";
+import { ChevronLeft, Eye, EyeOff, Circle, CheckCircle } from "lucide-react";
 
 const colleges = {
   'College of Engineering': ['Architecture', 'Mechanical Engineering', 'Electrical Engineering', 'Mechatronics Engineering'],
@@ -11,12 +11,22 @@ const colleges = {
   'College of Arts and Design': ['Accounting', 'Marketing', 'Finance']
 };
 
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+  tel: string;
+  college: string;
+  department: string;
+  agree: boolean;
+}
+
 const Register = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     password: "",
-    gender: "",
+    tel: "",
     college: "",
     department: "",
     agree: false,
@@ -37,13 +47,12 @@ const Register = () => {
     }));
   };
 
-
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) newErrors.name = "Name is required.";
     if (!formData.email.trim()) newErrors.email = "Email is required.";
     if (!formData.password) newErrors.password = "Password is required.";
-    if (!formData.gender) newErrors.gender = "Gender is required.";
+    if (!formData.tel) newErrors.tel = "Phone number is required.";
     if (!formData.college) newErrors.college = "College is required.";
     if (!formData.department) newErrors.department = "Department is required.";
     if (!formData.agree) newErrors.agree = "You must agree to the terms.";
@@ -75,7 +84,7 @@ const Register = () => {
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mt-8">
         {[{ label: "Name", name: "name", type: "text", placeholder: "Enter your name" },
-        { label: "Email Address", name: "email", type: "email", placeholder: "Enter your email address" }
+        { label: "Email Address", name: "email", type: "email", placeholder: "Enter your email address" },
         ].map(({ label, name, type, placeholder }) => (
           <fieldset key={name} className="flex flex-col">
             <label htmlFor={name} className="text-black">{label}</label>
@@ -85,90 +94,46 @@ const Register = () => {
               name={name}
               id={name}
               placeholder={placeholder}
-              value={typeof formData[name as keyof typeof formData] === "boolean" ? "" : formData[name as keyof typeof formData]}
+              value={formData[name as keyof FormData] as string}
               onChange={handleChange}
               required
             />
-
             {errors[name] && <small className="text-red-500">{errors[name]}</small>}
           </fieldset>
         ))}
 
-        <fieldset className="flex flex-col">
-          <label htmlFor="password" className="text-black">Password</label>
-          <div className="relative">
-            <input
-              className="w-full border p-3 rounded-lg bg-gray-100 text-gray-600 outline-none focus:border-green pr-10"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              id="password"
-              placeholder="Enter your password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            <button
-              type="button"
-              className="absolute inset-y-0 right-3 flex items-center"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
-          </div>
-          {errors.password && <small className="text-red-500">{errors.password}</small>}
-        </fieldset>
+
 
         <fieldset className="flex flex-col">
           <label htmlFor="college" className="text-black">College</label>
-          <select
-            className="w-full border p-3 rounded-lg bg-gray-100 outline-none text-gray-600 focus:border-green"
-            name="college"
-            id="college"
-            value={formData.college}
-            onChange={handleChange}
-            required
-          >
+          <select name="college" value={formData.college} onChange={handleChange} className="w-full border p-3 rounded-lg bg-gray-100 text-gray-600 outline-none focus:border-green" required>
             <option value="">Select College</option>
-            {Object.keys(colleges).map((college) => (
-              <option key={college} value={college}>{college}</option>
-            ))}
+            {Object.keys(colleges).map(college => <option key={college} value={college}>{college}</option>)}
           </select>
           {errors.college && <small className="text-red-500">{errors.college}</small>}
         </fieldset>
 
         <fieldset className="flex flex-col">
           <label htmlFor="department" className="text-black">Department</label>
-          <select
-            className="w-full border p-3 rounded-lg bg-gray-100 outline-none text-gray-600 focus:border-green"
-            name="department"
-            id="department"
-            value={formData.department}
-            onChange={handleChange}
-            required
-            disabled={!formData.college}
-          >
+          <select name="department" value={formData.department} onChange={handleChange} className="w-full border p-3 rounded-lg bg-gray-100 text-gray-600 outline-none focus:border-green" required>
             <option value="">Select Department</option>
-            {formData.college && colleges[formData.college].map((dept) => (
-              <option key={dept} value={dept}>{dept}</option>
-            ))}
+            {formData.college && colleges[formData.college]?.map(dept => <option key={dept} value={dept}>{dept}</option>)}
           </select>
           {errors.department && <small className="text-red-500">{errors.department}</small>}
         </fieldset>
-        <fieldset className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            name="agree"
-            id="agree"
-            checked={formData.agree} // Use checked instead of value
-            onChange={handleChange}
-          />
-          <label htmlFor="agree" className="text-gray-600">
-            I agree to the terms and conditions
-          </label>
-          {errors.agree && <small className="text-red-500">{errors.agree}</small>}
+
+        <fieldset className='relative'>
+          <label htmlFor="password" className="text-black">Password</label>
+          <input name="password" className='w-full border p-3 rounded-lg bg-gray-100 text-gray-600 outline-none focus:border-green' type={showPassword ? 'text' : 'password'} placeholder='Password' value={formData.password} onChange={handleChange} required />
+          <button type='button' className='absolute inset-y-0 right-3 flex items-center' onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
         </fieldset>
 
-
+        <div className='flex items-center gap-2 cursor-pointer' onClick={() => setFormData({ ...formData, agree: !formData.agree })}>
+          {formData.agree ? <CheckCircle className='text-green' size={24} /> : <Circle className='text-green' size={24} />}
+          <label htmlFor='agree' className='cursor-pointer'>I agree to the terms and conditions</label>
+        </div>
         <button className="w-full bg-green text-white py-3 rounded-lg mt-3">
           Register
         </button>
