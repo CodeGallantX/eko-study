@@ -4,10 +4,12 @@ import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import colleges from "@/data/colleges.json"; // ✅ Import JSON directly
-import { PageProps } from "next";
 
-// ✅ Instead of declaring `College`, infer its type from the JSON data
-export default function CollegePage({ params }: PageProps<{ id: string }>) {
+interface PageProps {
+  params: { id: string };
+}
+
+export default function CollegePage({ params }: PageProps) { ... }
   const collegeId = Number(params.id);
   const college = colleges.find((c) => c.id === collegeId); // ✅ No unused type warning
 
