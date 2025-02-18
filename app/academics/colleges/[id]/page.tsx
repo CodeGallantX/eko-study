@@ -1,10 +1,10 @@
-import path from "path";
-import fs from "fs";
 import { notFound } from "next/navigation";
 import Preloader from "@/components/Preloader";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
+import colleges from "@/data/colleges.json"; // ✅ Import JSON directly
+import { PageProps } from "next";
 
 interface College {
   id: number;
@@ -13,33 +13,20 @@ interface College {
   image: string;
 }
 
-// Fetch colleges from JSON
-async function fetchColleges(): Promise<College[]> {
-  const filePath = path.join(process.cwd(), "data", "colleges.json");
-  const jsonData = fs.readFileSync(filePath, "utf8");
-  return JSON.parse(jsonData || "[]");
-}
-
-// Fetch a single college based on ID
-async function fetchCollegeById(id: number): Promise<College | undefined> {
-  const colleges = await fetchColleges();
-  return colleges.find((college) => college.id === id);
-}
-
-// Main College Page
-export default async function CollegePage({ params }: { params: { id: string } }) {
-  const collegeId = parseInt(params.id, 10);
-  const college = await fetchCollegeById(collegeId);
+// ✅ Fix: Define `params` correctly
+export default function CollegePage({ params }: PageProps<{ id: string }>) {
+  const collegeId = Number(params.id); // ✅ Ensure correct parsing
+  const college = colleges.find((c) => c.id === collegeId);
 
   if (!college) {
-    notFound(); // Automatically triggers Next.js 404 page
+    notFound(); // 🔴 Show 404 page if not found
   }
 
   const page = {
     title: college.name,
     breadcrumb: [
-      { name: "Colleges", path: "/colleges" },
-      { name: college.name, path: `/colleges/${college.id}` },
+      { name: "Colleges", path: "/academics/colleges" },
+      { name: college.name, path: `/academics/colleges/${college.id}` },
     ],
   };
 
