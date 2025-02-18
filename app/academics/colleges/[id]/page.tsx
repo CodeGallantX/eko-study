@@ -6,27 +6,20 @@ import Footer from "@/components/Footer";
 import colleges from "@/data/colleges.json"; // ✅ Import JSON directly
 import { PageProps } from "next";
 
-interface College {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-}
-
-// ✅ Fix: Define `params` correctly
+// ✅ Instead of declaring `College`, infer its type from the JSON data
 export default function CollegePage({ params }: PageProps<{ id: string }>) {
-  const collegeId = Number(params.id); // ✅ Ensure correct parsing
-  const college = colleges.find((c) => c.id === collegeId);
+  const collegeId = Number(params.id);
+  const college = colleges.find((c) => c.id === collegeId); // ✅ No unused type warning
 
   if (!college) {
-    notFound(); // 🔴 Show 404 page if not found
+    notFound(); // 🔴 Show 404 if college is not found
   }
 
   const page = {
-    title: college.name,
+    title: college?.name || "College",
     breadcrumb: [
       { name: "Colleges", path: "/academics/colleges" },
-      { name: college.name, path: `/academics/colleges/${college.id}` },
+      { name: college?.name || "College", path: `/academics/colleges/${college?.id}` },
     ],
   };
 
