@@ -2,18 +2,18 @@ import Head from "next/head";
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "Programs - EkoStudy",
+  title: "Departments - EkoStudy",
   description:
     "Get in touch with EkoStudy for support, inquiries, or feedback. We are here to help LASUSTECH students with all their academic needs.",
   keywords:
-    "Programs EkoStudy, LASUSTECH support, student inquiries, academic assistance, help desk, educational support",
+    "Departments EkoStudy, LASUSTECH support, student inquiries, academic assistance, help desk, educational support",
 };
 
-type ProgramsLayoutProps = {
+type DepartmentsLayoutProps = {
   children: ReactNode;
 };
 
-export default function ProgramsLayout({ children }: ProgramsLayoutProps) {
+export default function DepartmentsLayout({ children }: DepartmentsLayoutProps) {
   return (
     <html lang="en">
       <Head>
@@ -26,14 +26,14 @@ export default function ProgramsLayout({ children }: ProgramsLayoutProps) {
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ekostudy.vercel.app/Programs" />
-        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Programs-banner.png" />
+        <meta property="og:url" content="https://ekostudy.vercel.app/Departments" />
+        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Departments-banner.png" />
 
         {/* Twitter Meta Tags */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content={metadata.title} />
         <meta property="twitter:description" content={metadata.description} />
-        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Programs-banner.png" />
+        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Departments-banner.png" />
       </Head>
       <body>
         {children}

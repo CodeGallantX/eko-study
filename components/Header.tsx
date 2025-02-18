@@ -43,17 +43,17 @@ export default function Header() {
           {
             label: "ACADEMICS",
             submenu: [
+              { label: "Colleges", href: "/academics/colleges" },
               { label: "Departments", href: "/academics/departments" },
               { label: "Courses", href: "/academics/courses" },
-              { label: "Programs", href: "/academics/programs" },
             ],
           },
           {
             label: "RESOURCES",
             submenu: [
               { label: "Book Store", href: "/resources/book-store" },
-              { label: "Notes & PQs", href: "/resources/notes" },
-              { label: "CBT", href: "/resources/cbt" },
+              { label: "Notes & PQs", href: "/resources/notes-and-PQs" },
+              { label: "CBT Practice", href: "/resources/cbt-practice" },
               { label: "AI Chatbot", href: "/resources/chatbot" },
             ],
           },
@@ -139,16 +139,16 @@ export default function Header() {
             {
               label: "ACADEMICS",
               submenu: [
+                { label: "Colleges", href: "/academics/colleges" },
                 { label: "Departments", href: "/academics/departments" },
                 { label: "Courses", href: "/academics/courses" },
-                { label: "Programs", href: "/academics/programs" },
               ],
             },
             {
               label: "RESOURCES",
               submenu: [
                 { label: "Book Store", href: "/resources/book-store" },
-                { label: "Notes & PQs", href: "/resources/notes" },
+                { label: "Notes & PQs", href: "/resources/notes-and-PQs" },
                 { label: "CBT", href: "/resources/cbt" },
                 { label: "AI Chatbot", href: "/resources/chatbot" },
               ],

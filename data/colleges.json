@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "slug": "engineering",
+    "name": "College of Engineering",
+    "description": "A hub for future engineers with cutting-edge research and facilities.",
+    "image": "/images/engineering.jpg"
+  },
+  {
+    "id": 2,
+    "slug": "cbs",
+    "name": "College of Basic Sciences",
+    "description": "Training the next generation of doctors and healthcare professionals.",
+    "image": "/images/medicine.jpg"
+  }
+]

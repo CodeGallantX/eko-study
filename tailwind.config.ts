@@ -18,7 +18,7 @@ export default {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
-			//   green: '#4c5f4e',
+			  deepGreen: '#4c5f4e',
 			green:'#92b76d',
 			//   secondary: '#e8ede6',
 			  yellow: '#ffca0d',
