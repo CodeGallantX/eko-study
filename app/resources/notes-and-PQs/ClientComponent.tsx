@@ -81,7 +81,7 @@ export default function ClientComponent({ courses, colleges }) {
     <Preloader />
     <Header />
     <Banner page={page} />
-    <div className="min-h-screen p-6 bg-gray-100">
+    <div className="min-h-screen px-6 xl:px-24 py-10 bg-gray-">
 
       {/* Search Box */}
       <input
@@ -89,7 +89,7 @@ export default function ClientComponent({ courses, colleges }) {
         placeholder="Search for a course or note..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="border p-3 w-full rounded outline-none focus:ring-2 focus:ring-green"
+        className="border p-2 w-full rounded outline-none focus:ring-2 focus:ring-green"
       />
 
       {/* Filters */}
