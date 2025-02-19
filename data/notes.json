@@ -1,0 +1,22 @@
+[
+    {
+      "id": 1,
+      "college": "Engineering",
+      "department": "Computer Engineering",
+      "level": "200",
+      "title": "Data Structures",
+      "notes": [
+        {
+          "id": "ds1",
+          "title": "Introduction to Data Structures",
+          "url": "/notes/data-structures-1.pdf"
+        },
+        {
+          "id": "ds2",
+          "title": "Trees & Graphs",
+          "url": "/notes/trees-graphs.pdf"
+        }
+      ]
+    }
+  ]
+  
