@@ -4,13 +4,31 @@
     "slug": "engineering",
     "name": "College of Engineering",
     "description": "A hub for future engineers with cutting-edge research and facilities.",
-    "image": "/images/engineering.jpg"
+    "image": "/images/engineering.jpg",
+    "departments": ["Architecture", "Electrical and Electronics Engineering", "Mechatronics Engineering", "Computer Engineering"]
   },
   {
     "id": 2,
     "slug": "cbs",
     "name": "College of Basic Sciences",
     "description": "Training the next generation of doctors and healthcare professionals.",
-    "image": "/images/medicine.jpg"
+    "image": "/images/medicine.jpg",
+    "departments": ["Mathematics", "Computer Science", "Industrial Mathematics", "Physics with electronics", "Chemistry", "Industrial Chemistry", "Statistics"]
+  },
+  {
+    "id": 3,
+    "slug": "environmental-design",
+    "name": "College of Environmental and Design",
+    "description": "Focused on art, design, and finance with a creative approach.",
+    "image": "/images/environmental-design.jpg",
+    "departments": ["Art & Design", "Marketing", "Finance"]
+  },
+  {
+    "id": 4,
+    "slug": "business-administration",
+    "name": "College of Business Administration",
+    "description": "Preparing students for the dynamic world of business and finance.",
+    "image": "/images/business-admin.jpg",
+    "departments": ["Banking and Finance", "Marketing"]
   }
 ]
