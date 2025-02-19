@@ -2,6 +2,10 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaFilePdf, FaFileWord, FaFilePowerpoint, FaBook } from "react-icons/fa";
+import Preloader from "@/components/Preloader";
+import Header from "@/components/Header";
+import Banner from "@/components/Banner";
+import Footer from "@/components/Footer";
 
 export default function ClientComponent({ courses, colleges }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -63,24 +67,36 @@ export default function ClientComponent({ courses, colleges }) {
     }
   };
 
+  const page = {
+    title: "Notes",
+    breadcrumb: [
+      { name: "Notes",
+        path: "notes"
+      }
+    ]
+  }
+
   return (
+    <>
+    <Preloader />
+    <Header />
+    <Banner page={page} />
     <div className="min-h-screen p-6 bg-gray-100">
-      <h1 className="text-3xl font-bold text-center mb-6">📚 Study Notes</h1>
 
       {/* Search Box */}
       <input
         type="text"
-        placeholder="🔍 Search for a course or note..."
+        placeholder="Search for a course or note..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="w-full p-3 mb-4 rounded-lg border shadow-sm"
+        className="border p-3 w-full rounded outline-none focus:ring-2 focus:ring-green"
       />
 
       {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {/* College Filter */}
         <select
-          className="p-3 rounded-lg border"
+          className="border p-2 w-full rounded outline-none focus:ring-2 focus:ring-green"
           value={filters.college}
           onChange={(e) => handleFilterChange("college", e.target.value)}
         >
@@ -94,7 +110,7 @@ export default function ClientComponent({ courses, colleges }) {
 
         {/* Department Filter (Disabled if no college selected) */}
         <select
-          className="p-3 rounded-lg border"
+          className="border p-2 w-full rounded outline-none focus:ring-2 focus:ring-green"
           value={filters.department}
           onChange={(e) => handleFilterChange("department", e.target.value)}
           disabled={!filters.college}
@@ -109,7 +125,7 @@ export default function ClientComponent({ courses, colleges }) {
 
         {/* Level Filter */}
         <select
-          className="p-3 rounded-lg border"
+          className="border p-2 w-full rounded outline-none focus:ring-2 focus:ring-green"
           value={filters.level}
           onChange={(e) => handleFilterChange("level", e.target.value)}
         >
@@ -167,5 +183,7 @@ export default function ClientComponent({ courses, colleges }) {
         </div>
       )}
     </div>
+    <Footer />
+    </>
   );
 }

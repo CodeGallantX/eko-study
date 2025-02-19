@@ -1,0 +1,105 @@
+[
+    {
+      "id": 1,
+      "title": "Introduction to Computer Science",
+      "college": "College of Technology",
+      "department": "Computer Science",
+      "level": "100",
+      "notes": [
+        {
+          "id": "note1",
+          "title": "Lecture 1 - Basics of Programming",
+          "type": "pdf",
+          "url": "/notes/cs101-lecture1.pdf"
+        },
+        {
+          "id": "note2",
+          "title": "Lecture 2 - Data Structures",
+          "type": "docx",
+          "url": "/notes/cs101-lecture2.docx"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Engineering Mathematics",
+      "college": "College of Engineering",
+      "department": "Mechanical Engineering",
+      "level": "200",
+      "notes": [
+        {
+          "id": "note3",
+          "title": "Differential Equations",
+          "type": "pdf",
+          "url": "/notes/math201-de.pdf"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Financial Accounting",
+      "college": "College of Business",
+      "department": "Accounting",
+      "level": "300",
+      "notes": [
+        {
+          "id": "note4",
+          "title": "Introduction to Accounting",
+          "type": "ppt",
+          "url": "/notes/acc301-intro.ppt"
+        },
+        {
+          "id": "note5",
+          "title": "Balance Sheets and Statements",
+          "type": "pdf",
+          "url": "/notes/acc301-balance.pdf"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Organic Chemistry",
+      "college": "College of Science",
+      "department": "Chemistry",
+      "level": "400",
+      "notes": [
+        {
+          "id": "note6",
+          "title": "Fundamentals of Organic Chemistry",
+          "type": "pdf",
+          "url": "/notes/chem401-organic.pdf"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Microeconomics",
+      "college": "College of Business",
+      "department": "Economics",
+      "level": "200",
+      "notes": [
+        {
+          "id": "note7",
+          "title": "Demand and Supply",
+          "type": "docx",
+          "url": "/notes/eco201-demand.docx"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Software Engineering",
+      "college": "College of Technology",
+      "department": "Computer Science",
+      "level": "300",
+      "notes": [
+        {
+          "id": "note8",
+          "title": "Software Development Life Cycle",
+          "type": "pdf",
+          "url": "/notes/se301-sdlc.pdf"
+        }
+      ]
+    }
+  ]
+  
