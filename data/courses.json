@@ -2,19 +2,21 @@
     {
       "id": 1,
       "title": "Introduction to Computer Science",
-      "college": "College of Technology",
+      "code": "CHM101",
+      "college": "College of Basic Science",
       "department": "Computer Science",
       "level": "100",
+      "url": "/notes/se301-sdlc.pdf",
       "notes": [
         {
           "id": "note1",
-          "title": "Lecture 1 - Basics of Programming",
+          "title": "Basics of Programming",
           "type": "pdf",
           "url": "/notes/cs101-lecture1.pdf"
         },
         {
           "id": "note2",
-          "title": "Lecture 2 - Data Structures",
+          "title": "Data Structures",
           "type": "docx",
           "url": "/notes/cs101-lecture2.docx"
         }
@@ -22,10 +24,12 @@
     },
     {
       "id": 2,
-      "title": "Engineering Mathematics",
-      "college": "College of Engineering",
+      "title": "Descriptive Statistics",
+      "code": "STA111",
+      "college": "College of Basic Science",
       "department": "Mechanical Engineering",
-      "level": "200",
+      "level": "100",
+      "url": "/notes/se301-sdlc.pdf",
       "notes": [
         {
           "id": "note3",
@@ -37,10 +41,12 @@
     },
     {
       "id": 3,
-      "title": "Financial Accounting",
+      "title": "Communication in English",
+      "code": "GST111",
       "college": "College of Business",
       "department": "Accounting",
       "level": "300",
+      "url": "/notes/se301-sdlc.pdf",
       "notes": [
         {
           "id": "note4",
@@ -58,10 +64,12 @@
     },
     {
       "id": 4,
-      "title": "Organic Chemistry",
-      "college": "College of Science",
-      "department": "Chemistry",
-      "level": "400",
+      "title": "Elementary Mathematics",
+      "code": "MTH101",
+      "college": "College of Basic Science",
+      "department": "Computer Science",
+      "level": "100",
+      "url": "/notes/se301-sdlc.pdf",
       "notes": [
         {
           "id": "note6",
@@ -73,10 +81,12 @@
     },
     {
       "id": 5,
-      "title": "Microeconomics",
-      "college": "College of Business",
-      "department": "Economics",
-      "level": "200",
+      "title": "Introduction to Biology",
+      "code": "BIO101",
+      "college": "College of Basic Science",
+      "department": "Microbiology",
+      "level": "100",
+      "url": "/notes/se301-sdlc.pdf",
       "notes": [
         {
           "id": "note7",
@@ -88,10 +98,28 @@
     },
     {
       "id": 6,
-      "title": "Software Engineering",
-      "college": "College of Technology",
+      "title": "Mathematical Computation in ODE",
+      "code": "MTH103",
+      "college": "College of Basic Science",
+      "department": "Statistics",
+      "level": "100",
+      "url": "/notes/se301-sdlc.pdf",
+      "notes": [
+        {
+          "id": "note8",
+          "title": "Software Development Life Cycle",
+          "type": "pdf",
+          "url": "/notes/se301-sdlc.pdf"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Introduction to Internet Technology",
+      "code": "CSC103",
+      "college": "College of Basic Science",
       "department": "Computer Science",
-      "level": "300",
+      "level": "100",
       "notes": [
         {
           "id": "note8",

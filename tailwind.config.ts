@@ -22,7 +22,7 @@ export default {
 			green:'#92b76d',
 			//   secondary: '#e8ede6',
 			  yellow: '#ffca0d',
-			//   background: '#e6e1d1',
+			  beige: '#e6e1d1',
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
