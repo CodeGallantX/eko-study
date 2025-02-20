@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FaChevronRight, FaMagnifyingGlass } from "react-icons/fa6";
 import Preloader from "@/components/Preloader";

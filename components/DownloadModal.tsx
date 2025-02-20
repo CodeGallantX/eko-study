@@ -38,13 +38,13 @@ export default function DownloadModal({ url, onClose }: DownloadModalProps) {
       />
 
       {/* Modal */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white rounded-lg shadow-lg p-6 w-full max-w-md lg:max-w-lg">
         {/* Close Button */}
         <button
           className="absolute top-3 right-3 text-gray-600 hover:text-black"
           onClick={onClose}
         >
-          <FaTimes size={18} />
+          <FaTimes size={20} />
         </button>
 
         {/* Modal Content */}
@@ -58,7 +58,7 @@ export default function DownloadModal({ url, onClose }: DownloadModalProps) {
         {/* Download Button */}
         <button
           onClick={handleDownload}
-          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-md flex items-center justify-center gap-2"
+          className="w-full bg-green text-white font-semibold py-2 rounded-md flex items-center justify-center gap-2"
         >
           <FaDownload />
           Download
