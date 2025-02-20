@@ -8,7 +8,8 @@ const jsonData = fs.readFileSync(filePath, "utf8");
 const courses = JSON.parse(jsonData);
 
 // Extract unique colleges & departments
-const colleges = [...new Set(courses.map((c) => c.college))];
+const colleges = [...new Set(courses.map((c: Course) => c.college))];
+
 
 export default function NotesPage() {
   return (
