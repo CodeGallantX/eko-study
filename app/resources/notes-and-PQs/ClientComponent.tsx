@@ -159,7 +159,7 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
                   <h2 className="text-base lg:text-lg font-semibold group-hover:text-white">{course.title}</h2>
                   <p className="text-gray-600 group-hover:text-gray-100 text-sm lg:text-base">{course.code}</p>
                 </div>
-                <FaChevronRight className="text-gray-500/50 group-hover:text-white -translate-x-5 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
+                <FaChevronRight className="text-gray-500/50 group-hover:text-white -translate-x-3 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
               </motion.div>
             ))
           ) : (
