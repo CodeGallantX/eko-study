@@ -6,16 +6,31 @@ import { FaChevronRight, FaMagnifyingGlass } from "react-icons/fa6";
 import Preloader from "@/components/Preloader";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
-// import DownloadModal from "@/components/DownloadModal";
+import DownloadModal from "@/components/DownloadModal";
 import Footer from "@/components/Footer";
 
-export default function ClientComponent({ courses, colleges }) {
+interface Course {
+  id: number;
+  title: string;
+  code: string;
+  college: string;
+  department: string;
+  level: string;
+  url: string;
+}
+
+interface ClientComponentProps {
+  courses: Course[];
+  colleges: string[];
+}
+
+export default function ClientComponent({ courses, colleges }: ClientComponentProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({ college: "", department: "", level: "" });
   const [visibleCourses, setVisibleCourses] = useState(6);
+  const [selectedNote, setSelectedNote] = useState<string | null>(null);
   const loadMoreRef = useRef(null);
 
-  // Get departments dynamically based on selected college
   const departments = [...new Set(
     courses.filter((c) => !filters.college || c.college === filters.college).map((c) => c.department)
   )];
@@ -38,11 +53,10 @@ export default function ClientComponent({ courses, colleges }) {
     setFilters((prev) => ({
       ...prev,
       [key]: value,
-      ...(key === "college" ? { department: "" } : {}), // Reset department if college changes
+      ...(key === "college" ? { department: "" } : {}),
     }));
   };
 
-  // **Filtering & Searching Logic**
   const filteredCourses = courses.filter((course) => {
     const regex = new RegExp(searchQuery, "i");
     return (
@@ -57,20 +71,6 @@ export default function ClientComponent({ courses, colleges }) {
     );
   });
 
-  // const getIcon = (fileType) => {
-  //   switch (fileType) {
-  //     case "pdf":
-  //       return <FaFilePdf className="text-gray-500 text-xl" />;
-  //     case "docx":
-  //       return <FaFileWord className="text-gray-500 text-xl" />;
-  //     case "ppt":
-  //       return <FaFilePowerpoint className="text-gray-500 text-xl" />;
-  //     default:
-  //       return <FaBook className="text-gray-500 text-xl" />;
-  //   }
-  // };
-
-  // Banner Details
   const page = {
     title: "Notes",
     breadcrumb: [
@@ -79,13 +79,15 @@ export default function ClientComponent({ courses, colleges }) {
         path: "notes"
       }
     ]
-  }
-  const router = useRouter();
+  };
 
-  const handleClick = ({url}) => {
-    confirm("Do you want to download this lecture note?")
-    router.push(url)
-  }
+  const openModal = (url: string) => {
+    setSelectedNote(url);
+  };
+
+  const closeModal = () => {
+    setSelectedNote(null);
+  };
 
   return (
     <>
@@ -93,9 +95,7 @@ export default function ClientComponent({ courses, colleges }) {
       <Header />
       <Banner page={page} />
       <div className="px-6 xl:px-24 py-10">
-        {/* Filters */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-          {/* Search Box */}
           <fieldset className="relative flex items-center justify-start">
             <FaMagnifyingGlass className="absolute left-3 text-gray-500" />
             <input
@@ -106,7 +106,6 @@ export default function ClientComponent({ courses, colleges }) {
               className="border pl-10 py-2 w-full rounded-md outline-none focus:ring-2 focus:ring-green"
             />
           </fieldset>
-          {/* College Filter */}
           <select
             className="border p-2 w-full rounded-md outline-none focus:ring-2 focus:ring-green"
             value={filters.college}
@@ -119,8 +118,6 @@ export default function ClientComponent({ courses, colleges }) {
               </option>
             ))}
           </select>
-
-          {/* Department Filter (Disabled if no college selected) */}
           <select
             className="border p-2 w-full rounded-md outline-none focus:ring-2 focus:ring-green"
             value={filters.department}
@@ -134,8 +131,6 @@ export default function ClientComponent({ courses, colleges }) {
               </option>
             ))}
           </select>
-
-          {/* Level Filter */}
           <select
             className="border p-2 w-full rounded-md outline-none focus:ring-2 focus:ring-green"
             value={filters.level}
@@ -150,43 +145,20 @@ export default function ClientComponent({ courses, colleges }) {
           </select>
         </div>
 
-        {/* Notes List with Animations */}
         <h1 className="text-2xl font-semibold text-left mt-14">Notes available</h1>
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-10 pt-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          onClick={handleClick}
-        >
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-10 pt-4">
           {filteredCourses.length > 0 ? (
             filteredCourses.slice(0, visibleCourses).map((course) => (
               <motion.div
                 key={course.id}
-                className="bg-white hover:bg-green rounded-md p-3 border border-gray-500/50 flex flex-row items-center justify-between group cursor-pointer transition-all duration-300 ease-in-out"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
+                className="bg-white hover:bg-green rounded-md p-3 border border-gray-500/50 flex flex-row items-center justify-between group cursor-pointer"
+                onClick={() => openModal(course.url)}
               >
                 <div>
-                  <h2 className="text-base lg:text-lg font-semibold group-hover:text-white transition-all duration-300 ease-in-out">{course.title}</h2>
-                  <p className="text-gray-600 group-hover:text-gray-100 transition-all duration-300 ease-in-out text-sm lg:text-base">
-                    {course.code}
-                  </p>
+                  <h2 className="text-base lg:text-lg font-semibold group-hover:text-white">{course.title}</h2>
+                  <p className="text-gray-600 group-hover:text-gray-100 text-sm lg:text-base">{course.code}</p>
                 </div>
-
-                {/* <ul className="mt-3">
-                  {course.notes.map((note) => (
-                    <li key={note.id} className="flex items-center gap-2">
-                      {getIcon(note.type)}
-                      <a href={note.url} className="text-blue-600 underline">
-                        {note.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul> */}
-
-                <FaChevronRight className="text-gray-500/50 group-hover:text-white -translate-x-3 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
+                <FaChevronRight className="text-gray-500/50 group-hover:text-white" />
               </motion.div>
             ))
           ) : (
@@ -194,14 +166,13 @@ export default function ClientComponent({ courses, colleges }) {
           )}
         </motion.div>
 
-        {/* Infinite Scroll Load More */}
         {visibleCourses < filteredCourses.length && (
           <div ref={loadMoreRef} className="mt-6 text-center text-gray-500">
             Loading more notes...
           </div>
         )}
       </div>
-      {/* <DownloadModal url={courses.url} /> */}
+      {selectedNote && <DownloadModal url={selectedNote} onClose={closeModal} />}
       <Footer />
     </>
   );

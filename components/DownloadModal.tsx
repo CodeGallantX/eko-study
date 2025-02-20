@@ -1,21 +1,69 @@
 "use client";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaDownload } from "react-icons/fa6";
+import { FaTimes } from "react-icons/fa";
 
-export default function DownloadModal({url}) {
-    const router  = useRouter();
-    const handleDownload = () => {
-        confirm("Do you want to download this lecture note?")
-        router.push(url)
+interface DownloadModalProps {
+  url: string;
+  onClose: () => void;
+}
+
+export default function DownloadModal({ url, onClose }: DownloadModalProps) {
+  const router = useRouter();
+
+  const handleDownload = () => {
+    if (confirm("Do you want to download this lecture note?")) {
+      router.push(url);
+    }
+  };
+
+  // Close modal on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
       }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
 
-    return (
-        <>
-        <div className="absolute min-h-screen w-full h-full bg-black/40 z-40"/>
-        <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-50 w-full sm:max-w-md md:max-w-lg lg:max-w-lg bg-beige rounded-lg flex flex-col items-center justify-center space-y-2 p-6">
-            <h3>Click the button below to download lecture note</h3>
-            <button onClick={handleDownload} className="rounded-md text-white bg-deepGreen px-4 py-3" type="button"><FaDownload className="inline-block mr-1"/>Download</button>
-        </div>
-        </>
-    )
+  return (
+    <>
+      {/* Background overlay */}
+      <div
+        className="fixed inset-0 bg-black/50 z-40"
+        onClick={onClose}
+      />
+
+      {/* Modal */}
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+        {/* Close Button */}
+        <button
+          className="absolute top-3 right-3 text-gray-600 hover:text-black"
+          onClick={onClose}
+        >
+          <FaTimes size={18} />
+        </button>
+
+        {/* Modal Content */}
+        <h3 className="text-lg font-semibold text-center mb-4">
+          Download Lecture Note
+        </h3>
+        <p className="text-gray-600 text-center mb-4">
+          Click the button below to download your lecture note.
+        </p>
+
+        {/* Download Button */}
+        <button
+          onClick={handleDownload}
+          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-md flex items-center justify-center gap-2"
+        >
+          <FaDownload />
+          Download
+        </button>
+      </div>
+    </>
+  );
 }
