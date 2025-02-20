@@ -152,14 +152,14 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
             filteredCourses.slice(0, visibleCourses).map((course) => (
               <motion.div
                 key={`${course.id}-${course.code}`}
-                className="bg-white hover:bg-green rounded-md p-3 border border-gray-500/50 flex flex-row items-center justify-between group cursor-pointer"
+                className="bg-white hover:bg-green rounded-md p-3 border border-gray-500/50 flex flex-row items-center justify-between group cursor-pointer transition-all duration-200 ease-in-out"
                 onClick={() => openModal(course.url)}
               >
                 <div>
                   <h2 className="text-base lg:text-lg font-semibold group-hover:text-white">{course.title}</h2>
                   <p className="text-gray-600 group-hover:text-gray-100 text-sm lg:text-base">{course.code}</p>
                 </div>
-                <FaChevronRight className="text-gray-500/50 group-hover:text-white" />
+                <FaChevronRight className="text-gray-500/50 group-hover:text-white -translate-x-5 group-hover:translate-x-0" />
               </motion.div>
             ))
           ) : (
