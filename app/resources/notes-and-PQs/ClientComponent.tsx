@@ -49,13 +49,14 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
     return () => observer.disconnect();
   }, []);
 
-  const handleFilterChange = (key, value) => {
+  const handleFilterChange = (key: keyof typeof filters, value: string) => {
     setFilters((prev) => ({
       ...prev,
       [key]: value,
       ...(key === "college" ? { department: "" } : {}),
     }));
   };
+  
 
   const filteredCourses = courses.filter((course) => {
     const regex = new RegExp(searchQuery, "i");
