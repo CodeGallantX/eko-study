@@ -2,18 +2,18 @@ import Head from "next/head";
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "Courses - EkoStudy",
+  title: "Tutorials - EkoStudy",
   description:
     "Get in touch with EkoStudy for support, inquiries, or feedback. We are here to help LASUSTECH students with all their academic needs.",
   keywords:
-    "Courses EkoStudy, LASUSTECH support, student inquiries, academic assistance, help desk, educational support",
+    "Tutorials EkoStudy, LASUSTECH support, student inquiries, academic assistance, help desk, educational support",
 };
 
-type CoursesLayoutProps = {
+type TutorialsLayoutProps = {
   children: ReactNode;
 };
 
-export default function CoursesLayout({ children }: CoursesLayoutProps) {
+export default function TutorialsLayout({ children }: TutorialsLayoutProps) {
   return (
     <html lang="en">
       <Head>
@@ -26,14 +26,14 @@ export default function CoursesLayout({ children }: CoursesLayoutProps) {
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ekostudy.vercel.app/Courses" />
-        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Courses-banner.png" />
+        <meta property="og:url" content="https://ekostudy.vercel.app/Tutorials" />
+        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Tutorials-banner.png" />
 
         {/* Twitter Meta Tags */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:title" content={metadata.title} />
         <meta property="twitter:description" content={metadata.description} />
-        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Courses-banner.png" />
+        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Tutorials-banner.png" />
       </Head>
       <body>
         {children}
