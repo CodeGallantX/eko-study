@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { FaChevronRight, FaMagnifyingGlass, FaFilePdf, FaFileWord, FaFilePowerpoint, FaBook } from "react-icons/fa6";
+import { FaChevronRight, FaMagnifyingGlass } from "react-icons/fa6";
 import Preloader from "@/components/Preloader";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
@@ -57,18 +57,18 @@ export default function ClientComponent({ courses, colleges }) {
     );
   });
 
-  const getIcon = (fileType) => {
-    switch (fileType) {
-      case "pdf":
-        return <FaFilePdf className="text-gray-500 text-xl" />;
-      case "docx":
-        return <FaFileWord className="text-gray-500 text-xl" />;
-      case "ppt":
-        return <FaFilePowerpoint className="text-gray-500 text-xl" />;
-      default:
-        return <FaBook className="text-gray-500 text-xl" />;
-    }
-  };
+  // const getIcon = (fileType) => {
+  //   switch (fileType) {
+  //     case "pdf":
+  //       return <FaFilePdf className="text-gray-500 text-xl" />;
+  //     case "docx":
+  //       return <FaFileWord className="text-gray-500 text-xl" />;
+  //     case "ppt":
+  //       return <FaFilePowerpoint className="text-gray-500 text-xl" />;
+  //     default:
+  //       return <FaBook className="text-gray-500 text-xl" />;
+  //   }
+  // };
 
   // Banner Details
   const page = {
