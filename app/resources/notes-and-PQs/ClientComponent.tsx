@@ -150,7 +150,7 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
           {filteredCourses.length > 0 ? (
             filteredCourses.slice(0, visibleCourses).map((course) => (
               <motion.div
-                key={course.id}
+                key={`${course.id}-${course.code}`}
                 className="bg-white hover:bg-green rounded-md p-3 border border-gray-500/50 flex flex-row items-center justify-between group cursor-pointer"
                 onClick={() => openModal(course.url)}
               >
