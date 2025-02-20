@@ -22,7 +22,7 @@ export default function App() {
         <Header />
         <Banner page={page} />
         <div>
-          
+          Book a tutor
         </div>
         <Footer />
       </div>
