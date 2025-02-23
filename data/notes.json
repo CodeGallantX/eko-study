@@ -1,22 +1,87 @@
 [
-    {
-      "id": 1,
-      "college": "Engineering",
-      "department": "Computer Engineering",
-      "level": "200",
-      "title": "Data Structures",
-      "notes": [
-        {
-          "id": "ds1",
-          "title": "Introduction to Data Structures",
-          "url": "/notes/data-structures-1.pdf"
-        },
-        {
-          "id": "ds2",
-          "title": "Trees & Graphs",
-          "url": "/notes/trees-graphs.pdf"
-        }
-      ]
-    }
+  {
+  "id": 1,
+  "name": "General Physics I",
+  "code": "PHY101",
+  "description":
+    "Explore the laws of planetary motion and their significance in astronomy.",
+  "lecturers": "Dr. Oyeleke",
+  "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/xyz1",
+    "https://www.youtube.com/embed/xyz2"
+  ],
+  "outline": [
+    "Kepler's First Law: Understanding elliptical orbits.",
+    "Kepler's Second Law: Areal velocity and planetary motion.",
+    "Kepler's Third Law: Orbital periods and distances.",
+    "Applications of Kepler's Laws in space missions.",
+    "Kepler's Laws and Newtonian Mechanics."
   ]
-  
+},
+{
+  "id": 2,
+  "name": "Elementary Mathematics I (Algebra and Trigonometry)",
+  "code": "MTH101",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "Dr. Idowu",
+  "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Mathematics", "Industrial Mathematics"],
+  "lessons": 6,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/abc1",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Indices, Logarithms, and Surds.",
+    "Operations with Complex Numbers.",
+    "Complex Plane and Polar Representation.",
+    "Euler's Formula and Applications.",
+    "Complex Functions and Transformations."
+  ]
+},
+{
+  "id": 3,
+  "name": "Introduction to Computer Sciences",
+  "code": "COS101",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "Dr. Jerry Sarumi",
+  "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Microbiology", "Industrial Mathematics", "Mathematics"],
+  "lessons": 6,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/abc1",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Indices, Logarithms, and Surds.",
+    "Operations with Complex Numbers.",
+    "Complex Plane and Polar Representation.",
+    "Euler's Formula and Applications.",
+    "Complex Functions and Transformations."
+  ]
+},
+{
+  "id": 4,
+  "name": "Descriptive Statistics",
+  "code": "STA111",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "",
+  "departments": ["Computer Science", "Chemistry", "Industrial Chemistry", "Biochemistry"],
+  "lessons": 9,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/abc1",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Statistical Data",
+    "Presentaion of Data",
+    "Errors and Approximation.",
+    "Frequency and Cummulative Distributions.",
+    "Measures of Location.",
+    "Measures of Partition.",
+    "Measures of Dispersion.",
+    "Measures of Kurtosis.",
+    "Measures of Rates, Ration and Index numbers."
+  ]
+}
+]

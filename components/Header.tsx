@@ -43,9 +43,9 @@ export default function Header() {
           {
             label: "ACADEMICS",
             submenu: [
+              { label: "Courses", href: "/academics/courses" },
               { label: "Colleges", href: "/academics/colleges" },
               { label: "Departments", href: "/academics/departments" },
-              { label: "Tutorials", href: "/academics/tutorials" },
             ],
           },
           {
@@ -139,9 +139,9 @@ export default function Header() {
             {
               label: "ACADEMICS",
               submenu: [
+                { label: "Courses", href: "/academics/courses" },
                 { label: "Colleges", href: "/academics/colleges" },
                 { label: "Departments", href: "/academics/departments" },
-                { label: "Tutorials", href: "/academics/tutorials" },
               ],
             },
             {
