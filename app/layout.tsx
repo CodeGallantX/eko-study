@@ -31,6 +31,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <Head>
+      {/* <!-- Google tag (gtag.js) --> */}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-721541P15F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-721541P15F');
+</script>
         <meta name="title" content="EkoStudy - The Ultimate Academic Hub" />
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
