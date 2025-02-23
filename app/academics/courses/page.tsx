@@ -41,7 +41,7 @@ export default function App() {
       }
     : {
         title: "Courses",
-        breadcrumb: [{ name: "Courses", path: "/courses" }],
+        breadcrumb: [{ name: "Courses", path: "/academics/courses" }],
       };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +74,7 @@ export default function App() {
       <Preloader />
       <div>
         <Header />
-        <Banner page={page} />
+        <Banner page={page}/>
         <div className="py-10 px-6 lg:px-20">
           {!selectedCourse ? (
             <>
