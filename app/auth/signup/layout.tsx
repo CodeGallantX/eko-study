@@ -3,6 +3,7 @@ import Head from "next/head";
 import "../../globals.css";
 import { ReactNode } from "react";
 
+
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -31,6 +32,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <Head>
+        {/* Google Analytics */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-721541P15F"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-721541P15F');
+            `,
+          }}
+        />
         <meta name="title" content="Sign Up - The Ultimate Academic Hub" />
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />

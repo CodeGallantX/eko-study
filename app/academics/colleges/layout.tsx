@@ -17,6 +17,18 @@ export default function CollegesLayout({ children }: CollegesLayoutProps) {
   return (
     <html lang="en">
       <Head>
+        {/* Google Analytics */}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-721541P15F"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-721541P15F');
+            `,
+          }}
+        />
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
