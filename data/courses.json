@@ -2,7 +2,7 @@
     {
       "id": 1,
       "title": "Introduction to Computer Science",
-      "code": "CHM101",
+      "code": "COS101",
       "college": "College of Basic Science",
       "department": "Computer Science",
       "level": "100",
@@ -13,12 +13,6 @@
           "title": "Basics of Programming",
           "type": "pdf",
           "url": "/notes/cs101-lecture1.pdf"
-        },
-        {
-          "id": "note2",
-          "title": "Data Structures",
-          "type": "docx",
-          "url": "/notes/cs101-lecture2.docx"
         }
       ]
     },
@@ -27,7 +21,7 @@
       "title": "Descriptive Statistics",
       "code": "STA111",
       "college": "College of Basic Science",
-      "department": "Mechanical Engineering",
+      "department": "Statistics",
       "level": "100",
       "url": "/notes/se301-sdlc.pdf",
       "notes": [
@@ -44,7 +38,7 @@
       "title": "Communication in English",
       "code": "GST111",
       "college": "College of Business",
-      "department": "Accounting",
+      "department": "Microbiology",
       "level": "300",
       "url": "/notes/se301-sdlc.pdf",
       "notes": [
@@ -53,12 +47,6 @@
           "title": "Introduction to Accounting",
           "type": "ppt",
           "url": "/notes/acc301-intro.ppt"
-        },
-        {
-          "id": "note5",
-          "title": "Balance Sheets and Statements",
-          "type": "pdf",
-          "url": "/notes/acc301-balance.pdf"
         }
       ]
     },
@@ -67,7 +55,7 @@
       "title": "Elementary Mathematics",
       "code": "MTH101",
       "college": "College of Basic Science",
-      "department": "Computer Science",
+      "department": "Mathematics",
       "level": "100",
       "url": "/notes/se301-sdlc.pdf",
       "notes": [
@@ -81,10 +69,10 @@
     },
     {
       "id": 5,
-      "title": "Introduction to Biology",
+      "title": "General Biology I",
       "code": "BIO101",
       "college": "College of Basic Science",
-      "department": "Microbiology",
+      "department": "Zoology",
       "level": "100",
       "url": "/notes/se301-sdlc.pdf",
       "notes": [
@@ -101,7 +89,7 @@
       "title": "Mathematical Computation in ODE",
       "code": "MTH103",
       "college": "College of Basic Science",
-      "department": "Statistics",
+      "department": "Industrial Mathematics",
       "level": "100",
       "url": "/notes/se301-sdlc.pdf",
       "notes": [
@@ -114,11 +102,107 @@
       ]
     },
     {
-      "id": 6,
+      "id": 7,
       "title": "Introduction to Internet Technology",
       "code": "CSC103",
       "college": "College of Basic Science",
       "department": "Computer Science",
+      "level": "100",
+      "notes": [
+        {
+          "id": "note8",
+          "title": "Software Development Life Cycle",
+          "type": "pdf",
+          "url": "/notes/se301-sdlc.pdf"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Communication in Yoruba I",
+      "code": "LASUSTECH-YOR101",
+      "college": "College of Basic Science",
+      "department": "Biochemistry",
+      "level": "100",
+      "notes": [
+        {
+          "id": "note8",
+          "title": "Software Development Life Cycle",
+          "type": "pdf",
+          "url": "/notes/se301-sdlc.pdf"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Introduction to Internet Technology",
+      "code": "CSC103",
+      "college": "College of Basic Science",
+      "department": "Computer Science",
+      "level": "100",
+      "notes": [
+        {
+          "id": "note8",
+          "title": "Software Development Life Cycle",
+          "type": "pdf",
+          "url": "/notes/se301-sdlc.pdf"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "General Physics I",
+      "code": "PHY101",
+      "college": "College of Basic Science",
+      "department": "Physics with Electronics",
+      "level": "100",
+      "notes": [
+        {
+          "id": "note8",
+          "title": "Software Development Life Cycle",
+          "type": "pdf",
+          "url": "/notes/se301-sdlc.pdf"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Use of Library, Study Skills and ICT",
+      "code": "LASUSTECH-LIB101",
+      "college": "College of Basic Science",
+      "department": "Industrial Chemistry",
+      "level": "100",
+      "notes": [
+        {
+          "id": "note8",
+          "title": "Software Development Life Cycle",
+          "type": "pdf",
+          "url": "/notes/se301-sdlc.pdf"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "title": "General Chemistry I",
+      "code": "CHM101",
+      "college": "College of Basic Science",
+      "department": "Industrial Chemistry",
+      "level": "100",
+      "notes": [
+        {
+          "id": "note8",
+          "title": "Software Development Life Cycle",
+          "type": "pdf",
+          "url": "/notes/se301-sdlc.pdf"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "title": "General Chemistry I",
+      "code": "CHM101",
+      "college": "College of Basic Science",
+      "department": "Industrial Chemistry",
       "level": "100",
       "notes": [
         {
