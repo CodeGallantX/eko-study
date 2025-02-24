@@ -6,15 +6,8 @@
       "college": "College of Basic Science",
       "department": "Computer Science",
       "level": "100",
-      "url": "/notes/se301-sdlc.pdf",
-      "notes": [
-        {
-          "id": "note1",
-          "title": "Basics of Programming",
-          "type": "pdf",
-          "url": "/notes/cs101-lecture1.pdf"
-        }
-      ]
+      "url": "../docs/"
+      
     },
     {
       "id": 2,
@@ -23,32 +16,17 @@
       "college": "College of Basic Science",
       "department": "Statistics",
       "level": "100",
-      "url": "/notes/se301-sdlc.pdf",
-      "notes": [
-        {
-          "id": "note3",
-          "title": "Differential Equations",
-          "type": "pdf",
-          "url": "/notes/math201-de.pdf"
-        }
-      ]
+      "url": "../docs/"
+      
     },
     {
       "id": 3,
       "title": "Communication in English",
       "code": "GST111",
-      "college": "College of Business",
+      "college": "College of Basic Science",
       "department": "Microbiology",
       "level": "300",
-      "url": "/notes/se301-sdlc.pdf",
-      "notes": [
-        {
-          "id": "note4",
-          "title": "Introduction to Accounting",
-          "type": "ppt",
-          "url": "/notes/acc301-intro.ppt"
-        }
-      ]
+      "url": "../docs/"
     },
     {
       "id": 4,
@@ -57,15 +35,7 @@
       "college": "College of Basic Science",
       "department": "Mathematics",
       "level": "100",
-      "url": "/notes/se301-sdlc.pdf",
-      "notes": [
-        {
-          "id": "note6",
-          "title": "Fundamentals of Organic Chemistry",
-          "type": "pdf",
-          "url": "/notes/chem401-organic.pdf"
-        }
-      ]
+      "url": "../docs/"
     },
     {
       "id": 5,
@@ -74,15 +44,7 @@
       "college": "College of Basic Science",
       "department": "Zoology",
       "level": "100",
-      "url": "/notes/se301-sdlc.pdf",
-      "notes": [
-        {
-          "id": "note7",
-          "title": "Demand and Supply",
-          "type": "docx",
-          "url": "/notes/eco201-demand.docx"
-        }
-      ]
+      "url": "../docs/"
     },
     {
       "id": 6,
@@ -91,15 +53,7 @@
       "college": "College of Basic Science",
       "department": "Industrial Mathematics",
       "level": "100",
-      "url": "/notes/se301-sdlc.pdf",
-      "notes": [
-        {
-          "id": "note8",
-          "title": "Software Development Life Cycle",
-          "type": "pdf",
-          "url": "/notes/se301-sdlc.pdf"
-        }
-      ]
+      "url": "../docs/"
     },
     {
       "id": 7,
@@ -108,14 +62,8 @@
       "college": "College of Basic Science",
       "department": "Computer Science",
       "level": "100",
-      "notes": [
-        {
-          "id": "note8",
-          "title": "Software Development Life Cycle",
-          "type": "pdf",
-          "url": "/notes/se301-sdlc.pdf"
-        }
-      ]
+      "url": "../docs/"
+
     },
     {
       "id": 8,
@@ -124,30 +72,17 @@
       "college": "College of Basic Science",
       "department": "Biochemistry",
       "level": "100",
-      "notes": [
-        {
-          "id": "note8",
-          "title": "Software Development Life Cycle",
-          "type": "pdf",
-          "url": "/notes/se301-sdlc.pdf"
-        }
-      ]
+      "url": "../docs/"
+        
     },
     {
       "id": 9,
-      "title": "Introduction to Internet Technology",
-      "code": "CSC103",
+      "title": "Introduction to Physics with Electronics",
+      "code": "PHY103",
       "college": "College of Basic Science",
-      "department": "Computer Science",
+      "department": "Physics with Electronics",
       "level": "100",
-      "notes": [
-        {
-          "id": "note8",
-          "title": "Software Development Life Cycle",
-          "type": "pdf",
-          "url": "/notes/se301-sdlc.pdf"
-        }
-      ]
+      "url": "../docs/" 
     },
     {
       "id": 10,
@@ -156,14 +91,7 @@
       "college": "College of Basic Science",
       "department": "Physics with Electronics",
       "level": "100",
-      "notes": [
-        {
-          "id": "note8",
-          "title": "Software Development Life Cycle",
-          "type": "pdf",
-          "url": "/notes/se301-sdlc.pdf"
-        }
-      ]
+      "url": "../docs/"
     },
     {
       "id": 11,
@@ -172,14 +100,7 @@
       "college": "College of Basic Science",
       "department": "Industrial Chemistry",
       "level": "100",
-      "notes": [
-        {
-          "id": "note8",
-          "title": "Software Development Life Cycle",
-          "type": "pdf",
-          "url": "/notes/se301-sdlc.pdf"
-        }
-      ]
+      "url": "../docs/"
     },
     {
       "id": 12,
@@ -188,30 +109,16 @@
       "college": "College of Basic Science",
       "department": "Industrial Chemistry",
       "level": "100",
-      "notes": [
-        {
-          "id": "note8",
-          "title": "Software Development Life Cycle",
-          "type": "pdf",
-          "url": "/notes/se301-sdlc.pdf"
-        }
-      ]
+      "url": "../docs/"
     },
     {
       "id": 13,
-      "title": "General Chemistry I",
-      "code": "CHM101",
+      "title": "Botany",
+      "code": "BOT101",
       "college": "College of Basic Science",
-      "department": "Industrial Chemistry",
+      "department": "Botany",
       "level": "100",
-      "notes": [
-        {
-          "id": "note8",
-          "title": "Software Development Life Cycle",
-          "type": "pdf",
-          "url": "/notes/se301-sdlc.pdf"
-        }
-      ]
+      "url": "../docs/"
     }
   ]
   

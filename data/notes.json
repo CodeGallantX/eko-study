@@ -83,5 +83,29 @@
     "Measures of Kurtosis.",
     "Measures of Rates, Ration and Index numbers."
   ]
+},
+{
+  "id": 5,
+  "name": "Introduction to Internet Technology",
+  "code": "CSC103",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "",
+  "departments": ["Computer Science", "Chemistry", "Industrial Chemistry", "Biochemistry"],
+  "lessons": 9,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/abc1",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Statistical Data",
+    "Presentaion of Data",
+    "Errors and Approximation.",
+    "Frequency and Cummulative Distributions.",
+    "Measures of Location.",
+    "Measures of Partition.",
+    "Measures of Dispersion.",
+    "Measures of Kurtosis.",
+    "Measures of Rates, Ration and Index numbers."
+  ]
 }
 ]
