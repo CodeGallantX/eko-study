@@ -56,13 +56,13 @@ const VideoCarousel = ({ videos }) => {
       </div>
       <div className="mt-4 flex space-x-4">
         <button
-          className="px-4 py-3 text-white rounded-lg bg-deepGreen hover:bg-yellow hover:text-black transition-all duration-300 ease-in-out"
+          className="px-4 py-3 text-white rounded-lg bg-deepGreen hover:bg-yellow hover:text-deepGreen transition-all duration-300 ease-in-out"
           onClick={() => setActiveIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))}
           >
           <FaChevronLeft />
         </button>
         <button
-          className="px-4 py-3 text-white rounded-lg bg-deepGreen hover:bg-yellow hover:text-black transition-all duration-300 ease-in-out"
+          className="px-4 py-3 text-white rounded-lg bg-deepGreen hover:bg-yellow hover:text-deepGreen transition-all duration-300 ease-in-out"
           onClick={() => setActiveIndex((prev) => (prev + 1) % videos.length)}
         >
           <FaChevronRight />
