@@ -21,7 +21,7 @@ const getYouTubeVideoId = (url: string) => {
             className="w-full h-20 object-cover"
           />
         ) : (
-          <p className="p-4 text-red-500">Invalid Video</p>
+          <p className="p-4 text-red-700 text-sm font-normal text-center">Video not available yet...</p>
         )}
       </div>
     );
