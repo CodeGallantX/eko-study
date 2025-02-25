@@ -113,9 +113,9 @@ export default function App() {
                         {course.name} [{course.code}]
                       </h2>
                       <p className="text-gray-600 mt-2">{course.description}</p>
-                      <p className="text-gray-500 mt-1 font-semibold">
+                      {/* <p className="text-gray-500 mt-1 font-semibold">
                         Instructor: {course.lecturers}
-                      </p>
+                      </p> */}
                     </div>
                   ))
                 ) : (

@@ -104,15 +104,14 @@
     "https://www.youtube.com/embed/abc2"
   ],
   "outline": [
-    "Statistical Data",
-    "Presentaion of Data",
-    "Errors and Approximation.",
-    "Frequency and Cummulative Distributions.",
-    "Measures of Location.",
-    "Measures of Partition.",
-    "Measures of Dispersion.",
-    "Measures of Kurtosis.",
-    "Measures of Rates, Ration and Index numbers."
+    "History of the iNternet",
+    "Overview of various INternet Technologies",
+    "Role of the internet in current society",
+    "Internet Security and Online safety",
+    "Introduction to the Internet",
+    "Internet Design and Communication Protocols.",
+    "Use of XHTML elements and CSS for static content and presentation",
+    "Technical requirements for efficient presentational structures"
   ]
 },
 {
@@ -173,6 +172,108 @@
     "Properties of gases",
     "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
     "Radioactivity"
+  ]
+},
+{
+  "id": 8,
+  "name": "Introduction to Zoology",
+  "code": "ZOO101",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "",
+  "departments": ["Microbiology", "Zoology", "Biochemistry"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Atoms, Molecules, Elements, and Compounds",
+    "Modern Electronic Theory of Atom",
+    "Electronic Configuration, Periodicity, and building-up of structure of solids",
+    "Chemical Equations, and Stoichiometry",
+    "Hybridization, and Shapes of simple molecules",
+    "Valence Forces.",
+    "Structure of Solids",
+    "Chemical Bonding and Inter-molecular forces",
+    "Kinetic Theory of Matter",
+    "Elementary Thermochemistry",
+    "Rate of Reacts, Equilibrium, and Thermodynamics",
+    "Acids, Bases, and Salts",
+    "Properties of gases",
+    "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
+    "Radioactivity"
+  ]
+},
+{
+  "id": 9,
+  "name": "Computational ODE",
+  "code": "MTH103",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "",
+  "departments": ["Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Concept of Differentail Equations",
+    "Computational Methods in getting Approximate Solutions",
+    "Electronic Configuration, Periodicity, and building-up of structure of solids"
+  ]
+},
+{
+  "id": 10,
+  "name": "Electronic Physics",
+  "code": "PHY103",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "",
+  "departments": ["Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Concept of Differential Equations",
+    "Computational Methods in getting Approximate Solutions",
+    "Electronic Configuration, Periodicity, and building-up of structure of solids"
+  ]
+},
+{
+  "id": 10,
+  "name": "Computational ODE",
+  "code": "MTH103",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "",
+  "departments": ["Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Concept of Differentail Equations",
+    "Computational Methods in getting Approximate Solutions",
+    "Electronic Configuration, Periodicity, and building-up of structure of solids"
+  ]
+},
+{
+  "id": 11,
+  "name": "Communication in English",
+  "code": "GST111",
+  "description": "Communication in English Language",
+  "lecturers": "",
+  "departments": ["Computer Science", "Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Concept of Differentail Equations",
+    "Computational Methods in getting Approximate Solutions",
+    "Electronic Configuration, Periodicity, and building-up of structure of solids"
   ]
 }
 ]
