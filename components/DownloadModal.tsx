@@ -13,9 +13,7 @@ export default function DownloadModal({ url, onClose }: DownloadModalProps) {
   const router = useRouter();
 
   const handleDownload = () => {
-    if (confirm("Do you want to download this lecture note?")) {
       router.push(url);
-    }
   };
 
   // Close modal on Escape key press
