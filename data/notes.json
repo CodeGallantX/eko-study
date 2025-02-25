@@ -9,8 +9,9 @@
   "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Physics with Electronics"],
   "lessons": 7,
   "youtubeLinks": [
-    "https://www.youtube.com/embed/xyz1",
-    "https://www.youtube.com/embed/xyz2"
+    "https://www.youtube.com/embed/WSqwzfEsC6I?si=LVmg3m5YEvp4s8cY",
+    "https://www.youtube.com/embed/w4QFJb9a8vo?si=snKMuhei5OHP2IuW",
+    "https://www.youtube.com/embed/7gf6YpdvtE0?si=ESQ0neeUklAbuex1"
   ],
   "outline": [
     "Kepler's First Law: Understanding elliptical orbits.",
@@ -29,7 +30,7 @@
   "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Mathematics", "Industrial Mathematics"],
   "lessons": 6,
   "youtubeLinks": [
-    "https://www.youtube.com/embed/abc1",
+    "https://www.youtube.com/embed/bmsapLZM2Uo?si=CheipEmQtuhPz_Fz",
     "https://www.youtube.com/embed/abc2"
   ],
   "outline": [
@@ -106,6 +107,66 @@
     "Measures of Dispersion.",
     "Measures of Kurtosis.",
     "Measures of Rates, Ration and Index numbers."
+  ]
+},
+{
+  "id": 6,
+  "name": "General Chemistry I",
+  "code": "CHM101",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "",
+  "departments": ["Computer Science", "Chemistry", "Industrial Chemistry", "Biochemistry", "Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/jyvcVjrZnJA?si=iNszhb1jc5gZvFmk",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Atoms, Molecules, Elements, and Compounds",
+    "Modern Electronic Theory of Atom",
+    "Electronic Configuration, Periodicity, and building-up of structure of solids",
+    "Chemical Equations, and Stoichiometry",
+    "Hybridization, and Shapes of simple molecules",
+    "Valence Forces.",
+    "Structure of Solids",
+    "Chemical Bonding and Inter-molecular forces",
+    "Kinetic Theory of Matter",
+    "Elementary Thermochemistry",
+    "Rate of Reacts, Equilibrium, and Thermodynamics",
+    "Acids, Bases, and Salts",
+    "Properties of gases",
+    "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
+    "Radioactivity"
+  ]
+},
+{
+  "id": 7,
+  "name": "General Biology I",
+  "code": "BIO101",
+  "description": "Understanding complex numbers and their applications.",
+  "lecturers": "",
+  "departments": ["Microbiology", "Chemistry", "Industrial Chemistry", "Biochemistry", "Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Atoms, Molecules, Elements, and Compounds",
+    "Modern Electronic Theory of Atom",
+    "Electronic Configuration, Periodicity, and building-up of structure of solids",
+    "Chemical Equations, and Stoichiometry",
+    "Hybridization, and Shapes of simple molecules",
+    "Valence Forces.",
+    "Structure of Solids",
+    "Chemical Bonding and Inter-molecular forces",
+    "Kinetic Theory of Matter",
+    "Elementary Thermochemistry",
+    "Rate of Reacts, Equilibrium, and Thermodynamics",
+    "Acids, Bases, and Salts",
+    "Properties of gases",
+    "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
+    "Radioactivity"
   ]
 }
 ]

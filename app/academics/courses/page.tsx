@@ -4,7 +4,9 @@ import Preloader from "@/components/Preloader";
 import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
+import VideoCarousel from "@/components/CourseVideos";
 import coursesVideos from "@/data/notes.json";
+import { FaChevronLeft } from "react-icons/fa6"
 
 // Define Course Type
 interface Course {
@@ -33,16 +35,16 @@ export default function App() {
 
   const page = selectedCourse
     ? {
-        title: selectedCourse.name,
-        breadcrumb: [
-          { name: "Courses", path: "/courses" },
-          { name: selectedCourse.name, path: "#" },
-        ],
-      }
+      title: selectedCourse.name,
+      breadcrumb: [
+        { name: "Courses", path: "/courses" },
+        { name: selectedCourse.name, path: "#" },
+      ],
+    }
     : {
-        title: "Courses",
-        breadcrumb: [{ name: "Courses", path: "/academics/courses" }],
-      };
+      title: "Courses",
+      breadcrumb: [{ name: "Courses", path: "/academics/courses" }],
+    };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
@@ -74,7 +76,7 @@ export default function App() {
       <Preloader />
       <div>
         <Header />
-        <Banner page={page}/>
+        <Banner page={page} />
         <div className="py-10 px-6 lg:px-20">
           {!selectedCourse ? (
             <>
@@ -127,9 +129,10 @@ export default function App() {
                 className="mb-4 px-6 py-2 rounded bg-green text-white font-bold hover:bg-opacity-80 transition"
                 onClick={() => setSelectedCourse(null)}
               >
+                <FaChevronLeft className="inline-block mr-1" />
                 Back to Courses
               </button>
-              <div className="flex flex-col md:flex-row items-start md:items-center justify-between md:space-x-10">
+              <div className="grid grid-cols-1 lg:grid-cols-2 items-start justify-start gap-4">
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900">
                     {selectedCourse.name} [{selectedCourse.code}]
@@ -157,20 +160,10 @@ export default function App() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold mt-6 text-gray-900">
+                  <h3 className="text-xl font-bold mt-6 lg:mt-0 space-y-3 text-gray-900">
                     Video Lessons
+                    <VideoCarousel videos={selectedCourse.youtubeLinks} />
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                    {selectedCourse.youtubeLinks.map((link, index) => (
-                      <iframe
-                        key={index}
-                        className="w-full h-64 rounded-lg shadow-md"
-                        src={link}
-                        title={`Video ${index + 1}`}
-                        allowFullScreen
-                      ></iframe>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>
