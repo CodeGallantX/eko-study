@@ -1,26 +1,15 @@
-"use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
+import VideoPlayer  from "@/components/VideoPlayer"
+import VideoThumbnail  from "@/components/VideoThumbnail"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6"
-import VideoThumbnail from "@/components/VideoThumbnail"
 
-const VideoPlayer = ({ video, onEnd }) => {
-  return (
-    <div className="relative w-full max-w-4xl">
-      <iframe
-        className="w-full h-64 md:h-96 rounded-lg shadow-lg"
-        src={`${video}?autoplay=1`}
-        title="Active Video"
-        allowFullScreen
-        onEnded={onEnd}
-      ></iframe>
-    </div>
-  );
-};
+interface VideoCarouselProps {
+  videos: string[];
+}
 
-
-const VideoCarousel = ({ videos }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [countdown, setCountdown] = useState(null);
+const VideoCarousel: React.FC<VideoCarouselProps> = ({ videos }) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [countdown, setCountdown] = useState<number | null>(null);
 
   useEffect(() => {
     if (countdown !== null) {
@@ -58,7 +47,7 @@ const VideoCarousel = ({ videos }) => {
         <button
           className="px-4 py-3 text-white rounded-lg bg-deepGreen hover:bg-yellow hover:text-deepGreen transition-all duration-300 ease-in-out"
           onClick={() => setActiveIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))}
-          >
+        >
           <FaChevronLeft />
         </button>
         <button
@@ -72,4 +61,4 @@ const VideoCarousel = ({ videos }) => {
   );
 };
 
-export default VideoCarousel;
+export default VideoCarousel
