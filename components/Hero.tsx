@@ -11,21 +11,36 @@ export default function Hero() {
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
           className="absolute w-[300px] h-[300px] bg-[#e6e1d1] dark:bg-[#333] rounded-full filter blur-3xl opacity-50"
-          initial={{ x: "-30%", y: "-20%", scale: 1 }}
-          animate={{ x: ["-20%", "10%", "-10%"], y: ["-10%", "20%", "-10%"], scale: [1, 1.2, 1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          initial={{ x: "-30%", y: "-20%", scale: 1, rotate: 0 }}
+          animate={{ 
+            x: ["-20%", "10%", "-10%"], 
+            y: ["-10%", "20%", "-10%"], 
+            scale: [1, 1.3, 1], 
+            rotate: [0, 15, -15, 0] 
+          }}
+          transition={{ duration: 6, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
         />
         <motion.div 
           className="absolute w-[200px] h-[200px] bg-[#92B76D] dark:bg-[#444] rounded-full filter blur-3xl opacity-50 bottom-10 right-10"
-          initial={{ x: "30%", y: "20%", scale: 1 }}
-          animate={{ x: ["20%", "-10%", "15%"], y: ["10%", "-15%", "10%"], scale: [1, 1.3, 1] }}
-          transition={{ duration:4 , repeat: Infinity, ease: "easeInOut" }}
+          initial={{ x: "30%", y: "20%", scale: 1, rotate: 0 }}
+          animate={{ 
+            x: ["20%", "-10%", "15%"], 
+            y: ["10%", "-15%", "10%"], 
+            scale: [1, 1.4, 1], 
+            rotate: [0, -20, 20, 0] 
+          }}
+          transition={{ duration: 5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
         />
         <motion.div 
           className="absolute w-[250px] h-[250px] bg-[#ffca0d] dark:bg-[#555] rounded-full filter blur-3xl opacity-50 top-20 left-20"
-          initial={{ x: "-20%", y: "30%", scale: 1 }}
-          animate={{ x: ["-15%", "15%", "-10%"], y: ["30%", "10%", "20%"], scale: [1, 1.1, 1] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          initial={{ x: "-20%", y: "30%", scale: 1, rotate: 0 }}
+          animate={{ 
+            x: ["-15%", "15%", "-10%"], 
+            y: ["30%", "10%", "20%"], 
+            scale: [1, 1.2, 1], 
+            rotate: [0, 10, -10, 0] 
+          }}
+          transition={{ duration: 7, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
         />
       </div>
 

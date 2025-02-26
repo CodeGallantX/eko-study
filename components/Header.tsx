@@ -71,7 +71,7 @@ export default function Header() {
               {item.submenu && (
                 <ChevronDown
                   size={18}
-                  className={`transition duration-300 font-bold ${
+                  className={`transition duration-500 ease-in-out font-bold ${
                     hoveredMenu === item.label ? "rotate-180" : "rotate-0"
                   }`}
                 />
