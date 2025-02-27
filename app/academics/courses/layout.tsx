@@ -1,12 +1,13 @@
 import Head from "next/head";
+import Script from "next/script";
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "Courses - EkoStudy",
+  title: "Courses & Study Materials - EkoStudy",
   description:
-    "Get in touch with EkoStudy for support, inquiries, or feedback. We are here to help LASUSTECH students with all their academic needs.",
+    "Discover LASUSTECH courses, lecture notes, past questions, and AI-powered study resources on EkoStudy. Get personalized academic support, smart study recommendations, and exam preparation tools to boost your performance.",
   keywords:
-    "Courses EkoStudy, LASUSTECH support, student inquiries, academic assistance, help desk, educational support",
+    "LASUSTECH courses, EkoStudy study materials, lecture notes, past questions, exam preparation, AI tutoring, university resources, student academic support, online learning platform, LASUSTECH education, study tips, course syllabus, free educational materials, digital learning, student success, personalized study plans, academic excellence, university exam help, AI-powered study assistant, efficient learning, higher education resources",
 };
 
 type CoursesLayoutProps = {
@@ -16,19 +17,21 @@ type CoursesLayoutProps = {
 export default function CoursesLayout({ children }: CoursesLayoutProps) {
   return (
     <html lang="en">
+      {/* Google Analytics */}
+      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DZMYQ5NQT0');
+          `,
+        }}
+      />
       <Head>
-        {/* Google Analytics */}
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-721541P15F"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-721541P15F');
-            `,
-          }}
-        />
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />

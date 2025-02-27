@@ -1,5 +1,6 @@
 import { Outfit, Merriweather } from "next/font/google";
 import Head from "next/head";
+import Script from "next/script";
 import "./globals.css";
 import { ReactNode } from "react";
 
@@ -30,19 +31,21 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <Head>
       {/* Google Analytics */}
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-721541P15F"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-721541P15F');
-            `,
-          }}
-        />
+      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DZMYQ5NQT0');
+          `,
+        }}
+      />
+      <Head>
         <meta name="title" content="EkoStudy - The Ultimate Academic Hub" />
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />

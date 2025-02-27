@@ -1,5 +1,6 @@
 import { Outfit, Merriweather } from "next/font/google";
 import Head from "next/head";
+import Script from "next/script"
 import "../../globals.css";
 import { ReactNode } from "react";
 
@@ -17,7 +18,7 @@ const merriweather = Merriweather({
 });
 
 export const metadata = {
-  title: "Sign Up - The Ultimate Academic Hub",
+  title: "Sign Up - EkoStudy",
   description:
     "EkoStudy is the ultimate online resource for students of Lagos State University of Science and Technology (LASUSTECH), Ikorodu; offering an extensive collection of lecture notes, study guides, and interactive courses across various departments. Designed to support and enhance academic success, EkoStudy provides everything you need to excel in your studies, from comprehensive materials to engaging learning tools.",
   keywords:
@@ -31,19 +32,21 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+      {/* Google Analytics */}
+      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DZMYQ5NQT0');
+          `,
+        }}
+      />
       <Head>
-        {/* Google Analytics */}
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-721541P15F"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-721541P15F');
-            `,
-          }}
-        />
         <meta name="title" content="Sign Up - The Ultimate Academic Hub" />
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />

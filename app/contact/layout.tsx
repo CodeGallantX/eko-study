@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Script from "next/script";
 import { ReactNode } from "react";
 
 export const metadata = {
@@ -16,19 +17,21 @@ type ContactLayoutProps = {
 export default function ContactLayout({ children }: ContactLayoutProps) {
   return (
     <html lang="en">
+      {/* Google Analytics */}
+      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DZMYQ5NQT0');
+          `,
+        }}
+      />
       <Head>
-        {/* Google Analytics */}
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-721541P15F"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-721541P15F');
-            `,
-          }}
-        />
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
