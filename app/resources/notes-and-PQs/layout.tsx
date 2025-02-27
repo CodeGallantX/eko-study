@@ -3,12 +3,13 @@ import Script from "next/script";
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "Resources EkoStudy - Our Mission & Vision",
+  title: "Free Lecture Notes & Past Questions - EkoStudy LASUSTECH",
   description:
-    "Learn Resources EkoStudy’s mission to empower LASUSTECH students with top-quality academic resources, interactive learning tools, and expert study support.",
+    "Access free LASUSTECH lecture notes, past questions, and study materials on EkoStudy. Get the best university resources, solved exam papers, and AI-powered academic assistance to help you succeed in your studies.",
   keywords:
-    "Resources EkoStudy, EkoStudy mission, LASUSTECH education platform, student learning resources, academic support, study tools, online education, university success, learning innovation",
+    "LASUSTECH past questions, free lecture notes, university study materials, EkoStudy resources, Nigerian university exams, solved past questions, academic support, LASUSTECH students, free past questions and answers, university revision materials, online study tools, WAEC JAMB resources, higher institution notes, free educational resources in Nigeria, school exam preparation, best Nigerian study platform, AI-powered learning, e-learning Nigeria, LASUSTECH course syllabus, study for university exams, free PDF lecture notes",
 };
+
 
 type ResourcesLayoutProps = {
   children: ReactNode;
