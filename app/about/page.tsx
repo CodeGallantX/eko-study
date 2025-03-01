@@ -35,7 +35,7 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Image */}
             <div className="relative h-96 w-full">
-              <Image
+              <img
                 src="https://plus.unsplash.com/premium_photo-1714211557697-f3339798f89c"
                 alt="EkoStudy Vision"
                 fill
