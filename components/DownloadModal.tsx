@@ -1,19 +1,20 @@
 "use client";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { saveAs } from "file-saver"; // Import file-saver library
 import { FaDownload } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 
 interface DownloadModalProps {
   url: string;
+  fileName: string; // Add fileName prop
   onClose: () => void;
 }
 
-export default function DownloadModal({ url, onClose }: DownloadModalProps) {
-  const router = useRouter();
-
+export default function DownloadModal({ url, fileName, onClose }: DownloadModalProps) {
   const handleDownload = () => {
-      router.push(url);
+    // Trigger download using file-saver
+    saveAs(url, fileName);
+    onClose(); // Close the modal after download
   };
 
   // Close modal on Escape key press
@@ -50,7 +51,7 @@ export default function DownloadModal({ url, onClose }: DownloadModalProps) {
           Download Lecture Note
         </h3>
         <p className="text-gray-600 text-center mb-4">
-          Click the button below to download your lecture note.
+          Do you want to download <strong>{fileName}</strong>?
         </p>
 
         {/* Download Button */}

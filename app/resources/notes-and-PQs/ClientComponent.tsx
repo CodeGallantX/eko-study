@@ -28,7 +28,7 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState({ college: "", department: "", level: "" });
   const [visibleCourses, setVisibleCourses] = useState(6);
-  const [selectedNote, setSelectedNote] = useState<string | null>(null);
+  const [selectedNote, setSelectedNote] = useState<{ url: string; fileName: string } | null>(null);
   const loadMoreRef = useRef(null);
 
   const departments = [...new Set(
@@ -82,8 +82,8 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
     ]
   };
 
-  const openModal = (url: string) => {
-    setSelectedNote(url);
+  const openModal = (url: string, fileName: string) => {
+    setSelectedNote({ url, fileName });
   };
 
   const closeModal = () => {
@@ -153,7 +153,7 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
               <motion.div
                 key={`${course.id}-${course.code}`}
                 className="bg-white hover:bg-green rounded-md p-3 border border-gray-500/50 flex flex-row items-center justify-between group cursor-pointer transition-all duration-200 ease-in-out"
-                onClick={() => openModal(course.url)}
+                onClick={() => openModal(course.url, `${course.code}_${course.title}.pdf`)} // Pass file name
               >
                 <div>
                   <h2 className="text-base lg:text-lg font-semibold group-hover:text-white">{course.title}</h2>
@@ -173,7 +173,14 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
           </div>
         )}
       </div>
-      {selectedNote && <DownloadModal url={selectedNote} onClose={closeModal} />}
+      
+{selectedNote && (
+  <DownloadModal
+    url={selectedNote.url}
+    fileName={selectedNote.fileName}
+    onClose={closeModal}
+  />
+)}
       <Footer />
     </>
   );
