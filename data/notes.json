@@ -11,7 +11,10 @@
   "youtubeLinks": [
     "https://www.youtube.com/embed/WSqwzfEsC6I?si=LVmg3m5YEvp4s8cY",
     "https://www.youtube.com/embed/w4QFJb9a8vo?si=snKMuhei5OHP2IuW",
-    "https://www.youtube.com/embed/7gf6YpdvtE0?si=ESQ0neeUklAbuex1"
+    "https://www.youtube.com/embed/7gf6YpdvtE0?si=ESQ0neeUklAbuex1",
+    "https://www.youtube.com/embed/Y-QOfc2XqOk?si=AB5HxnU4h85Wl4FS",
+    "https://www.youtube.com/embed/b-HZ1SZPaQw?si=QuTp950v0esErspq",
+    "https://www.youtube.com/embed/bpFK2VCRHUs?si=D732PMytUw5eagcu"
   ],
   "outline": [
     "Kepler's First Law: Understanding elliptical orbits.",
@@ -75,12 +78,12 @@
   "departments": ["Computer Science", "Chemistry", "Industrial Chemistry", "Biochemistry"],
   "lessons": 9,
   "youtubeLinks": [
-    "https://www.youtube.com/embed/abc1",
+    "https://www.youtube.com/embed/VHYOuWu9jQI?si=ChKc04ppamMQHsM-",
     "https://www.youtube.com/embed/abc2"
   ],
   "outline": [
     "Statistical Data",
-    "Presentaion of Data",
+    "Presentation of Data",
     "Errors and Approximation.",
     "Frequency and Cummulative Distributions.",
     "Measures of Location.",
