@@ -241,24 +241,6 @@
 },
 {
   "id": 11,
-  "name": "Computational ODE",
-  "code": "MTH103",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "",
-  "departments": ["Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Concept of Differentail Equations",
-    "Computational Methods in getting Approximate Solutions",
-    "Electronic Configuration, Periodicity, and building-up of structure of solids"
-  ]
-},
-{
-  "id": 12,
   "name": "Communication in English",
   "code": "GST111",
   "description": "Communication in English Language",
