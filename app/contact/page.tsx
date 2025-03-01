@@ -56,36 +56,6 @@ export default function App() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </section>
-
-      {/* Contact Form */}
-      <section className="px-10 xl:px-24 mt-12 mb-24">
-        <div className="max-w-3xl mx-auto bg-[#e8ede6] p-8 rounded-lg shadow-md">
-          <h2 className="text-3xl font-bold mb-6 text-[#4C5F4E]">Send Us a Message</h2>
-          <form className="flex flex-col gap-6">
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="p-4 border border-gray-300 rounded-md focus:outline-none focus:border-[#92B76D]"
-            />
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="p-4 border border-gray-300 rounded-md focus:outline-none focus:border-[#92B76D]"
-            />
-            <textarea
-              placeholder="Your Message"
-              rows={5}
-              className="p-4 border border-gray-300 rounded-md focus:outline-none focus:border-[#92B76D]"
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-[#4C5F4E] text-white py-3 px-6 rounded-md font-bold hover:bg-[#92B76D] transition-all"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
-      </section>
       <Footer />
     </div>
     </>
