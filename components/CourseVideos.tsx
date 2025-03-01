@@ -16,8 +16,10 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ videos }) => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setVisibleThumbnails(3); // Mobile
-      } else if (window.innerWidth < 1024) {
-        setVisibleThumbnails(4); // Tablet
+      } else if (window.innerWidth < 425) {
+        setVisibleThumbnails(6); // Wider screen
+      } else if (window.innerWidth < 325) {
+        setVisibleThumbnails(3); // Smaller screen
       } else {
         setVisibleThumbnails(6); // Desktop
       }
