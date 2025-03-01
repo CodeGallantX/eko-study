@@ -67,7 +67,7 @@ export default function App() {
                 src="/data/video/lasustech_video.mp4"
                 controls
                 className="w-full h-full object-cover"
-                poster="/.jpg"
+                poster="/upcoming-bg.jpg"
               >
                 Your browser does not support the video tag.
               </video>
