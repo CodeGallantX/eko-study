@@ -175,9 +175,10 @@ export default function App() {
                     {showPastQuestions && (
                       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <PastQuestions
-                          courseCode={selectedCourse?.code} // Use optional chaining
+                          courseID={selectedCourse?.id} // Ensure you're passing the correct prop
                           onClose={() => setShowPastQuestions(false)}
                         />
+
                       </div>
                     )}
                   </>
