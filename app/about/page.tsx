@@ -39,7 +39,6 @@ export default function App() {
               <img
                 src="https://plus.unsplash.com/premium_photo-1714211557697-f3339798f89c"
                 alt="EkoStudy Vision"
-                fill
                 className="rounded-lg object-cover"
               />
             </div>
