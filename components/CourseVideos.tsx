@@ -14,12 +14,12 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ videos }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setVisibleThumbnails(3); // Mobile
+      if (window.innerWidth < 325) {
+        setVisibleThumbnails(3); // Smallest screens
       } else if (window.innerWidth < 425) {
-        setVisibleThumbnails(6); // Wider screen
-      } else if (window.innerWidth < 325) {
-        setVisibleThumbnails(3); // Smaller screen
+        setVisibleThumbnails(6); // Wider mobile
+      } else if (window.innerWidth < 768) {
+        setVisibleThumbnails(3); // Standard mobile
       } else {
         setVisibleThumbnails(6); // Desktop
       }
@@ -31,22 +31,21 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ videos }) => {
   }, []);
 
   useEffect(() => {
-    if (countdown !== null) {
-      if (countdown > 0) {
-        const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
-        return () => clearTimeout(timer);
-      } else {
-        setActiveIndex((prev) => (prev + 1) % videos.length);
-        setCountdown(null);
-      }
+    if (countdown !== null && countdown > 0) {
+      const timer = setTimeout(() => setCountdown((prev) => (prev ? prev - 1 : null)), 1000);
+      return () => clearTimeout(timer);
+    } else if (countdown === 0) {
+      setActiveIndex((prev) => (videos.length > 0 ? (prev + 1) % videos.length : 0));
+      setCountdown(null);
     }
-  }, [countdown]);
+  }, [countdown, videos.length]);
 
   const handleVideoEnd = () => {
     setCountdown(4);
   };
 
   const getVisibleVideos = () => {
+    if (videos.length === 0) return [];
     const start = Math.max(0, activeIndex - Math.floor(visibleThumbnails / 2));
     const end = Math.min(videos.length, start + visibleThumbnails);
     return videos.slice(start, end);
@@ -54,12 +53,16 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ videos }) => {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <VideoPlayer video={videos[activeIndex]} onEnd={handleVideoEnd} />
+      {videos.length > 0 ? (
+        <VideoPlayer video={videos[activeIndex]} onEnd={handleVideoEnd} />
+      ) : (
+        <p className="text-gray-600">No videos available</p>
+      )}
       {countdown !== null && (
         <p className="text-gray-600 mt-2">Next video in {countdown}s...</p>
       )}
       <div className="flex mt-4 space-x-2 overflow-x-auto">
-        {getVisibleVideos().map((video, index) => {
+        {getVisibleVideos().map((video) => {
           const globalIndex = videos.indexOf(video);
           return (
             <VideoThumbnail
@@ -74,15 +77,15 @@ const VideoCarousel: React.FC<VideoCarouselProps> = ({ videos }) => {
       <div className="mt-4 flex space-x-4">
         <button
           className="px-4 py-3 text-white rounded-lg bg-deepGreen hover:bg-yellow hover:text-deepGreen transition-all duration-300 ease-in-out"
-          onClick={() =>
-            setActiveIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))
-          }
+          onClick={() => setActiveIndex((prev) => (prev === 0 ? videos.length - 1 : prev - 1))}
+          disabled={videos.length === 0}
         >
           <FaChevronLeft />
         </button>
         <button
           className="px-4 py-3 text-white rounded-lg bg-deepGreen hover:bg-yellow hover:text-deepGreen transition-all duration-300 ease-in-out"
-          onClick={() => setActiveIndex((prev) => (prev + 1) % videos.length)}
+          onClick={() => setActiveIndex((prev) => (videos.length > 0 ? (prev + 1) % videos.length : 0))}
+          disabled={videos.length === 0}
         >
           <FaChevronRight />
         </button>

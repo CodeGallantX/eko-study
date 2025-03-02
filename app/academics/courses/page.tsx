@@ -162,26 +162,26 @@ export default function App() {
                   </ul>
                 </div>
                 {selectedCourse && (
-  <>
-    {/* Button to open past questions */}
-    <button
-      onClick={() => setShowPastQuestions(true)}
-      className="bg-green text-white px-4 py-2 rounded-lg hover:bg-deepGreen"
-    >
-      Try Past Questions
-    </button>
+                  <>
+                    {/* Button to open past questions */}
+                    <button
+                      onClick={() => setShowPastQuestions(true)}
+                      className="bg-green text-white px-4 py-2 rounded-lg hover:bg-deepGreen"
+                    >
+                      Try Past Questions
+                    </button>
 
-    {/* Render PastQuestions as a modal when showPastQuestions is true */}
-    {showPastQuestions && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <PastQuestions
-          courseCode={selectedCourse?.code} // Use optional chaining
-          onClose={() => setShowPastQuestions(false)}
-        />
-      </div>
-    )}
-  </>
-)}
+                    {/* Render PastQuestions as a modal when showPastQuestions is true */}
+                    {showPastQuestions && (
+                      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <PastQuestions
+                          courseCode={selectedCourse?.code} // Use optional chaining
+                          onClose={() => setShowPastQuestions(false)}
+                        />
+                      </div>
+                    )}
+                  </>
+                )}
 
                 <div>
                   <h3 className="text-xl font-bold mt-6 lg:mt-0 space-y-3 text-gray-900">
