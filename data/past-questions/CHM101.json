@@ -1,0 +1,65 @@
+{
+    "courseID": "GST121",
+    "questions": [
+      {
+        "questionText": "What is the atomic number of Carbon?",
+        "options": { "A": "12", "B": "6", "C": "8", "D": "10" },
+        "correctAnswer": "B",
+        "explanation": "The atomic number of Carbon is 6."
+      },
+      {
+        "questionText": "What is the chemical formula for water?",
+        "options": { "A": "H2O", "B": "O2", "C": "H2", "D": "H2O2" },
+        "correctAnswer": "A",
+        "explanation": "Water is represented by the formula H2O."
+      },
+      {
+        "questionText": "What is the pH of a neutral solution?",
+        "options": { "A": "7", "B": "1", "C": "14", "D": "0" },
+        "correctAnswer": "A",
+        "explanation": "The pH of a neutral solution is 7."
+      },
+      {
+        "questionText": "Which element is most abundant in the Earth's crust?",
+        "options": { "A": "Oxygen", "B": "Silicon", "C": "Aluminium", "D": "Iron" },
+        "correctAnswer": "A",
+        "explanation": "Oxygen is the most abundant element in the Earth's crust."
+      },
+      {
+        "questionText": "What type of bond is found in NaCl?",
+        "options": { "A": "Covalent", "B": "Ionic", "C": "Metallic", "D": "Hydrogen" },
+        "correctAnswer": "B",
+        "explanation": "NaCl has an ionic bond."
+      },
+      {
+        "questionText": "What is Avogadro's number?",
+        "options": { "A": "6.022 x 10^23", "B": "3.14", "C": "2.71", "D": "1.61" },
+        "correctAnswer": "A",
+        "explanation": "Avogadro's number is 6.022 x 10^23."
+      },
+      {
+        "questionText": "Which gas is commonly known as laughing gas?",
+        "options": { "A": "Nitrogen", "B": "Carbon Dioxide", "C": "Nitrous Oxide", "D": "Methane" },
+        "correctAnswer": "C",
+        "explanation": "Nitrous Oxide is known as laughing gas."
+      },
+      {
+        "questionText": "What is the primary gas found in Earth's atmosphere?",
+        "options": { "A": "Oxygen", "B": "Nitrogen", "C": "Carbon Dioxide", "D": "Hydrogen" },
+        "correctAnswer": "B",
+        "explanation": "Nitrogen is the primary gas in Earth's atmosphere."
+      },
+      {
+        "questionText": "What is the molarity formula?",
+        "options": { "A": "moles/volume", "B": "volume/moles", "C": "mass/volume", "D": "moles x volume" },
+        "correctAnswer": "A",
+        "explanation": "Molarity is defined as moles of solute per volume of solution."
+      },
+      {
+        "questionText": "What is the chemical symbol for gold?",
+        "options": { "A": "Au", "B": "Ag", "C": "Pb", "D": "Hg" },
+        "correctAnswer": "A",
+        "explanation": "The symbol for gold is Au."
+      }
+    ]
+  }

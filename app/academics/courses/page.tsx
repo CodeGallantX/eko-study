@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import VideoCarousel from "@/components/CourseVideos";
+import PastQuestions from "@/components/PastQuestions";
 import coursesVideos from "@/data/notes.json";
 import { FaChevronLeft } from "react-icons/fa6"
 
@@ -28,6 +29,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [departmentFilter, setDepartmentFilter] = useState<string>("");
   const [filteredCourses, setFilteredCourses] = useState<Course[]>(courses);
+  const [showPastQuestions, setShowPastQuestions] = useState(false);
 
   const uniqueDepartments: string[] = Array.from(
     new Set(courses.flatMap((course) => course.departments))
@@ -159,6 +161,23 @@ export default function App() {
                     ))}
                   </ul>
                 </div>
+                {/* Button to open past questions */}
+                <button
+                  onClick={() => setShowPastQuestions(true)}
+                  className="bg-green text-white px-4 py-2 rounded-lg hover:bg-deepGreen"
+                >
+                  Try Past Questions
+                </button>
+
+                {/* Render PastQuestions as a modal when showPastQuestions is true */}
+                {showPastQuestions && (
+                  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <PastQuestions
+                      courseCode={selectedCourse.code}
+                      onClose={() => setShowPastQuestions(false)}
+                    />
+                  </div>
+                )}
                 <div>
                   <h3 className="text-xl font-bold mt-6 lg:mt-0 space-y-3 text-gray-900">
                     Video Lessons
@@ -174,3 +193,5 @@ export default function App() {
     </>
   );
 }
+
+
