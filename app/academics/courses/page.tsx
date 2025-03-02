@@ -11,7 +11,7 @@ import { FaChevronLeft } from "react-icons/fa6"
 
 // Define Course Type
 interface Course {
-  id: number;
+  id: string;
   name: string;
   code: string;
   description: string;
@@ -175,9 +175,10 @@ export default function App() {
                     {showPastQuestions && (
                       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                         <PastQuestions
-                          courseID={selectedCourse?.id} // Ensure you're passing the correct prop
+                          courseID={String(selectedCourse?.id)} // Convert number to string
                           onClose={() => setShowPastQuestions(false)}
                         />
+
 
                       </div>
                     )}
