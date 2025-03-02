@@ -1,65 +1,1173 @@
-{
+[
+  {
     "courseID": "PHY101",
     "questions": [
       {
-        "questionText": "What is the atomic number of Carbon?",
-        "options": { "A": "12", "B": "6", "C": "8", "D": "10" },
         "correctAnswer": "B",
-        "explanation": "The atomic number of Carbon is 6."
+        "explanation": "Velocity: v(t) = t² - 10t + 21. Setting v = 0 gives t = 3 s and 7 s. The acceleration a = 2t - 10, so at t = 3, a = -4 m/s² and at t = 7, a = 4 m/s².",
+        "options": {
+          "A": "-2.0 m/s² and 2.0 m/s²",
+          "B": "-4.0 m/s² and 4.0 m/s²",
+          "C": "-3.0 m/s² and 3.0 m/s²",
+          "D": "-1.0 m/s² and 1.0 m/s²"
+        },
+        "questionText": "The motion of a particle in the vertical plane is defined by y(t) = (1/3)t³ - 5t² + 21t + 10 m. Determine the acceleration when the velocity is zero."
       },
       {
-        "questionText": "What is the chemical formula for water?",
-        "options": { "A": "H2O", "B": "O2", "C": "H2", "D": "H2O2" },
-        "correctAnswer": "A",
-        "explanation": "Water is represented by the formula H2O."
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "equal and in the same direction as B on A",
+          "B": "slightly different and in the opposite direction as B on A",
+          "C": "slightly different and in the same direction as B on A",
+          "D": "equal and in the opposite direction as B on A"
+        },
+        "questionText": "Body A exerts a force on a body B and receives a force…"
       },
       {
-        "questionText": "What is the pH of a neutral solution?",
-        "options": { "A": "7", "B": "1", "C": "14", "D": "0" },
-        "correctAnswer": "A",
-        "explanation": "The pH of a neutral solution is 7."
-      },
-      {
-        "questionText": "Which element is most abundant in the Earth's crust?",
-        "options": { "A": "Oxygen", "B": "Silicon", "C": "Aluminium", "D": "Iron" },
-        "correctAnswer": "A",
-        "explanation": "Oxygen is the most abundant element in the Earth's crust."
-      },
-      {
-        "questionText": "What type of bond is found in NaCl?",
-        "options": { "A": "Covalent", "B": "Ionic", "C": "Metallic", "D": "Hydrogen" },
-        "correctAnswer": "B",
-        "explanation": "NaCl has an ionic bond."
-      },
-      {
-        "questionText": "What is Avogadro's number?",
-        "options": { "A": "6.022 x 10^23", "B": "3.14", "C": "2.71", "D": "1.61" },
-        "correctAnswer": "A",
-        "explanation": "Avogadro's number is 6.022 x 10^23."
-      },
-      {
-        "questionText": "Which gas is commonly known as laughing gas?",
-        "options": { "A": "Nitrogen", "B": "Carbon Dioxide", "C": "Nitrous Oxide", "D": "Methane" },
         "correctAnswer": "C",
-        "explanation": "Nitrous Oxide is known as laughing gas."
+        "explanation": "When waves are in phase, their amplitudes add constructively, a phenomenon known as constructive interference.",
+        "options": {
+          "A": "double collision",
+          "B": "destructive interference",
+          "C": "constructive interference",
+          "D": "pulsating collision"
+        },
+        "questionText": "When the pulses of two waves are in the same direction, they can experience..."
       },
       {
-        "questionText": "What is the primary gas found in Earth's atmosphere?",
-        "options": { "A": "Oxygen", "B": "Nitrogen", "C": "Carbon Dioxide", "D": "Hydrogen" },
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "First law",
+          "B": "Second Law",
+          "C": "Thrid Law",
+          "D": "Gas Law"
+        },
+        "questionText": "When you apply force to a spring by stressing or compressing it, the spring in return reacts with a force that completely obeys Newton's…"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "1 m/s^2",
+          "B": "-18 m/s^2",
+          "C": "-23 m/s^2",
+          "D": "-26 m/s^2"
+        },
+        "questionText": "A tennis ball is knocked into the air with a racket, such that the functional form of the velocity is: v (t) = 10t - 3t^3 m/s. What is its instantaneous acceleration at t = 2s?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Converting 54 km/hr to 15 m/s and assuming the ball’s direction changes such that the angle between initial and final velocities is 135°, the impulse magnitude is given by 2mv sin(67.5°) ≈ 4.15 Ns.",
+        "options": {
+          "A": "4.15 Ns",
+          "B": "6.3 Ns",
+          "C": "7.8 Ns",
+          "D": "9.0 Ns"
+        },
+        "questionText": "A cricket ball is deflected by a batsman at 45° without changing its speed, which is 54 km/hr, and has a mass of 0.15 kg. Calculate the impulse given to the ball."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "8.66",
+          "B": "562.5",
+          "C": "487.139",
+          "D": "281.25"
+        },
+        "questionText": "Jubril exerts a constant force of 75 N at an angle of 30 degrees on a lawn mower, pushing it a distance of 7.5 m. What is the work done on the lawn mower by Jubril?"
+      },
+      {
         "correctAnswer": "B",
-        "explanation": "Nitrogen is the primary gas in Earth's atmosphere."
+        "explanation": "option B.",
+        "options": {
+          "A": "1724 m",
+          "B": "1721 m",
+          "C": "1734 m",
+          "D": "1861 m"
+        },
+        "questionText": "An airplane accelerates down a runway at 3.20 m/s2 for 32.8 s until it finally lifts off the ground. Determine the distance travelled before take-off."
       },
       {
-        "questionText": "What is the molarity formula?",
-        "options": { "A": "moles/volume", "B": "volume/moles", "C": "mass/volume", "D": "moles x volume" },
-        "correctAnswer": "A",
-        "explanation": "Molarity is defined as moles of solute per volume of solution."
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "PE is maximum and KE is minimum",
+          "B": "KE increases and PE decreases",
+          "C": "PE increases and KE decreases",
+          "D": "PE is minimum and KE is maximum"
+        },
+        "questionText": "A footballer kicks a ball into the air, it makes a curve and drops at the other end as shown by the diagram. Let KE be the kineteic energy and PE the potential energy. What is the energy of the ball at stage 2?"
       },
       {
-        "questionText": "What is the chemical symbol for gold?",
-        "options": { "A": "Au", "B": "Ag", "C": "Pb", "D": "Hg" },
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "displacement",
+          "B": "velocity",
+          "C": "position",
+          "D": "volume"
+        },
+        "questionText": "Which of these is NOT a vector quantity?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "1 m/s",
+          "B": "3 m/s",
+          "C": "5 m/s",
+          "D": "7 m/s"
+        },
+        "questionText": "A tennis ball is knocked into the air with a racket, such that the functional form of the velocity is: v (t) = 10t - 3t^3 m/s. What is its instantaneous velocity at t = 1s?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "an increase in a quantity",
+          "B": "a decrease in a quantity",
+          "C": "zero quantity",
+          "D": "a change in a quantity"
+        },
+        "questionText": "What does the greek letter ∆ denote?"
+      },
+      {
         "correctAnswer": "A",
-        "explanation": "The symbol for gold is Au."
+        "explanation": "option A.",
+        "options": {
+          "A": "46.7 m/s",
+          "B": "47.1 m/s",
+          "C": "45.6 m/s",
+          "D": "57.7 m/s"
+        },
+        "questionText": "It was once recorded that a Jaguar left skid marks that were 290 m in length. Assuming that the Jaguar skidded to a stop with a constant acceleration of -3.90 m/s2, determine the speed of the Jaguar before it began to skid."
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "Differentiating twice gives a = -180π² cos(3πt) - 10. At t = 0.5, cos(1.5π) = 0, so a = -10 m/s².",
+        "options": {
+          "A": "-12 m/s²",
+          "B": "-11 m/s²",
+          "C": "-20 m/s²",
+          "D": "-10 m/s²"
+        },
+        "questionText": "The motion of a particle is defined by its position x = 20 cos(3πt) - 5t². Determine the acceleration when t = 0.5 s."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "The useful power is (9000 × 9.81 × 120) / 3600 ≈ 2933 W. Accounting for 75% efficiency, the required power is about 3920 W.",
+        "options": {
+          "A": "1010 W",
+          "B": "4000 W",
+          "C": "3920 W",
+          "D": "1500 W"
+        },
+        "questionText": "A pump can lift 9000 kg of coal per hour from a mine of depth 120 m. Assuming its efficiency is 75%, calculate the power in watts."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "derived displacement",
+          "B": "instantaneous acceleration",
+          "C": "instantaneous velocity",
+          "D": "average acceleration"
+        },
+        "questionText": "What is the derivative of displacement with respect to time?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "0.01136 m/s",
+          "B": "-0.01136 m/s",
+          "C": "88 m/s",
+          "D": "-88 m/s"
+        },
+        "questionText": "Teni sets out of her house at 6:10 am, she travels due east for 13 minutes covering 0.5 km then she remembers she did not take her powerbank. She walks back to her house due west and she arrives there exactly 6:36 am. She sets out again due east at 6:40am"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "10t - 6t m/s^2",
+          "B": "10 - 9t m/s^2",
+          "C": "10 - 9t^2 m/s^2",
+          "D": "10t - 9t^2 m/s^2"
+        },
+        "questionText": "A tennis ball is knocked into the air with a racket, such that the functional form of the velocity is: v (t) = 10t - 3t^3 m/s. What is the functional form of its acceleration?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "At the earth surface",
+          "B": "At the equator",
+          "C": "At the north pole",
+          "D": "At the south pole"
+        },
+        "questionText": "At which place of the earth, the centripetal force is maximum"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "PE is maximum and KE is minimum",
+          "B": "KE increases and PE decreases",
+          "C": "PE increases and KE decreases",
+          "D": "PE is minimum and KE is maximum"
+        },
+        "questionText": "A footballer kicks a ball into the air, it makes a curve and drops at the other end as shown by the diagram. Let KE be the kineteic energy and PE the potential energy. What is the energy of the ball at stage 1?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "By resolving the gravitational and frictional forces along the plane and multiplying by the displacement, the work done comes out to be approximately 98.08 J.",
+        "options": {
+          "A": "98.08 J",
+          "B": "100.01 J",
+          "C": "101.1 J",
+          "D": "99.08 J"
+        },
+        "questionText": "The work done in pulling a body of mass 5 kg along an inclined plane (angle 60°) with a coefficient of friction 0.2 through 2 m will be"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "118 m",
+          "B": "-32 m",
+          "C": "-43 m",
+          "D": "43 m"
+        },
+        "questionText": "A mentally unstable man is noticed to be walking about an area. He walks 15 meters to the east, 56 meters to the west, 3 meters to the east and some 25 meters more to the east. Then he moves 19 meters to the west and stops. What is the total displacement "
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Only 25% of the initial energy remains. Thus, the new height is 0.25 × 20 cm = 5 cm.",
+        "options": {
+          "A": "5 cm",
+          "B": "7 cm",
+          "C": "9 cm",
+          "D": "11 cm"
+        },
+        "questionText": "A body falls from a height of 20 cm. If after colliding with the earth, 75% of its mechanical energy is lost, to what height will it rise?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "force is a factor of momentum",
+          "B": "force equals momentum",
+          "C": "momentum is conserved",
+          "D": "force is more than momentum"
+        },
+        "questionText": "The whole mathematical expression: dp1/dt = -dp2/dt where p represents momentum informs us that…"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Total mass = water (2 kg) + bucket (0.5 kg) = 2.5 kg. Work = 2.5 × 9.81 × 6 ≈ 147 J.",
+        "options": {
+          "A": "147 J",
+          "B": "157 J",
+          "C": "167 J",
+          "D": "177 J"
+        },
+        "questionText": "The work done in taking out 2 litres of water using a bucket of mass 0.5 kg from a well of depth 6 m will be"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Conservation of momentum: (0.25 kg × 400 m/s) = (0.25 + 4.75) kg × v, so v = 100/5 = 20 m/s.",
+        "options": {
+          "A": "20 m/s",
+          "B": "22 m/s",
+          "C": "25 m/s",
+          "D": "30 m/s"
+        },
+        "questionText": "A bullet moving at 400 m/s is stopped after penetrating into a bag of sand. The masses of the bullet and bag are 0.25 kg and 4.75 kg respectively. If the bag is free to move, what is its speed after the collision?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "By resolving the gravitational and frictional forces along the plane and multiplying by the displacement, the work done comes out to be approximately 98.08 J.",
+        "options": {
+          "A": "98.08 J",
+          "B": "100.01 J",
+          "C": "101.1 J",
+          "D": "99.08 J"
+        },
+        "questionText": "The work done in pulling a body of mass 5 kg along an inclined plane (angle 60°) with a coefficient of friction 0.2 through 2 m will be"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "At constant speed the elevator exerts an upward force equal to Mg. Over a vertical displacement H, the work done by the elevator is MgH.",
+        "options": {
+          "A": "MgH",
+          "B": "Mg",
+          "C": "-MgH",
+          "D": "-Mg"
+        },
+        "questionText": "You are in a lift moving from the 3rd floor to the 12th floor, through a height H. If the elevator moves at a constant speed without stopping, what is the work performed on you by the elevator? (Take your body mass as M)"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "In a circular path, as before",
+          "B": "Directly to the centre of the circle",
+          "C": "In a straight line at a tangent",
+          "D": "Directly to the centre of the circle"
+        },
+        "questionText": "A model aeroplane fastened to a post by a fine thread is flying in a horizontal circle. Suddenly the thread breaks. What direction will the aeroplane fly?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "This phenomenon is known as superposition.",
+        "options": {
+          "A": "collision",
+          "B": "refraction",
+          "C": "superposition",
+          "D": "interaction"
+        },
+        "questionText": "The combination of two or more waves to get the resultant wave is called?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "40 minutes",
+          "B": "53 minutes",
+          "C": "66 minutes",
+          "D": "100 minutes"
+        },
+        "questionText": "Teni sets out of her house at 6:10 am, she travels due east for 13 minutes covering 0.5 km then she remembers she did not take her powerbank. She walks back to her house due west and she arrives there exactly 6:36 am. She sets out again due east at 6:40am"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "63.4 degrees",
+          "B": "45 degrees",
+          "C": "60 degrees",
+          "D": "66.8 degrees"
+        },
+        "questionText": "Pius fires a shot with a ball weighing 0.6 kg into the bottom corner of the net with an acceleration of a = 4.00 i + 8.00 j m/s^2. Find the direction of the resultant force."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A .",
+        "options": {
+          "A": "10^9 x 10^12",
+          "B": "10^12 x 10^15",
+          "C": "10^9 x 10^12",
+          "D": "10^6 x 10^9"
+        },
+        "questionText": "What is the approxiamte distance of the Whirlpool galaxy to the Milky way?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "PE is maximum and KE is minimum",
+          "B": "KE increases and PE decreases",
+          "C": "PE increases and KE decreases",
+          "D": "PE is minimum and KE is maximum"
+        },
+        "questionText": "A footballer kicks a ball into the air, it makes a curve and drops at the other end as shown by the diagram. Let KE be the kineteic energy and PE the potential energy. What is the energy of the ball at stage 5?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "The temperature at which the Celsius and Fahrenheit scales read the same is –40°.",
+        "options": {
+          "A": "-40 °",
+          "B": "40 °",
+          "C": "44 °",
+          "D": "-44 °"
+        },
+        "questionText": "At what temperature is the reading on the Celsius scale the same as the reading on the Fahrenheit scale?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "diagonal vectors",
+          "B": "triangular vectors",
+          "C": "orthogonal vectors",
+          "D": "resultant vectors"
+        },
+        "questionText": "Two vectors that are at right angles to each other are called?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "Addition",
+          "B": "Subtraction",
+          "C": "Multiplication",
+          "D": "None of these"
+        },
+        "questionText": "Which of the following operations with two vectors can result in a scalar"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Conservation of momentum: (0.25 kg × 400 m/s) = (0.25 + 4.75) kg × v, so v = 100/5 = 20 m/s.",
+        "options": {
+          "A": "20 m/s",
+          "B": "22 m/s",
+          "C": "25 m/s",
+          "D": "30 m/s"
+        },
+        "questionText": "A bullet moving at 400 m/s is stopped after penetrating into a bag of sand. The masses of the bullet and bag are 0.25 kg and 4.75 kg respectively. If the bag is free to move, what is its speed after the collision?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "In an ideal throw, the brick would have zero speed at the top. The extra kinetic energy (corresponding to 12 m/s) is wasted. Calculations show that approximately 38% of the energy is saved.",
+        "options": {
+          "A": "31%",
+          "B": "32%",
+          "C": "30%",
+          "D": "38%"
+        },
+        "questionText": "A man throws bricks to a height of 12 m where they reach with a speed of 12 m/s. If he throws the bricks such that they just reach this height, what percentage of energy will he save?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Acceleration = (45 – 25)/10 = 20/10 = 2 m/s².",
+        "options": {
+          "A": "2 m/s²",
+          "B": "5 m/s²",
+          "C": "20 m/s²",
+          "D": "25 m/s²"
+        },
+        "questionText": "A car moves with an initial velocity of 25 m/s and reaches a velocity of 45 m/s in 10 s. What is the acceleration of the car?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "Centripetal force",
+          "B": "translational force",
+          "C": "centrifugal force",
+          "D": "rotational force"
+        },
+        "questionText": "The component of force acting on an object in curvilinear motion which is directed towards the axis of rotation is called?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "PE is maximum and KE is minimum",
+          "B": "KE increases and PE decreases",
+          "C": "PE increases and KE decreases",
+          "D": "PE is minimum and KE is maximum"
+        },
+        "questionText": "A footballer kicks a ball into the air, it makes a curve and drops at the other end as shown by the diagram. Let KE be the kineteic energy and PE the potential energy. What is the energy of the ball at stage 4?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "Using KE = 1/2 m v², we have m = (2 × 200) / (200²) = 400/40000 = 0.01 kg.",
+        "options": {
+          "A": "0.001 kg",
+          "B": "0.0001 kg",
+          "C": "0.01 kg",
+          "D": "0.1 kg"
+        },
+        "questionText": "A body possesses a velocity of 200 m/s and its kinetic energy is 200 J. Calculate the mass of the body."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "L/T",
+          "B": "L/T^2",
+          "C": "L^2",
+          "D": "L^3"
+        },
+        "questionText": "In Dimensional Analysis, the dimension of speed [v] is…?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "13 minutes",
+          "B": "15 minutes",
+          "C": "25 minutes",
+          "D": "26 minutes"
+        },
+        "questionText": "Teni sets out of her house at 6:10 am, she travels due east for 13 minutes covering 0.5 km then she remembers she did not take her powerbank. She walks back to her house due west and she arrives there exactly 6:36 am. She sets out again due east at 6:40am"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "5.05 m/s and 1.03 s",
+          "B": "5.09 m/s and 1.03 s",
+          "C": "5.03 m/s and 1.03 s",
+          "D": "5.10 m/s and 1.03 s"
+        },
+        "questionText": "If Michael Jordan has a vertical leap of 1.29 m, then what is his take-off speed and his hang time (total time to move upwards to the peak and then return to the ground)?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "v = u + at",
+          "B": "(v - u)/2",
+          "C": "(u - v)/2",
+          "D": "(v + u)/2"
+        },
+        "questionText": "If u represents the initial velocity of an object and v represents its final velocity. How can the average velocity be represented?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "Only when spring is stretched",
+          "B": "Only when spring is compressed",
+          "C": "When spring is neither stretched nor compressed",
+          "D": "When spring is compressed or stretched"
+        },
+        "questionText": "When does the potential energy of a spring increase?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "x = y + ut + 0.5at",
+          "B": "y = x + ut + 0.5at",
+          "C": "x = y + ut + 2at",
+          "D": "y = x + ut + 2at"
+        },
+        "questionText": "An object's initial position is represented as 'y', acceleration as 'a', initial velocity as 'u' and time as 't'. Then the final position of the object 'x' experiencing constant acceleration is given as:"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Temperature reflects the average kinetic energy of the molecules in the body.",
+        "options": {
+          "A": "the average kinetic energy of the molecules of the body",
+          "B": "the amount of heat in the body",
+          "C": "the average mechanical energy of the molecules of the body",
+          "D": "the average potential energy of the molecules of the body"
+        },
+        "questionText": "The temperature of a body is an indicator of"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "The ball’s speed changes by 20 + 12 = 32 m/s. With m = 0.15 kg, the impulse is 0.15 × 32 = 4.8 Ns, and the average force is 4.8 Ns / 0.02 s = 240 N.",
+        "options": {
+          "A": "4.8 Ns and 240 N",
+          "B": "5.4 Ns and 260 N",
+          "C": "4.8 Ns and 270 N",
+          "D": "8.0 Ns and 240 N"
+        },
+        "questionText": "A cricket ball of mass 150 g moves at a velocity of 12 m/s and after being hit by the bat is deflected back at a speed of 20 m/s. If the bat and the ball remain in contact for 0.02 s, calculate the impulse and average force exerted on the ball by the bat."
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "In this context, the pulse refers to a single disturbance characterized by its amplitude.",
+        "options": {
+          "A": "wavelength",
+          "B": "amplitude",
+          "C": "speed",
+          "D": "frequency"
+        },
+        "questionText": "The pulse of a wave is its..."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "Yes",
+          "B": "No",
+          "C": "Maybe",
+          "D": "Not sure"
+        },
+        "questionText": "Consider the equation: S = vt + at^2. Is the equation dimensionally consistent?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "129000 m/s2",
+          "B": "160000 m/s2",
+          "C": "150000 m/s2",
+          "D": "140000 m/s2"
+        },
+        "questionText": "A bullet leaves a rifle with a muzzle velocity of 521 m/s. While accelerating through the barrel of the rifle, the bullet moves a distance of 0.840 m. Determine the acceleration of the bullet (assume a uniform acceleration)."
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "While gravitational, electrostatic, and nuclear potential energies are standard, magnetic potential energy is not conventionally treated as a form of potential energy in basic physics.",
+        "options": {
+          "A": "Gravitational potential energy",
+          "B": "Magnetic potential energy",
+          "C": "Electrostatic potential energy",
+          "D": "Nuclear potential energy"
+        },
+        "questionText": "Which of the following is not a kind of potential energy?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D .",
+        "options": {
+          "A": "2574.4 cm",
+          "B": "4022.5 cm",
+          "C": "257440 cm",
+          "D": "402250 cm"
+        },
+        "questionText": "If 3218 meters makes up 2 miles, what is 2.5 miles in centimeters?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "In this context, the pulse refers to a single disturbance characterized by its amplitude.",
+        "options": {
+          "A": "wavelength",
+          "B": "amplitude",
+          "C": "speed",
+          "D": "frequency"
+        },
+        "questionText": "The pulse of a wave is its..."
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "Tension",
+          "B": "Friction",
+          "C": "Spring force",
+          "D": "Terminal Speed"
+        },
+        "questionText": "A resistive force opposing motion or its tendency is?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Option A.",
+        "options": {
+          "A": "10^9 x 10^12",
+          "B": "10^12 x 10^15",
+          "C": "10^9 x 10^12",
+          "D": "10^6 x 10^9"
+        },
+        "questionText": "What is the approximate distance of the Whirlpool galaxy to the Milky Way?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "Option B.",
+        "options": {
+          "A": "median solar day",
+          "B": "mean solar day",
+          "C": "median rainy day",
+          "D": "mean rainy day"
+        },
+        "questionText": "Before 1960, how was the second defined? Using…"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "Force",
+          "B": "Coefficient of friction",
+          "C": "Modulus of elasticity",
+          "D": "Energy"
+        },
+        "questionText": "[ML-1T-2] is the dimensional formula of"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "Kinetic energy is positive",
+          "B": "Potential energy is positive",
+          "C": "Kinetic energy is negative",
+          "D": "Potential energy is negative"
+        },
+        "questionText": "Which of the following statements is false:"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "When carrying the object, the person lifts a total mass of 75 kg (person + object). The useful work on the object is 15 × 9.81 × 10, so efficiency ≈ (15/75) × 100% = 20%.",
+        "options": {
+          "A": "20%",
+          "B": "30%",
+          "C": "49%",
+          "D": "43%"
+        },
+        "questionText": "A person of mass 60 kg can take a 15 kg object to a height of 10 m in 3 minutes. Calculate the efficiency."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "1 m/s^2",
+          "B": "-18 m/s^2",
+          "C": "-23 m/s^2",
+          "D": "-26 m/s^2"
+        },
+        "questionText": "A tennis ball is knocked into the air with a racket, such that the functional form of the velocity is: v (t) = 10t - 3t^3 m/s. What is its instantaneous acceleration at t = 1s?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "infinity",
+          "B": "zero",
+          "C": "small magnitude",
+          "D": "big magnitude"
+        },
+        "questionText": "To create equilibrum, we require a balancing force that will produce a net force of…?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "mass and acceleration",
+          "B": "acceleration and velocity",
+          "C": "power and heat",
+          "D": "mass and speed"
+        },
+        "questionText": "According to Newton's third law, the magnitude of the forces on the object are the same, but what could change?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "derived velocity",
+          "B": "instantaneous acceleration",
+          "C": "instantaneous velocity",
+          "D": "average velocity"
+        },
+        "questionText": "What is the derivative of velocity with respect to time?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "Thrust = mass flow rate × exhaust velocity = 0.05 kg/s × 4000 m/s = 200 N.",
+        "options": {
+          "A": "202 N",
+          "B": "201 N",
+          "C": "200 N",
+          "D": "205 N"
+        },
+        "questionText": "The rate of burning of fuel in a rocket is 50 g/s, and it is expelled with a velocity of 4000 m/s. Calculate the force exerted by the gas on the rocket."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "either at rest or moving at constant velocity",
+          "B": "first at rest then begins accelerating",
+          "C": "neither at rest nor moving at constant velocity",
+          "D": "neither at rest nor accelerating"
+        },
+        "questionText": "For a reference frame to be inertial just as the inertial frame, then the reference frame is…"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "The change in momentum is 2 kg × (100 - (−100)) = 400 kg·m/s. Dividing by the contact time (1/50 s) gives a force of 400 × 50 = 20,000 N (2 x 10^4 N).",
+        "options": {
+          "A": "10^4 N",
+          "B": "2 x 10^4 N",
+          "C": "4 N",
+          "D": "8 N"
+        },
+        "questionText": "A body of mass 2 kg moving with a velocity of 100 m/s hits a wall and rebounds with the same velocity. If the contact time is (1/50) s, calculate the force applied on the wall."
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "F = kx",
+          "B": "F = -kx",
+          "C": "F = k/x",
+          "D": "F = -k/x"
+        },
+        "questionText": "What is the formula for a sping force if x is the distance through stress, k is the constant and F is the force applied."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Force is given by pressure × area = 100 Pa × 3 m² = 300 N.",
+        "options": {
+          "A": "300 N",
+          "B": "200 N",
+          "C": "150 N",
+          "D": "100 N"
+        },
+        "questionText": "In a hydraulic press, the pump piston exerts a pressure of 100 Pa on the liquid. What force is exerted on the second piston having a cross-sectional area of 3 m²?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "The combined mass is 7 kg giving an acceleration of 35/7 = 5 m/s². The 5 kg block is accelerated by the contact force, which is 5 × 5 = 25 N, and the 2 kg block experiences a reaction force of 2 × 5 = 10 N.",
+        "options": {
+          "A": "25 N and 10 N",
+          "B": "26 N and 20 N",
+          "C": "30 N and 20 N",
+          "D": "42 N and 30 N"
+        },
+        "questionText": "Two blocks of masses m = 2 kg and M = 5 kg are in contact on a frictionless table. A horizontal force F = 35 N is applied to the 2 kg block. Find the force of contact between the blocks."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "PE is always constant",
+          "B": "KE is always constant",
+          "C": "total energy is conserved",
+          "D": "PE is more constant"
+        },
+        "questionText": "The analysis of a ball kicked in the air to make a parabolic curve as it drops at the distance from the kicker, informs us that…"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "1.29 s",
+          "B": "1.40 s",
+          "C": "1.50 s",
+          "D": "1.39 s"
+        },
+        "questionText": "A feather is dropped on the moon from a height of 1.40 meters. The acceleration of gravity on the moon is 1.67 m/s². Determine the time for the feather to fall to the surface of the moon."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "The combined mass is 7 kg giving an acceleration of 35/7 = 5 m/s². The 5 kg block is accelerated by the contact force, which is 5 × 5 = 25 N, and the 2 kg block experiences a reaction force of 2 × 5 = 10 N.",
+        "options": {
+          "A": "25 N and 10 N",
+          "B": "26 N and 20 N",
+          "C": "30 N and 20 N",
+          "D": "42 N and 30 N"
+        },
+        "questionText": "Two blocks of masses m = 2 kg and M = 5 kg are in contact on a frictionless table. A horizontal force F = 35 N is applied to the 2 kg block. Find the force of contact between the blocks."
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B .",
+        "options": {
+          "A": "median solar day",
+          "B": "mean solar day",
+          "C": "median rainy day",
+          "D": "mean rainy day"
+        },
+        "questionText": "Before 1960, how was the second defined? Using…"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C .",
+        "options": {
+          "A": "No, was short of the speed limit by 5.7 mi/hr",
+          "B": "Maintained the speed limit of 30 mi/hr.",
+          "C": "Yes, exceded the speed limit by 5.7 mi/hr",
+          "D": "Yes, exceded the speed limit by 7.5 mi/hr"
+        },
+        "questionText": "A vehicle upon gaining entry at the third gate of Lasustech begins travelling towards first gate at a speed of 16m/s. Is the car exceeding the speed limit of 30mi/hr? If so, by how many mi/hr? Assume 1609 meters is equivalent to 1 mile."
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "W = F/dr",
+          "B": "dW = F.dr",
+          "C": "W = F.dr",
+          "D": "dW = F/dr"
+        },
+        "questionText": "If work 'W' is done on an object to move it an infinitesimal distance 'dr' by applying force 'F'. We can represent this change in work done as…"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "0.5065 m/s",
+          "B": "0.665 m/s",
+          "C": "0.997 m/s",
+          "D": "1.1715 m/s"
+        },
+        "questionText": "Two objects initially apart, collide and stick together. The first object has a mass of 0.675 kg travelling at 0.75 m/s and the second object has a mass of 0.5 kg travelling at 1.33 m/s. What is their final velocity after collision?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "2",
+          "B": "3",
+          "C": "4",
+          "D": "Any number"
+        },
+        "questionText": "What is the maximum possible number of components of a vector can have"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "the velocity of the body",
+          "B": "the net force of the body",
+          "C": "the mass of the body",
+          "D": "the body's acceleration"
+        },
+        "questionText": "The rate of change of momentum of a body with respect to time, is…"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Strain energy = ½ × Force × Extension. Here, extension = 0.5 cm = 0.005 m, so energy = 0.5 × 300 × 0.005 = 0.75 J.",
+        "options": {
+          "A": "0.75 J",
+          "B": "7.50 J",
+          "C": "75.00 J",
+          "D": "750.00 J"
+        },
+        "questionText": "If a wire 30 cm long is extended to 30.5 cm by a force of 300 N, find the strain energy of the wire."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C .",
+        "options": {
+          "A": "L/T",
+          "B": "L/T^2.",
+          "C": "L^2",
+          "D": "L^3"
+        },
+        "questionText": "In Dimensional Analysis, the dimension of area [A] is…?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "17.2 m/s2 and 80.8 m",
+          "B": "19.2 m/s2 and 81.8 m",
+          "C": "21.2 m/s2 and 82.8 m",
+          "D": "11.2 m/s2 and 79.8 m"
+        },
+        "questionText": "A race car accelerates uniformly from 18.5 m/s to 46.1 m/s in 2.47 seconds. Determine the acceleration of the car and the distance travelled."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "mass and force",
+          "B": "force and velocity",
+          "C": "mass and velocity",
+          "D": "speed and force"
+        },
+        "questionText": "Momentum is a factor of a body's…"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "The correct conversion formula is C = (5/9)(F – 32).",
+        "options": {
+          "A": "C = 9F/5 + 32",
+          "B": "C = 5/9(F + 32)",
+          "C": "C = 9F/5 – 32",
+          "D": "C = 5/9(F – 32)"
+        },
+        "questionText": "Which of the following equations represents a temperature conversion from Fahrenheit (°F) to Celsius (°C)?"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "28.8 N",
+          "B": "5.4 N",
+          "C": "7.2 N",
+          "D": "2.7 N"
+        },
+        "questionText": "Pius fires a shot with a ball weighing 0.6 kg into the bottom corner of the net with an acceleration of a = 4.00 i + 8.00 j m/s^2. Find the magnitude of the resultant force to 1d.p."
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "Restoring force of spring",
+          "B": "Force between two stationary masses",
+          "C": "Force between two stationary charges",
+          "D": "Human push or pull"
+        },
+        "questionText": "Which of the following force is non-conservative?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "Centripetal force",
+          "B": "translational force",
+          "C": "centrifugal force",
+          "D": "rotational force"
+        },
+        "questionText": "This is a force in a circular motion which acts along the radius and is directed away from the center of the circle."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "time",
+          "B": "mass",
+          "C": "torque",
+          "D": "distance"
+        },
+        "questionText": "Which of these is NOT a scalar quantity?"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "0.6 m/s i",
+          "B": "0.5 m/s i",
+          "C": "-0.1 m/s i",
+          "D": "0.4 m/s i"
+        },
+        "questionText": "A ship travelling east with respect to the sea moves with a velocity of VSE = 0.5 m/s i. If the captain of the ship walks towards the back of the ship to the west at a velocity of VCS = -0.1m/s i. What is the velocity of the captain with respect to the st"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "Work is the integral of F with respect to x: ∫₀⁵ (7 - 2x + 3x²) dx = [7x - x² + x³]₀⁵ = 35 - 25 + 125 = 135 J.",
+        "options": {
+          "A": "125 J",
+          "B": "140 J",
+          "C": "145 J",
+          "D": "135 J"
+        },
+        "questionText": "A position-dependent force F = 7 – 2x + 3x² acts on a small body (mass 2 kg) as it is displaced from x = 0 to x = 5 m. Calculate the work done."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "Using U = k e²/r with k ≈ 9 x 10^9 N·m²/C² and e = 1.6 x 10^-19 C, the potential energy comes out to be approximately 1.44 x 10^3 eV.",
+        "options": {
+          "A": "1.44 x 10^3 eV",
+          "B": "1.55 x 10^3 eV",
+          "C": "1.40 x 10^3 eV",
+          "D": "1.50 x 10^3 eV"
+        },
+        "questionText": "Two electrons are at a distance of 1 x 10^-12 m from each other. Calculate the potential energy (in eV) of this system."
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "6 cm",
+          "B": "15 cm",
+          "C": "6 km",
+          "D": "15 km"
+        },
+        "questionText": "If Odogunyan is 75km from Imota and we represent the distance with 5cm on a piece of paper, then 1cm on the piece of paper, represents..."
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "PE is maximum and KE is minimum",
+          "B": "KE increases and PE decreases",
+          "C": "PE increases and KE decreases",
+          "D": "PE is minimum and KE is maximum"
+        },
+        "questionText": "A footballer kicks a ball into the air, it makes a curve and drops at the other end as shown by the diagram. Let KE be the kineteic energy and PE the potential energy. What is the energy of the ball at stage 3?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "True",
+          "B": "FALSE",
+          "C": "can’t predict",
+          "D": "none of these"
+        },
+        "questionText": "Railway tracks are banked at the curves so that the necessary centripetal force may be obtained from the horizontal component of the reaction on the train"
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "Differentiate twice: v(t) = 9t² - 8t + 2 and a(t) = 18t - 8. At t = 0.5, a = 18×0.5 - 8 = 1 m/s².",
+        "options": {
+          "A": "1.2 m/s²",
+          "B": "1.0 m/s²",
+          "C": "3.0 m/s²",
+          "D": "4.2 m/s²"
+        },
+        "questionText": "The motion of a particle is defined by its position x(t) = 3t³ - 4t² + 2t + 6 m. Determine the acceleration when t = 0.5 s."
+      },
+      {
+        "correctAnswer": "B",
+        "explanation": "option B.",
+        "options": {
+          "A": "Force should be inversely proportional to the square root of the velocity of the body",
+          "B": "Force should be inversely proportional to the velocity of the body",
+          "C": "Force should be directly proportional to the velocity of the body",
+          "D": "Force should not be varied. It should remain constant with the velocity"
+        },
+        "questionText": "How should the force applied on a body be varied with velocity to keep the power of force constant?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "LT-2",
+          "B": "T-3",
+          "C": "LT-3",
+          "D": "T3"
+        },
+        "questionText": "The displacement of particles moving along the x-axis with respect to time is x=at+bt2-ct3. The dimension of [ML-1T-2] is"
+      },
+      {
+        "correctAnswer": "D",
+        "explanation": "option D.",
+        "options": {
+          "A": "-F12",
+          "B": "F12",
+          "C": "F21",
+          "D": "-F21"
+        },
+        "questionText": "According to Newton's third law, if the magnitude of the force of a body of mass m2 on mass m1 is given as F12, then what is it equal to?"
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "Gravitational force",
+          "B": "Frictional force",
+          "C": "Centrifugal force",
+          "D": "Centripetal force"
+        },
+        "questionText": "Which of the following is called a fictitious force?"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "option A.",
+        "options": {
+          "A": "Newton's first law",
+          "B": "Newton's second law",
+          "C": "Newton's third law",
+          "D": "Beer Lambert law"
+        },
+        "questionText": "A body at rest remains in a state of rest, or if in motion moves at a constant velocity.' This stated law is..."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "4N",
+          "B": "2N",
+          "C": "8N",
+          "D": "16N"
+        },
+        "questionText": "The position x of a body of mass 2 kg varies with time t as x = (2t² + 3t – 4) m, calculate the force acting on the body."
+      },
+      {
+        "correctAnswer": "C",
+        "explanation": "option C.",
+        "options": {
+          "A": "Electrostatic force",
+          "B": "Electromagnetic force",
+          "C": "Impulsive force",
+          "D": "Centripetal force"
+        },
+        "questionText": "A force which acts for a small time and also varies with time is called:"
+      },
+      {
+        "correctAnswer": "A",
+        "explanation": "100 °C is equivalent to approximately 373 K and 212 °F.",
+        "options": {
+          "A": "373K, 212 °F",
+          "B": "–373K, 212 °F",
+          "C": "–373K, -212 °F",
+          "D": "373K, -212 °F"
+        },
+        "questionText": "Convert to 100 °C: (i) Kelvin, (ii) Fahrenheit."
       }
     ]
   }
+]

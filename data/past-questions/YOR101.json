@@ -1,0 +1,612 @@
+[
+    {
+      "courseID": "YOR101",
+      "questions": [
+        {
+          "correctAnswer": "D",
+          "explanation": "“Ibowofagba”—the proper display of deference—is also known as “iteriba” in Yoruba, emphasizing respect and humility.",
+          "options": {
+            "A": "SISO ODODO",
+            "B": "SUURU",
+            "D": "ITERIBA",
+            "E": "PIPA OFIN MO"
+          },
+          "questionText": "(1) ORUKO MIIRAN FUN IBOWOFAGBA NI___"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "“Ise ajumose ilu” refers to the civic or communal work carried out by the people; hence it is simply called “ise ilu” (the work of the town).",
+          "options": {
+            "A": "AABO ILU",
+            "B": "ISE ILU",
+            "D": "ISE OBA",
+            "E": "ISE OWO"
+          },
+          "questionText": "(2) ISE AJUMOSE ILU NI___"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The proverb points to how a pretence or laziness (“opuro”) can delude one’s heart about genuine work.",
+          "options": {
+            "A": "OLOTITO",
+            "B": "OPURO",
+            "D": "OSISE",
+            "E": "ASEMELE"
+          },
+          "questionText": "(3) _______ LO SE FI OKAN TAN LENU ISE?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "A person of genuine character (omoluabi) does not need to pay “owo ori” in public—his respect is inherent.",
+          "options": {
+            "A": "BEENI",
+            "B": "BEEEKO",
+            "D": "MEEJEEJI",
+            "E": "GBOGBO E"
+          },
+          "questionText": "(4) OMOLUABI A MAA SAN OWO ORI NI AWUJO?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "In the absence of law, the spread of “irẹbo” (corruption/immorality) increases, leading to more wicked behavior in society.",
+          "options": {
+            "A": "ITESIWAJU",
+            "B": "IREBO",
+            "D": "IFASEYIN",
+            "E": "ALAFIA"
+          },
+          "questionText": "(5) IPA WO NI AIPA-OFIN MO KO NINU IWA IBAJE TIO TUBO N GBOORO SI LAWUJO W,"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "Traditionally, the “Olowa” is appointed to proclaim messages throughout the town in the Yoruba system of government.",
+          "options": {
+            "A": "ILU",
+            "B": "",
+            "D": "OLOWA",
+            "E": "AKOGUN"
+          },
+          "questionText": "(6) NINU ASA ISEJOBA ILE YORUBA, TANI O MAAN KEDE KAAKIRI ILU?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "Apart from “baale,” the head of a council may also be called “adari,” indicating one who leads and oversees communal affairs.",
+          "options": {
+            "B": "ADARI",
+            "D": "ALAKOSO",
+            "E": "ALAMOJUTO"
+          },
+          "questionText": "(7) YATO SI BAALE, ORUKO MIRAN TI A TUN LEE FUN OLORI AGBOOLE NI ___"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "The chieftaincy title “oye atojuran” is typically associated with the palace (“aafin”), highlighting the holder’s central role in palace matters.",
+          "options": {
+            "A": "OYE IDILE",
+            "B": "OYE ILU",
+            "D": "OYE AAFIN",
+            "E": "OYE IFIDANILOLA"
+          },
+          "questionText": "(8) OYE ATOJURAN NI OYE TI O JE ___"
+        },
+        {
+          "correctAnswer": "E",
+          "explanation": "The “parakoyi” is the designated collector of levies from those reluctant to contribute, ensuring that communal dues are gathered.",
+          "options": {
+            "A": "OTUN",
+            "B": "ASIPA",
+            "D": "SERIKI",
+            "E": "PARAKOYI"
+          },
+          "questionText": "(9) OKAN NINU AWON WONYI NI O MAAN SAAJU LATI GBA ISAKOLE AWON IRUKEREJE TI O BA WA NI AYIKA ILU?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "Yoruba tradition generally holds that a chief (oloye) should not accumulate several chieftaincy titles in one town so as not to dilute the dignity of each title.",
+          "options": {
+            "B": "BEEEKO",
+            "D": "MEEJEEJI",
+            "E": "GBOGBO E"
+          },
+          "questionText": "(10) NJE OLOYE LEE JU MEJI TABI META LO NI ADUGBO KAN?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The primary duty of a Balogun (war chief) is to “ja ogu” (fight the enemy), underscoring his martial responsibility.",
+          "options": {
+            "A": "PASE",
+            "B": "JA OGU",
+            "D": "IA SILE",
+            "E": "SUN NI AAFIN"
+          },
+          "questionText": "(11) ISE BALOGUN NI KI O ___"
+        },
+        {
+          "correctAnswer": "E",
+          "explanation": "The elders (ogboni) are customarily granted the privilege of surveying the “odi ilu” (the town’s periphery) to assess communal well‐being.",
+          "options": {
+            "A": "AAFIN",
+            "B": "ILU",
+            "D": "IGBEKUN",
+            "E": "ODI ILU"
+          },
+          "questionText": "(12) AWON OGBONI ILU NI ANFAANI LATI WO ___"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "“Otun” literally means “the second” and designates the deputy or second in command in the palace.",
+          "options": {
+            "A": "BALOGUN",
+            "B": "OTUN",
+            "D": "ASIPA",
+            "E": "BOBAGUNWA"
+          },
+          "questionText": "(13) ____ NI IGBAKEJI OBA NI AAFIN?"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "The title “iyalode” is one of the highest among the “oye ifidanilola,” symbolizing the esteemed status of women in the community.",
+          "options": {
+            "A": "BOBAGUNWA",
+            "B": "OTUN",
+            "D": "IYALODE",
+            "E": "IKOLABA"
+          },
+          "questionText": "(14) OKAN LARA OYE IFIDANILOLA NI IWONYI AYAFI?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "In Yoruba tradition, the leader of the town’s women is honored with the title “iyalode”.",
+          "options": {
+            "A": "IYALODE",
+            "B": "IYALAJE",
+            "D": "IYALOJA",
+            "E": "IYABIYE"
+          },
+          "questionText": "(15) OLORI AWON OBINRIN ILU NI ___?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The poem serves as a cautionary message with warnings and moral lessons—thus it is classified as “ewi ikilo” (warning poetry).",
+          "options": {
+            "A": "EWI IBAWI",
+            "B": "EWI IKILO",
+            "D": "ASAMO",
+            "E": "AALO"
+          },
+          "questionText": "(16) IRU EWI WO NI EYI?"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "The poet’s admonitions are addressed to “eniyan” (all people), urging everyone to be mindful of their conduct.",
+          "options": {
+            "A": "ODARAN",
+            "B": "OMOLUABI",
+            "D": "ENIYAN",
+            "E": "ENIKANKAN KO"
+          },
+          "questionText": "(17) TANI AKEWI N KILO FUN?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "The poet stresses the power of the “ipe” (the call or summons) as central to urging responsibility—linking it to the characterization in the poem.",
+          "options": {
+            "A": "IPE",
+            "B": "AANU",
+            "D": "EJO",
+            "E": "OBA ALAYE"
+          },
+          "questionText": "(18) KINI OMO OWENEWENE GEGE BI AKEWI SE SO NINU EWI YII?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "Counting the lines in the poem shows there are 12 lines—in Yoruba, “méjìlà” means twelve.",
+          "options": {
+            "A": "MÉTÀLÀ",
+            "B": "MÉJÌLÀ",
+            "D": "MÉRÌNLÀ",
+            "E": "MARUNDINLOGBON"
+          },
+          "questionText": "(19) ILA MELO NI GBOGBO EWI NAA?"
+        },
+        {
+          "correctAnswer": "E",
+          "explanation": "The poem implies that the one who truly upholds truth (“asotito”) is the exalted or high one—symbolized by “oke.”",
+          "options": {
+            "A": "ENIYAN",
+            "B": "OKUNRIN",
+            "D": "ALAWURABI",
+            "E": "OKE"
+          },
+          "questionText": "(20) TANI N BE LEYIN ASOTITO?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "“Ọrẹ̀ Ọdàlẹ̀” suitably encapsulates the critical tone of the passage that exposes the degenerative nature of irresponsible wealth.",
+          "options": {
+            "A": "ỌRẸ̀ ỌDÀLẸ̀",
+            "B": "ỌJÚ ÈNÍ MÁLÀ",
+            "D": "ÌGBÀ ÌPỌ̀NJÚ"
+          },
+          "questionText": "(21) AKỌ́RÍ TÁBÌ AKỌ́LẸ̀ TÍ Ó BÁ ÀYỌKÀ MÚ JÚLỌ́ NI ______?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "The text suggests that instead of extravagant spending, the wisdom found in proverbs (“òwè”) should serve as the true exemplar.",
+          "options": {
+            "A": "ÒWÉ",
+            "B": "ÀKÀNLÓ ÈDÈ"
+          },
+          "questionText": "(22) KÁKÀ KÁ FÓWÓ ỌLÁ LẸ̀LẸ̀ PÍPẸ̀LẸ̀ LỌ́ TÚN PẸ̀LẸ̀ ṢÍ JE ÀPÈẸRẸ ___?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The passage implies a tripartite participation—a common motif in Yoruba thought—so “mẹ́tà” (three) is indicated.",
+          "options": {
+            "A": "MÉJÌ",
+            "B": "MẸ́TÀ",
+            "C": "MẸ́RIN"
+          },
+          "questionText": "(23) ÀWỌN MÉLÒÓ NÍ WỌN KÓPÁ NÍNÚ ÈRÈ NÁÁ ___?"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "In English usage, a private or pleasure vehicle is simply called a “car,” matching the Yoruba term “ọkọ̀ ayọkẹ́lẹ́.”",
+          "options": {
+            "A": "LORRY",
+            "B": "LUXURY",
+            "D": "CAR"
+          },
+          "questionText": "(24) ORÚKỌ TÍ A LÉÈ FÚN Ọ̀KỌ̀ AYỌ̀KẸ́LẸ́ NÍ ÈDÈ GẸ̀Ẹ̀SÍ NI___?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "The proverb teaches that a wealthy person (owólábí) typically has but one true friend.",
+          "options": {
+            "A": "EYỌKAN",
+            "B": "MÉJÌ",
+            "D": "MÉFÀ"
+          },
+          "questionText": "(25) ÀWỌN MÉLÒÓ NÍ Ọ̀RẸ̀ OWÓLÁBÍ?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "A connecting word or conjunction in Yoruba is called “òrò àsọ̀pọ̀” because it binds two phrases or ideas together.",
+          "options": {
+            "A": "ÒRỌ̀ ÌṢẸ̀",
+            "B": "ÒRỌ̀ ÀSỌ̀PÒ",
+            "D": "ÒRỌ̀ ÀTÓKÙN"
+          },
+          "questionText": "(26) ÒRỌ̀ TÍ Ó LÉÈ SỌ ÒRỌ̀ MÉJÌ PỌ̀ NÍ ÀN PẸ̀NÍ ___?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "In the sentence, two action words (“je” and “mu”) appear; thus, there are “meji” (two) work‐related verbs.",
+          "options": {
+            "A": "MEJI",
+            "B": "META",
+            "D": "EYO KAN"
+          },
+          "questionText": "(27) BOLA JE EJA ARO, O SI MU OMI TUTU LEE. ORO ISE TI A LEE RI NINU GBOLOHUN YII JE ___?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "This phrase describes nonverbal communication—that is, conveying messages through body language.",
+          "options": {
+            "A": "ONA IBARA ENI SORO LAILO OHUN ENU",
+            "B": "ONA IBARA ENI SORO LONA EYA ARA",
+            "D": "FIFI EYA ARA KINI"
+          },
+          "questionText": "(28) LILO EYA ARA WA LATI BA ARA WA SORO NI A N PE NI ____?"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "In English punctuation, the symbol used to denote a question is the question mark.",
+          "options": {
+            "A": "QUOTATION MARK",
+            "B": "EXCLAMATION MARKS",
+            "D": "QUESTION MARKS"
+          },
+          "questionText": "(29) AMI TI A MAA FI N SE IBERE NI WON PE NI ____ NI EDE GEESI ?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "In discussing money (“owo”), one alternative term is “owo ile,” which stresses its domestic or familiar nature.",
+          "options": {
+            "A": "SOWOKUDURU",
+            "B": "OWO ILE",
+            "D": "ABETELE"
+          },
+          "questionText": "(30) NINU AKAYE OWO EYIN, ORUKO MIRAN TI A TUN LEE FUN OWO EYIN ____ AYAAFI?"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "The phrase “ó púró” is used to express that someone is being insincere or dismissive when snubbing another in conversation.",
+          "options": {
+            "A": "O KARE!",
+            "B": "O KUU SE!",
+            "D": "O PURO!"
+          },
+          "questionText": "(31) BI ENIYAN BA YIN IMU SI ENIYAN NIGBA TI O SORO TAN, ITUMO EYI NI ____?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The marks that appear at the beginning, middle, and end of sentences are punctuation marks—here rendered in Yoruba as “pontu eson.”",
+          "options": {
+            "A": "AMI OHUN",
+            "B": "PONTU ESON",
+            "D": "ORO AKAMO"
+          },
+          "questionText": "(32) AWON AMI TI A N FI SI ORI ORO, ISALE ORO ATI IPARI ORO NI A N PE NI ____?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The poetic structure indicates that three (“meta”) endorsements or supports are used, echoing the Yoruba appreciation for triadic completeness.",
+          "options": {
+            "A": "MEJI",
+            "B": "META",
+            "D": "MERIN"
+          },
+          "questionText": "(33) NINU AWORAN EWI IGBEYIN AWON OLOSA TI A KA NI SAA YII, AWON MELOO NI WON FI EYIN WON TI AGBA?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The speaker indicates participation in a narrative recitation—a form best described as “aroko asotan.”",
+          "options": {
+            "A": "AROKO LETA",
+            "B": "AROKO ASOTAN",
+            "D": "AROKO ASARIYANJUYA"
+          },
+          "questionText": "(34) MO FI ARA MO ATI MI O FI ARA MO A MAA JEYO NINU AROKO ____?"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "When speaking about rice (“iresi”), the natural verb is “je” (to eat); thus, Kola “je” his rice at the place of expenditure.",
+          "options": {
+            "A": "MU",
+            "B": "LO",
+            "D": "JE"
+          },
+          "questionText": "(35) KOLA _____ IRESI NI IBI INAWO NI ANA?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "In a market setting, people “ra” (buy) goods; hence, they are buying in the town along the market road.",
+          "options": {
+            "A": "RA",
+            "B": "LU",
+            "D": "JE"
+          },
+          "questionText": "(36) WON N _____ ILU NI ONA OJA NI AARO YI?"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "After his meal, Bola naturally drinks “omi” (water).",
+          "options": {
+            "A": "IYAN",
+            "B": "ATA",
+            "D": "OMI"
+          },
+          "questionText": "(37) BOLA MU _____ LEYIN IGBA TO JE OUNJE RE TAN"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The context implies a modest or succinct action; “kuru” (meaning brief or limited) best fits the expression.",
+          "options": {
+            "A": "REBATE",
+            "B": "KURU",
+            "D": "GA"
+          },
+          "questionText": "(38) KEMI _______ FIOFIO"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "“Egba” is a food item; thus, Tunde “je” (ate) it when serving his parents.",
+          "options": {
+            "A": "JE",
+            "B": "MU",
+            "D": "RA"
+          },
+          "questionText": "(39) TUNDE _____ EGBA NIGBA TI O SE AWON OBI RE?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "A word that names people, animals, things, and places is a noun—that is, “òrò orúkọ.”",
+          "options": {
+            "A": "ORO ORUKO",
+            "B": "ORO ISE",
+            "D": "ORO AROPO ORUKO"
+          },
+          "questionText": "(40) _____ NI ORO TI O N TOKA SI ORUKO ENIYAN, ERANKO, NNKAN ATI IBIKAN"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "For clarity in writing, one must avoid “oro atokun” (extraneous or superfluous words) in a sentence.",
+          "options": {
+            "A": "ORO APONLE",
+            "B": "ORO ATOKUN",
+            "D": "ORO ISE"
+          },
+          "questionText": "(41) KO SE E MA N ___ NINU GBOLOHUN"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "Filler words (“oro atokun”) serve to attach extra emphasis or smoothness to a sentence—that is, they “pon” (stick) to the sentence.",
+          "options": {
+            "A": "AGBA EGBE TI NNKAN WA",
+            "B": "ORO PON KAN LE NINU GBOLOHUN",
+            "D": "A MAA YAN ORO NINU GBOLOHUN"
+          },
+          "questionText": "(42) ORO ATOKUN A MAA SO NIPA ____?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "A noun that groups or collects names is called a “oro aro-po oruko” (a collective noun).",
+          "options": {
+            "A": "ORO AROPO ORUKO",
+            "B": "ORO AORPO AFARAJORUKO",
+            "D": "ORO EYAN TABI ASAPEJUWE"
+          },
+          "questionText": "(43) IRUFE ORO ORUKO TI O N YAN ORO ORUKO EGBE RE NI WON N PE NI ____?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "A word that substitutes for a noun is a pronoun, known in Yoruba as “oro eyan.”",
+          "options": {
+            "A": "ORO ISE",
+            "B": "ORO EYAN",
+            "D": "ORO AROPO ORUKO"
+          },
+          "questionText": "(44) ORO TI A LEE LO DIPO ORO ORUKO NINU GBOLOHUN NI ____?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "“Ise abinibi” refers to the inherited or destiny work passed down by one’s forefathers.",
+          "options": {
+            "A": "ISE AGBE",
+            "B": "ISE ABINIBI",
+            "D": "ISE OLUKO"
+          },
+          "questionText": "(45) _____ NI ISE TI A JOGUN BA LOWO AWON BABANLA WA?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "In traditional Yoruba society, wisdom is transmitted through proverbs (“òwè”), narrative forms (“àrokodòkò”), and communal assemblies (“àjọ”).",
+          "options": {
+            "A": "OWE, AROKODOKO, AJO",
+            "B": "ESUSU, AARO, WAHLALA",
+            "D": "AARO, OWE, ESUSU"
+          },
+          "questionText": "(46) AWON ONA IRAN ARA ENI LOWO NI IWONI AYAAFI _____?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "There are traditionally three (“meta”) recognized types of agricultural practice or “agbe” in Yoruba agrarian life.",
+          "options": {
+            "A": "META",
+            "B": "MERIN",
+            "D": "MEJI"
+          },
+          "questionText": "(47) ORISI AGBE TI A NI JE _____?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "A classic example of an inherited occupation is participation in governance (“ise ijoba”), a role passed through generations.",
+          "options": {
+            "A": "ISE IJOBA",
+            "B": "ISE ONA SISE",
+            "D": "IKOKO MIMU"
+          },
+          "questionText": "(48) APEERE AWON ISE ABINIBI _____?"
+        },
+        {
+          "correctAnswer": "B",
+          "explanation": "The title “alayán” is given to the person who is acknowledged as the pioneer or first entrant into a town.",
+          "options": {
+            "A": "AYAN AGALU",
+            "B": "ALAYAN",
+            "D": "KUSANRIN AYAN"
+          },
+          "questionText": "(49) ORUKO ENI TI O KOKO LU ILU NI ILE YORUBA NI ____?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "In the proverb, “akoní” is used to describe those who habitually carry burdens—reflecting their role as porters in the community.",
+          "options": {
+            "A": "AKONI",
+            "B": "JAGUNJAGUN",
+            "D": "ONISUMOMI"
+          },
+          "questionText": "(50) AWON TI WON MAA N KO ENIYAN NI ERU ATI ERU NI WON PE NI ____?"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "Supporting one another means keeping confidences—“bó ènì ní àṣírí” (to keep someone’s secret).",
+          "options": {
+            "A": "TU ENI NI ASIRI",
+            "B": "KO BA ENI",
+            "D": "BO ENI NI ASIRI"
+          },
+          "questionText": "(51) ONA IRAN ARA ENI LOWO A MAA ____?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "Among the options, “òwè” (proverbs) do not directly denote mutual assistance, unlike the other forms that imply collective support.",
+          "options": {
+            "A": "OWE",
+            "B": "AARO",
+            "D": "AJO"
+          },
+          "questionText": "(52) EWO NINU AWON WONYI NI KO PON DANDAN ATI DA PADA TI AWON ENIYAN BA RAN ENIYAN LOWO"
+        },
+        {
+          "correctAnswer": "D",
+          "explanation": "Yoruba tradition recognizes Odùduwà as the progenitor—the founding ancestor of the Yoruba people.",
+          "options": {
+            "A": "OKANBI",
+            "B": "ORUNMILA",
+            "D": "ODUDUWA"
+          },
+          "questionText": "(53) BABANLA AWON YORUBA NI ____?"
+        },
+        {
+          "correctAnswer": "A",
+          "explanation": "The traditional armaments used in Yoruba warfare include a gun (íbọn), sword (àdá), spear (òbẹ), shield (ègbè), and a type of dagger (kánákọ).",
+          "options": {
+            "A": "IBON, ADA, OBE, EGBE ATI KANAKO",
+            "B": "ILU, AAKE, KUMO AYETA ATI OFA",
+            "D": "BANTE, IWE, OFA, BATA ATI OUNJE"
+          },
+          "questionText": "(54) LARA AWON OHUN ELO OGUN JIJA NI IWONI AYAAFI ____?"
+        },
+        {
+          "correctAnswer": "Ẹ káàárọ̀",
+          "explanation": "In Yoruba, the morning (“owuro”) greeting is “Ẹ káàárọ̀.”",
+          "options": {
+            "A": "Ẹ káàárọ̀"
+          },
+          "questionText": "(55) OWURO __________?"
+        },
+        {
+          "correctAnswer": "Ẹ káàsán",
+          "explanation": "The appropriate greeting during the afternoon (“òsán”) is “Ẹ káàsán.”",
+          "options": {
+            "A": "Ẹ káàsán"
+          },
+          "questionText": "(56) OSAN __________?"
+        },
+        {
+          "correctAnswer": "Ẹ káalẹ́",
+          "explanation": "“Iyaleta” (the later part of the day) is customarily greeted with “Ẹ káalẹ́” (good evening).",
+          "options": {
+            "A": "Ẹ káalẹ́"
+          },
+          "questionText": "(57) IYALETA __________?"
+        },
+        {
+          "correctAnswer": "Ẹ káàárọ̀",
+          "explanation": "“Àárọ̀” also designates the morning period, so the greeting remains “Ẹ káàárọ̀.”",
+          "options": {
+            "A": "Ẹ káàárọ̀"
+          },
+          "questionText": "(58) AARO __________?"
+        },
+        {
+          "correctAnswer": "Ẹ káalẹ́",
+          "explanation": "At “àsálẹ̀” (early evening), it is customary to say “Ẹ káalẹ́.”",
+          "options": {
+            "A": "Ẹ káalẹ́"
+          },
+          "questionText": "(59) ASALE __________?"
+        },
+        {
+          "correctAnswer": "Ẹ káalẹ́",
+          "explanation": "In the night (“alẹ́”), the greeting “Ẹ káalẹ́” is still used, reflecting continuity in Yoruba salutations.",
+          "options": {
+            "A": "Ẹ káalẹ́"
+          },
+          "questionText": "(60) ALE __________?"
+        }
+      ]
+    }
+  ]
