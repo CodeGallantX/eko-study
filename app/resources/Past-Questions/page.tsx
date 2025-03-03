@@ -6,8 +6,8 @@ import Footer from "@/components/Footer";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import ResultModal from "@/components/ResultModal";
 import Timer from "@/components/Timer";
-import notes from "@/data/notes.json";
-import pastQuestionsData from "@/data/past-questions/PHY101.json"; 
+import notes from "@/data/notes.json"; // List of courses
+
 interface Course {
   id: string;
   name: string;
@@ -40,11 +40,22 @@ const PastQuestions = () => {
   const [showResult, setShowResult] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  // When a course is selected, set its questions
-  const handleCourseSelect = (courseCode: string) => {
+  // Function to load past questions dynamically
+  const handleCourseSelect = async (courseCode: string) => {
+    setLoading(true);
     setSelectedCourse(courseCode);
-    setQuestions(pastQuestionsData[courseCode] || []);
+
+    try {
+      const data = await import(`@/data/past-questions/${courseCode}.json`);
+      setQuestions(data.default || []);
+    } catch (error) {
+      console.error(`Error loading past questions for ${courseCode}:`, error);
+      setQuestions([]);
+    }
+
+    setLoading(false);
   };
 
   const startTest = () => {
@@ -90,6 +101,8 @@ const PastQuestions = () => {
       <Header />
       <div className="px-10 lg:px-20 py-20">
         <h1 className="text-2xl font-bold">Past Questions</h1>
+
+        {/* Course Selection */}
         {!selectedCourse && (
           <div className="grid grid-cols-3 gap-4 mt-4">
             {courses.map((course) => (
@@ -104,7 +117,11 @@ const PastQuestions = () => {
           </div>
         )}
 
-        {selectedCourse && !isTestStarted && (
+        {/* Loading State */}
+        {loading && <p className="mt-4 text-lg text-gray-500">Loading past questions...</p>}
+
+        {/* Start Test Button */}
+        {selectedCourse && !isTestStarted && !loading && (
           <button
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
             onClick={() => setShowConfirmation(true)}
@@ -113,6 +130,7 @@ const PastQuestions = () => {
           </button>
         )}
 
+        {/* Quiz Questions */}
         {isTestStarted && (
           <div>
             <Timer duration={timeLeft} onTimeUp={submitTest} />
@@ -145,10 +163,12 @@ const PastQuestions = () => {
           </div>
         )}
 
+        {/* Results Modal */}
         {showResult && result && (
           <ResultModal result={result} onClose={() => setShowResult(false)} onReview={() => {}} />
         )}
 
+        {/* Confirmation Modal */}
         {showConfirmation && (
           <ConfirmationModal onConfirm={startTest} onCancel={() => setShowConfirmation(false)} />
         )}
