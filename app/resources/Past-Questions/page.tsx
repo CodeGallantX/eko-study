@@ -1,3 +1,5 @@
+// Past-Questions/page.tsx
+
 import fs from "fs";
 import path from "path";
 import ClientComponent from "./ClientComponent";

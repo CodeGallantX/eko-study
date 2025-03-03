@@ -51,8 +51,9 @@ export default function Header() {
           {
             label: "RESOURCES",
             submenu: [
-              { label: "Book Store", href: "/resources/book-store" },
-              { label: "Notes & PQs", href: "/resources/notes-and-PQs" },
+              // { label: "Book Store", href: "/resources/book-store" },
+              { label: "Notes", href: "/resources/notes" },
+              { label: "Past Questions", href: "/resources/Past-Questions" },
               // { label: "CBT Practice", href: "/resources/cbt-practice" },
               { label: "Products", href: "/resources/products" },
             ],
@@ -147,8 +148,9 @@ export default function Header() {
             {
               label: "RESOURCES",
               submenu: [
-                { label: "Book Store", href: "/resources/book-store" },
-                { label: "Notes & PQs", href: "/resources/notes-and-PQs" },
+                // { label: "Book Store", href: "/resources/book-store" },
+                { label: "Notes & PQs", href: "/resources/notes" },
+                { label: "Past Questions", href: "/resources/Past-Questions" },
                 // { label: "CBT", href: "/resources/cbt" },
                 { label: "Products", href: "/resources/products" },
               ],
