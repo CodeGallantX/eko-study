@@ -1,7 +1,7 @@
 // components/ResultModal.tsx
 "use client";
 import { motion } from "framer-motion";
-import { FaCheck, FaTimes } from "react-icons/fa";
+// import { FaCheck, FaTimes } from "react-icons/fa";
 
 interface ResultModalProps {
   result: {

@@ -1,17 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import ResultModal from "@/components/ResultModal";
 import Timer from "@/components/Timer";
 import notes from "@/data/notes.json";
-
-
+import pastQuestionsData from "@/data/past-questions/PHY101.json"; 
 interface Course {
   id: string;
   name: string;
+  code: string;
 }
 
 interface Question {
@@ -29,7 +29,7 @@ interface Result {
   percentage: string;
 }
 
-const courses: Course[] = notes
+const courses: Course[] = notes;
 
 const PastQuestions = () => {
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
@@ -41,18 +41,11 @@ const PastQuestions = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
 
-  
-      useEffect(() => {
-        if (selectedCourse) {
-          console.log("Fetching:", `../../data/past-questions/${selectedCourse}.json`);
-          fetch(`../../data/past-questions/${selectedCourse}.json`)
-            .then((res) => res.json())
-            .then((data) => setQuestions(data.questions))
-            .catch((err) => console.error("Failed to load questions", err));
-        }
-      }, [selectedCourse]);
-      
-  
+  // When a course is selected, set its questions
+  const handleCourseSelect = (courseCode: string) => {
+    setSelectedCourse(courseCode);
+    setQuestions(pastQuestionsData[courseCode] || []);
+  };
 
   const startTest = () => {
     setShowConfirmation(false);
@@ -103,7 +96,7 @@ const PastQuestions = () => {
               <div
                 key={course.code}
                 className="p-4 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300"
-                onClick={() => setSelectedCourse(course.code)}
+                onClick={() => handleCourseSelect(course.code)}
               >
                 {course.name}
               </div>
