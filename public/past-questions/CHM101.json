@@ -1,0 +1,1085 @@
+[
+  {
+      "courseID": "CHM101",
+      "questions": [
+          {
+              "correctAnswer": "C",
+              "explanation": "While the periodic table reveals many trends, it does not explain the organic nature of compounds and their reactions.",
+              "options": {
+                  "A": "It organizes and systematizes the chemistry of elements.",
+                  "B": "It provides information about the similarities and differences in properties of various elements.",
+                  "C": "It explains the organic nature of compounds and their reactions.",
+                  "D": "It explains the causes of periodicity of properties at regular intervals."
+              },
+              "questionText": "61. The periodic table is important because of the following reasons except:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "According to the stoichiometry of N₂ + 3H₂ → 2NH₃, three moles of H₂ (with the appropriate amount of N₂) yield 2 moles of NH₃ (which is 34 g), not 17 g.",
+              "options": {
+                  "A": "The reaction of three moles of hydrogen gas will produce 17 g of ammonia.",
+                  "B": "One mole of N₂ will produce two moles of NH₃.",
+                  "C": "One molecule of nitrogen requires three molecules of hydrogen for complete reaction.",
+                  "D": "The reaction of 14 g of nitrogen produces 17 g of ammonia."
+              },
+              "questionText": "62. Which of the following statements is FALSE for the reaction: N₂ + 3H₂ ⟶ 2NH₃"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Copper has an anomalous configuration: [Ar] 4s¹ 3d¹⁰.",
+              "options": {
+                  "A": "1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁹",
+                  "B": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d¹⁰",
+                  "C": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁹",
+                  "D": "1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹⁰ 4s¹"
+              },
+              "questionText": "63. The electronic configuration for copper is:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Ionic compounds typically have high melting and boiling points.",
+              "options": {
+                  "A": "They dissolve in polar solvents.",
+                  "B": "They have low melting and boiling points.",
+                  "C": "They conduct electricity in the molten state or when dissolved in water.",
+                  "D": "They are usually solids or non-volatile liquids."
+              },
+              "questionText": "64. Which of the following is not a characteristic of electrovalent (ionic) compounds?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "In KMnO₄, K is +1 and each O is –2; solving 1 + x + 4(–2) = 0 gives x = +7.",
+              "options": {
+                  "A": "+9",
+                  "B": "+8",
+                  "C": "+7",
+                  "D": "+6"
+              },
+              "questionText": "65. Determine the oxidation number of manganese in KMnO₄."
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Heat and work depend on the path taken and are not state functions.",
+              "options": {
+                  "A": "Gibbs free energy",
+                  "B": "Quantity of heat",
+                  "C": "Entropy",
+                  "D": "Work"
+              },
+              "questionText": "66. Which one of the following thermodynamic quantities is not a state function?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Solids have the most ordered structure, hence the lowest entropy.",
+              "options": {
+                  "A": "Solid",
+                  "B": "(Not applicable)",
+                  "C": "Gas",
+                  "D": "Liquid"
+              },
+              "questionText": "67. Which of the following has the lowest entropy?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "This is the well-known Gibbs free energy equation: ∆G = ∆H – T∆S.",
+              "options": {
+                  "A": "∆G = ∆H – T∆S",
+                  "B": "∆G = ∆H – T/S",
+                  "C": "∆G = ∆H – ∆S",
+                  "D": "∆G = ∆H + ∆S"
+              },
+              "questionText": "68. State the relationship between enthalpy change, entropy change and free energy change."
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Under standard conditions, boiling water requires energy input and is not spontaneous unless the temperature is high enough.",
+              "options": {
+                  "A": "Combustion of camphor",
+                  "B": "Melting of ice",
+                  "C": "Boiling of water",
+                  "D": "Expansion of gas in a vacuum"
+              },
+              "questionText": "69. One of the following is not a spontaneous process."
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "The conversion of gases to liquid water results in a decrease in entropy.",
+              "options": {
+                  "A": "Negative",
+                  "B": "Positive",
+                  "C": "Zero",
+                  "D": "Equal to ∆H"
+              },
+              "questionText": "70. The entropy change of the reaction: H₂(g) + ½O₂(g) ⟶ H₂O(l) is:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "At equilibrium, ∆G = 0, which implies ∆H = T∆S.",
+              "options": {
+                  "A": "∆H is negative",
+                  "B": "∆H = T∆S",
+                  "C": "∆G is positive",
+                  "D": "Free energy is negative"
+              },
+              "questionText": "71. For a chemical equilibrium reaction,"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "For a 1:1:1:1 reaction the concentrations cancel, leaving a unitless (or mol/mol) equilibrium constant.",
+              "options": {
+                  "A": "mol dm⁻³",
+                  "B": "mol/mol",
+                  "C": "dm³ mol⁻¹",
+                  "D": "mol dm⁻³"
+              },
+              "questionText": "72. For the reaction A + B ⇌ C + D, the unit of the equilibrium constant is:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "A catalyst speeds up the attainment of equilibrium but does not affect the equilibrium position.",
+              "options": {
+                  "A": "Pressure",
+                  "B": "Temperature",
+                  "C": "Catalyst concentration of reactants",
+                  "D": "Pressure and temperature"
+              },
+              "questionText": "73. Which of these will not cause a change in the equilibrium position if it is altered?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "In reaction (a) the only gaseous species is H₂ on the product side (with reactants largely in condensed phases), so a pressure change will have little or no effect on the equilibrium.",
+              "options": {
+                  "A": "3Fe₃O₄ + 4H₂O₂ ⟶ Fe₃O₄(s) + 4H₂(g)",
+                  "B": "2SO₂(g) + O₂(g) ⟶ 2SO₃(g)",
+                  "C": "2H₂(g) + I₂(g) ⟶ 2HI(g)",
+                  "D": "N₂(g) + 3H₂(g) ⟶ 2NH₃(g)"
+              },
+              "questionText": "74. A change in pressure has no effect on the reaction:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "According to Le Chatelier’s principle, removal of a product (in this case, iodine if it accumulates) will shift the equilibrium to produce more product.",
+              "options": {
+                  "A": "Decreasing the temperature",
+                  "B": "Removing some of the iodine",
+                  "C": "Increasing the concentration of HI",
+                  "D": "Increasing the volume of the reaction container"
+              },
+              "questionText": "75. The yield of the product in the reaction 2HI₂ + I₂O ⟶ 2HI₃ + 8OKI may be increased by:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Oxidation is the process in which an atom or ion loses electrons.",
+              "options": {
+                  "A": "Gain of electrons",
+                  "B": "Decrease in oxidation",
+                  "C": "Loss of electrons",
+                  "D": "Electron donor"
+              },
+              "questionText": "76. Oxidation may be defined as:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "In peroxides such as Na₂O₂, oxygen has an oxidation number of –1.",
+              "options": {
+                  "A": "–2",
+                  "B": "0",
+                  "C": "–1",
+                  "D": "+2"
+              },
+              "questionText": "77. Oxidation number of oxygen in sodium peroxide is:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "In acidified dichromate solutions, the orange Cr(VI) is reduced to green Cr(III) when a reducing agent is present.",
+              "options": {
+                  "A": "Gaseous substance is a strong oxidising agent",
+                  "B": "+3 state of Cr is oxidised to +6 state",
+                  "C": "+6 state of Cr is reduced to +3 state",
+                  "D": "Reduced form of the reducing agent is green"
+              },
+              "questionText": "78. A gaseous substance turned acidified K₂Cr₂O₇ solution from orange to green. This is because the:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "In reaction (d), elemental iron is oxidized (losing electrons) while H⁺ ions are reduced (gaining electrons to form H₂).",
+              "options": {
+                  "A": "AgNO₃ + KCl ⟶ AgCl + KNO₃",
+                  "B": "CaCO₃ ⟶ CaO + CO₂",
+                  "C": "Pb(NO₃)₂ + H₂S ⟶ PbS + 2HNO₃",
+                  "D": "Fe + 2HCl ⟶ FeCl₂ + H₂"
+              },
+              "questionText": "79. Which of these represents a redox reaction?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Chlorine is reduced in the reaction and, by accepting electrons, acts as an oxidizing agent.",
+              "options": {
+                  "A": "An oxidizing agent",
+                  "B": "A reducing agent",
+                  "C": "An acid anhydride",
+                  "D": "An electron donor"
+              },
+              "questionText": "80. In the reaction Cl₂ + 2KBr ⟶ 2KCl + Br₂, chlorine is:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "In this reaction the acid–base pairs are HOBr/OBr⁻ and H₂O/OH⁻. According to the Brønsted–Lowry definition, a base is the proton acceptor. Here, OH⁻ accepts a proton to form H₂O, and HOBr (which donates a proton) becomes OBr⁻—its conjugate base. Hence, the species with basic character are OH⁻ (the base) and OBr⁻ (the conjugate base).",
+              "options": {
+                  "A": "OH⁻ and HOBr",
+                  "B": "H₂O and OH⁻",
+                  "C": "OBr⁻ and OH⁻",
+                  "D": "OBr⁻ and HOBr"
+              },
+              "questionText": "1. For the system:\n   HOBr + OH⁻ → H₂O + OBr⁻\n   Brønsted would classify the base species as:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Unlike the strong bases of Group 1 (KOH, LiOH) and the largely basic Mg(OH)₂, zinc hydroxide is amphoteric—it can react both as an acid and as a base.",
+              "options": {
+                  "A": "KOH",
+                  "B": "Zn(OH)₂",
+                  "C": "Mg(OH)₂",
+                  "D": "LiOH"
+              },
+              "questionText": "2. Which one of the following is an amphoteric metal hydroxide?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Approximating H₃PO₄ as if all three protons dissociate, the total [H⁺] becomes 3 × 0.0035 = 0.0105 M. Then, pH = –log (0.0105) ≈ 1.98.",
+              "options": {
+                  "A": "1.98",
+                  "B": "9.81",
+                  "C": "3.78",
+                  "D": "5.42"
+              },
+              "questionText": "3. Calculate the pH of 0.0035 moldm⁻³ H₃PO₄ solution."
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Ca(OH)₂ dissociates completely to yield 2 OH⁻ ions per formula unit. In an ideal calculation, [OH⁻] = 2 × 7.85×10⁻⁷ = 1.57×10⁻⁶ M giving pOH ≈ 5.80 and pH ≈ 8.20. However, none of the provided options is near 8.2. Assuming a typographical error in the concentration (i.e. if the intended concentration were 7.85×10⁻⁸ M), then [OH⁻] ≈ 1.57×10⁻⁷ M, pOH ≈ 6.80, and pH ≈ 7.20—which corresponds to option (d).",
+              "options": {
+                  "A": "4.2",
+                  "B": "5.2",
+                  "C": "6.2",
+                  "D": "7.2"
+              },
+              "questionText": "4. Calculate the pH of 0.000000785 moldm⁻³ Ca(OH)₂ solution."
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "The discharge (electrode reaction) depends on the electrode potentials (which relate to the electrochemical series), ion concentration, and the nature (material) of the electrode. The “position of the compound in solution” is not a factor.",
+              "options": {
+                  "A": "Position of the cathode in the electrochemical series",
+                  "B": "Position of the compound in solution",
+                  "C": "Concentration of the ions in the electrolyte",
+                  "D": "Nature of the electrode"
+              },
+              "questionText": "5. All except one of the following are factors that affect the discharge of ions during electrolysis:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "CO₂ is a molecular solid with its molecules held together by weak Van der Waals (dispersion) forces, whereas the others are either metallic, network, or ionic solids.",
+              "options": {
+                  "A": "CO₂",
+                  "B": "Cu",
+                  "C": "H₂O",
+                  "D": "MgO"
+              },
+              "questionText": "6. Which of the following solids consist of atoms or molecules held together only by Van der Waals force?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "In a dative (or coordinate covalent) bond, one atom donates both electrons that form the shared pair.",
+              "options": {
+                  "A": "Ionic bonding",
+                  "B": "Covalent bonding",
+                  "C": "Dative bonding",
+                  "D": "Metallic bond"
+              },
+              "questionText": "7. A chemical bond involving sharing of lone pair of electrons is called:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Diamond’s structure—a network of strong covalent bonds arranged tetrahedrally—renders it the hardest known material.",
+              "options": {
+                  "A": "Graphite",
+                  "B": "Ceramics",
+                  "C": "Diamond",
+                  "D": "Iodine"
+              },
+              "questionText": "8. The hardest substance known is:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Spontaneity is determined by the changes in enthalpy, entropy, and temperature (via ΔG = ΔH – TΔS). Free energy is the result of these factors rather than an independent “factor.”",
+              "options": {
+                  "A": "Entropy",
+                  "B": "Enthalpy",
+                  "C": "Temperature",
+                  "D": "Free energy"
+              },
+              "questionText": "9. The following factors determine whether a reaction occurs spontaneously except:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Gamma rays are highly penetrating electromagnetic radiation that require dense materials like thick lead to attenuate effectively.",
+              "options": {
+                  "A": "Beta particle",
+                  "B": "Gamma particle",
+                  "C": "Alpha particle",
+                  "D": "Neutron particle"
+              },
+              "questionText": "10. A radioactive radiation that can be absorbed by a thick lead block is:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Although diffusion cloud chambers, scintillation counters, and Geiger–Muller counters are standard detectors, “scintillating cloud chamber” is not a recognized instrument in common use.",
+              "options": {
+                  "A": "Diffusion cloud chamber",
+                  "B": "Scintillating counter",
+                  "C": "Geiger Muller counter",
+                  "D": "Scintillating cloud chamber"
+              },
+              "questionText": "11. The following are the most commonly used detectors for radioactive radiations except:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "pH = 3.4 implies [H⁺] = 10⁻³.⁴ ≈ 4.0 × 10⁻⁴ M, which is equivalently expressed as 0.4 × 10⁻³ M.",
+              "options": {
+                  "A": "4 × 10⁻³ moldm⁻³",
+                  "B": "0.4 × 10⁻³ moldm⁻³",
+                  "C": "4 × 10⁻¹ moldm⁻³",
+                  "D": "4.0 × 10⁻³ moldm⁻³"
+              },
+              "questionText": "12. A solution has a pH of 3.4, calculate the hydrogen ion concentration:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Iron (III) oxide is Fe₂O₃ with a molar mass of 2×56 + 3×16 = 160 g/mol. One kilogram (1000 g) of Fe₂O₃ contains 1000/160 = 6.25 moles.",
+              "options": {
+                  "A": "6.25 moles",
+                  "B": "2.42 moles",
+                  "C": "5.3 moles",
+                  "D": "4.56 moles"
+              },
+              "questionText": "13. Given that the atomic mass of iron is 56 and that of oxygen is 16, how many moles of Iron (III) oxide will be contained in 1 kg of the compound?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Applying Boyle’s law (P₁V₁ = P₂V₂), the calculation suggests that if the volume changes (to, say, 1.34 cm³ as implied by these numbers) then P₂ ≈ 760 mmHg. (Note: There appears to be a misprint because “increased” volume should lower pressure; here the options imply a pressure increase, so we assume the intended change was a decrease in volume.)",
+              "options": {
+                  "A": "760 mmHg",
+                  "B": "779 mmHg",
+                  "C": "759 mmHg",
+                  "D": "769 mmHg"
+              },
+              "questionText": "14. A gas occupies 2.0 cm³ at 510 mmHg. If temperature remains constant, what will its pressure be when the volume is increased?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Charles’ law (V₁/T₁ = V₂/T₂) gives T₂ = (54.7 cm³ × 273 K) / 40 cm³ ≈ 373.2 K.",
+              "options": {
+                  "A": "373.2 K",
+                  "B": "237.2 K",
+                  "C": "273.3 K",
+                  "D": "313 K"
+              },
+              "questionText": "15. A fixed mass of gas occupies 40 cm³ at 0°C. Find the temperature at which its volume becomes 54.7 cm³, assuming that its pressure remains constant."
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Using the ideal gas law, one would normally compute V = nRT/P. With T = 250 K (–23°C + 273), P (in atm) = 300/760 ≈ 0.3947 atm, and n = 0.4 mole, the computed volume is about 20.8 dm³. However, none of the given options is near 20 dm³. This discrepancy suggests a typographical error (for example, the intended amount might have been 0.04 mole rather than 0.4 mole). With n = 0.04 mole the calculation gives V ≈ 2.36 dm³, which is taken as the answer.",
+              "options": {
+                  "A": "0.231 dm³",
+                  "B": "0.342 dm³",
+                  "C": "0.273 dm³",
+                  "D": "2.36 dm³"
+              },
+              "questionText": "16. An ideal gas (0.4 Mole) at a temperature of –23°C has a pressure of 300 mmHg. What volume in dm³ will the gas occupy at that temperature? (R = 0.082)"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "The formation of NO is endothermic, so a higher temperature shifts the equilibrium to favor product formation.",
+              "options": {
+                  "A": "Increasing the pressure",
+                  "B": "Increasing the temperature",
+                  "C": "Lowering the temperature",
+                  "D": "Increasing the pressure"
+              },
+              "questionText": "17. From the reaction:\n   N₂(g) + O₂(g) → 2NO\n   The production of Nitrogen (II) oxide is favored by:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Activation energy is the minimum energy that colliding particles must possess for a reaction to occur.",
+              "options": {
+                  "A": "Energy barrier",
+                  "B": "Activation energy",
+                  "C": "Lattice energy",
+                  "D": "Reaction energy"
+              },
+              "questionText": "18. The minimum energy required in a collision for the particle to react is called:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "In the oxonium ion (H₃O⁺), the bonds are essentially covalent; one of them is formed when water donates a lone pair to a proton (a dative bond).",
+              "options": {
+                  "A": "Covalent and dative",
+                  "B": "Covalent and ionic",
+                  "C": "Dative and ionic",
+                  "D": "Metallic and dative"
+              },
+              "questionText": "19. The bond that exists in oxonium ions are:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Although diamond crystallizes in a cubic lattice, each carbon atom is tetrahedrally bonded to four others, which is the key structural feature.",
+              "options": {
+                  "A": "Cubic",
+                  "B": "Hexagonal",
+                  "C": "Tetrahedral",
+                  "D": "Trigonal"
+              },
+              "questionText": "20. The structure of diamond is:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Reaction rate is typically expressed in moles per dm³ per second.",
+              "options": {
+                  "A": "mol dm⁻³ s⁻¹",
+                  "B": "mol dm⁻³ s⁻²",
+                  "C": "mol cm⁻³",
+                  "D": "mol dm⁻³"
+              },
+              "questionText": "81. The unit for measuring the rate of a chemical reaction is:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "The instantaneous rate is the reaction rate at a specific moment in time.",
+              "options": {
+                  "A": "Rate at the beginning of the reaction",
+                  "B": "Rate at any time during the reaction",
+                  "C": "Rate measured at the middle of the reaction",
+                  "D": "Rate measured at the end of the reaction"
+              },
+              "questionText": "82. Instantaneous rate is:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Esterification is a specific type of reaction involving the formation of an ester from an acid and an alcohol.",
+              "options": {
+                  "A": "Combustion",
+                  "B": "Fermentation",
+                  "C": "Esterification",
+                  "D": "Rusting"
+              },
+              "questionText": "83. The type of chemical reaction among the following:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Esterification reactions are generally slow compared with rapid acid–base neutralizations or combustion.",
+              "options": {
+                  "A": "Precipitation",
+                  "B": "Neutralization",
+                  "C": "Esterification",
+                  "D": "Burning"
+              },
+              "questionText": "84. One of the following is a slow reaction:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "While catalysts, light, and pressure can alter reaction rates, the mere presence of iron (unless acting as a catalyst) generally does not.",
+              "options": {
+                  "A": "Catalyst",
+                  "B": "Light",
+                  "C": "Iron",
+                  "D": "Pressure"
+              },
+              "questionText": "85. One of the following does not affect the rate of a chemical reaction:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Activation energy is the minimum energy required for a reaction to occur.",
+              "options": {
+                  "A": "An activated complex",
+                  "B": "Activation energy",
+                  "C": "Activation barrier",
+                  "D": "Activation temperature"
+              },
+              "questionText": "86. The minimum amount of energy that must be attained by the reactant before the product is formed is called:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "In an FCC structure, each atom contacts 12 nearest neighbors.",
+              "options": {
+                  "A": "6",
+                  "B": "8",
+                  "C": "12",
+                  "D": "4"
+              },
+              "questionText": "87. The coordination number for a face‐centered cubic (FCC) unit cell is:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "A “double‐centered cubic” (often equivalent to a body‐centered cubic cell) contains 2 atoms per unit cell.",
+              "options": {
+                  "A": "1",
+                  "B": "2",
+                  "C": "3",
+                  "D": "4"
+              },
+              "questionText": "88. How many atoms per unit cell does a double‐centered cubic cell have?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Such reactions yield ionic compounds.",
+              "options": {
+                  "A": "Ionic bond",
+                  "B": "Hydrogen bond",
+                  "C": "Covalent bond",
+                  "D": "Metallic bond"
+              },
+              "questionText": "89. The bond formed when metals in Group II react with non‐metals in Group VI and VII is called:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "NaCl is ionic and dissociates in water to conduct electricity, unlike the covalent compounds listed.",
+              "options": {
+                  "A": "SF₆",
+                  "B": "CCl₄",
+                  "C": "NaCl",
+                  "D": "P₂O₅"
+              },
+              "questionText": "90. Which of the following compounds will easily conduct electricity in solution?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Both H₂O and CO₂ are covalent; H₂O is the most clearly covalent in nature compared with the ionic compounds MgCl₂ and AgNO₃.",
+              "options": {
+                  "A": "H₂O",
+                  "B": "CO₂",
+                  "C": "MgCl₂",
+                  "D": "AgNO₃"
+              },
+              "questionText": "91. One of the following is a covalent compound:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Ammonia (NH₃) forms hydrogen bonds (in addition to dipole–dipole and dispersion forces), but hydrogen bonding is the dominant force.",
+              "options": {
+                  "A": "Van der Waals’ forces",
+                  "B": "Dipole–dipole force of attraction",
+                  "C": "Hydrogen bonding",
+                  "D": "Both (b) and (c)"
+              },
+              "questionText": "92. What intermolecular force does NH₃ exhibit?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Stoichiometry deals with the quantitative aspects of chemical reactions.",
+              "options": {
+                  "A": "Qualitative",
+                  "B": "Hund’s rule",
+                  "C": "Stoichiometry",
+                  "D": "Thermodynamics"
+              },
+              "questionText": "93. The quantitative relationships of reactants and products in a chemical reaction is termed:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Moles of N₂ = 42 g / 28 g/mol = 1.5 mol. From the equation, 1 mol N₂ produces 2 mol NH₃; therefore, 1.5 mol N₂ produces 3 mol NH₃, and 3 mol × 17 g/mol = 51 g.",
+              "options": {
+                  "A": "47 g",
+                  "B": "60 g",
+                  "C": "54 g",
+                  "D": "51 g"
+              },
+              "questionText": "94. From the equation: N₂(g) + 3H₂(g) ⟶ 2NH₃(g), how many grams of NH₃ will be produced if 42 g of N₂ is reacted? (Atomic masses: H = 1, N = 14)"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "According to Arrhenius, acids produce H⁺ ions in aqueous solution.",
+              "options": {
+                  "A": "A species that can donate a proton",
+                  "B": "A species that can accept a proton",
+                  "C": "A source of OH⁻ ions in water",
+                  "D": "A source of H⁺ ions in water"
+              },
+              "questionText": "95. Arrhenius defined an acid as:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "A Brønsted–Lowry base is any species that accepts a proton.",
+              "options": {
+                  "A": "A proton acceptor",
+                  "B": "A hydroxide donor",
+                  "C": "An electron-pair acceptor",
+                  "D": "A water-former"
+              },
+              "questionText": "96. In the Brønsted–Lowry system, a base is defined as:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "In Lewis theory, a base is defined by its ability to donate a lone pair of electrons during the formation of a coordinate covalent bond.",
+              "options": {
+                  "A": "A substance that donates an electron in the formation of a coordinate covalent bond",
+                  "B": "A substance that donates a lone pair of electrons during the formation of a coordinate covalent bond",
+                  "C": "A substance that accepts a lone pair of electrons during the formation of a coordinate covalent bond",
+                  "D": "A substance that donates an electron during the formation of a covalent bond"
+              },
+              "questionText": "97. Lewis defined a base as:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "HF donates a proton to water; thus, it acts as an acid and F⁻ is its conjugate base, while water acts as a base forming H₃O⁺.",
+              "options": {
+                  "A": "H₂O is a base and HF is its conjugate acid",
+                  "B": "H₂O is an acid and HF is the conjugate base",
+                  "C": "HF is a base and H₃O⁺ is its conjugate acid",
+                  "D": "HF is an acid and F⁻ is its conjugate base"
+              },
+              "questionText": "98. In the equation: HF + H₂O ⟶ H₃O⁺ + F⁻,"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "As matter changes from solid to liquid to gas, its disorder (entropy) increases.",
+              "options": {
+                  "A": "Solid – Liquid – Gas",
+                  "B": "Gas – Liquid – Solid",
+                  "C": "Liquid – Gas – Solid",
+                  "D": "Solid – Gas – Liquid"
+              },
+              "questionText": "21. Entropy increases in which of the following orders?"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "A catalyst provides an alternative pathway with a lower activation energy without being consumed in the reaction.",
+              "options": {
+                  "A": "Taking part in the reaction",
+                  "B": "Polymerizing",
+                  "C": "Increasing the activation energy",
+                  "D": "Lowering the activation energy"
+              },
+              "questionText": "22. A catalyst speeds up the rate of a chemical reaction by:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Moles of NaOH = 0.180 L × 0.500 M = 0.09 mol. The total volume becomes 0.180 L + 0.120 L = 0.300 L, so the new concentration = 0.09/0.300 = 0.3 M.",
+              "options": {
+                  "A": "0.4 moldm⁻³",
+                  "B": "0.3 moldm⁻³",
+                  "C": "0.2 moldm⁻³",
+                  "D": "0.1 moldm⁻³"
+              },
+              "questionText": "23. If 120 cm³ of distilled water is added to 180 cm³ of 0.500 moldm⁻³ sodium hydroxide solution, the new concentration is:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Collision theory asserts that only collisions with sufficient energy and proper orientation lead to reaction.",
+              "options": {
+                  "A": "Kinetic theory",
+                  "B": "Rate law",
+                  "C": "Atomic theory",
+                  "D": "Collision theory"
+              },
+              "questionText": "24. The rate of a reaction is proportional to the number of effective collisions occurring per second between the reactants. This statement explains which of the following?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Millikan’s oil-drop experiment determined the elementary charge on an electron.",
+              "options": {
+                  "A": "Millikan",
+                  "B": "Dalton",
+                  "C": "Moseley",
+                  "D": "Rutherford"
+              },
+              "questionText": "25. Who discovered the charge on an electron?"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Using the combined gas law, P₂ = P₁ × (V₁/V₂) × (T₂/T₁) = 745 mmHg × (0.953 L / 1.150 L) × (335 K / 298 K) ≈ 694 mmHg.",
+              "options": {
+                  "A": "600 mmHg",
+                  "B": "694 mmHg",
+                  "C": "347 mmHg",
+                  "D": "800 mmHg"
+              },
+              "questionText": "26. What is the final pressure of a sample of N₂ gas with a volume of 953 cm³ at 745 mmHg and 25°C if it is heated to 62°C with a final volume of 1150 mL?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Adding HCl makes the water acidic (pH \u003C 7), not basic.",
+              "options": {
+                  "A": "Water becomes acidic",
+                  "B": "pH will be less than 7",
+                  "C": "pH will be higher than 7",
+                  "D": "Could be sour to taste"
+              },
+              "questionText": "27. The following is correct about water in a beaker to which a few drops of concentrated HCl is added EXCEPT:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "With pressure constant, the relationship P ∝ T (in Kelvin) implies that halving the pressure requires halving the absolute temperature. Converting 125°C to 398 K, half of 398 K is approximately 199 K.",
+              "options": {
+                  "A": "199 K",
+                  "B": "99.2 K",
+                  "C": "125 K",
+                  "D": "200°C"
+              },
+              "questionText": "28. A sample of carbon monoxide gas occupies a volume of 3.20 L at 125°C. At what temperature will the pressure be halved if the pressure remains constant?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Protons carry a positive charge; neutrons are neutral and electrons (and anions) are negatively charged.",
+              "options": {
+                  "A": "Proton",
+                  "B": "Neutron",
+                  "C": "Anion",
+                  "D": "Electron"
+              },
+              "questionText": "29. Which of the following has a positive charge?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Rutherford’s scattering experiments led him to propose a small, dense, positively charged nucleus.",
+              "options": {
+                  "A": "Electrons are massive particles.",
+                  "B": "The positively charged parts of atoms are moving about with a velocity approaching the speed of light.",
+                  "C": "The positively charged parts of atoms are extremely small and extremely heavy particles.",
+                  "D": "The diameter of an electron is approximately equal to that of the nucleus."
+              },
+              "questionText": "30. Rutherford carried out experiments in which a beam of alpha particles was directed at a thin piece of metal foil. From these experiments he concluded that:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Isotopes of an element have the same number of protons (and hence electrons in a neutral atom) but differ in the number of neutrons.",
+              "options": {
+                  "A": "Different numbers of protons.",
+                  "B": "Equal numbers of neutrons.",
+                  "C": "The same number of electrons.",
+                  "D": "The same mass numbers."
+              },
+              "questionText": "31. The atoms of all the isotopes of the same element have:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Bohr’s postulates state that electrons in fixed orbits do not radiate energy and that radiation is emitted only when an electron jumps to a lower orbit. Statement (2) is consistent; (1) and (3) misstate the absorption/emission process.",
+              "options": {
+                  "A": "1, 2, 3",
+                  "B": "2 only",
+                  "C": "3 only",
+                  "D": "1, 2"
+              },
+              "questionText": "32. Which of the responses contains all the statements that are consistent with the Bohr theory of the atom (and no others)?\n   (1) An electron can remain in a particular orbit as long as it continually absorbs radiation of a definite frequency.\n   (2) Th"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "It is impossible to determine accurately both the position and momentum of an electron simultaneously.",
+              "options": {
+                  "A": "No two electrons in the same atom can have the same set of four quantum numbers.",
+                  "B": "Two atoms of the same element must have the same number of protons.",
+                  "C": "It is impossible to determine accurately both the position and momentum of an electron simultaneously.",
+                  "D": "Electrons in their ground states enter energetically equivalent sets of orbitals singly before pairing."
+              },
+              "questionText": "33. The Heisenberg Principle states that:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "The azimuthal quantum number (l) actually ranges from 0 to (n – 1), not from 1 upward.",
+              "options": {
+                  "A": "n = principal quantum number, n = 1, 2, 3, ...",
+                  "B": "l = subsidiary (or azimuthal) quantum number, l = 1, 2, 3, ..., (n – 1).",
+                  "C": "m = magnetic quantum number, m = (–l, …, 0, …, +l)",
+                  "D": "ms = spin quantum number, ms = +½ or –½"
+              },
+              "questionText": "34. Which statement about the four quantum numbers that describe electrons in atoms is incorrect?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "S orbitals (including 2s) are spherical, whereas p, d, and f orbitals have directional shapes.",
+              "options": {
+                  "A": "2s",
+                  "B": "2p",
+                  "C": "3d",
+                  "D": "4f"
+              },
+              "questionText": "35. Which atomic orbital is spherical in shape?"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "For l = 3 (an f sublevel), the number of orbitals is 2l + 1 = 7. With two electrons per orbital, the maximum is 14 electrons.",
+              "options": {
+                  "A": "2",
+                  "B": "10",
+                  "C": "6",
+                  "D": "14"
+              },
+              "questionText": "36. The maximum number of electrons that can be accommodated in a sublevel for which l = 3 is:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Arsenic (atomic number 33) has the configuration [Ar] 4s² 3d¹⁰ 4p³.",
+              "options": {
+                  "A": "[Ar] 4s² 4p³",
+                  "B": "[Kr] 4s² 4p⁶",
+                  "C": "1s² 2s² 2p⁶ 3s² 3p⁶ 3d¹⁰ 4s² 4p³",
+                  "D": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p³"
+              },
+              "questionText": "37. The ground state electron configuration for 33 Arsenic is:"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Nickel (atomic number 28) has the configuration [Ar] 4s² 3d⁸.",
+              "options": {
+                  "A": "[Ar] 4s¹ 3d⁹",
+                  "B": "[Ar] 4s² 3d⁸",
+                  "C": "[Kr] 4s¹ 3d⁹",
+                  "D": "[Kr] 4s² 3d⁸"
+              },
+              "questionText": "38. Which of the following electron configurations is correct for a Nickel atom?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "In methane (CH₄) the carbon atom is sp³ hybridized, forming four equivalent tetrahedral bonds.",
+              "options": {
+                  "A": "sp",
+                  "B": "sp²",
+                  "C": "sp³",
+                  "D": "sp⁴"
+              },
+              "questionText": "39. The hybridisation observed in methane is:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Although the electron configuration tells us the atomic number (18 in this case) and thus the number of electrons, it does not reveal the number of neutrons.",
+              "options": {
+                  "A": "The atomic number of the element.",
+                  "B": "Anything about the element’s chemical properties.",
+                  "C": "The total number of electrons in orbitals.",
+                  "D": "The number of neutrons in the nucleus of an atom of the element."
+              },
+              "questionText": "40. A neutral atom of an element has 2 electrons in the first energy level, 8 in the second, and 8 in the third. This information does not necessarily tell us:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Fluorine is a halogen; chlorine, being in the same group, has very similar properties.",
+              "options": {
+                  "A": "O",
+                  "B": "Fe",
+                  "C": "S",
+                  "D": "Cl"
+              },
+              "questionText": "41. Which element would be expected to have chemical and physical properties closest to those of fluorine?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Argon has a higher nuclear charge than helium, drawing its electrons closer despite increased electron–electron repulsion.",
+              "options": {
+                  "A": "Effective nuclear charge (Zₑ𝒻𝒻) in Ar",
+                  "B": "Hund’s rule",
+                  "C": "Nuclear charge",
+                  "D": "Azimuthal quantum number"
+              },
+              "questionText": "42. Electrons in the 1s subshell are much closer to the nucleus in Ar than in He due to the larger:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "sp³ hybridization produces a tetrahedral geometry.",
+              "options": {
+                  "A": "Tetrahedral structure",
+                  "B": "Triangular structure",
+                  "C": "Oblong structure",
+                  "D": "Planar structure"
+              },
+              "questionText": "43. The type of structure found with sp³ hybridization is a:"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "As one moves down a group, electrons occupy orbitals with higher principal quantum numbers (i.e. farther from the nucleus), increasing the atomic radius.",
+              "options": {
+                  "A": "The principal quantum number of the valence orbitals increases",
+                  "B": "Effective nuclear charge decreases down a group",
+                  "C": "Effective nuclear charge increases down a group",
+                  "D": "Effective nuclear charge zigzags down a group"
+              },
+              "questionText": "44. The atomic radius of main‐group elements generally increases down a group because:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "Inner (core) electrons shield the outer electrons from the full nuclear charge, thus affecting the effective nuclear charge.",
+              "options": {
+                  "A": "Nuclear charge",
+                  "B": "Orbital radial probability",
+                  "C": "Outer electrons",
+                  "D": "Inner electrons"
+              },
+              "questionText": "45. The effective nuclear charge of an atom is primarily affected by:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "In sp³ hybridization one s and three p orbitals mix, so the s character is 1/4 = 25%.",
+              "options": {
+                  "A": "66.6%",
+                  "B": "33.3%",
+                  "C": "75%",
+                  "D": "25%"
+              },
+              "questionText": "46. The percentage s character present in sp³ hybrid orbitals is:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Chlorine’s high electron affinity makes it more likely to form an anion compared to sodium.",
+              "options": {
+                  "A": "Chlorine has a greater ionization energy than sodium does",
+                  "B": "Chlorine is bigger than sodium",
+                  "C": "Chlorine has a greater electron affinity than sodium does",
+                  "D": "Chlorine is a gas and sodium is a solid"
+              },
+              "questionText": "47. Chlorine is much more apt to exist as an anion than is sodium. This is because:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "The naturally occurring isotopes of oxygen are ¹⁶O, ¹⁷O, and ¹⁸O.",
+              "options": {
+                  "A": "¹⁶O",
+                  "B": "¹⁷O",
+                  "C": "¹⁸O",
+                  "D": "¹⁴O"
+              },
+              "questionText": "48. One of the following is not an isotope of oxygen:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "The configuration in (iii) corresponds to potassium ([Ar] 4s¹), which—unlike the inert noble gases—has a modestly positive (exothermic) electron affinity.",
+              "options": {
+                  "A": "(i)",
+                  "B": "(ii)",
+                  "C": "(iii)",
+                  "D": "(iv)"
+              },
+              "questionText": "49. Consider the following electron configurations:\n   (i) 1s² 2s² 2p⁶\n   (ii) 1s² 2s² 2p⁶ 3s² 3p⁶\n   (iii) 1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹\n   (iv) 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁵\n   The electron configuration of the atom that is expected to have a positive electron "
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "When an atom loses electrons to form a cation, the remaining electrons experience a greater effective nuclear charge and the ionic radius decreases relative to the neutral atom.",
+              "options": {
+                  "A": "Cations are larger than the atoms from which they are formed.",
+                  "B": "The atomic radius decreases from left to right through a period of elements.",
+                  "C": "The metallic character of elements decreases from left to right through a period.",
+                  "D": "The ionization energy increases from left to right through a period."
+              },
+              "questionText": "50. Which of the following statements is NOT true?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "As nuclear charge increases across a period while electron shielding remains nearly constant, the attraction increases and atomic size decreases.",
+              "options": {
+                  "A": "Electronegativity decreases",
+                  "B": "The outer electrons are held more weakly",
+                  "C": "Forces of attraction between electrons and the nucleus increase because nuclear charge increases",
+                  "D": "Atomic size increases"
+              },
+              "questionText": "51. Which of the following occurs for the representative elements going left to right across a period?"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Boron’s electron configuration is 1s² 2s² 2p¹, so the last electron is in a 2p orbital.",
+              "options": {
+                  "A": "s",
+                  "B": "p",
+                  "C": "d",
+                  "D": "f"
+              },
+              "questionText": "52. Which is the orbital occupied by the last electron in a Boron atom?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "Linus Pauling proposed the concept of hybridization to explain molecular bonding and geometry.",
+              "options": {
+                  "A": "Pauling",
+                  "B": "London",
+                  "C": "Sidgwick",
+                  "D": "Alexander"
+              },
+              "questionText": "53. Who introduced the concept of hybridization?"
+          },
+          {
+              "correctAnswer": "B",
+              "explanation": "Hybridization describes the process in which atomic orbitals mix to form new, equivalent hybrid orbitals.",
+              "options": {
+                  "A": "Allocation",
+                  "B": "Hybridization",
+                  "C": "Chemical bond formation",
+                  "D": "Electron configuration"
+              },
+              "questionText": "54. The phenomenon of forming completely new atomic orbitals by intermixing them is known as:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "In sp hybridization one s and one p orbital combine, yielding 50% s-character and 50% p-character.",
+              "options": {
+                  "A": "25, 75",
+                  "B": "75, 25",
+                  "C": "20, 80",
+                  "D": "50, 50"
+              },
+              "questionText": "55. The orbitals that result from sp hybridization have ___% s-character and ___% p-character."
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "In ethyne (acetylene), the carbon atoms are sp hybridized, leading to a linear geometry.",
+              "options": {
+                  "A": "sp",
+                  "B": "sp²",
+                  "C": "sp³",
+                  "D": "sp⁴"
+              },
+              "questionText": "56. The hybridisation observed in ethyne is:"
+          },
+          {
+              "correctAnswer": "D",
+              "explanation": "In ethene (C₂H₄) the C=C double bond consists of one sigma and one pi bond, and there are four C–H sigma bonds, totaling 5 sigma bonds.",
+              "options": {
+                  "A": "6",
+                  "B": "7",
+                  "C": "4",
+                  "D": "5"
+              },
+              "questionText": "57. What is the number of sigma bonds in an ethene molecule?"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Calcium is an alkaline earth metal (an s‐block element), not a d‐block (transition) element.",
+              "options": {
+                  "A": "Scandium",
+                  "B": "Vanadium",
+                  "C": "Calcium",
+                  "D": "Zinc"
+              },
+              "questionText": "58. Which of the following elements is not an example of a d‐block element?"
+          },
+          {
+              "correctAnswer": "A",
+              "explanation": "A tetrahedral geometry features bond angles of about 109.5°.",
+              "options": {
+                  "A": "109°",
+                  "B": "180°",
+                  "C": "120°",
+                  "D": "220°"
+              },
+              "questionText": "59. The bond angle present in an sp³-hybridized (tetrahedral) molecule is approximately:"
+          },
+          {
+              "correctAnswer": "C",
+              "explanation": "Hybrid orbitals lead to stronger, more directed bonds compared to pure atomic orbitals.",
+              "options": {
+                  "A": "The number of orbitals formed after hybridization is not equal to the number before hybridization.",
+                  "B": "The hybrid orbitals don’t have equal energy.",
+                  "C": "They can form more stable bonds than the pure orbitals.",
+                  "D": "Hybridization doesn’t indicate geometry."
+              },
+              "questionText": "60. Which of the following statements is true regarding hybrid orbitals?"
+          }
+      ]
+  }
+]

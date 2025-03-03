@@ -1,27 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ConfirmationModal from "@/components/ConfirmationModal";
 import ResultModal from "@/components/ResultModal";
 import Timer from "@/components/Timer";
-import notes from "@/data/notes.json"; // List of courses
+import axios from "axios";
 
 interface Course {
-  id: string;
-  name: string;
-  code: string;
+  course_code: string;
+  title: string;
 }
 
 interface Question {
+  question_number: number;
   question: string;
-  options: string[];
-  correctAnswer: string;
+  options: { [key: string]: string };
+  correct_answer: string;
+  explanation: string;
 }
 
 interface Result {
-  total: number;
+  totalQuestions: number;
   attempted: number;
   correct: number;
   failed: number;
@@ -29,7 +30,15 @@ interface Result {
   percentage: string;
 }
 
-const courses: Course[] = notes;
+const courses: Course[] = [
+  { course_code: "CHM101", title: "Chemistry 101" },
+  { course_code: "PHY101", title: "Physics 101" },
+  { course_code: "YOR101", title: "Yoruba 101" },
+  { course_code: "MTH101", title: "Mathematics 101" },
+  { course_code: "COS101", title: "Computer Science 101" },
+  { course_code: "CSC103", title: "Computer Science 103" },
+  { course_code: "LIB101", title: "Library 101" },
+];
 
 const PastQuestions = () => {
   const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
@@ -40,23 +49,28 @@ const PastQuestions = () => {
   const [showResult, setShowResult] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Function to load past questions dynamically
-  const handleCourseSelect = async (courseCode: string) => {
-    setLoading(true);
-    setSelectedCourse(courseCode);
+  useEffect(() => {
+    if (selectedCourse) {
+      const fetchQuestions = async () => {
+        setIsLoading(true);
+        try {
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/questions/${selectedCourse}/`
+          );
+          setQuestions(response.data);
+        } catch (error) {
+          console.error("Error fetching questions:", error);
+          setQuestions([]);
+        } finally {
+          setIsLoading(false);
+        }
+      };
 
-    try {
-      const data = await import(`@/data/past-questions/${courseCode}.json`);
-      setQuestions(data.default || []);
-    } catch (error) {
-      console.error(`Error loading past questions for ${courseCode}:`, error);
-      setQuestions([]);
+      fetchQuestions();
     }
-
-    setLoading(false);
-  };
+  }, [selectedCourse]);
 
   const startTest = () => {
     setShowConfirmation(false);
@@ -73,27 +87,27 @@ const PastQuestions = () => {
   const calculateScore = () => {
     let correct = 0;
     let attempted = 0;
-    const total = questions.length;
+    const totalQuestions = questions.length;
 
-    questions.forEach((q, index) => {
-      if (userAnswers[index] !== undefined) {
+    questions.forEach((q) => {
+      if (userAnswers[q.question_number] !== undefined) {
         attempted++;
-        if (userAnswers[index] === q.correctAnswer) {
+        if (userAnswers[q.question_number] === q.correct_answer) {
           correct++;
         }
       }
     });
 
     const failed = attempted - correct;
-    const ignored = total - attempted;
-    const percentage = ((correct / total) * 100).toFixed(2);
+    const ignored = totalQuestions - attempted;
+    const percentage = ((correct / totalQuestions) * 100).toFixed(2);
 
-    setResult({ total, attempted, correct, failed, ignored, percentage });
+    setResult({ totalQuestions, attempted, correct, failed, ignored, percentage });
     setShowResult(true);
   };
 
-  const handleAnswerSelect = (questionIndex: number, answer: string) => {
-    setUserAnswers((prev) => ({ ...prev, [questionIndex]: answer }));
+  const handleAnswerSelect = (questionNumber: number, answer: string) => {
+    setUserAnswers((prev) => ({ ...prev, [questionNumber]: answer }));
   };
 
   return (
@@ -101,53 +115,60 @@ const PastQuestions = () => {
       <Header />
       <div className="px-10 lg:px-20 py-20">
         <h1 className="text-2xl font-bold">Past Questions</h1>
-
-        {/* Course Selection */}
         {!selectedCourse && (
           <div className="grid grid-cols-3 gap-4 mt-4">
             {courses.map((course) => (
               <div
-                key={course.code}
+                key={course.course_code}
                 className="p-4 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300"
-                onClick={() => handleCourseSelect(course.code)}
+                onClick={() => setSelectedCourse(course.course_code)}
               >
-                {course.name}
+                {course.title}
               </div>
             ))}
           </div>
         )}
 
-        {/* Loading State */}
-        {loading && <p className="mt-4 text-lg text-gray-500">Loading past questions...</p>}
-
-        {/* Start Test Button */}
-        {selectedCourse && !isTestStarted && !loading && (
-          <button
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
-            onClick={() => setShowConfirmation(true)}
-          >
-            Start Test
-          </button>
+        {selectedCourse && !isTestStarted && (
+          <div>
+            <button
+              className="mt-4 px-4 py-2 bg-gray-400 text-white rounded-lg"
+              onClick={() => setSelectedCourse(null)}
+            >
+              Back to Courses
+            </button>
+            <button
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+              onClick={() => setShowConfirmation(true)}
+            >
+              Start Test
+            </button>
+          </div>
         )}
 
-        {/* Quiz Questions */}
+        {isLoading && <div className="text-center mt-4">Loading...</div>}
+
         {isTestStarted && (
           <div>
             <Timer duration={timeLeft} onTimeUp={submitTest} />
             <div className="mt-4 space-y-4">
-              {questions.map((q, index) => (
-                <div key={index} className="p-4 border rounded-md">
+              {questions.map((q) => (
+                <div key={q.question_number} className="p-4 border rounded-md">
                   <p className="font-semibold">{q.question}</p>
                   <div className="space-y-2 mt-2">
-                    {q.options.map((option, i) => (
+                    {Object.entries(q.options).map(([optionKey, optionValue]) => (
                       <button
-                        key={i}
+                        key={optionKey}
                         className={`block w-full px-4 py-2 border rounded-md ${
-                          userAnswers[index] === option ? "bg-blue-300" : "bg-gray-100"
+                          userAnswers[q.question_number] === optionKey
+                            ? "bg-blue-300"
+                            : "bg-gray-100"
                         }`}
-                        onClick={() => handleAnswerSelect(index, option)}
+                        onClick={() =>
+                          handleAnswerSelect(q.question_number, optionKey)
+                        }
                       >
-                        {option}
+                        {optionValue}
                       </button>
                     ))}
                   </div>
@@ -163,14 +184,19 @@ const PastQuestions = () => {
           </div>
         )}
 
-        {/* Results Modal */}
         {showResult && result && (
-          <ResultModal result={result} onClose={() => setShowResult(false)} onReview={() => {}} />
+          <ResultModal
+            result={result}
+            onClose={() => setShowResult(false)}
+            onReview={() => {}}
+          />
         )}
 
-        {/* Confirmation Modal */}
         {showConfirmation && (
-          <ConfirmationModal onConfirm={startTest} onCancel={() => setShowConfirmation(false)} />
+          <ConfirmationModal
+            onConfirm={startTest}
+            onCancel={() => setShowConfirmation(false)}
+          />
         )}
       </div>
       <Footer />

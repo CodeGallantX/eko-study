@@ -29,7 +29,7 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [departmentFilter, setDepartmentFilter] = useState<string>("");
   const [filteredCourses, setFilteredCourses] = useState<Course[]>(courses);
-  const [showPastQuestions, setShowPastQuestions] = useState(false);
+  // const [showPastQuestions, setShowPastQuestions] = useState(false);
 
   const uniqueDepartments: string[] = Array.from(
     new Set(courses.flatMap((course) => course.departments))
