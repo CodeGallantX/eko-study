@@ -39,4 +39,4 @@ export default function ConfirmationModal({ onConfirm, onCancel }: ConfirmationM
       </motion.div>
     </motion.div>
   );
-}
+} 

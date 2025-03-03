@@ -34,4 +34,4 @@ export default function Timer({ duration, onTimeUp }: TimerProps) {
       Time Left: <span className="text-red-500">{formatTime(timeLeft)}</span>
     </div>
   );
-}
+} 

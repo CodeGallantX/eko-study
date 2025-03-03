@@ -73,4 +73,4 @@ export default function ResultModal({ result, onClose, onReview }: ResultModalPr
       </motion.div>
     </motion.div>
   );
-}
+} 

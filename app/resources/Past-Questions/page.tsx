@@ -1,64 +1,71 @@
-"use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-const PastQuestions = () => {
+const PastQuestions = ({ courseID }) => {
   const [questions, setQuestions] = useState([]);
-  const [filteredQuestions, setFilteredQuestions] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isTestStarted, setIsTestStarted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(900); // 15 minutes timer
+  const [isTimeUp, setIsTimeUp] = useState(false);
+  const [showResult, setShowResult] = useState(false);
+  const [score, setScore] = useState(0);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  
   useEffect(() => {
-    // Fetch past questions from JSON file or API
-    fetch("/past_questions.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setQuestions(data);
-        setFilteredQuestions(data);
-      })
-      .catch((error) => console.error("Error loading questions:", error));
-  }, []);
-
-  // Handle search
-  const handleSearch = (e) => {
-    const value = e.target.value.toLowerCase();
-    setSearchTerm(value);
-    const filtered = questions.filter((q) =>
-      q.question.toLowerCase().includes(value)
-    );
-    setFilteredQuestions(filtered);
+    fetch(`@/data/${courseID}.json`)
+      .then((res) => res.json())
+      .then((data) => setQuestions(data.questions))
+      .catch((err) => console.error("Failed to load questions", err));
+  }, [courseID]);
+  
+  useEffect(() => {
+    if (isTestStarted && timeLeft > 0) {
+      const timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
+      return () => clearInterval(timer);
+    } else if (timeLeft === 0) {
+      setIsTimeUp(true);
+      setShowResult(true);
+    }
+  }, [isTestStarted, timeLeft]);
+  
+  const startTest = () => {
+    setShowConfirmation(false);
+    setIsTestStarted(true);
   };
-
+  
+  const submitTest = () => {
+    setIsTestStarted(false);
+    setShowResult(true);
+    calculateScore();
+  };
+  
+  const calculateScore = () => {
+    let newScore = Math.floor(Math.random() * 100); // Placeholder score logic
+    setScore(newScore);
+  };
+  
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Past Questions</h1>
-      <input
-        type="text"
-        placeholder="Search questions..."
-        value={searchTerm}
-        onChange={handleSearch}
-        className="w-full p-2 border rounded mb-4"
-      />
-      <div className="space-y-4">
-        {filteredQuestions.length > 0 ? (
-          filteredQuestions.map((q, index) => (
-            <div key={index} className="border p-4 rounded">
-              <p className="font-semibold">{q.question}</p>
-              <ul className="mt-2">
-                {q.options.map((option, i) => (
-                  <li key={i} className="ml-4 list-disc">
-                    {option}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-2 text-green-600 font-semibold">Answer: {q.answer}</p>
-              {q.explanation && (
-                <p className="text-gray-600">Explanation: {q.explanation}</p>
-              )}
-            </div>
-          ))
-        ) : (
-          <p>No questions found.</p>
-        )}
-      </div>
+    <div>
+      <h1>Past Questions</h1>
+      {!isTestStarted && (
+        <div>
+          <input 
+            type="text" 
+            placeholder="Search questions..." 
+            value={searchTerm} 
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button onClick={() => setShowConfirmation(true)}>Start Test</button>
+        </div>
+      )}
+      {isTestStarted && (
+        <div>
+          <h2>Test in Progress</h2>
+          <Timer timeLeft={timeLeft} />
+          <button onClick={submitTest}>Submit Test</button>
+        </div>
+      )}
+      {showResult && <ResultModal score={score} onClose={() => setShowResult(false)} />}
+      {showConfirmation && <ConfirmationModal onConfirm={startTest} onCancel={() => setShowConfirmation(false)} />}
     </div>
   );
 };
