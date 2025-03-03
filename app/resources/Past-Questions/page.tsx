@@ -43,7 +43,7 @@ const PastQuestions = () => {
 
   useEffect(() => {
     if (selectedCourse) {
-      fetch(`/data/${selectedCourse}.json`)
+      fetch(`@/data/${selectedCourse}.json`)
         .then((res) => res.json())
         .then((data) => setQuestions(data.questions))
         .catch((err) => console.error("Failed to load questions", err));
@@ -97,9 +97,9 @@ const PastQuestions = () => {
           <div className="grid grid-cols-3 gap-4 mt-4">
             {courses.map((course) => (
               <div
-                key={course.id}
+                key={course.code}
                 className="p-4 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300"
-                onClick={() => setSelectedCourse(course.id)}
+                onClick={() => setSelectedCourse(course.code)}
               >
                 {course.name}
               </div>
