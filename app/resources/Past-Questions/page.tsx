@@ -41,14 +41,18 @@ const PastQuestions = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
 
-  useEffect(() => {
-    if (selectedCourse) {
-      fetch(`@/data/${selectedCourse}.json`)
-        .then((res) => res.json())
-        .then((data) => setQuestions(data.questions))
-        .catch((err) => console.error("Failed to load questions", err));
-    }
-  }, [selectedCourse]);
+  
+      useEffect(() => {
+        if (selectedCourse) {
+          console.log("Fetching:", `../../data/past-questions/${selectedCourse}.json`);
+          fetch(`../../data/past-questions/${selectedCourse}.json`)
+            .then((res) => res.json())
+            .then((data) => setQuestions(data.questions))
+            .catch((err) => console.error("Failed to load questions", err));
+        }
+      }, [selectedCourse]);
+      
+  
 
   const startTest = () => {
     setShowConfirmation(false);
