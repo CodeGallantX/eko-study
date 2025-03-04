@@ -33,9 +33,11 @@
   "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Mathematics", "Industrial Mathematics"],
   "lessons": 6,
   "youtubeLinks": [
-    "https://www.youtube.com/embed/bmsapLZM2Uo?si=CheipEmQtuhPz_Fz",
+    "https://www.youtube.com/embed/UZTvYYoOrmI?si=AhKVrZ6-qGxTIAUJ",
     "https://www.youtube.com/embed/dMn5w4_ztSw?si=k0kgUq6tw_rkEFUk",
-    "https://www.youtube.com/embed/6HIlT6oSvXc?si=Wvdjt_bcoOoBuRIx"
+    "https://www.youtube.com/embed/6HIlT6oSvXc?si=Wvdjt_bcoOoBuRIx",
+    "https://www.youtube.com/embed/bmsapLZM2Uo?si=CheipEmQtuhPz_Fz",
+    "https://www.youtube.com/embed/ZvL9aDGNHqA?si=dHxHDFypRwQK5DOu"
   ],
   "outline": [
     "Indices, Logarithms, and Surds.",
