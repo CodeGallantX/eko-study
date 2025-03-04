@@ -3,6 +3,7 @@
 // import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 // import ConfirmationModal from "@/components/ConfirmationModal";
 // import ResultModal from "@/components/ResultModal";
 // import Timer from "@/components/Timer";
@@ -213,7 +214,7 @@ export default function App () {
     <Header/>
     <div className="flex flex-col space-y-3 py-20 items-center justify-center px-10 lg:px-20">
     <h1 className="text-2xl">The page is currently being maintained. Check back later.</h1>
-    <a href="/" className="bg-green px-4 py-3 uppercase hover:bg-yellow transition-all duration-300 ease-in-out">Back to home</a>
+    <Link href="/" className="bg-green px-4 py-3 uppercase hover:bg-yellow transition-all duration-300 ease-in-out">Back to home</Link>
     </div>
     <Footer />
     </>

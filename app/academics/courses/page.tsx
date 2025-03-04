@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import Banner from "@/components/Banner";
 import Footer from "@/components/Footer";
 import VideoCarousel from "@/components/CourseVideos";
-import PastQuestions from "@/components/PastQuestions";
+// import PastQuestions from "@/components/PastQuestions";
 import coursesVideos from "@/data/notes.json";
 import { FaChevronLeft } from "react-icons/fa6"
 
