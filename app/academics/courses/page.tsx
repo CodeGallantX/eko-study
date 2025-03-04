@@ -162,14 +162,16 @@ export default function App() {
                     ))}
                   </ul>
                       
-
-                <Link
-                  className="mb-4 px-6 py-2 rounded bg-green text-white font-bold hover:bg-opacity-80 transition"
-                  href="/resources/notes"
-                >
-                  <FaChevronRight className="inline-block mr-1" />
+<div className="mt-3 py-6 px-4 flex flex-col items-start justify-center">
+  
+<Link
+className="mb-4 px-6 py-3 rounded bg-green text-white font-bold hover:bg-opacity-80 transition"
+href="/resources/notes"
+>
                   Access Notes
+<FaChevronRight className="inline-block ml-1" />
                 </Link>
+</div>
                 </div>
                 {/*
                 {selectedCourse && (
