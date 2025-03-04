@@ -104,13 +104,14 @@
   "departments": ["Computer Science", "Chemistry", "Industrial Chemistry", "Biochemistry"],
   "lessons": 9,
   "youtubeLinks": [
-    "https://www.youtube.com/embed/abc1",
-    "https://www.youtube.com/embed/abc2"
+    "https://www.youtube.com/embed/UMpEkZxeVcY?si=CitBqq0u0g1VBg02",
+    "https://www.youtube.com/embed/G91s61R4qhs?si=x-BBDA_ATvp0Plsh",
+    "https://www.youtube.com/embed/x3c1ih2NJEg?si=yYFeSw1g2FUR0VtK"
   ],
   "outline": [
-    "History of the iNternet",
-    "Overview of various INternet Technologies",
-    "Role of the internet in current society",
+    "History of the Internet and its significance in the modern world",
+    "An Overview of various Internet Technologies from e-mails to World Wide Web",
+    "Role of the internet in current society and the technologies availabe on the internet",
     "Internet Security and Online safety",
     "Introduction to the Internet",
     "Internet Design and Communication Protocols.",
