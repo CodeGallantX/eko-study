@@ -11,7 +11,7 @@ import { FaChevronLeft } from "react-icons/fa6"
 
 // Define Course Type
 interface Course {
-  id: string;
+  id: number; // Change from string to number
   name: string;
   code: string;
   description: string;
