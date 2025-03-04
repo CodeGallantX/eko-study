@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import VideoCarousel from "@/components/CourseVideos";
 // import PastQuestions from "@/components/PastQuestions";
 import coursesVideos from "@/data/notes.json";
+import Link from "next/link";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6"
 
 // Define Course Type
@@ -162,9 +163,9 @@ export default function App() {
                   </ul>
                       
 
-                <Linnk
+                <Link
                   className="mb-4 px-6 py-2 rounded bg-green text-white font-bold hover:bg-opacity-80 transition"
-                  href="/"
+                  href="/resources/notes"
                 >
                   <FaChevronRight className="inline-block mr-1" />
                   Access Notes
