@@ -186,6 +186,56 @@
 },
 {
   "id": 8,
+  "name": "Communication in English",
+  "code": "GST111",
+  "description": "Communication in English Language",
+  "lecturers": "",
+  "departments": ["Computer Science", "Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/abc1",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Sounds and sound patterns in English Language (vowels and consonants, phonetics, and phonology).",
+    "English Word Classes (Lexical and grammatical words, definitions, usages, collocations); Major word formation processes; The sentence in English (Types: structural and functional); Grammar and usage (tense, concord, and modality).",
+    "Reading and types of reading; Comprehension skills, SQ3R.",
+    "Logical and Critical Thinking; Reasoning methods (logic and syllogism, inductive and deductive arguments, analogy, generalisations and explanations.",
+    "Ethical consideration, copyright rules and infringements.",
+    "Writing activities (Pre-writing, Brainstorming, and Outlining), Writing (Paragraphing, Punctuation and Expression), Post Writing (Editing and Proofreading)",
+    "Types of Writing (Summary, Essays, Letter, Curriculum Vitae (CV), Report Writing, Note-making and Note-taking, e.t.c.)",
+    "Mechanics of writing (Information & Communication Technology in modern language learning",
+    "Language Skills for Effective Communication",
+    "The Art of Public Speaking"
+  ]
+},
+{
+  "id": 9,
+  "name": "Use of Library",
+  "code": "LASUSTECH-LIB101",
+  "description": "Use of Library Skills, ICT",
+  "lecturers": "",
+  "departments": ["Computer Science", "Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
+  "lessons": 7,
+  "youtubeLinks": [
+    "https://www.youtube.com/embed/abc1",
+    "https://www.youtube.com/embed/abc2"
+  ],
+  "outline": [
+    "Sounds and sound patterns in English Language (vowels and consonants, phonetics, and phonology).",
+    "English Word Classes (Lexical and grammatical words, definitions, usages, collocations); Major word formation processes; The sentence in English (Types: structural and functional); Grammar and usage (tense, concord, and modality).",
+    "Reading and types of reading; Comprehension skills, SQ3R.",
+    "Logical and Critical Thinking; Reasoning methods (logic and syllogism, inductive and deductive arguments, analogy, generalisations and explanations.",
+    "Ethical consideration, copyright rules and infringements.",
+    "Writing activities (Pre-writing, Brainstorming, and Outlining), Writing (Paragraphing, Punctuation and Expression), Post Writing (Editing and Proofreading)",
+    "Types of Writing (Summary, Essays, Letter, Curriculum Vitae (CV), Report Writing, Note-making and Note-taking, e.t.c.)",
+    "Mechanics of writing (Information & Communication Technology in modern language learning",
+    "Language Skills for Effective Communication",
+    "The Art of Public Speaking"
+  ]
+},
+{
+  "id": 10,
   "name": "Introduction to Zoology",
   "code": "ZOO101",
   "description": "Understanding complex numbers and their applications.",
@@ -215,7 +265,7 @@
   ]
 },
 {
-  "id": 9,
+  "id": 11,
   "name": "Computational ODE",
   "code": "MTH103",
   "description": "Understanding complex numbers and their applications.",
@@ -233,7 +283,7 @@
   ]
 },
 {
-  "id": 10,
+  "id": 12,
   "name": "Electronic Physics",
   "code": "PHY103",
   "description": "Understanding complex numbers and their applications.",
@@ -246,24 +296,6 @@
   ],
   "outline": [
     "Concept of Differential Equations",
-    "Computational Methods in getting Approximate Solutions",
-    "Electronic Configuration, Periodicity, and building-up of structure of solids"
-  ]
-},
-{
-  "id": 11,
-  "name": "Communication in English",
-  "code": "GST111",
-  "description": "Communication in English Language",
-  "lecturers": "",
-  "departments": ["Computer Science", "Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Concept of Differentail Equations",
     "Computational Methods in getting Approximate Solutions",
     "Electronic Configuration, Periodicity, and building-up of structure of solids"
   ]
