@@ -1,303 +1,364 @@
 [
   {
-  "id": 1,
-  "name": "General Physics I",
-  "code": "PHY101",
-  "description":
-    "Explore the laws of planetary motion and their significance in astronomy.",
-  "lecturers": "Dr. Oyeleke",
-  "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/WSqwzfEsC6I?si=LVmg3m5YEvp4s8cY",
-    "https://www.youtube.com/embed/w4QFJb9a8vo?si=snKMuhei5OHP2IuW",
-    "https://www.youtube.com/embed/7gf6YpdvtE0?si=ESQ0neeUklAbuex1",
-    "https://www.youtube.com/embed/Y-QOfc2XqOk?si=AB5HxnU4h85Wl4FS",
-    "https://www.youtube.com/embed/b-HZ1SZPaQw?si=QuTp950v0esErspq",
-    "https://www.youtube.com/embed/bpFK2VCRHUs?si=D732PMytUw5eagcu"
-  ],
-  "outline": [
-    "Kepler's First Law: Understanding elliptical orbits.",
-    "Kepler's Second Law: Areal velocity and planetary motion.",
-    "Kepler's Third Law: Orbital periods and distances.",
-    "Applications of Kepler's Laws in space missions.",
-    "Kepler's Laws and Newtonian Mechanics."
-  ]
-},
-{
-  "id": 2,
-  "name": "Elementary Mathematics I (Algebra and Trigonometry)",
-  "code": "MTH101",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "Dr. Idowu",
-  "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Mathematics", "Industrial Mathematics"],
-  "lessons": 6,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/UZTvYYoOrmI?si=AhKVrZ6-qGxTIAUJ",
-    "https://www.youtube.com/embed/dMn5w4_ztSw?si=k0kgUq6tw_rkEFUk",
-    "https://www.youtube.com/embed/6HIlT6oSvXc?si=Wvdjt_bcoOoBuRIx",
-    "https://www.youtube.com/embed/bmsapLZM2Uo?si=CheipEmQtuhPz_Fz",
-    "https://www.youtube.com/embed/ZvL9aDGNHqA?si=dHxHDFypRwQK5DOu"
-  ],
-  "outline": [
-    "Indices, Logarithms, and Surds.",
-    "Set Theory and the Use of Venn Diagram",
-    "Quadratic Equations",
-    "Trigonometric Functions.",
-    "Identify various types of numbers.",
-    "Polynomials",
-    "Binomial Theorem",
-    "Complex Numbers",
-    "Mathematical Induction.",
-    "Argand's Diagram.",
-    "De Moivre's Theorem"
-  ]
-},
-{
-  "id": 3,
-  "name": "Introduction to Computer Sciences",
-  "code": "COS101",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "Dr. Jerry Sarumi",
-  "departments": ["Statistics", "Computer Science", "Chemistry", "Industrial Chemistry", "Microbiology", "Industrial Mathematics", "Mathematics"],
-  "lessons": 6,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/abc1",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Indices, Logarithms, and Surds.",
-    "Set Theory and the Use of Venn Diagram",
-    "Quadratic Equations"
-  ]
-},
-{
-  "id": 4,
-  "name": "Descriptive Statistics",
-  "code": "STA111",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "",
-  "departments": ["Computer Science", "Chemistry", "Industrial Chemistry", "Biochemistry"],
-  "lessons": 9,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/VHYOuWu9jQI?si=ChKc04ppamMQHsM-",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Statistical Data",
-    "Presentation of Data",
-    "Errors and Approximation.",
-    "Frequency and Cummulative Distributions.",
-    "Measures of Location.",
-    "Measures of Partition.",
-    "Measures of Dispersion.",
-    "Measures of Kurtosis.",
-    "Measures of Rates, Ration and Index numbers."
-  ]
-},
-{
-  "id": 5,
-  "name": "Introduction to Internet Technology",
-  "code": "CSC103",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "",
-  "departments": ["Computer Science", "Chemistry", "Industrial Chemistry", "Biochemistry"],
-  "lessons": 9,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/UMpEkZxeVcY?si=CitBqq0u0g1VBg02",
-    "https://www.youtube.com/embed/G91s61R4qhs?si=x-BBDA_ATvp0Plsh",
-    "https://www.youtube.com/embed/x3c1ih2NJEg?si=yYFeSw1g2FUR0VtK"
-  ],
-  "outline": [
-    "History of the Internet and its significance in the modern world",
-    "An Overview of various Internet Technologies from e-mails to World Wide Web",
-    "Role of the internet in current society and the technologies availabe on the internet",
-    "Internet Security and Online safety",
-    "Introduction to the Internet",
-    "Internet Design and Communication Protocols.",
-    "Use of XHTML elements and CSS for static content and presentation",
-    "Technical requirements for efficient presentational structures"
-  ]
-},
-{
-  "id": 6,
-  "name": "General Chemistry I",
-  "code": "CHM101",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "",
-  "departments": ["Computer Science", "Chemistry", "Industrial Chemistry", "Biochemistry", "Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/jyvcVjrZnJA?si=iNszhb1jc5gZvFmk",
-    "https://www.youtube.com/embed/v3zK4NxoCkQ?si=qH5F7QtoAd9S6vCu",
-    "https://www.youtube.com/embed/UL1jmJaUkaQ?si=L4rI4Wyp2WGhgpSO",
-    "https://www.youtube.com/embed/J8GLj_armbA?si=47oD6kPDLc-hADOT",
-    "https://www.youtube.com/embed/Q9-JjyAEqnU?si=Lpp3HAn-CiKAweQI",
-    "https://www.youtube.com/embed/robEY-idcLU?si=YBAGlOeSE1Rt3LDV",
-    "https://www.youtube.com/embed/"
-  ],
-  "outline": [
-    "Atoms, Molecules, Elements, and Compounds",
-    "Modern Electronic Theory of Atom",
-    "Electronic Configuration, Periodicity, and building-up of structure of solids",
-    "Chemical Equations, and Stoichiometry",
-    "Hybridization, and Shapes of simple molecules",
-    "Valence Forces.",
-    "Structure of Solids",
-    "Chemical Bonding and Inter-molecular forces",
-    "Kinetic Theory of Matter",
-    "Elementary Thermochemistry",
-    "Rate of Reacts, Equilibrium, and Thermodynamics",
-    "Acids, Bases, and Salts",
-    "Properties of gases",
-    "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
-    "Radioactivity"
-  ]
-},
-{
-  "id": 7,
-  "name": "General Biology I",
-  "code": "BIO101",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "",
-  "departments": ["Microbiology", "Chemistry", "Industrial Chemistry", "Biochemistry", "Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Atoms, Molecules, Elements, and Compounds",
-    "Modern Electronic Theory of Atom",
-    "Electronic Configuration, Periodicity, and building-up of structure of solids",
-    "Chemical Equations, and Stoichiometry",
-    "Hybridization, and Shapes of simple molecules",
-    "Valence Forces.",
-    "Structure of Solids",
-    "Chemical Bonding and Inter-molecular forces",
-    "Kinetic Theory of Matter",
-    "Elementary Thermochemistry",
-    "Rate of Reacts, Equilibrium, and Thermodynamics",
-    "Acids, Bases, and Salts",
-    "Properties of gases",
-    "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
-    "Radioactivity"
-  ]
-},
-{
-  "id": 8,
-  "name": "Communication in English",
-  "code": "GST111",
-  "description": "Communication in English Language",
-  "lecturers": "",
-  "departments": ["Computer Science", "Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/abc1",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Sounds and sound patterns in English Language (vowels and consonants, phonetics, and phonology).",
-    "English Word Classes (Lexical and grammatical words, definitions, usages, collocations); Major word formation processes; The sentence in English (Types: structural and functional); Grammar and usage (tense, concord, and modality).",
-    "Reading and types of reading; Comprehension skills, SQ3R.",
-    "Logical and Critical Thinking; Reasoning methods (logic and syllogism, inductive and deductive arguments, analogy, generalisations and explanations.",
-    "Ethical consideration, copyright rules and infringements.",
-    "Writing activities (Pre-writing, Brainstorming, and Outlining), Writing (Paragraphing, Punctuation and Expression), Post Writing (Editing and Proofreading)",
-    "Types of Writing (Summary, Essays, Letter, Curriculum Vitae (CV), Report Writing, Note-making and Note-taking, e.t.c.)",
-    "Mechanics of writing (Information & Communication Technology in modern language learning",
-    "Language Skills for Effective Communication",
-    "The Art of Public Speaking"
-  ]
-},
-{
-  "id": 9,
-  "name": "Use of Library",
-  "code": "LASUSTECH-LIB101",
-  "description": "Use of Library Skills, ICT",
-  "lecturers": "",
-  "departments": ["Computer Science", "Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/abc1",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Sounds and sound patterns in English Language (vowels and consonants, phonetics, and phonology).",
-    "English Word Classes (Lexical and grammatical words, definitions, usages, collocations); Major word formation processes; The sentence in English (Types: structural and functional); Grammar and usage (tense, concord, and modality).",
-    "Reading and types of reading; Comprehension skills, SQ3R.",
-    "Logical and Critical Thinking; Reasoning methods (logic and syllogism, inductive and deductive arguments, analogy, generalisations and explanations.",
-    "Ethical consideration, copyright rules and infringements.",
-    "Writing activities (Pre-writing, Brainstorming, and Outlining), Writing (Paragraphing, Punctuation and Expression), Post Writing (Editing and Proofreading)",
-    "Types of Writing (Summary, Essays, Letter, Curriculum Vitae (CV), Report Writing, Note-making and Note-taking, e.t.c.)",
-    "Mechanics of writing (Information & Communication Technology in modern language learning",
-    "Language Skills for Effective Communication",
-    "The Art of Public Speaking"
-  ]
-},
-{
-  "id": 10,
-  "name": "Introduction to Zoology",
-  "code": "ZOO101",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "",
-  "departments": ["Microbiology", "Zoology", "Biochemistry"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Atoms, Molecules, Elements, and Compounds",
-    "Modern Electronic Theory of Atom",
-    "Electronic Configuration, Periodicity, and building-up of structure of solids",
-    "Chemical Equations, and Stoichiometry",
-    "Hybridization, and Shapes of simple molecules",
-    "Valence Forces.",
-    "Structure of Solids",
-    "Chemical Bonding and Inter-molecular forces",
-    "Kinetic Theory of Matter",
-    "Elementary Thermochemistry",
-    "Rate of Reacts, Equilibrium, and Thermodynamics",
-    "Acids, Bases, and Salts",
-    "Properties of gases",
-    "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
-    "Radioactivity"
-  ]
-},
-{
-  "id": 11,
-  "name": "Computational ODE",
-  "code": "MTH103",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "",
-  "departments": ["Statistics", "Mathematics", "Industrial Mathematics", "Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Concept of Differential Equations",
-    "Computational Methods in getting Approximate Solutions",
-    "Electronic Configuration, Periodicity, and building-up of structure of solids"
-  ]
-},
-{
-  "id": 12,
-  "name": "Electronic Physics",
-  "code": "PHY103",
-  "description": "Understanding complex numbers and their applications.",
-  "lecturers": "",
-  "departments": ["Physics with Electronics"],
-  "lessons": 7,
-  "youtubeLinks": [
-    "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
-    "https://www.youtube.com/embed/abc2"
-  ],
-  "outline": [
-    "Concept of Differential Equations",
-    "Computational Methods in getting Approximate Solutions",
-    "Electronic Configuration, Periodicity, and building-up of structure of solids"
-  ]
-}
+    "id": 1,
+    "name": "General Physics I",
+    "code": "PHY101",
+    "description": "Explore the laws of planetary motion and their significance in astronomy.",
+    "lecturers": "Dr. Oyeleke",
+    "departments": [
+      "Statistics",
+      "Computer Science",
+      "Chemistry",
+      "Industrial Chemistry",
+      "Physics with Electronics"
+    ],
+    "lessons": 7,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/WSqwzfEsC6I?si=LVmg3m5YEvp4s8cY",
+      "https://www.youtube.com/embed/w4QFJb9a8vo?si=snKMuhei5OHP2IuW",
+      "https://www.youtube.com/embed/7gf6YpdvtE0?si=ESQ0neeUklAbuex1",
+      "https://www.youtube.com/embed/Y-QOfc2XqOk?si=AB5HxnU4h85Wl4FS",
+      "https://www.youtube.com/embed/b-HZ1SZPaQw?si=QuTp950v0esErspq",
+      "https://www.youtube.com/embed/bpFK2VCRHUs?si=D732PMytUw5eagcu"
+    ],
+    "outline": [
+      "Kepler's First Law: Understanding elliptical orbits.",
+      "Kepler's Second Law: Areal velocity and planetary motion.",
+      "Kepler's Third Law: Orbital periods and distances.",
+      "Applications of Kepler's Laws in space missions.",
+      "Kepler's Laws and Newtonian Mechanics."
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Elementary Mathematics I (Algebra and Trigonometry)",
+    "code": "MTH101",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "Dr. Idowu",
+    "departments": [
+      "Statistics",
+      "Computer Science",
+      "Chemistry",
+      "Industrial Chemistry",
+      "Mathematics",
+      "Industrial Mathematics"
+    ],
+    "lessons": 6,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/UZTvYYoOrmI?si=AhKVrZ6-qGxTIAUJ",
+      "https://www.youtube.com/embed/dMn5w4_ztSw?si=k0kgUq6tw_rkEFUk",
+      "https://www.youtube.com/embed/6HIlT6oSvXc?si=Wvdjt_bcoOoBuRIx",
+      "https://www.youtube.com/embed/bmsapLZM2Uo?si=CheipEmQtuhPz_Fz",
+      "https://www.youtube.com/embed/ZvL9aDGNHqA?si=dHxHDFypRwQK5DOu"
+    ],
+    "outline": [
+      "Indices, Logarithms, and Surds.",
+      "Set Theory and the Use of Venn Diagram",
+      "Quadratic Equations",
+      "Trigonometric Functions.",
+      "Identify various types of numbers.",
+      "Polynomials",
+      "Binomial Theorem",
+      "Complex Numbers",
+      "Mathematical Induction.",
+      "Argand's Diagram.",
+      "De Moivre's Theorem"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Introduction to Computer Sciences",
+    "code": "COS101",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "Dr. Jerry Sarumi",
+    "departments": [
+      "Statistics",
+      "Computer Science",
+      "Chemistry",
+      "Industrial Chemistry",
+      "Microbiology",
+      "Industrial Mathematics",
+      "Mathematics"
+    ],
+    "lessons": 6,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/abc1",
+      "https://www.youtube.com/embed/abc2"
+    ],
+    "outline": [
+      "Indices, Logarithms, and Surds.",
+      "Set Theory and the Use of Venn Diagram",
+      "Quadratic Equations"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Descriptive Statistics",
+    "code": "STA111",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "",
+    "departments": [
+      "Computer Science",
+      "Chemistry",
+      "Industrial Chemistry",
+      "Biochemistry"
+    ],
+    "lessons": 9,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/VHYOuWu9jQI?si=ChKc04ppamMQHsM-",
+      "https://www.youtube.com/embed/abc2"
+    ],
+    "outline": [
+      "Statistical Data",
+      "Presentation of Data",
+      "Errors and Approximation.",
+      "Frequency and Cummulative Distributions.",
+      "Measures of Location.",
+      "Measures of Partition.",
+      "Measures of Dispersion.",
+      "Measures of Kurtosis.",
+      "Measures of Rates, Ration and Index numbers."
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Introduction to Internet Technology",
+    "code": "CSC103",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "",
+    "departments": [
+      "Computer Science",
+      "Chemistry",
+      "Industrial Chemistry",
+      "Biochemistry"
+    ],
+    "lessons": 9,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/UMpEkZxeVcY?si=CitBqq0u0g1VBg02",
+      "https://www.youtube.com/embed/G91s61R4qhs?si=x-BBDA_ATvp0Plsh",
+      "https://www.youtube.com/embed/x3c1ih2NJEg?si=yYFeSw1g2FUR0VtK"
+    ],
+    "outline": [
+      "History of the Internet and its significance in the modern world",
+      "An Overview of various Internet Technologies from e-mails to World Wide Web",
+      "Role of the internet in current society and the technologies availabe on the internet",
+      "Internet Security and Online safety",
+      "Introduction to the Internet",
+      "Internet Design and Communication Protocols.",
+      "Use of XHTML elements and CSS for static content and presentation",
+      "Technical requirements for efficient presentational structures"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "General Chemistry I",
+    "code": "CHM101",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "",
+    "departments": [
+      "Computer Science",
+      "Chemistry",
+      "Industrial Chemistry",
+      "Biochemistry",
+      "Physics with Electronics"
+    ],
+    "lessons": 7,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/jyvcVjrZnJA?si=iNszhb1jc5gZvFmk",
+      "https://www.youtube.com/embed/v3zK4NxoCkQ?si=qH5F7QtoAd9S6vCu",
+      "https://www.youtube.com/embed/UL1jmJaUkaQ?si=L4rI4Wyp2WGhgpSO",
+      "https://www.youtube.com/embed/J8GLj_armbA?si=47oD6kPDLc-hADOT",
+      "https://www.youtube.com/embed/Q9-JjyAEqnU?si=Lpp3HAn-CiKAweQI",
+      "https://www.youtube.com/embed/robEY-idcLU?si=YBAGlOeSE1Rt3LDV",
+      "https://www.youtube.com/embed/"
+    ],
+    "outline": [
+      "Atoms, Molecules, Elements, and Compounds",
+      "Modern Electronic Theory of Atom",
+      "Electronic Configuration, Periodicity, and building-up of structure of solids",
+      "Chemical Equations, and Stoichiometry",
+      "Hybridization, and Shapes of simple molecules",
+      "Valence Forces.",
+      "Structure of Solids",
+      "Chemical Bonding and Inter-molecular forces",
+      "Kinetic Theory of Matter",
+      "Elementary Thermochemistry",
+      "Rate of Reacts, Equilibrium, and Thermodynamics",
+      "Acids, Bases, and Salts",
+      "Properties of gases",
+      "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
+      "Radioactivity"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "General Biology I",
+    "code": "BIO101",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "",
+    "departments": [
+      "Microbiology",
+      "Chemistry",
+      "Industrial Chemistry",
+      "Biochemistry",
+      "Physics with Electronics"
+    ],
+    "lessons": 7,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+      "https://www.youtube.com/embed/abc2"
+    ],
+    "outline": [
+      "Atoms, Molecules, Elements, and Compounds",
+      "Modern Electronic Theory of Atom",
+      "Electronic Configuration, Periodicity, and building-up of structure of solids",
+      "Chemical Equations, and Stoichiometry",
+      "Hybridization, and Shapes of simple molecules",
+      "Valence Forces.",
+      "Structure of Solids",
+      "Chemical Bonding and Inter-molecular forces",
+      "Kinetic Theory of Matter",
+      "Elementary Thermochemistry",
+      "Rate of Reacts, Equilibrium, and Thermodynamics",
+      "Acids, Bases, and Salts",
+      "Properties of gases",
+      "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
+      "Radioactivity"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Communication in English",
+    "code": "GST111",
+    "description": "Communication in English Language",
+    "lecturers": "",
+    "departments": [
+      "Computer Science",
+      "Statistics",
+      "Mathematics",
+      "Industrial Mathematics",
+      "Physics with Electronics"
+    ],
+    "lessons": 7,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/abc1",
+      "https://www.youtube.com/embed/abc2"
+    ],
+    "outline": [
+      "Sounds and sound patterns in English Language (vowels and consonants, phonetics, and phonology).",
+      "English Word Classes (Lexical and grammatical words, definitions, usages, collocations); Major word formation processes; The sentence in English (Types: structural and functional); Grammar and usage (tense, concord, and modality).",
+      "Reading and types of reading; Comprehension skills, SQ3R.",
+      "Logical and Critical Thinking; Reasoning methods (logic and syllogism, inductive and deductive arguments, analogy, generalisations and explanations.",
+      "Ethical consideration, copyright rules and infringements.",
+      "Writing activities (Pre-writing, Brainstorming, and Outlining), Writing (Paragraphing, Punctuation and Expression), Post Writing (Editing and Proofreading)",
+      "Types of Writing (Summary, Essays, Letter, Curriculum Vitae (CV), Report Writing, Note-making and Note-taking, e.t.c.)",
+      "Mechanics of writing (Information & Communication Technology in modern language learning",
+      "Language Skills for Effective Communication",
+      "The Art of Public Speaking"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Use of Library",
+    "code": "LASUSTECH-LIB101",
+    "description": "Use of Library Skills, ICT",
+    "lecturers": "",
+    "departments": [
+      "Computer Science",
+      "Statistics",
+      "Mathematics",
+      "Industrial Mathematics",
+      "Physics with Electronics",
+      "Microbiology"
+    ],
+    "lessons": 7,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/abc1",
+      "https://www.youtube.com/embed/abc2"
+    ],
+    "outline": [
+      "Meaning of Library",
+      "History of Library",
+      "Types of Libraries",
+      "Library and Education",
+      "Library Services",
+      "Organization of Information Materials",
+      "Information Sources & Reference Materials",
+      "Library Automation",
+      "Citations and Research",
+      "Copyright",
+      "Anatomy of Book"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Introduction to Zoology",
+    "code": "ZOO101",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "",
+    "departments": ["Microbiology", "Zoology", "Biochemistry"],
+    "lessons": 7,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+      "https://www.youtube.com/embed/abc2"
+    ],
+    "outline": [
+      "Atoms, Molecules, Elements, and Compounds",
+      "Modern Electronic Theory of Atom",
+      "Electronic Configuration, Periodicity, and building-up of structure of solids",
+      "Chemical Equations, and Stoichiometry",
+      "Hybridization, and Shapes of simple molecules",
+      "Valence Forces.",
+      "Structure of Solids",
+      "Chemical Bonding and Inter-molecular forces",
+      "Kinetic Theory of Matter",
+      "Elementary Thermochemistry",
+      "Rate of Reacts, Equilibrium, and Thermodynamics",
+      "Acids, Bases, and Salts",
+      "Properties of gases",
+      "RedOx reactions, and Introduction to Electrochemistry(Electrolysis)",
+      "Radioactivity"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Computational ODE",
+    "code": "MTH103",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "",
+    "departments": [
+      "Statistics",
+      "Mathematics",
+      "Industrial Mathematics",
+      "Physics with Electronics"
+    ],
+    "lessons": 7,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+      "https://www.youtube.com/embed/abc2"
+    ],
+    "outline": [
+      "Concept of Differential Equations",
+      "Computational Methods in getting Approximate Solutions",
+      "Electronic Configuration, Periodicity, and building-up of structure of solids"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Electronic Physics",
+    "code": "PHY103",
+    "description": "Understanding complex numbers and their applications.",
+    "lecturers": "",
+    "departments": ["Physics with Electronics"],
+    "lessons": 7,
+    "youtubeLinks": [
+      "https://www.youtube.com/embed/mcEV3m9SG9M?si=Om46u71vGJqQ_SOJ",
+      "https://www.youtube.com/embed/abc2"
+    ],
+    "outline": [
+      "Concept of Differential Equations",
+      "Computational Methods in getting Approximate Solutions",
+      "Electronic Configuration, Periodicity, and building-up of structure of solids"
+    ]
+  }
 ]
