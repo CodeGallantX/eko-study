@@ -16,13 +16,13 @@ const merriweather = Merriweather({
   weight: ["300", "400", "700", "900"],
 });
 
-export const metadata = {
-  title: "EkoStudy - The Ultimate Academic Hub",
-  description:
-    "EkoStudy is the ultimate online resource for students of Lagos State University of Science and Technology (LASUSTECH), Ikorodu; offering an extensive collection of lecture notes, study guides, and interactive courses across various departments. Designed to support and enhance academic success, EkoStudy provides everything you need to excel in your studies, from comprehensive materials to engaging learning tools.",
-  keywords:
-    "LASUSTECH pre-degree, LASUSTECH departments, study resources, pre-degree exam resources, EkoStudy online courses, LASUSTECH students study platform, EkoStudy,online study resources LASUSTECH,pre-degree study guides,interactive courses for LASUSTECH students,academic success tools,comprehensive lecture notes online,study materials for LASUSTECH,EkoStudy learning tools,enhance academic performance,LASUSTECH departments study resources,online learning platform for LASUSTECH,study support for pre-degree students,EkoStudy courses,educational resources for pre-degree,LASUSTECH pre-degree preparation,LASUSTECH academic resources,LASUSTECH exam resources,LASUSTECH lecture notes,virtual learning for LASUSTECH students,study aids for LASUSTECH students,EkoStudy study guides,academic enhancement tools LASUSTECH,EkoStudy interactive learning, online academic success LASUSTECH,EkoStudy education support,departmental guides LASUSTECH,pre-degree coursework help",
-};
+// export const metadata = {
+//   title: "EkoStudy - The Ultimate Academic Hub",
+//   description:
+//     "EkoStudy is the ultimate online resource for students of Lagos State University of Science and Technology (LASUSTECH), Ikorodu; offering an extensive collection of lecture notes, study guides, and interactive courses across various departments. Designed to support and enhance academic success, EkoStudy provides everything you need to excel in your studies, from comprehensive materials to engaging learning tools.",
+//   keywords:
+//     "LASUSTECH pre-degree, LASUSTECH departments, study resources, pre-degree exam resources, EkoStudy online courses, LASUSTECH students study platform, EkoStudy,online study resources LASUSTECH,pre-degree study guides,interactive courses for LASUSTECH students,academic success tools,comprehensive lecture notes online,study materials for LASUSTECH,EkoStudy learning tools,enhance academic performance,LASUSTECH departments study resources,online learning platform for LASUSTECH,study support for pre-degree students,EkoStudy courses,educational resources for pre-degree,LASUSTECH pre-degree preparation,LASUSTECH academic resources,LASUSTECH exam resources,LASUSTECH lecture notes,virtual learning for LASUSTECH students,study aids for LASUSTECH students,EkoStudy study guides,academic enhancement tools LASUSTECH,EkoStudy interactive learning, online academic success LASUSTECH,EkoStudy education support,departmental guides LASUSTECH,pre-degree coursework help",
+// };
 
 type RootLayoutProps = {
   children: ReactNode;
@@ -47,26 +47,31 @@ export default function RootLayout({ children }: RootLayoutProps) {
       />
       <Head>
         <meta name="title" content="EkoStudy - The Ultimate Academic Hub" />
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-        <meta name="author" content="John Samuel" />
-        <meta name="robots" content="index, follow" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="language" content="English" />
+        <title>EkoStudy: Your Gateway to Academic Excellence at LASUSTECH</title>
+<meta name="title" content="EkoStudy"/>
+<meta name="description" content="EkoStudy is the ultimate online resource for students of Lagos State University of Science and Technology (LASUSTECH), Ikorodu; offering an extensive collection of lecture notes, study guides, and interactive courses across various departments. Designed to support and enhance academic success, EkoStudy provides everything you need to excel in your studies, from comprehensive materials to engaging learning tools."/>
+<meta name="keywords" content="LASUSTECH pre-degree, LASUSTECH study resources, LASUSTECH departments study resources, pre-degree exam resources, EkoStudy online courses, LASUSTECH students study platform, EkoStudy,online study resources LASUSTECH,pre-degree study guides,interactive courses for LASUSTECH students,academic success tools,LASUSTECH comprehensive lecture notes online,study materials for LASUSTECH,EkoStudy learning tools,enhance academic performance,LASUSTECH departments study resources,online learning platform for LASUSTECH,study support for pre-degree students,EkoStudy courses,educational resources for pre-degree,LASUSTECH pre-degree preparation,EkoStudy academic resources,pre-degree exam resources,EkoStudy lecture notes,virtual learning for LASUSTECH students,study aids for LASUSTECH students,EkoStudy study guides,academic enhancement tools LASUSTECH,EkoStudy interactive learning,online academic success LASUSTECH,EkoStudy education support,departmental guides LASUSTECH,LASUSTECH Past Questions, LASUSTECH Online learning platform."/>
+<meta name="robots" content="index, follow"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="language" content="English"/>
+<meta name="author" content="John Samuel"/>
 
-        {/* Open Graph Meta Tags */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ekostudy.vercel.app/" />
-        <meta property="og:title" content="EkoStudy: Your Gateway to Academic Excellence at LASUSTECH" />
-        <meta property="og:description" content={metadata.description} />
-        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png" />
+<meta name="title" content="EkoStudy: Your Gateway to Academic Excellence at LASUSTECH" />
+<meta name="description" content="EkoStudy is the premier online platform tailored for LASUSTECH students. Offering a comprehensive collection of lecture notes, study materials, and interactive courses across various departments, EkoStudy is designed to enhance your learning experience. Stay updated with the latest lectures, master critical concepts, and prepare effectively for your Computer-Based Tests (CBTs). Join your peers on EkoStudy to elevate your academic journey and achieve your educational goals with ease and confidence." />
 
-        {/* Twitter Meta Tags */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://ekostudy.vercel.app/" />
-        <meta property="twitter:title" content="EkoStudy: Your Gateway to Academic Excellence at LASUSTECH" />
-        <meta property="twitter:description" content={metadata.description} />
-        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png" />
+{/* <!-- Open Graph / Facebook --> */}
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://eko-study.vercel.app/" />
+<meta property="og:title" content="EkoStudy: Your Gateway to Academic Excellence at LASUSTECH" />
+<meta property="og:description" content="EkoStudy is the premier online platform tailored for LASUSTECH students. Offering a comprehensive collection of lecture notes, study materials, and interactive courses across various departments, EkoStudy is designed to enhance your learning experience. Stay updated with the latest lectures, master critical concepts, and prepare effectively for your Computer-Based Tests (CBTs). Join your peers on EkoStudy to elevate your academic journey and achieve your educational goals with ease and confidence." />
+<meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png" />
+
+{/* <!-- Twitter --> */}
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://ek-ostudy.vercel.app/" />
+<meta property="twitter:title" content="EkoStudy: Your Gateway to Academic Excellence at LASUSTECH" />
+<meta property="twitter:description" content="EkoStudy is the premier online platform tailored for LASUSTECH students. Offering a comprehensive collection of lecture notes, study materials, and interactive courses across various departments, EkoStudy is designed to enhance your learning experience. Stay updated with the latest lectures, master critical concepts, and prepare effectively for your Computer-Based Tests (CBTs). Join your peers on EkoStudy to elevate your academic journey and achieve your educational goals with ease and confidence." />
+<meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png" />
       </Head>
       <body className={`${outfit.variable} ${merriweather.variable} antialiased`}>
         {children}
