@@ -1,8 +1,9 @@
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Banner from "@/components/Banner";
 import Preloader from "@/components/Preloader";
-import { FaXTwitter, FaFacebookF, FaYoutube, FaEnvelope, FaPhone } from "react-icons/fa6";
+import { FaXTwitter, FaFacebookF, FaYoutube, FaEnvelope} from "react-icons/fa6";
 
 export default function App() {
   const page = {
@@ -26,28 +27,20 @@ export default function App() {
           <div className="flex flex-col text-[18px] lg:text-2xl xl:text-[28px] gap-3">
             <a href="mailto:johnayobami77@proton.me" className="flex flex-row items-center group">
               <FaEnvelope />
-              <span className="ml-4 group-hover:text-[#92B76D] transition-all duration-300 ease-in-out">johnayobami77@proton.me</span>
+              <span className="ml-4 group-hover:text-[#92B76D] transition-all duration-300 ease-in-out">contact@ekostudy.io</span>
             </a>
-            <a href="tel:+2348096044860" className="flex flex-row items-center group">
-              <FaPhone />
-              <span className="ml-4 group-hover:text-[#92B76D] transition-all duration-300 ease-in-out">+234 809 604 4860</span>
-            </a>
-            <a href="tel:+2348067954912" className="flex flex-row items-center group">
-              <FaPhone />
-              <span className="ml-4 group-hover:text-[#92B76D] transition-all duration-300 ease-in-out">+234 806 795 4912</span>
-            </a>
-            <a href="https://facebook.com" target="_blank" className="flex flex-row items-center group">
+            <Link href="https://facebook.com" target="_blank" className="flex flex-row items-center group">
               <FaFacebookF />
               <span className="ml-4 group-hover:text-[#92B76D] transition-all duration-300 ease-in-out">EkoStudy</span>
-            </a>
-            <a href="https://x.com" target="_blank" className="flex flex-row items-center group">
+            </Link>
+            <Link href="https://x.com" target="_blank" className="flex flex-row items-center group">
               <FaXTwitter />
               <span className="ml-4 group-hover:text-[#92B76D] transition-all duration-300 ease-in-out">EkoStudy</span>
-            </a>
-            <a href="https://youtube.com" target="_blank" className="flex flex-row items-center group">
+            </Link>
+            <Link href="https://youtube.com" target="_blank" className="flex flex-row items-center group">
               <FaYoutube />
               <span className="ml-4 group-hover:text-[#92B76D] transition-all duration-300 ease-in-out">EkoStudy_Vlog</span>
-            </a>
+            </Link>
           </div>
         </div>
         <iframe
