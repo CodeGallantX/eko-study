@@ -149,7 +149,7 @@ export default function Header() {
               label: "RESOURCES",
               submenu: [
                 // { label: "Book Store", href: "/resources/book-store" },
-                { label: "Notes & PQs", href: "/resources/notes" },
+                { label: "Notes", href: "/resources/notes" },
                 { label: "Past Questions", href: "/resources/Past-Questions" },
                 // { label: "CBT", href: "/resources/cbt" },
                 { label: "Products", href: "/resources/products" },

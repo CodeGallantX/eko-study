@@ -1,5 +1,14 @@
 [
     {
+      "id": 10,
+      "title": "General Mathematics",
+      "code": " MTH101",
+      "college": "College of Basic Science",
+      "department": "Computer Science",
+      "level": "100",
+      "url": "/MTH101(EkoStudy).pdf"
+    },
+    {
       "id": 1,
       "title": "Introduction to Computer Science",
       "code": "COS101",
@@ -7,6 +16,15 @@
       "department": "Computer Science",
       "level": "100",
       "url": "/COS_101.pdf"
+    },
+    {
+      "id": 9,
+      "title": "Descriptive Statistics",
+      "code": "STA111",
+      "college": "College of Basic Science",
+      "department": "Statistics",
+      "level": "100",
+      "url": "/STA111(EkoStudy).pdf"
     },
     {
       "id": 2,
@@ -62,7 +80,7 @@
       "college": "College of Basic Science",
       "department": "Industrial Chemistry",
       "level": "100",
-      "url": "/LIB_101(Ekkostudy).pdf"
+      "url": "/LIB_101(Ekostudy).pdf"
     },
     {
       "id": 8,
