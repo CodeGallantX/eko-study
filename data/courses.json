@@ -8,6 +8,15 @@
       "level": "100",
       "url": "/MTH101(EkoStudy).pdf"
     },
+  {
+    "id": 8,
+    "title": "General Chemistry I",
+    "code": "CHM101",
+    "college": "College of Basic Science",
+    "department": "Industrial Chemistry",
+    "level": "100",
+    "url": "/CHM_101(Ekostudy).pdf"
+  }
     {
       "id": 1,
       "title": "Introduction to Computer Science",
@@ -81,15 +90,6 @@
       "department": "Industrial Chemistry",
       "level": "100",
       "url": "/LIB_101(Ekostudy).pdf"
-    },
-    {
-      "id": 8,
-      "title": "General Chemistry I",
-      "code": "CHM101",
-      "college": "College of Basic Science",
-      "department": "Industrial Chemistry",
-      "level": "100",
-      "url": "/CHM_101(Ekostudy).pdf"
     }
   ]
   
