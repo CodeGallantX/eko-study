@@ -27,11 +27,12 @@ export default async function CollegesPage() {
     <>
       <Preloader />
       <Header />
-      <Banner page={{ title: "Colleges", breadcrumb: [{ name: "Colleges", path: "/colleges" }] }} />
+      <Banner page={{ title: "Colleges", breadcrumb: [{ name: "Colleges", path: "/academics/colleges" }] }} />
       <div className="min-h-screen px-6 lg:px-24 py-10 bg-white">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {colleges.map((college) => (
-            <Link key={college.slug} href={`/colleges/${college.slug}`}>
+            // <Link key={college.slug} href={`/colleges/${college.slug}`}>
+            <Link key={college.slug} href="">
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer">
                 <img src={college.image} alt={college.name} className="w-full h-48 object-cover" />
                 <div className="p-4">

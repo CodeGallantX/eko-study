@@ -44,20 +44,20 @@ const Footer: React.FC = () => {
                                 <li><Link href="/about">About Us</Link></li>
                                 <li><Link href="/academics/courses">Courses</Link></li>
                                 <li><Link href="/blog">Blog</Link></li>
-                                <li><Link href="/instructor">Become an Instructor</Link></li>
-                                <li><Link href="/events">Events</Link></li>
+                                <li><Link href="/#">Become an Instructor</Link></li>
+                                <li><Link href="/#">Events</Link></li>
                                 <li><Link href="/contact">Contact</Link></li>
                             </ul>
                         </div>
                         <div className="flex flex-col gap-6 w-full">
                             <h3 className="text-[#92B76D] font-bold text-base">LINKS</h3>
                             <ul className="space-y-1">
-                                <li><Link href="/partners">Be a Partner</Link></li>
+                                <li><Link href="/#">Be a Partner</Link></li>
                                 <li><Link href="/academics/colleges">Colleges</Link></li>
                                 <li><Link href="#">Campus Tour</Link></li>
                                 <li><Link href="#">Help Center</Link></li>
-                                <li><Link href="/resources">Resources</Link></li>
-                                <li><Link href="/donate">Donate</Link></li>
+                                <li><Link href="#">Resources</Link></li>
+                                <li><Link href="#">Donate</Link></li>
                             </ul>
                         </div>
                     </div>
