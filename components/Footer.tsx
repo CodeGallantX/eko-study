@@ -25,11 +25,6 @@ const Footer: React.FC = () => {
                         <div className="flex flex-col gap-6 w-full">
                             <h3 className="text-[#92B76D] font-bold text-base">OUR OFFICE</h3>
                             <p>EkoStudy, 104101 Ikorodu, <br /> Lagos.</p>
-                            {/* <div className='flex flex-col gap-1 mt-2 lg:mt-0'>
-                                <Link href="tel:+2348096044860" className="flex flex-row items-center">
-                                    <Phone size={20} />
-                                    <span className="ml-2">+234 809 604 4860</span>
-                                </Link> */}
                                 <Link href="mailto:ekostudy-73bec1@smtpexpress.email" className="flex flex-row items-center">
                                     <Mail size={20} />
                                     <span className="ml-2">contact@ekostudy.io</span>
