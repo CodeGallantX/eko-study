@@ -1,13 +1,34 @@
-import Head from "next/head";
-import Script from "next/script";
 import { ReactNode } from "react";
+import Script from "next/script";
 
 export const metadata = {
-  title: "About EkoStudy - Our Mission & Vision",
+  title: "About EkoStudy - Transforming Learning for LASUSTECH Students",
   description:
-    "Learn about EkoStudy’s mission to empower LASUSTECH students with top-quality academic resources, interactive learning tools, and expert study support.",
+    "Discover EkoStudy’s mission to revolutionize education at LASUSTECH. We provide AI-powered study tools, lecture notes, past questions, and personalized learning resources to help students excel in their academics and career paths.",
   keywords:
-    "About EkoStudy, EkoStudy mission, LASUSTECH education platform, student learning resources, academic support, study tools, online education, university success, learning innovation",
+    "EkoStudy, about EkoStudy, LASUSTECH education, LASUSTECH study platform, online learning, academic resources, AI-powered study tools, LASUSTECH past questions, university study materials, personalized learning, LASUSTECH students, best study platform, digital learning, e-learning for LASUSTECH, study aids, academic success, LASUSTECH online resources, university learning tools, educational support, student success, lecture notes LASUSTECH, digital education, smart learning platform",
+  openGraph: {
+    title: "About EkoStudy - Transforming Learning for LASUSTECH Students",
+    description:
+      "Discover EkoStudy’s mission to revolutionize education at LASUSTECH with AI-powered study tools, lecture notes, past questions, and more.",
+    url: "https://ekostudy.vercel.app/about",
+    type: "website",
+    images: [
+      {
+        url: "https://ik.imagekit.io/mshcgnjju/EkoStudy/about-banner.png",
+        width: 1200,
+        height: 630,
+        alt: "EkoStudy About Page",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About EkoStudy - Transforming Learning for LASUSTECH Students",
+    description:
+      "Discover EkoStudy’s mission to revolutionize education at LASUSTECH with AI-powered study tools, lecture notes, past questions, and more.",
+    images: ["https://ik.imagekit.io/mshcgnjju/EkoStudy/about-banner.png"],
+  },
 };
 
 type AboutLayoutProps = {
@@ -17,40 +38,21 @@ type AboutLayoutProps = {
 export default function Layout({ children }: AboutLayoutProps) {
   return (
     <html lang="en">
-        {/* Google Analytics */}
-      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-DZMYQ5NQT0');
-          `,
-        }}
-      />
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-        <meta name="robots" content="index, follow" />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:description" content={metadata.description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ekostudy.vercel.app/about" />
-        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/about-banner.png" />
-
-        {/* Twitter Meta Tags */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content={metadata.title} />
-        <meta property="twitter:description" content={metadata.description} />
-        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/about-banner.png" />
-      </Head>
       <body>
+        {/* Google Analytics Tracking */}
+        <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-DZMYQ5NQT0');
+            `,
+          }}
+        />
         {children}
       </body>
     </html>

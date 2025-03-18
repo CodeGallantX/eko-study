@@ -1,13 +1,34 @@
-import Head from "next/head";
-import Script from "next/script"
 import { ReactNode } from "react";
+import Script from "next/script";
 
 export const metadata = {
   title: "Departments - EkoStudy",
   description:
-    "Get in touch with EkoStudy for support, inquiries, or feedback. We are here to help LASUSTECH students with all their academic needs.",
+    "Explore LASUSTECH departments on EkoStudy. Find courses, resources, and academic support tailored to your department.",
   keywords:
-    "Departments EkoStudy, LASUSTECH support, student inquiries, academic assistance, help desk, educational support",
+    "Departments EkoStudy, LASUSTECH departments, student inquiries, academic assistance, educational resources, university departments, study support, higher education",
+  openGraph: {
+    title: "Departments - EkoStudy",
+    description:
+      "Explore LASUSTECH departments on EkoStudy. Find courses, resources, and academic support tailored to your department.",
+    url: "https://eko-study.vercel.app/academics/departments",
+    type: "website",
+    images: [
+      {
+        url: "https://ik.imagekit.io/mshcgnjju/EkoStudy/Departments-banner.png",
+        width: 1200,
+        height: 630,
+        alt: "EkoStudy Departments Page",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Departments - EkoStudy",
+    description:
+      "Explore LASUSTECH departments on EkoStudy. Find courses, resources, and academic support tailored to your department.",
+    images: ["https://ik.imagekit.io/mshcgnjju/EkoStudy/Departments-banner.png"],
+  },
 };
 
 type DepartmentsLayoutProps = {
@@ -17,40 +38,21 @@ type DepartmentsLayoutProps = {
 export default function DepartmentsLayout({ children }: DepartmentsLayoutProps) {
   return (
     <html lang="en">
-      {/* Google Analytics */}
-      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-DZMYQ5NQT0');
-          `,
-        }}
-      />
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-        <meta name="robots" content="index, follow" />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:description" content={metadata.description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ekostudy.vercel.app/Departments" />
-        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Departments-banner.png" />
-
-        {/* Twitter Meta Tags */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content={metadata.title} />
-        <meta property="twitter:description" content={metadata.description} />
-        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Departments-banner.png" />
-      </Head>
       <body>
+        {/* Google Analytics Tracking */}
+        <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-DZMYQ5NQT0');
+            `,
+          }}
+        />
         {children}
       </body>
     </html>

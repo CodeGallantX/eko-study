@@ -1,9 +1,7 @@
 import { Outfit, Merriweather } from "next/font/google";
-import Head from "next/head";
-import Script from "next/script"
+import Script from "next/script";
 import "../../globals.css";
 import { ReactNode } from "react";
-
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -18,11 +16,35 @@ const merriweather = Merriweather({
 });
 
 export const metadata = {
-  title: "Sign Up - EkoStudy",
+  title: "Sign Up | EkoStudy - #1 Academic Platform for LASUSTECH Students",
   description:
-    "EkoStudy is the ultimate online resource for students of Lagos State University of Science and Technology (LASUSTECH), Ikorodu; offering an extensive collection of lecture notes, study guides, and interactive courses across various departments. Designed to support and enhance academic success, EkoStudy provides everything you need to excel in your studies, from comprehensive materials to engaging learning tools.",
+    "Join EkoStudy, the ultimate e-learning platform for LASUSTECH students. Access free lecture notes, past exam questions, AI-powered study assistance, interactive courses, and personalized academic resources to excel in your studies.",
   keywords:
-    "LASUSTECH pre-degree, LASUSTECH departments, study resources, pre-degree exam resources, EkoStudy online courses, LASUSTECH students study platform, EkoStudy,online study resources LASUSTECH,pre-degree study guides,interactive courses for LASUSTECH students,academic success tools,comprehensive lecture notes online,study materials for LASUSTECH,EkoStudy learning tools,enhance academic performance,LASUSTECH departments study resources,online learning platform for LASUSTECH,study support for pre-degree students,EkoStudy courses,educational resources for pre-degree,LASUSTECH pre-degree preparation,LASUSTECH academic resources,LASUSTECH exam resources,LASUSTECH lecture notes,virtual learning for LASUSTECH students,study aids for LASUSTECH students,EkoStudy study guides,academic enhancement tools LASUSTECH,EkoStudy interactive learning, online academic success LASUSTECH,EkoStudy education support,departmental guides LASUSTECH,pre-degree coursework help",
+    "LASUSTECH study resources, LASUSTECH past questions, free university lecture notes, AI-powered tutoring Nigeria, LASUSTECH e-learning, online education platform, academic success tools, best study platform Nigeria, university exam prep, digital learning Nigeria, interactive courses LASUSTECH, AI study assistant, free university resources, EkoStudy LASUSTECH, online learning hub Nigeria, LASUSTECH student portal, best e-learning website Nigeria, academic excellence tools, university education online",
+  authors: [{ name: "John Samuel" }],
+  robots: "index, follow",
+  openGraph: {
+    type: "website",
+    url: "https://eko-study.vercel.app/auth/signup",
+    title: "Sign Up | EkoStudy - LASUSTECH's Best Online Learning Platform",
+    description:
+      "Unlock academic success with EkoStudy! Get free LASUSTECH lecture notes, past questions, study guides, AI-assisted learning, and structured online courses.",
+    images: [
+      {
+        url: "https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png",
+        width: 1200,
+        height: 630,
+        alt: "EkoStudy - The Ultimate Academic Hub for LASUSTECH",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sign Up | EkoStudy - LASUSTECH's Best Online Learning Hub",
+    description:
+      "EkoStudy provides LASUSTECH students with top-quality study materials, past exam questions, AI-assisted learning, and personalized academic support.",
+    images: ["https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png"],
+  },
 };
 
 type RootLayoutProps = {
@@ -32,44 +54,21 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      {/* Google Analytics */}
-      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-DZMYQ5NQT0');
-          `,
-        }}
-      />
-      <Head>
-        <meta name="title" content="Sign Up - The Ultimate Academic Hub" />
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-        <meta name="author" content="John Samuel" />
-        <meta name="robots" content="index, follow" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="language" content="English" />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ekostudy.vercel.app/" />
-        <meta property="og:title" content="EkoStudy: Your Gateway to Academic Excellence at LASUSTECH" />
-        <meta property="og:description" content={metadata.description} />
-        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png" />
-
-        {/* Twitter Meta Tags */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://ekostudy.vercel.app/" />
-        <meta property="twitter:title" content="EkoStudy: Your Gateway to Academic Excellence at LASUSTECH" />
-        <meta property="twitter:description" content={metadata.description} />
-        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png" />
-      </Head>
       <body className={`${outfit.variable} ${merriweather.variable} antialiased`}>
+        {/* Google Analytics for Tracking */}
+        <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-DZMYQ5NQT0');
+            `,
+          }}
+        />
         {children}
       </body>
     </html>

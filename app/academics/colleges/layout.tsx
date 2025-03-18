@@ -1,13 +1,34 @@
-import Head from "next/head";
-import Script from "next/script";
 import { ReactNode } from "react";
+import Script from "next/script";
 
 export const metadata = {
-  title: "Colleges - EkoStudy",
+  title: "Colleges - Explore LASUSTECH's Academic Divisions | EkoStudy",
   description:
-    "Get in touch with EkoStudy for support, inquiries, or feedback. We are here to help LASUSTECH students with all their academic needs.",
+    "Discover LASUSTECH's colleges and academic faculties on EkoStudy. Explore course offerings, departments, and key resources to support your educational journey.",
   keywords:
-    "Colleges EkoStudy, LASUSTECH support, student inquiries, academic assistance, help desk, educational support",
+    "LASUSTECH colleges, EkoStudy colleges, university faculties, academic divisions, LASUSTECH departments, university programs, higher education, student resources, academic assistance, faculty information, college details",
+  openGraph: {
+    title: "Colleges - Explore LASUSTECH's Academic Divisions | EkoStudy",
+    description:
+      "Discover LASUSTECH's colleges and academic faculties on EkoStudy. Explore course offerings, departments, and key resources to support your educational journey.",
+    url: "https://eko-study.vercel.app/academics/colleges",
+    type: "website",
+    images: [
+      {
+        url: "https://ik.imagekit.io/mshcgnjju/EkoStudy/Colleges-banner.png",
+        width: 1200,
+        height: 630,
+        alt: "EkoStudy Colleges Page",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Colleges - Explore LASUSTECH's Academic Divisions | EkoStudy",
+    description:
+      "Discover LASUSTECH's colleges and academic faculties on EkoStudy. Explore course offerings, departments, and key resources to support your educational journey.",
+    images: ["https://ik.imagekit.io/mshcgnjju/EkoStudy/Colleges-banner.png"],
+  },
 };
 
 type CollegesLayoutProps = {
@@ -17,40 +38,21 @@ type CollegesLayoutProps = {
 export default function CollegesLayout({ children }: CollegesLayoutProps) {
   return (
     <html lang="en">
-        {/* Google Analytics */}
-      <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-DZMYQ5NQT0');
-          `,
-        }}
-      />
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
-        <meta name="robots" content="index, follow" />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:description" content={metadata.description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ekostudy.vercel.app/Colleges" />
-        <meta property="og:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Colleges-banner.png" />
-
-        {/* Twitter Meta Tags */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content={metadata.title} />
-        <meta property="twitter:description" content={metadata.description} />
-        <meta property="twitter:image" content="https://ik.imagekit.io/mshcgnjju/EkoStudy/Colleges-banner.png" />
-      </Head>
       <body>
+        {/* Google Analytics Tracking */}
+        <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-DZMYQ5NQT0');
+            `,
+          }}
+        />
         {children}
       </body>
     </html>
