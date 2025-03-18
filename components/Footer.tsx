@@ -25,14 +25,14 @@ const Footer: React.FC = () => {
                         <div className="flex flex-col gap-6 w-full">
                             <h3 className="text-[#92B76D] font-bold text-base">OUR OFFICE</h3>
                             <p>EkoStudy, 104101 Ikorodu, <br /> Lagos.</p>
-                            <div className='flex flex-col gap-1 mt-2 lg:mt-0'>
+                            {/* <div className='flex flex-col gap-1 mt-2 lg:mt-0'>
                                 <Link href="tel:+2348096044860" className="flex flex-row items-center">
                                     <Phone size={20} />
                                     <span className="ml-2">+234 809 604 4860</span>
-                                </Link>
-                                <Link href="mailto:johnayobami77@proton.me" className="flex flex-row items-center">
+                                </Link> */}
+                                <Link href="mailto:ekostudy-73bec1@smtpexpress.email" className="flex flex-row items-center">
                                     <Mail size={20} />
-                                    <span className="ml-2">johnayobami77@proton.me</span>
+                                    <span className="ml-2">contact@ekostudy.io</span>
                                 </Link>
                             </div>
                         </div>
@@ -44,15 +44,15 @@ const Footer: React.FC = () => {
                                 <li><Link href="/about">About Us</Link></li>
                                 <li><Link href="/academics/courses">Courses</Link></li>
                                 <li><Link href="/blog">Blog</Link></li>
-                                <li><Link href="/#">Become an Instructor</Link></li>
-                                <li><Link href="/#">Events</Link></li>
+                                <li><Link href="#">Become an Instructor</Link></li>
+                                <li><Link href="#">Events</Link></li>
                                 <li><Link href="/contact">Contact</Link></li>
                             </ul>
                         </div>
                         <div className="flex flex-col gap-6 w-full">
                             <h3 className="text-[#92B76D] font-bold text-base">LINKS</h3>
                             <ul className="space-y-1">
-                                <li><Link href="/#">Be a Partner</Link></li>
+                                <li><Link href="#">Be a Partner</Link></li>
                                 <li><Link href="/academics/colleges">Colleges</Link></li>
                                 <li><Link href="#">Campus Tour</Link></li>
                                 <li><Link href="#">Help Center</Link></li>

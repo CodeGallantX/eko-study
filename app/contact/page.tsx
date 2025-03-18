@@ -25,7 +25,7 @@ export default function App() {
             We&rsquo;re here to help! Whether you have a question about our courses, need assistance, or just want to give feedback, feel free to reach out to us.
           </p>
           <div className="flex flex-col text-[18px] lg:text-2xl xl:text-[28px] gap-3">
-            <a href="mailto:johnayobami77@proton.me" className="flex flex-row items-center group">
+            <a href="mailto:ekostudy-73bec1@smtpexpress.email" className="flex flex-row items-center group">
               <FaEnvelope />
               <span className="ml-4 group-hover:text-[#92B76D] transition-all duration-300 ease-in-out">contact@ekostudy.io</span>
             </a>
