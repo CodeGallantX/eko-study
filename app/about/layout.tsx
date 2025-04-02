@@ -11,7 +11,7 @@ export const metadata = {
     title: "About EkoStudy - Transforming Learning for LASUSTECH Students",
     description:
       "Discover EkoStudy’s mission to revolutionize education at LASUSTECH with AI-powered study tools, lecture notes, past questions, and more.",
-    url: "https://ekostudy.vercel.app/about",
+    url: "https://eko-study.vercel.app/about",
     type: "website",
     images: [
       {
