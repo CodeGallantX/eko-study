@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FaChevronLeft, FaEye, FaEyeSlash, FaCircle, FaCheckCircle } from "react-icons/fa";
+import { FaChevronLeft, FaEye, FaEyeSlash } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 
 interface FormData {
@@ -83,7 +83,7 @@ const Register = () => {
                 Already have an account?{" "}
                 <Link
                   href="/auth/signin"
-                  className="text-green-600 hover:text-green-500 font-medium transition-colors"
+                  className="text-deepGreen hover:text-green font-medium transition-colors"
                 >
                   Sign in
                 </Link>
@@ -122,7 +122,7 @@ const Register = () => {
                   onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-lg border ${
                     errors[field.name] ? "border-red-500" : "border-gray-300"
-                  } focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all`}
+                  } focus:ring-2 focus:ring-green focus:border-transparent transition-all`}
                 />
                 {errors[field.name] && (
                   <p className="mt-1 text-sm text-red-600">{errors[field.name]}</p>
@@ -147,7 +147,7 @@ const Register = () => {
                   onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-lg border ${
                     errors.password ? "border-red-500" : "border-gray-300"
-                  } focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all pr-12`}
+                  } focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-12`}
                 />
                 <button
                   type="button"
@@ -171,7 +171,7 @@ const Register = () => {
                   type="checkbox"
                   checked={formData.agree}
                   onChange={handleChange}
-                  className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
+                  className="appearance-none h-4 w-4 text-deepGreen checked:ring-green border-gray-300 rounded"
                 />
               </div>
               <div className="ml-3">
@@ -182,14 +182,14 @@ const Register = () => {
                   I agree to the{" "}
                   <Link
                     href="/terms"
-                    className="text-green-600 hover:text-green-500 font-medium"
+                    className="text-deepGreen hover:text-green font-medium"
                   >
                     Terms of Service
                   </Link>{" "}
                   and{" "}
                   <Link
                     href="/privacy"
-                    className="text-green-600 hover:text-green-500 font-medium"
+                    className="text-deepGreen hover:text-green font-medium"
                   >
                     Privacy Policy
                   </Link>
@@ -203,10 +203,10 @@ const Register = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
+              className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green transition-colors ${
                 isSubmitting
-                  ? "bg-green-600"
-                  : "bg-green-600 hover:bg-green-700"
+                  ? "bg-deepGreen"
+                  : "bg-deepGreen hover:bg-green-700"
               }`}
             >
               {isSubmitting ? (
