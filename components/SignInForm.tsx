@@ -76,7 +76,7 @@ const SigninForm = () => {
           <div className="bg-gray-900 px-8 py-6">
             <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
             <p className="mt-2 text-gray-300">
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <Link 
                 href="/auth/signup" 
                 className="text-green-400 hover:text-green-300 transition-colors font-medium"

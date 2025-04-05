@@ -9,7 +9,7 @@ import { motion, useAnimation, AnimatePresence, useInView } from 'framer-motion'
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import { FaArrowRight } from 'react-icons/fa';
 import { FaXTwitter, FaFacebookF, FaInstagram, FaLinkedin } from 'react-icons/fa6';
-import { PiStarFill, PiCaretDown, PiUniversity, PiFile, PiUsers, PiChartLine, PiLightbulb, PiUsers as PiUsersIcon, PiPlay, PiPause } from 'react-icons/pi';
+import { PiStarFill, PiCaretDown, PiFile, PiUsers, PiChartLine, PiLightbulb, PiUser, PiUsers as PiUsersIcon, PiPlay, PiPause } from 'react-icons/pi';
 
 interface Page {
   title: string;
@@ -178,7 +178,7 @@ export default function AboutPage() {
     {
       title: "Department-Specific Resources",
       description: "Access curated materials for your exact department and courses.",
-      icon: <PiUniversity className="text-3xl text-emerald-700" />
+      icon: <PiUser className="text-3xl text-emerald-700" />
     },
     {
       title: "Exam Preparation Suite",
