@@ -1,6 +1,10 @@
 import { Testimonial, FAQ, Feature, VisionItem, Page } from '@/types/about';
 import { FaFacebookF, FaXTwitter } from 'react-icons/fa6';
 import { PiLightbulb, PiUser, PiUsers as PiUsersIcon, PiFile, PiCaretDown, PiChartLine } from 'react-icons/pi';
+import { VisionItem } from '../types/about';
+import { visionIcons } from '../components/about/VisionIcons';
+import { Feature } from '../types/about';
+import { featureIcons } from '../components/about/FeaturesIcons';
 
 export const testimonials: Testimonial[] = [
   {
@@ -45,54 +49,56 @@ export const faqs: FAQ[] = [
   }
 ];
 
+
 export const visionItems: VisionItem[] = [
   {
     title: "Accessibility",
     description: "Making quality education accessible to every LASUSTECH student, regardless of location or economic background.",
-    icon: <FaFacebookF className="text-4xl text-emerald-700" />
+    icon: visionIcons.accessibility
   },
   {
     title: "Innovation",
     description: "Continuously developing cutting-edge tools that address the real challenges students face in their academic journey.",
-    icon: <PiLightbulb className="text-4xl text-emerald-700" />
+    icon: visionIcons.innovation
   },
   {
     title: "Community",
     description: "Building a supportive network where students can learn from each other and grow together.",
-    icon: <PiUsersIcon className="text-4xl text-emerald-700" />
+    icon: visionIcons.community
   }
 ];
+
 
 export const features: Feature[] = [
   {
     title: "AI-Powered Study Assistant",
     description: "Get personalized study recommendations based on your courses and performance.",
-    icon: <FaXTwitter className="text-3xl text-emerald-700" />
+    icon: featureIcons.twitter
   },
   {
     title: "Department-Specific Resources",
     description: "Access curated materials for your exact department and courses.",
-    icon: <PiUser className="text-3xl text-emerald-700" />
+    icon: featureIcons.user
   },
   {
     title: "Exam Preparation Suite",
     description: "Past questions, marking schemes, and timed practice tests.",
-    icon: <PiFile className="text-3xl text-emerald-700" />
+    icon: featureIcons.file
   },
   {
     title: "Offline Access",
     description: "Download materials for studying without internet connection.",
-    icon: <PiCaretDown className="text-3xl text-emerald-700" />
+    icon: featureIcons.caretDown
   },
   {
     title: "Collaborative Learning",
     description: "Departmental discussion forums and study groups.",
-    icon: <PiUsers className="text-3xl text-emerald-700" />
+    icon: featureIcons.users
   },
   {
     title: "Progress Tracking",
     description: "Monitor your study habits and improvement over time.",
-    icon: <PiChartLine className="text-3xl text-emerald-700" />
+    icon: featureIcons.chartLine
   }
 ];
 
