@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 :menu
-echo Welcome back!
+echo Welcome to EkoStudy!
 echo.
 echo Select option
 echo 1. Continue Working
@@ -17,10 +17,9 @@ if "%option%"=="3" goto quit
 
 
 :continueworking
-echo Continue where you left off.
-code .
-echo Running local server...
-npm run dev
+echo Opening workspace...
+echo Running Next.js local server - http://localhost:3000
+code . && npm run dev
 
 
 :pushtogithub
