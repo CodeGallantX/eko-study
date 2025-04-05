@@ -35,7 +35,7 @@ interface FAQ {
 interface Feature {
   title: string;
   description: string;
-  icon: JSX.Element;
+  icon: React.ReactNode;
 }
 
 const testimonials: Testimonial[] = [
