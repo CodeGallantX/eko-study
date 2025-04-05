@@ -44,72 +44,162 @@ const SigninForm = () => {
   };
 
   return (
-    <div className="relative flex flex-col lg:flex-row items-center justify-center min-h-screen">
+    <div className="relative flex min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
+      {/* Left side - Illustration */}
       <motion.div 
-        initial={{ opacity: 0, x: -50 }} 
-        animate={{ opacity: 1, x: 0 }} 
-        transition={{ duration: 0.5 }}
-        className="hidden lg:block w-full absolute top-0 left-0 h-full"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="hidden lg:flex w-1/2 items-center justify-center p-12"
       >
-        <Image src="/illustration.jpg" alt="Study" layout="fill" objectFit="cover" />
-      </motion.div>
-
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }} 
-        animate={{ opacity: 1, scale: 1 }} 
-        transition={{ duration: 0.5 }}
-        className="z-10 absolute top-20 right-10 w-full lg:w-1/2 max-w-lg bg-gray-900/50 backdrop-blur-xl border-2 border-gray-300 hover:border-green shadow-lg rounded-2xl p-8 transition-all duration-300 ease-in-out"
-      >
-        <h1 className="text-4xl font-bold text-center text-white">Sign In</h1>
-        <p className="text-center mt-2 text-gray-300">
-          Don&apos;t have an account? <Link href="/auth/signup" className="text-green hover:text-yellow transition">Sign up</Link>
-        </p>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6">
-          <input 
-            className="bg-transparent border border-gray-300 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:border-2 focus:border-green transition" 
-            type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required 
+        <div className="relative w-full h-full max-w-2xl">
+          <Image 
+            src="/illustration.jpg" 
+            alt="Modern workspace illustration" 
+            layout="fill" 
+            objectFit="contain"
+            className="opacity-90"
+            priority
           />
-
-          <div className="relative">
-            <input 
-              className="bg-transparent border border-gray-300 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:border-2 focus:border-green transition w-full pr-10" 
-              type={passwordVisible ? 'text' : 'password'} name="password" placeholder="Password" value={formData.password} onChange={handleChange} required 
-            />
-            <button 
-              type="button" 
-              className="absolute inset-y-0 right-3 flex items-center text-gray-300 hover:text-white transition" 
-              onClick={() => setPasswordVisible(!passwordVisible)}
-            >
-              {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
-          </div>
-
-          <div className="flex justify-end items-center">
-            <Link href="/forgot-password" className="text-sm text-green hover:text-yellow transition">Forgot Password?</Link>
-          </div>
-
-          <button 
-            className="w-full bg-green hover:bg-yellow transition text-gray-900 py-3 rounded-lg flex items-center justify-center font-semibold" 
-            type="submit" disabled={isSubmitting}
-          >
-            {isSubmitting && <Loader2 className="animate-spin mr-2" size={20} />}
-            {isSubmitting ? 'Signing in...' : 'Sign In'}
-          </button>
-
-          <div className="flex items-center my-2">
-            <hr className="w-full border-gray-500" />
-            <span className="px-4 text-gray-400">or</span>
-            <hr className="w-full border-gray-500" />
-          </div>
-
-          <button 
-            className="text-white flex items-center justify-center gap-3 border border-gray-400 p-3 rounded-lg hover:bg-gray-700 transition"
-          >
-            <FaGoogle size={20} /> Continue with Google
-          </button>
-        </form>
+        </div>
       </motion.div>
+
+      {/* Right side - Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="w-full max-w-md bg-white rounded-xl shadow-2xl overflow-hidden"
+        >
+          {/* Form header */}
+          <div className="bg-gray-900 px-8 py-6">
+            <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
+            <p className="mt-2 text-gray-300">
+              Don't have an account?{' '}
+              <Link 
+                href="/auth/signup" 
+                className="text-green-400 hover:text-green-300 transition-colors font-medium"
+              >
+                Sign up
+              </Link>
+            </p>
+          </div>
+
+          {/* Form content */}
+          <div className="px-8 py-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Email field */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email address
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all placeholder-gray-400"
+                  placeholder="you@example.com"
+                />
+              </div>
+
+              {/* Password field */}
+              <div>
+                <div className="flex justify-between items-center mb-1">
+                  <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                    Password
+                  </label>
+                  <Link 
+                    href="/forgot-password" 
+                    className="text-sm font-medium text-green-600 hover:text-green-500 transition-colors"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
+                <div className="relative">
+                  <input
+                    id="password"
+                    name="password"
+                    type={passwordVisible ? 'text' : 'password'}
+                    autoComplete="current-password"
+                    required
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all placeholder-gray-400 pr-12"
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    aria-label={passwordVisible ? 'Hide password' : 'Show password'}
+                  >
+                    {passwordVisible ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Submit button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ${
+                  isSubmitting ? 'bg-green-600' : 'bg-green-600 hover:bg-green-700'
+                }`}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="animate-spin mr-2" size={20} />
+                    Signing in...
+                  </>
+                ) : (
+                  'Sign in'
+                )}
+              </button>
+
+              {/* Divider */}
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-300" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                </div>
+              </div>
+
+              {/* Social login */}
+              <div>
+                <button
+                  type="button"
+                  className="w-full inline-flex justify-center items-center py-3 px-4 rounded-lg border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+                >
+                  <FaGoogle className="mr-3 text-red-500" size={18} />
+                  Continue with Google
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Footer */}
+          <div className="bg-gray-50 px-8 py-4 border-t border-gray-200">
+            <p className="text-xs text-gray-500 text-center">
+              By continuing, you agree to our{' '}
+              <Link href="/terms" className="text-green-600 hover:text-green-500">
+                Terms of Service
+              </Link>{' '}
+              and{' '}
+              <Link href="/privacy" className="text-green-600 hover:text-green-500">
+                Privacy Policy
+              </Link>
+              .
+            </p>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };
