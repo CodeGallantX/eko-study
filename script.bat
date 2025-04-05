@@ -1,6 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 :menu
+prompt EkoStudy Bot: 
 echo Welcome to EkoStudy!
 echo.
 echo Select option
@@ -30,6 +31,7 @@ set /p message="Enter GitHub commit message: "
 git commit -m "%message%"
 git push -u origin
 echo Updates pushed to GitHub successfully
+echo.
 
 :quit
 cls
