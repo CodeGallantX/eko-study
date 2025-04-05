@@ -1,9 +1,7 @@
 import { Testimonial, FAQ, Feature, VisionItem, Page } from '@/types/about';
 import { FaFacebookF, FaXTwitter } from 'react-icons/fa6';
 import { PiLightbulb, PiUser, PiUsers as PiUsersIcon, PiFile, PiCaretDown, PiChartLine } from 'react-icons/pi';
-import { VisionItem } from '../types/about';
 import { visionIcons } from '../components/about/VisionIcons';
-import { Feature } from '../types/about';
 import { featureIcons } from '../components/about/FeaturesIcons';
 
 export const testimonials: Testimonial[] = [
