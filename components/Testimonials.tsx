@@ -1,12 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import { FaQuoteLeft, FaGraduationCap } from "react-icons/fa";
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { FaQuoteLeft, FaGraduationCap, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const testimonials = [
   {
@@ -24,7 +21,7 @@ const testimonials = [
   {
     name: "Michael Ajibola",
     level: "400L Mechanical Engineering",
-    feedback: "The AI-powered recommendations and easy access to lecture notes are game-changers. EkoStudy truly understands students’ needs!",
+    feedback: "The AI-powered recommendations and easy access to lecture notes are game-changers. EkoStudy truly understands students' needs!",
     image: "/students/michael.jpg",
   },
   {
@@ -57,51 +54,84 @@ export default function Testimonials() {
           </p>
         </motion.div>
 
-        {/* Swiper Testimonial Slider */}
-        <Swiper
-          modules={[Autoplay, Pagination, EffectFade]}
-          slidesPerView={1}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          effect="fade"
-          loop={true}
-          className="max-w-3xl mx-auto"
-        >
-          {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={index}>
-              <motion.div
-                className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-8 text-center transition-all flex flex-col items-center"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+        {/* Carousel */}
+        <div className="max-w-3xl mx-auto">
+          <Carousel
+            showArrows={true}
+            showStatus={false}
+            showThumbs={false}
+            infiniteLoop={true}
+            autoPlay={true}
+            interval={5000}
+            stopOnHover={true}
+            transitionTime={500}
+            swipeable={true}
+            emulateTouch={true}
+            dynamicHeight={false}
+            renderArrowPrev={(clickHandler, hasPrev, label) => (
+              <button
+                onClick={clickHandler}
+                aria-label={label}
+                className="absolute left-0 top-1/2 z-10 -translate-y-1/2 w-10 h-10 rounded-full bg-[#4c5f4e]/30 hover:bg-[#4c5f4e]/70 flex items-center justify-center text-white"
               >
-                {/* Quote Icon */}
-                <FaQuoteLeft className="absolute top-2 left-5 text-4xl text-[#4c5f4e] opacity-30" />
+                <FaChevronLeft className="w-5 h-5" />
+              </button>
+            )}
+            renderArrowNext={(clickHandler, hasNext, label) => (
+              <button
+                onClick={clickHandler}
+                aria-label={label}
+                className="absolute right-0 top-1/2 z-10 -translate-y-1/2 w-10 h-10 rounded-full bg-[#4c5f4e]/30 hover:bg-[#4c5f4e]/70 flex items-center justify-center text-white"
+              >
+                <FaChevronRight className="w-5 h-5" />
+              </button>
+            )}
+            renderIndicator={(clickHandler, isSelected, index, label) => (
+              <button
+                type="button"
+                onClick={clickHandler}
+                key={index}
+                className={`mx-1 w-2 h-2 rounded-full transition-all ${isSelected ? 'bg-[#4c5f4e] w-3' : 'bg-[#4c5f4e]/30'}`}
+                aria-label={label}
+              />
+            )}
+          >
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="px-4">
+                <motion.div
+                  className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-8 text-center transition-all flex flex-col items-center"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                >
+                  {/* Quote Icon */}
+                  <FaQuoteLeft className="absolute top-2 left-5 text-4xl text-[#4c5f4e] opacity-30" />
 
-                {/* Student Image */}
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-20 h-20 rounded-full border-4 border-[#ffca0d] object-cover mb-4"
-                />
+                  {/* Student Image */}
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-20 h-20 rounded-full border-4 border-[#ffca0d] object-cover mb-4"
+                  />
 
-                {/* Feedback */}
-                <p className="text-lg text-gray-800 dark:text-gray-200 italic">
-                  &ldquo;{testimonial.feedback}&rdquo;
-                </p>
+                  {/* Feedback */}
+                  <p className="text-lg text-gray-800 dark:text-gray-200 italic">
+                    &ldquo;{testimonial.feedback}&rdquo;
+                  </p>
 
-                {/* Name & Level */}
-                <h3 className="text-xl font-bold text-[#4c5f4e] dark:text-[#ffca0d] mt-4">
-                  {testimonial.name}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.level}</p>
+                  {/* Name & Level */}
+                  <h3 className="text-xl font-bold text-[#4c5f4e] dark:text-[#ffca0d] mt-4">
+                    {testimonial.name}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.level}</p>
 
-                {/* Quote Icon */}
-                <FaQuoteLeft className="absolute bottom-2 right-5 text-4xl text-[#4c5f4e] opacity-30 rotate-180" />
-              </motion.div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                  {/* Quote Icon */}
+                  <FaQuoteLeft className="absolute bottom-2 right-5 text-4xl text-[#4c5f4e] opacity-30 rotate-180" />
+                </motion.div>
+              </div>
+            ))}
+          </Carousel>
+        </div>
       </div>
     </section>
   );
