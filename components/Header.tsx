@@ -30,7 +30,7 @@ export default function Header() {
   }, [isSidebarVisible]);
 
   return (
-    <header className="bg-[#4c5f4e] flex flex-row items-center justify-between py-2 px-6 lg:px-24 z-40">
+    <header className="bg-[#4c5f4e] fixed flex flex-row items-center justify-between py-2 px-6 lg:px-24 z-40 w-full">
       <Link href="/" className="w-32 lg:w-40">
         <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
       </Link>
