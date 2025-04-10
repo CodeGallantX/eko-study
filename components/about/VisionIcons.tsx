@@ -1,5 +1,3 @@
-"use client";
-
 import { FaFacebookF } from 'react-icons/fa6';
 import { PiLightbulb, PiUsers as PiUsersIcon } from 'react-icons/pi';
 

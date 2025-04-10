@@ -1,6 +1,4 @@
 import { Testimonial, FAQ, Feature, VisionItem, Page } from '../app/types/about';
-import { FaFacebookF, FaXTwitter } from 'react-icons/fa6';
-import { PiLightbulb, PiUser, PiUsers as PiUsersIcon, PiFile, PiCaretDown, PiChartLine } from 'react-icons/pi';
 import { visionIcons } from '../components/about/VisionIcons';
 import { featureIcons } from '../components/about/FeaturesIcons';
 
