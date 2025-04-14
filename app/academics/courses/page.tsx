@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import Preloader from "@/components/Preloader";
-import Header from "@/components/Header";
-import Banner from "@/components/Banner";
-import Footer from "@/components/Footer";
-import VideoCarousel from "@/components/CourseVideos";
+import Preloader from "@/components/shared/Preloader";
+import Header from "@/components/shared/Header";
+import Banner from "@/components/shared/Banner";
+import Footer from "@/components/shared/Footer";
+import VideoCarousel from "@/components/courses/CourseVideos";
 // import PastQuestions from "@/components/PastQuestions";
 import coursesVideos from "@/data/notes.json";
 import Link from "next/link";

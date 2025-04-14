@@ -18,11 +18,10 @@ export default {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
-			  deepGreen: '#4c5f4e',
-			green:'#92b76d',
-			//   secondary: '#e8ede6',
-			  yellow: '#ffca0d',
-			  beige: '#e6e1d1',
+  			deepGreen: '#4c5f4e',
+  			green: '#92b76d',
+  			yellow: '#ffca0d',
+  			beige: '#e6e1d1',
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
@@ -65,5 +64,5 @@ export default {
   		}
   	}
   },
-//   plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate")]
 } satisfies Config;

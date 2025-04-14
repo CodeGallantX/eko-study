@@ -1,7 +1,7 @@
 import { ParallaxProvider } from 'react-scroll-parallax';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Banner from '../../components/Banner';
+import Header from '../../components/shared/Header';
+import Footer from '../../components/shared/Footer';
+import Banner from '../../components/shared/Banner';
 import AboutHero from '../../components/about/AboutHero';
 import AboutStats from '../../components/about/AboutStats';
 import AboutMission from '../../components/about/AboutMission';
