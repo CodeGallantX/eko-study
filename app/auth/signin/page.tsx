@@ -1,5 +1,5 @@
-import SignInForm from '@/components/SignInForm';
-import SignInMobile from "@/components/SignInMobile";
+import { SignInForm } from '../../../components/auth/SignInForm';
+import { SignInMobile } from "../../../components/auth/SignInMobile";
 
 export default function SignIn()  {
   return (
