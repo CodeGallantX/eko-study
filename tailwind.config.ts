@@ -11,44 +11,44 @@ export default {
   	extend: {
   		colors: {
   			primary: {
-  				DEFAULT: '#4c5f4e',
-  				foreground: '#ffffff'
+  				DEFAULT: 'hsl(var(--primary))',
+  				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
-  				DEFAULT: '#92b76d',
-  				foreground: '#ffffff'
+  				DEFAULT: 'hsl(var(--secondary))',
+  				foreground: 'hsl(var(--secondary-foreground))'
   			},
   			deepGreen: '#4c5f4e',
   			green: '#92b76d',
   			yellow: '#ffca0d',
   			beige: '#e6e1d1',
   			accent: {
-  				DEFAULT: '#92b76d',
-  				foreground: '#ffffff'
+  				DEFAULT: 'hsl(var(--accent))',
+  				foreground: 'hsl(var(--accent-foreground))'
   			},
-  			background: '#ffffff',
+  			background: 'hsl(var(--background))',
   			black: '#000000',
   			white: '#ffffff',
-  			foreground: '#000000',
+  			foreground: 'hsl(var(--foreground))',
   			card: {
-  				DEFAULT: '#ffffff',
-  				foreground: '#000000'
+  				DEFAULT: 'hsl(var(--card))',
+  				foreground: 'hsl(var(--card-foreground))'
   			},
   			popover: {
-  				DEFAULT: '#ffffff',
-  				foreground: '#000000'
+  				DEFAULT: 'hsl(var(--popover))',
+  				foreground: 'hsl(var(--popover-foreground))'
   			},
   			muted: {
-  				DEFAULT: '#f5f5f5',
-  				foreground: '#737373'
+  				DEFAULT: 'hsl(var(--muted))',
+  				foreground: 'hsl(var(--muted-foreground))'
   			},
   			destructive: {
-  				DEFAULT: '#ef4444',
-  				foreground: '#ffffff'
+  				DEFAULT: 'hsl(var(--destructive))',
+  				foreground: 'hsl(var(--destructive-foreground))'
   			},
-  			border: '#e5e5e5',
-  			input: '#e5e5e5',
-  			ring: '#4c5f4e',
+  			border: 'hsl(var(--border))',
+  			input: 'hsl(var(--input))',
+  			ring: 'hsl(var(--ring))',
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
