@@ -1,5 +1,6 @@
 import { Outfit, Merriweather } from "next/font/google";
 import Script from "next/script";
+import { Toaster } from "@/components/ui/toaster"
 import "../../globals.css";
 import { ReactNode } from "react";
 
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         />
         {children}
+        <Toaster />
       </body>
     </html>
   );

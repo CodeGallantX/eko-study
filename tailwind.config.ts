@@ -11,45 +11,44 @@ export default {
   	extend: {
   		colors: {
   			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+  				DEFAULT: '#4c5f4e',
+  				foreground: '#ffffff'
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
+  				DEFAULT: '#92b76d',
+  				foreground: '#ffffff'
   			},
-			  deepGreen: '#4c5f4e',
-			green:'#92b76d',
-			//   secondary: '#e8ede6',
-			  yellow: '#ffca0d',
-			  beige: '#e6e1d1',
+  			deepGreen: '#4c5f4e',
+  			green: '#92b76d',
+  			yellow: '#ffca0d',
+  			beige: '#e6e1d1',
   			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
+  				DEFAULT: '#92b76d',
+  				foreground: '#ffffff'
   			},
-  			background: 'hsl(var(--background))',
+  			background: '#ffffff',
   			black: '#000000',
   			white: '#ffffff',
-  			foreground: 'hsl(var(--foreground))',
+  			foreground: '#000000',
   			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
+  				DEFAULT: '#ffffff',
+  				foreground: '#000000'
   			},
   			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
+  				DEFAULT: '#ffffff',
+  				foreground: '#000000'
   			},
   			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
+  				DEFAULT: '#f5f5f5',
+  				foreground: '#737373'
   			},
   			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
+  				DEFAULT: '#ef4444',
+  				foreground: '#ffffff'
   			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
+  			border: '#e5e5e5',
+  			input: '#e5e5e5',
+  			ring: '#4c5f4e',
   			chart: {
   				'1': 'hsl(var(--chart-1))',
   				'2': 'hsl(var(--chart-2))',
@@ -65,5 +64,5 @@ export default {
   		}
   	}
   },
-//   plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate")]
 } satisfies Config;
