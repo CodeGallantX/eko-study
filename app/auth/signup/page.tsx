@@ -1,5 +1,5 @@
-import SignUpForm from '@/components/SignUpForm';
-import SignUpMobile from "@/components/SignUpMobile";
+import { SignUpForm } from '../../../components/auth/SignUpForm';
+import { SignUpMobile } from "../../../components/auth/SignUpMobile";
 
 export default function SignUp()  {
   return (
