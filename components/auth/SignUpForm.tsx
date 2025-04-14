@@ -221,7 +221,7 @@ export const SignUpForm = () => {
                 onCheckedChange={(checked) =>
                   setFormData({ ...formData, agreeTerms: checked as boolean })
                 }
-                className="mt-0.5 border-gray-300 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
+                className="mt-0.5 border-gray-300 data-[state=checked]:bg-green data-[state=checked]:border-green"
               />
               <label
                 htmlFor="agreeTerms"
@@ -230,14 +230,14 @@ export const SignUpForm = () => {
                 I agree to the{' '}
                 <Link
                   href="/terms"
-                  className="text-green-600 hover:text-green-500 font-medium transition-colors"
+                  className="text-green hover:text-green font-medium transition-colors"
                 >
                   Terms of Service
                 </Link>{' '}
                 and{' '}
                 <Link
                   href="/privacy"
-                  className="text-green-600 hover:text-green-500 font-medium transition-colors"
+                  className="text-green hover:text-green font-medium transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -251,7 +251,7 @@ export const SignUpForm = () => {
             >
               <Button
                 type="submit"
-                className="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium transition-colors shadow-sm"
+                className="w-full bg-green text-white py-3 px-4 rounded-lg font-medium transition-colors shadow-sm"
                 disabled={isSubmitting || !formData.agreeTerms}
               >
                 {isSubmitting ? (
