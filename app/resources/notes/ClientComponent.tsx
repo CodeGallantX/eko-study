@@ -3,11 +3,11 @@ import { useState, useEffect, useRef } from "react";
 // import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FaChevronRight, FaMagnifyingGlass } from "react-icons/fa6";
-import Preloader from "@/components/Preloader";
-import Header from "@/components/Header";
-import Banner from "@/components/Banner";
-import DownloadModal from "@/components/DownloadModal";
-import Footer from "@/components/Footer";
+import Preloader from "@/components/shared/Preloader";
+import Header from "@/components/shared/Header";
+import Banner from "@/components/shared/Banner";
+import DownloadModal from "@/components/notes/DownloadModal";
+import Footer from "@/components/shared/Footer";
 
 interface Course {
   id: number;

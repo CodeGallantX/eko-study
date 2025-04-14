@@ -1,8 +1,8 @@
 // "use client";
 
 // import { useState, useEffect } from "react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/shared/Header";
+import Footer from "@/components/shared/Footer";
 import Link from "next/link";
 // import ConfirmationModal from "@/components/ConfirmationModal";
 // import ResultModal from "@/components/ResultModal";

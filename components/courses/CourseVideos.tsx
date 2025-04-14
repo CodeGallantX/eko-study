@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import VideoPlayer from "@/components/VideoPlayer";
-import VideoThumbnail from "@/components/VideoThumbnail";
+import VideoPlayer from "@/components/courses/VideoPlayer";
+import VideoThumbnail from "@/components/courses/VideoThumbnail";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 interface VideoCarouselProps {

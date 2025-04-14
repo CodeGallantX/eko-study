@@ -1,10 +1,10 @@
-import Preloader from "@/components/Preloader"
-import Header from "@/components/Header"
-import Hero from "@/components/Hero"
-import AboutSection from "@/components/AboutSection"
-import Features from "@/components/Features"
-import Testimonials from "@/components/Testimonials"
-import Footer from "@/components/Footer"
+import Preloader from "@/components/shared/Preloader"
+import Header from "@/components/shared/Header"
+import Hero from "@/components/home/Hero"
+import AboutSection from "@/components/home/AboutSection"
+import Features from "@/components/home/Features"
+import Testimonials from "@/components/home/Testimonials"
+import Footer from "@/components/shared/Footer"
 
 export default function App () {
   return (

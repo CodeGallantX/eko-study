@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Banner from "@/components/Banner";
-import Preloader from "@/components/Preloader";
+import Header from "@/components/shared/Header";
+import Footer from "@/components/shared/Footer";
+import Banner from "@/components/shared/Banner";
+import Preloader from "@/components/shared/Preloader";
 import { FaXTwitter, FaFacebookF, FaYoutube, FaEnvelope} from "react-icons/fa6";
 
 export default function App() {

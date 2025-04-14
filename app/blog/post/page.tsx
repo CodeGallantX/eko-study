@@ -1,6 +1,6 @@
-import Header from '@/components/Header';
-import Banner from '@/components/Banner';
-import Footer from '@/components/Footer';
+import Header from '@/components/shared/Header';
+import Banner from '@/components/shared/Banner';
+import Footer from '@/components/shared/Footer';
 import Script from 'next/script';
 
 const BlogPage = () => {

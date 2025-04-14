@@ -1,7 +1,7 @@
-import Preloader from "@/components/Preloader"
-import Header from "@/components/Header"
-import Banner from "@/components/Banner"
-import Footer from "@/components/Footer"
+import Preloader from "@/components/shared/Preloader"
+import Header from "@/components/shared/Header"
+import Banner from "@/components/shared/Banner"
+import Footer from "@/components/shared/Footer"
 
 export default function App() {
 

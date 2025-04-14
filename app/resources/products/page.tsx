@@ -1,7 +1,7 @@
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Banner from "@/components/Banner";
-import Preloader from "@/components/Preloader";
+import Header from "@/components/shared/Header";
+import Footer from "@/components/shared/Footer";
+import Banner from "@/components/shared/Banner";
+import Preloader from "@/components/shared/Preloader";
 
 export default function App() {
   const page = {
