@@ -31,7 +31,7 @@ export const SignInForm = () => {
         duration: 3000,
       });
       router.push('/dashboard');
-    } catch (err) {
+    } catch {
       toast({
         title: 'Error',
         description: 'Invalid email or password',
