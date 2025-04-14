@@ -7,23 +7,12 @@ import { Eye, EyeOff, Loader2, CheckCircle2, Circle } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-const colleges = {
-  'College of Engineering': ['Architecture', 'Electrical Engineering', 'Mechatronics', 'Computer Engineering'],
-  'College of Sciences': ['Mathematics', 'Computer Science', 'Physics', 'Chemistry', 'Statistics'],
-  'College of Environmental': ['Art & Design', 'Urban Planning'],
-  'College of Business': ['Banking & Finance', 'Marketing', 'Accounting'],
-};
-
 export const SignUpMobile = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    phone: '+234',
-    gender: '',
-    college: '',
-    department: '',
     password: '',
     agreeTerms: false,
   });
@@ -66,7 +55,7 @@ export const SignUpMobile = () => {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -115,85 +104,6 @@ export const SignUpMobile = () => {
             required
           />
         </div>
-
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-            Phone Number
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all placeholder-gray-400"
-            placeholder="+234 800 000 0000"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
-            Gender
-          </label>
-          <select
-            id="gender"
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-            required
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="college" className="block text-sm font-medium text-gray-700 mb-1">
-            College
-          </label>
-          <select
-            id="college"
-            name="college"
-            value={formData.college}
-            onChange={handleChange}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-            required
-          >
-            <option value="">Select College</option>
-            {Object.keys(colleges).map((college) => (
-              <option key={college} value={college}>
-                {college}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {formData.college && (
-          <div>
-            <label htmlFor="department" className="block text-sm font-medium text-gray-700 mb-1">
-              Department
-            </label>
-            <select
-              id="department"
-              name="department"
-              value={formData.department}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-              required
-            >
-              <option value="">Select Department</option>
-              {colleges[formData.college as keyof typeof colleges].map((dept) => (
-                <option key={dept} value={dept}>
-                  {dept}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
 
         <div>
           <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
