@@ -35,7 +35,7 @@ export const SignUpForm = () => {
         description: 'Welcome to our platform. Redirecting to dashboard...',
       });
       router.push('/dashboard');
-    } catch (error) {
+    } catch {
       toast({
         title: 'Error',
         description: 'Something went wrong. Please try again.',
