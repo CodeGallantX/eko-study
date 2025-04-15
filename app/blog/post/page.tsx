@@ -14,8 +14,8 @@ const BlogPage = () => {
 
   return (
     <div className="font-sans">
-      <Script>
-        var bh_id = "609HmCqwe4Qx6DNDIxNA";</Script>
+      <Script id="blog-handy-config">
+        var bh_id = &quot;609HmCqwe4Qx6DNDIxNA&quot;</Script>
 
       <Script src="https://www.bloghandy.com/api/bh_blogengine.js"></Script>
       <Header />

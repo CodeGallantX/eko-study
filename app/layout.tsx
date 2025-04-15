@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
+import { Providers } from './providers';
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -51,7 +52,6 @@ export const metadata = {
   },
 };
 
-
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
@@ -70,7 +70,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
         }}
       />
       <body className={`${outfit.variable} ${merriweather.variable} antialiased`}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
         <Toaster />
       </body>
     </html>
