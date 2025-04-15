@@ -3,49 +3,39 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { toast } from '@/hooks/use-toast';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { PiGoogleLogoBold } from 'react-icons/pi';
+import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 export const SignInForm = () => {
   const router = useRouter();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://ekustudy.onrender.com/users/createUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          // Adding default values for required fields
-          fullName: email.split('@')[0], // Using email username as fullName
-          username: email.split('@')[0], // Using email username as username
-        }),
+      const { email, password } = formData;
+      
+      const response = await axios.post('https://ekustudy.onrender.com/auth/login', {
+        email,
+        password,
       });
 
-      if (!response.ok) {
-        throw new Error('Sign in failed');
-      }
-
-      const data = await response.json();
-      
       // Store token if available
-      if (data.token) {
-        localStorage.setItem('auth_token', data.token);
+      if (response.data.token) {
+        localStorage.setItem('auth_token', response.data.token);
       }
 
       toast({
@@ -55,9 +45,10 @@ export const SignInForm = () => {
       });
       router.push('/dashboard');
     } catch (error) {
+      console.error('Sign in error:', error);
       toast({
         title: 'Error',
-        description: 'Invalid email or password',
+        description: 'Invalid email or password. Please try again.',
         variant: 'destructive',
       });
     } finally {
@@ -65,15 +56,15 @@ export const SignInForm = () => {
     }
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setEmail(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setPassword(e.target.value);
-  };
-
-  const togglePasswordVisibility = (): void => {
+  const togglePasswordVisibility = () => {
     setPasswordVisible(prev => !prev);
   };
 
@@ -94,7 +85,7 @@ export const SignInForm = () => {
         >
           <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Welcome back</h1>
           <p className="text-sm sm:text-base text-gray-600">
-            Don&apos;t have an account?{' '}
+            Don't have an account?{' '}
             <Link
               href="/auth/signup"
               className="text-green hover:text-deepGreen font-medium transition-colors"
@@ -115,26 +106,27 @@ export const SignInForm = () => {
             <Label htmlFor="email" className="text-gray-700">Email</Label>
             <Input
               id="email"
+              name="email"
               type="email"
               placeholder="you@example.com"
-              value={email}
-              onChange={handleEmailChange}
+              value={formData.email}
+              onChange={handleChange}
               required
               className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
             />
           </motion.div>
-          
+
           <motion.div 
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
             className="space-y-2"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex justify-between items-center">
               <Label htmlFor="password" className="text-gray-700">Password</Label>
               <Link
-                href="/forgot-password"
-                className="text-xs sm:text-sm font-medium text-green hover:text-deepGreen transition-colors"
+                href="/auth/forgot-password"
+                className="text-xs sm:text-sm text-green hover:text-deepGreen font-medium transition-colors"
               >
                 Forgot password?
               </Link>
@@ -142,10 +134,11 @@ export const SignInForm = () => {
             <div className="relative">
               <Input
                 id="password"
+                name="password"
                 type={passwordVisible ? 'text' : 'password'}
                 placeholder="••••••••"
-                value={password}
-                onChange={handlePasswordChange}
+                value={formData.password}
+                onChange={handleChange}
                 required
                 className="focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-10"
               />
@@ -163,7 +156,7 @@ export const SignInForm = () => {
               </button>
             </div>
           </motion.div>
-          
+
           <motion.div
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
@@ -180,7 +173,7 @@ export const SignInForm = () => {
                   <span className="text-sm sm:text-base">Signing in...</span>
                 </>
               ) : (
-                <span className="text-sm sm:text-base">Sign In</span>
+                <span className="text-sm sm:text-base">Sign in</span>
               )}
             </Button>
           </motion.div>
@@ -198,31 +191,7 @@ export const SignInForm = () => {
           </div>
         </div>
 
-        {/* Terms */}
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          className="text-center text-xs sm:text-sm text-gray-500 mb-4"
-        >
-          By clicking continue, you agree to our{' '}
-          <Link
-            href="/terms"
-            className="text-green hover:text-deepGreen font-medium transition-colors"
-          >
-            Terms of Service
-          </Link>{' '}
-          and{' '}
-          <Link
-            href="/privacy"
-            className="text-green hover:text-deepGreen font-medium transition-colors"
-          >
-            Privacy Policy
-          </Link>
-          .
-        </motion.p>
-
-        {/* Google Button - Moved to bottom */}
+        {/* Google Button */}
         <motion.div
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
