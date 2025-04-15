@@ -22,6 +22,7 @@ export const SignUpForm = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
+    username: '',
     password: '',
     agreeTerms: false,
   });
@@ -33,12 +34,23 @@ export const SignUpForm = () => {
     setIsSubmitting(true);
 
     try {
+      // Log the request payload for debugging
+      console.log('Sending signup request with data:', {
+        fullName: formData.fullName,
+        email: formData.email,
+        username: formData.username,
+        password: '********', // Don't log the actual password
+      });
+
       const response = await axios.post('https://ekustudy.onrender.com/users/createUser', {
         fullName: formData.fullName,
         email: formData.email,
-        username: formData.email.split('@')[0], // Using email username as default
+        username: formData.username,
         password: formData.password,
       });
+
+      // Log the response for debugging
+      console.log('Signup response:', response.data);
 
       // Check if the response contains a userId
       if (response.data && response.data.userId) {
@@ -64,11 +76,30 @@ export const SignUpForm = () => {
       }
     } catch (error) {
       console.error('Sign up error:', error);
-      toast({
-        title: 'Error',
-        description: 'Failed to create account. Please try again.',
-        variant: 'destructive',
-      });
+      
+      // Log more detailed error information
+      if (axios.isAxiosError(error) && error.response) {
+        console.error('Error response data:', error.response.data);
+        console.error('Error status:', error.response.status);
+        console.error('Error headers:', error.response.headers);
+        
+        // Show a more specific error message based on the API response
+        const errorMessage = error.response.data.message || 
+                            error.response.data.error || 
+                            'Failed to create account. Please try again.';
+        
+        toast({
+          title: 'Error',
+          description: errorMessage,
+          variant: 'destructive',
+        });
+      } else {
+        toast({
+          title: 'Error',
+          description: 'Failed to create account. Please try again.',
+          variant: 'destructive',
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -150,6 +181,27 @@ export const SignUpForm = () => {
               required
               className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
             />
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2 }}
+            className="space-y-2"
+          >
+            <Label htmlFor="username" className="text-gray-700">Username</Label>
+            <Input
+              id="username"
+              name="username"
+              placeholder="johndoe"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              This will be your unique identifier on the platform
+            </p>
           </motion.div>
 
           <motion.div 

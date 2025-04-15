@@ -7,17 +7,56 @@ import { RootState } from '@/store/store';
 import { clearUser, setUser } from '@/store/slices/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
-import axios from 'axios';
+import CourseCard from '@/components/CourseCard';
 
-export default function DashboardPage() {
+export default function CoursesPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [activeSection, setActiveSection] = useState('dashboard');
+  const [activeSection, setActiveSection] = useState('courses');
   const [isLoading, setIsLoading] = useState(true);
-  const [userProfile, setUserProfile] = useState<any>(null);
+
+  // Mock courses data
+  const courses = [
+    {
+      id: 1,
+      title: 'Introduction to Computer Science',
+      instructor: 'Dr. John Smith',
+      image: '/images/courses/cs101.jpg',
+      progress: 65,
+      rating: 4.8,
+      students: 1250,
+    },
+    {
+      id: 2,
+      title: 'Advanced Mathematics',
+      instructor: 'Prof. Sarah Johnson',
+      image: '/images/courses/math201.jpg',
+      progress: 30,
+      rating: 4.6,
+      students: 980,
+    },
+    {
+      id: 3,
+      title: 'Physics Fundamentals',
+      instructor: 'Dr. Michael Brown',
+      image: '/images/courses/physics101.jpg',
+      progress: 0,
+      rating: 4.7,
+      students: 1100,
+    },
+    {
+      id: 4,
+      title: 'Chemistry Basics',
+      instructor: 'Prof. Emily Davis',
+      image: '/images/courses/chem101.jpg',
+      progress: 0,
+      rating: 4.5,
+      students: 850,
+    },
+  ];
 
   // Mock notifications data
   const notifications = [
@@ -39,18 +78,13 @@ export default function DashboardPage() {
 
   useEffect(() => {
     // Check if user is authenticated
-    const checkAuth = async () => {
+    const checkAuth = () => {
       try {
         const userData = localStorage.getItem('user');
-        const token = localStorage.getItem('auth_token');
-        
-        if (!userData || !token || !isAuthenticated) {
+        if (!userData && !isAuthenticated) {
           router.push('/auth/signin');
-          return;
-        }
-        
-        // If we have user data in localStorage but not in Redux, update Redux
-        if (userData && !isAuthenticated) {
+        } else if (userData && !isAuthenticated) {
+          // If we have user data in localStorage but not in Redux, update Redux
           const parsedUserData = JSON.parse(userData);
           dispatch(setUser({
             isAuthenticated: true,
@@ -59,20 +93,8 @@ export default function DashboardPage() {
             email: parsedUserData.email || '',
             username: parsedUserData.username || ''
           }));
-        }
-        
-        // Fetch user profile data
-        try {
-          const response = await axios.get('https://ekustudy.onrender.com/users/profile', {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          });
-          
-          setUserProfile(response.data);
           setIsLoading(false);
-        } catch (profileError) {
-          console.error('Error fetching profile:', profileError);
+        } else {
           setIsLoading(false);
         }
       } catch (error) {
@@ -84,27 +106,11 @@ export default function DashboardPage() {
     checkAuth();
   }, [isAuthenticated, router, dispatch]);
 
-  const handleSignOut = async () => {
-    try {
-      // Call the logout API endpoint
-      await fetch("https://ekustudy.onrender.com/auth/logout", {
-        method: 'GET',
-        redirect: 'follow'
-      });
-      
-      // Clear local state and storage
-      dispatch(clearUser());
-      localStorage.removeItem('user');
-      localStorage.removeItem('auth_token');
-      router.push('/auth/signin');
-    } catch (error) {
-      console.error('Error during logout:', error);
-      // Still clear local state even if API call fails
-      dispatch(clearUser());
-      localStorage.removeItem('user');
-      localStorage.removeItem('auth_token');
-      router.push('/auth/signin');
-    }
+  const handleSignOut = () => {
+    dispatch(clearUser());
+    localStorage.removeItem('user');
+    localStorage.removeItem('auth_token');
+    router.push('/auth/signin');
   };
 
   if (isLoading) {
@@ -138,14 +144,22 @@ export default function DashboardPage() {
       <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
         <div className="max-w-7xl mx-auto">
           <h1 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            Welcome back, {userProfile?.fullName || username}!
+            My Courses
           </h1>
           
-          {/* Dashboard content will go here */}
-          <div className={`rounded-lg p-6 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
-            <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>
-              Your dashboard content will appear here.
-            </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {courses.map((course) => (
+              <CourseCard 
+                key={course.id}
+                title={course.title}
+                instructor={course.instructor}
+                image={course.image}
+                progress={course.progress}
+                rating={course.rating}
+                students={course.students}
+                isDarkMode={isDarkMode}
+              />
+            ))}
           </div>
         </div>
       </main>

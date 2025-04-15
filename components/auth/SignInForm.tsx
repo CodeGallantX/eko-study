@@ -11,9 +11,12 @@ import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/store/slices/userSlice';
 
 export const SignInForm = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -33,17 +36,43 @@ export const SignInForm = () => {
         password,
       });
 
-      // Store token if available
-      if (response.data.token) {
-        localStorage.setItem('auth_token', response.data.token);
+      // Extract user data from response
+      const { token, firstName, lastName, username } = response.data;
+      
+      // Store token in localStorage
+      if (token) {
+        localStorage.setItem('auth_token', token);
       }
+      
+      // Store user data in localStorage
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        username,
+        token
+      };
+      localStorage.setItem('user', JSON.stringify(userData));
+      
+      // Update Redux state
+      dispatch(setUser({
+        isAuthenticated: true,
+        firstName,
+        lastName,
+        email,
+        username
+      }));
 
       toast({
         title: 'Successfully signed in!',
         description: 'Redirecting to your dashboard...',
         duration: 3000,
       });
-      router.push('/dashboard');
+      
+      // Use setTimeout to ensure Redux state is updated before navigation
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 500);
     } catch (error) {
       console.error('Sign in error:', error);
       toast({
