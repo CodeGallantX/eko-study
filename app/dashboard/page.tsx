@@ -3,152 +3,99 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store/store';
-import { clearUser, setUser } from '@/store/slices/userSlice';
-import { Sidebar } from '@/components/dashboard/Sidebar';
-import { TopNav } from '@/components/dashboard/TopNav';
-import axios from 'axios';
+import { RootState } from '@/lib/redux/store';
+import { clearUserData } from '@/lib/redux/features/userSlice';
+import { Loader2 } from 'lucide-react';
 
 export default function DashboardPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [activeSection, setActiveSection] = useState('dashboard');
+  const { firstName, isAuthenticated } = useSelector((state: RootState) => state.user);
+  const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userProfile, setUserProfile] = useState<any>(null);
 
-  // Mock notifications data
-  const notifications = [
-    {
-      id: 1,
-      title: 'New Course Available',
-      message: 'Introduction to Computer Science is now available',
-      time: '2 hours ago',
-      read: false
-    },
-    {
-      id: 2,
-      title: 'Study Group Invitation',
-      message: 'You have been invited to join the Physics study group',
-      time: '1 day ago',
-      read: true
-    }
-  ];
-
+  // Set mounted state after component mounts
   useEffect(() => {
-    // Check if user is authenticated
+    setMounted(true);
+  }, []);
+
+  // Check authentication status
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return;
+    
     const checkAuth = async () => {
       try {
         const userData = localStorage.getItem('user');
         const token = localStorage.getItem('auth_token');
         
-        if (!userData || !token || !isAuthenticated) {
+        if (!token || !userData) {
           router.push('/auth/signin');
           return;
         }
         
-        // If we have user data in localStorage but not in Redux, update Redux
-        if (userData && !isAuthenticated) {
-          const parsedUserData = JSON.parse(userData);
-          dispatch(setUser({
-            isAuthenticated: true,
-            firstName: parsedUserData.firstName || '',
-            lastName: parsedUserData.lastName || '',
-            email: parsedUserData.email || '',
-            username: parsedUserData.username || ''
-          }));
-        }
-        
-        // Fetch user profile data
-        try {
-          const response = await axios.get('https://ekustudy.onrender.com/users/profile', {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          });
-          
-          setUserProfile(response.data);
-          setIsLoading(false);
-        } catch (profileError) {
-          console.error('Error fetching profile:', profileError);
-          setIsLoading(false);
-        }
+        setIsLoading(false);
       } catch (error) {
         console.error('Error checking authentication:', error);
         setIsLoading(false);
       }
     };
     
-    checkAuth();
-  }, [isAuthenticated, router, dispatch]);
-
-  const handleSignOut = async () => {
-    try {
-      // Call the logout API endpoint
-      await fetch("https://ekustudy.onrender.com/auth/logout", {
-        method: 'GET',
-        redirect: 'follow'
-      });
-      
-      // Clear local state and storage
-      dispatch(clearUser());
-      localStorage.removeItem('user');
-      localStorage.removeItem('auth_token');
-      router.push('/auth/signin');
-    } catch (error) {
-      console.error('Error during logout:', error);
-      // Still clear local state even if API call fails
-      dispatch(clearUser());
-      localStorage.removeItem('user');
-      localStorage.removeItem('auth_token');
-      router.push('/auth/signin');
+    if (mounted) {
+      checkAuth();
     }
+  }, [router, mounted]);
+
+  const handleSignOut = () => {
+    // Clear Redux state
+    dispatch(clearUserData());
+    
+    // Clear local storage
+    localStorage.removeItem('user');
+    localStorage.removeItem('auth_token');
+    
+    // Redirect to sign in page
+    router.push('/auth/signin');
   };
 
-  if (isLoading) {
+  // Show loading state during SSR or initial client render
+  if (!mounted || isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-deepGreen"></div>
+        <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );
   }
 
+  // Only render the dashboard content after component is mounted and auth is checked
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      <Sidebar
-        isDarkMode={isDarkMode}
-        isSidebarCollapsed={isSidebarCollapsed}
-        activeSection={activeSection}
-        username={username}
-        toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-        toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-        setActiveSection={setActiveSection}
-        handleSignOut={handleSignOut}
-      />
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Welcome, {firstName || 'Student'}!</h1>
+        <button 
+          onClick={handleSignOut}
+          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+        >
+          Sign Out
+        </button>
+      </div>
       
-      <TopNav
-        isDarkMode={isDarkMode}
-        isSidebarCollapsed={isSidebarCollapsed}
-        username={username}
-        notifications={notifications}
-      />
-
-      <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
-        <div className="max-w-7xl mx-auto">
-          <h1 className={`text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            Welcome back, {userProfile?.fullName || username}!
-          </h1>
-          
-          {/* Dashboard content will go here */}
-          <div className={`rounded-lg p-6 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm`}>
-            <p className={isDarkMode ? 'text-gray-300' : 'text-gray-600'}>
-              Your dashboard content will appear here.
-            </p>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Your Profile</h2>
+          <p className="text-gray-600">View and edit your profile information</p>
         </div>
-      </main>
+        
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Recent Courses</h2>
+          <p className="text-gray-600">Continue learning from where you left off</p>
+        </div>
+        
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4">Study Groups</h2>
+          <p className="text-gray-600">Join study groups and collaborate with peers</p>
+        </div>
+      </div>
     </div>
   );
 } 

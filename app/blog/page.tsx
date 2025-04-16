@@ -3,6 +3,7 @@ import Footer from "@/components/shared/Footer";
 import Preloader from "@/components/shared/Preloader";
 import Banner from "@/components/shared/Banner";
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function App() {
   const page = {
@@ -41,10 +42,12 @@ export default function App() {
                     The Importance of Intrinsic <br /> Motivation for Students
                   </h3>
                   <div className="flex items-center justify-start mt-4">
-                    <img
+                    <Image
                       className="w-12 h-12 rounded-full"
                       src="https://ik.imagekit.io/mshcgnjju/team9.png?updatedAt=1710713969991"
                       alt="Author - EkoStudy"
+                      width={48}
+                      height={48}
                     />
                     <div className="ml-4 text-sm">
                       <h6>Oliver Adetutu</h6>
@@ -85,10 +88,12 @@ export default function App() {
                         </Link>
                       </h4>
                       <div className="flex items-center">
-                        <img
+                        <Image
                           className="w-10 h-10 rounded-full"
                           src="https://ik.imagekit.io/mshcgnjju/team9.png?updatedAt=1710713969991"
                           alt="User -EkoStudy"
+                          width={40}
+                          height={40}
                         />
                         <span className="ml-4">Kia Smith</span>
                       </div>

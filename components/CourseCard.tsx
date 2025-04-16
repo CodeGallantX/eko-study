@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Link from "next/link";
+import Image from "next/image";
 import { FiStar, FiUsers } from "react-icons/fi";
 
 interface CourseCardProps {
@@ -27,10 +27,12 @@ export default function CourseCard({
       whileHover={{ scale: 1.02 }}
     >
       <div className="relative h-40">
-        <img
+        <Image
           src={image}
           alt={title}
           className="w-full h-full object-cover"
+          width={400}
+          height={160}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
           <h3 className={`font-bold text-lg ${isDarkMode ? 'text-white' : 'text-white'}`}>

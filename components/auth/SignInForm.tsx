@@ -12,7 +12,7 @@ import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { setUser } from '@/store/slices/userSlice';
+import { setUserData } from '@/lib/redux/features/userSlice';
 
 export const SignInForm = () => {
   const router = useRouter();
@@ -55,12 +55,9 @@ export const SignInForm = () => {
       localStorage.setItem('user', JSON.stringify(userData));
       
       // Update Redux state
-      dispatch(setUser({
-        isAuthenticated: true,
+      dispatch(setUserData({
         firstName,
-        lastName,
-        email,
-        username
+        token
       }));
 
       toast({
@@ -69,10 +66,8 @@ export const SignInForm = () => {
         duration: 3000,
       });
       
-      // Use setTimeout to ensure Redux state is updated before navigation
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 500);
+      // Use router.push with replace to prevent back navigation to login
+      router.push('/dashboard');
     } catch (error) {
       console.error('Sign in error:', error);
       toast({
@@ -114,7 +109,7 @@ export const SignInForm = () => {
         >
           <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Welcome back</h1>
           <p className="text-sm sm:text-base text-gray-600">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link
               href="/auth/signup"
               className="text-green hover:text-deepGreen font-medium transition-colors"
