@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-  firstName: string;
+  username: string;
   isAuthenticated: boolean;
   token: string | null;
 }
 
 const initialState: UserState = {
-  firstName: '',
+  username: '',
   isAuthenticated: false,
   token: null,
 };
@@ -16,13 +16,13 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserData: (state, action: PayloadAction<{ firstName: string; token: string }>) => {
-      state.firstName = action.payload.firstName;
+    setUserData: (state, action: PayloadAction<{ username: string; token: string }>) => {
+      state.username = action.payload.username;
       state.token = action.payload.token;
       state.isAuthenticated = true;
     },
     clearUserData: (state) => {
-      state.firstName = '';
+      state.username = '';
       state.token = null;
       state.isAuthenticated = false;
     },

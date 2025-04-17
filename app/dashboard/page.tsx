@@ -10,7 +10,7 @@ import { Loader2 } from 'lucide-react';
 export default function DashboardPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { firstName, isAuthenticated } = useSelector((state: RootState) => state.user);
+  const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -71,7 +71,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Welcome, {firstName || 'Student'}!</h1>
+        <h1 className="text-3xl font-bold">Welcome, {username || 'Student'}!</h1>
         <button 
           onClick={handleSignOut}
           className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
