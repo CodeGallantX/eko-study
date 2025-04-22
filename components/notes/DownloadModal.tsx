@@ -48,6 +48,12 @@ export default function DownloadModal({ url, fileName, onClose }: DownloadModalP
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  useEffect(() => {
+    if (isOpen) {
+      handleDownload();
+    }
+  }, [isOpen, handleDownload]);
+
   return (
     <>
       {/* Background overlay */}

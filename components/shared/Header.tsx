@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown, Plus } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from 'next/image';
 
 export default function Header() {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
@@ -32,7 +33,13 @@ export default function Header() {
   return (
     <header className="bg-[#4c5f4e] fixed flex flex-row items-center justify-between py-2 px-6 lg:px-24 z-40 w-full">
       <Link href="/" className="w-32 lg:w-40">
-        <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
+        <Image
+          src="/images/logo.png"
+          alt="EkoStudy Logo"
+          width={150}
+          height={40}
+          className="h-10 w-auto"
+        />
       </Link>
 
       {/* Desktop Navigation */}
@@ -125,7 +132,13 @@ export default function Header() {
       >
         <div className="relative flex flex-row items-start justify-between py-4">
           <Link href="/" className="w-32" onClick={toggleSidebar}>
-            <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-full object-cover" />
+            <Image
+              src="/images/logo.png"
+              alt="EkoStudy Logo"
+              width={150}
+              height={40}
+              className="h-10 w-auto"
+            />
           </Link>
           <button className="text-white mb-6 hover:rotate-135 transition-all duration-200 ease-in-out" onClick={toggleSidebar}>
             <X size={28} />

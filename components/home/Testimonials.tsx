@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { FaQuoteLeft, FaGraduationCap, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Image from 'next/image';
 
 const testimonials = [
   {
@@ -108,10 +109,12 @@ export default function Testimonials() {
                   <FaQuoteLeft className="absolute top-2 left-5 text-4xl text-[#4c5f4e] opacity-30" />
 
                   {/* Student Image */}
-                  <img
+                  <Image
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-20 h-20 rounded-full border-4 border-[#ffca0d] object-cover mb-4"
+                    width={48}
+                    height={48}
+                    className="rounded-full"
                   />
 
                   {/* Feedback */}
