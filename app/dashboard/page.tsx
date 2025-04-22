@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/redux/store';
 import { clearUserData } from '@/lib/redux/features/userSlice';
 import { Loader2 } from 'lucide-react';
+import { useAuth } from '@/lib/auth';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function DashboardPage() {
   const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { user, loading } = useAuth();
 
   // Set mounted state after component mounts
   useEffect(() => {

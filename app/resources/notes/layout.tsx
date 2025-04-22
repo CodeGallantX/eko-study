@@ -45,7 +45,9 @@ export default function Layout({ children }: ResourcesLayoutProps) {
           `,
         }}
       />
-      <body>{children}</body>
+      <div className="min-h-screen bg-[#e8ede6] dark:bg-[#1a1a1a]">
+        {children}
+      </div>
     </html>
   );
 }

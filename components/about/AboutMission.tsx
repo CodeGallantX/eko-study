@@ -53,7 +53,7 @@ export default function AboutMission() {
           >
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Revolutionizing Education</h3>
             <div className="space-y-6 text-gray-700">
-              <p>At EkoStudy, we're committed to transforming how students learn, study, and succeed. Our mission is threefold:</p>
+              <p>At EkoStudy, we&apos;re committed to transforming how students learn, study, and succeed. Our mission is threefold:</p>
               
               <div className="space-y-4">
                 <motion.div 
@@ -112,7 +112,7 @@ export default function AboutMission() {
                 transition={{ delay: 0.8, duration: 0.5 }}
                 className="pt-4"
               >
-                We believe every student deserves equal access to quality learning resources, regardless of their background or circumstances.
+                We&apos;re committed to providing LASUSTECH students with the best possible learning experience.
               </motion.p>
             </div>
           </motion.div>
