@@ -78,8 +78,9 @@ export const SignUpForm = () => {
       // Log the response for debugging
       console.log('Signup response:', response.data);
 
-      // Check if the response contains a userId
-      if (response.data && response.data.userId) {
+      // Check if the response contains a userId or _id
+      const userId = response.data.userId || response.data._id;
+      if (response.data && userId) {
         // Store user data in Redux
         dispatch(setUserData({ 
           username: formData.username.trim().toLowerCase(), 
@@ -93,9 +94,10 @@ export const SignUpForm = () => {
         });
         
         // Redirect to verification page with userId
-        router.push(`/auth/verify?userId=${response.data.userId}`);
+        router.push(`/auth/verify?userId=${userId}`);
       } else {
-        throw new Error('User ID not found in response');
+        console.error('Invalid response format:', response.data);
+        throw new Error('User ID not found in response. Please try again.');
       }
     } catch (error) {
       console.error('Sign up error:', error);
@@ -117,10 +119,46 @@ export const SignUpForm = () => {
         console.error('Error status:', error.response.status);
         console.error('Error headers:', error.response.headers);
         
-        // Show a more specific error message based on the API response
-        const errorMessage = error.response.data.message || 
-                            error.response.data.error || 
-                            'Failed to create account. Please try again.';
+        // Handle specific error cases
+        let errorMessage = 'Failed to create account. Please try again.';
+        
+        if (error.response.status === 409) {
+          // Check for specific conflict messages in the response
+          const responseData = error.response.data;
+          
+          // Log the exact error message for debugging
+          console.log('Conflict error details:', responseData);
+          
+          if (responseData.message === 'User already exists') {
+            errorMessage = 'An account with these details already exists.';
+            
+            toast({
+              title: 'Account Already Exists',
+              description: (
+                <div className="flex flex-col gap-2">
+                  <p>An account with these details already exists.</p>
+                  <Button 
+                    onClick={handleSignInClick}
+                    className="w-full mt-2"
+                    variant="outline"
+                  >
+                    Sign In Instead
+                  </Button>
+                </div>
+              ),
+              variant: 'destructive',
+            });
+            return;
+          } else if (responseData.message?.toLowerCase().includes('email')) {
+            errorMessage = 'This email is already registered. Please use a different email or sign in.';
+          } else if (responseData.message?.toLowerCase().includes('username')) {
+            errorMessage = 'This username is already taken. Please choose a different username.';
+          } else {
+            errorMessage = 'An account with these details already exists. Please try again with different information.';
+          }
+        } else if (error.response.status === 400) {
+          errorMessage = error.response.data.message || 'Invalid information provided. Please check your details and try again.';
+        }
         
         toast({
           title: 'Sign Up Failed',
@@ -149,6 +187,10 @@ export const SignUpForm = () => {
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(prev => !prev);
+  };
+
+  const handleSignInClick = () => {
+    router.push('/auth/signin');
   };
 
   return (

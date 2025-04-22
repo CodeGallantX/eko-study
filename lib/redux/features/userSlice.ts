@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
   username: string;
+  token: string;
   isAuthenticated: boolean;
-  token: string | null;
 }
 
 const initialState: UserState = {
   username: '',
+  token: '',
   isAuthenticated: false,
-  token: null,
 };
 
 export const userSlice = createSlice({
@@ -23,7 +23,7 @@ export const userSlice = createSlice({
     },
     clearUserData: (state) => {
       state.username = '';
-      state.token = null;
+      state.token = '';
       state.isAuthenticated = false;
     },
   },

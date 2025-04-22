@@ -14,7 +14,7 @@ export default function DashboardPage() {
   const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { user, loading } = useAuth();
+  const { user, loading, signOut } = useAuth();
 
   // Set mounted state after component mounts
   useEffect(() => {
@@ -49,19 +49,11 @@ export default function DashboardPage() {
   }, [router, mounted]);
 
   const handleSignOut = () => {
-    // Clear Redux state
-    dispatch(clearUserData());
-    
-    // Clear local storage
-    localStorage.removeItem('user');
-    localStorage.removeItem('auth_token');
-    
-    // Redirect to sign in page
-    router.push('/auth/signin');
+    signOut();
   };
 
   // Show loading state during SSR or initial client render
-  if (!mounted || isLoading) {
+  if (!mounted || isLoading || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <Loader2 className="h-8 w-8 animate-spin" />
@@ -73,7 +65,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Welcome, {username || 'Student'}!</h1>
+        <h1 className="text-3xl font-bold">Welcome, {user?.username || username || 'Student'}!</h1>
         <button 
           onClick={handleSignOut}
           className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
