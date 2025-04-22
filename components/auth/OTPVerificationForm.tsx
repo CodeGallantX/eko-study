@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
@@ -14,11 +14,16 @@ interface OTPVerificationFormProps {
 }
 
 export function OTPVerificationForm({ email, onResendOTP }: OTPVerificationFormProps) {
-  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
   const [isLoading, setIsLoading] = useState(false);
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(30);
   const router = useRouter();
   const dispatch = useDispatch();
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  useEffect(() => {
+    inputRefs.current = inputRefs.current.slice(0, 6);
+  }, []);
 
   useEffect(() => {
     if (timer > 0) {
@@ -31,22 +36,20 @@ export function OTPVerificationForm({ email, onResendOTP }: OTPVerificationFormP
 
   const handleChange = (index: number, value: string) => {
     if (value.length > 1) return;
-    
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-
-    // Auto-focus next input
     if (value && index < 5) {
-      const nextInput = document.querySelector(`input[name=otp-${index + 1}]`) as HTMLInputElement;
-      if (nextInput) nextInput.focus();
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
-  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === 'Backspace' && !otp[index] && index > 0) {
-      const prevInput = document.querySelector(`input[name=otp-${index - 1}]`) as HTMLInputElement;
-      if (prevInput) prevInput.focus();
+      const newOtp = [...otp];
+      newOtp[index - 1] = '';
+      setOtp(newOtp);
+      inputRefs.current[index - 1]?.focus();
     }
   };
 
@@ -117,16 +120,16 @@ export function OTPVerificationForm({ email, onResendOTP }: OTPVerificationFormP
         <div className="flex justify-center gap-2">
           {otp.map((digit, index) => (
             <input
-              key={index}
+              ref={el => inputRefs.current[index] = el}
               type="text"
+              inputMode="numeric"
+              pattern="[0-9]*"
               name={`otp-${index}`}
               value={digit}
               onChange={(e) => handleChange(index, e.target.value)}
-              onKeyDown={(e) => handleKeyDown(index, e)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
               className="h-12 w-12 rounded-lg border border-gray-300 text-center text-lg font-semibold focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
               maxLength={1}
-              pattern="[0-9]"
-              inputMode="numeric"
             />
           ))}
         </div>
