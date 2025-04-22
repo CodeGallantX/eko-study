@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, X } from 'lucide-react';
+ import { useState, useEffect } from 'react';
 
 interface EmailSentModalProps {
   isOpen: boolean;
@@ -11,6 +12,16 @@ interface EmailSentModalProps {
 }
 
 export function EmailSentModal({ isOpen, onClose, email, type }: EmailSentModalProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
