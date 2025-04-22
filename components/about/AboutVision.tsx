@@ -1,31 +1,77 @@
+'use client';
+
 import { motion } from 'framer-motion';
-import { visionItems } from '../../data/about';
+import { FaAccessibleIcon, FaLightbulb, FaUsers } from 'react-icons/fa';
 
 export default function AboutVision() {
   return (
-    <section className="mb-20 bg-gray-50 rounded-xl p-12">
-      <div className="text-center mb-12">
-        <h6 className="text-lg font-semibold text-emerald-700 mb-2">Our Vision</h6>
-        <h2 className="text-4xl font-bold text-gray-900 mb-6">Shaping the Future of LASUSTECH Education</h2>
-        <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-          We envision a LASUSTECH where every student has personalized learning tools at their fingertips, where academic success is not limited by access to resources, and where technology enhances rather than replaces traditional learning methods.
-        </p>
-      </div>
+    <section className="mb-20 py-12 bg-gradient-to-b from-white to-green-50">
+      <div className="container mx-auto px-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Vision</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Building the future of education through innovation and accessibility
+          </p>
+        </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {visionItems.map((item, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <motion.div
-            key={index}
-            whileHover={{ y: -5 }}
-            className="bg-white p-8 rounded-lg shadow-md text-center hover:shadow-lg transition-shadow"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            whileHover={{ y: -10, transition: { duration: 0.3 } }}
+            className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all"
           >
-            <div className="flex justify-center mb-4">
-              {item.icon}
+            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
+              <FaAccessibleIcon className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-            <p className="text-gray-600">{item.description}</p>
+            <h3 className="text-xl font-semibold mb-4 text-gray-900">Accessibility</h3>
+            <p className="text-gray-600">
+              Making quality education accessible to every student, regardless of location or economic background.
+            </p>
           </motion.div>
-        ))}
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            whileHover={{ y: -10, transition: { duration: 0.3 } }}
+            className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all"
+          >
+            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
+              <FaLightbulb className="w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-semibold mb-4 text-gray-900">Innovation</h3>
+            <p className="text-gray-600">
+              Continuously developing cutting-edge tools that address the real challenges students face in their academic journey.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            whileHover={{ y: -10, transition: { duration: 0.3 } }}
+            className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all"
+          >
+            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600">
+              <FaUsers className="w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-semibold mb-4 text-gray-900">Community</h3>
+            <p className="text-gray-600">
+              Building a supportive network where students can learn from each other and grow together.
+            </p>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

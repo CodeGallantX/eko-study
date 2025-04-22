@@ -55,11 +55,10 @@ export const SignUpForm = () => {
       // Check if the response contains a userId
       if (response.data && response.data.userId) {
         // Extract first name from full name
-        const firstName = formData.fullName.split(' ')[0];
         
         // Store first name in Redux
         dispatch(setUserData({ 
-          firstName, 
+          username: formData.username, 
           token: response.data.token || '' 
         }));
         
@@ -134,14 +133,14 @@ export const SignUpForm = () => {
         >
           <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Create an account</h1>
           <p className="text-sm sm:text-base text-gray-600">
-            Already have an account?{' '}
-            <Link
-              href="/auth/signin"
+          Already have an account?{' '}
+          <Link
+            href="/auth/signin"
               className="text-green hover:text-deepGreen font-medium transition-colors"
-            >
-              Sign in
-            </Link>
-          </p>
+          >
+            Sign in
+          </Link>
+        </p>
         </motion.div>
 
         {/* Form */}
@@ -158,7 +157,7 @@ export const SignUpForm = () => {
               name="fullName"
               placeholder="John Doe"
               value={formData.fullName}
-              onChange={handleChange}
+                onChange={handleChange}
               required
               className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
             />
@@ -259,21 +258,21 @@ export const SignUpForm = () => {
               htmlFor="agreeTerms"
               className="text-xs sm:text-sm text-gray-700 leading-snug"
             >
-              I agree to the{' '}
+                I agree to the{' '}
               <Link
                 href="/terms"
                 className="text-green hover:text-deepGreen font-medium transition-colors"
               >
-                Terms of Service
-              </Link>{' '}
-              and{' '}
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
               <Link
                 href="/privacy"
                 className="text-green hover:text-deepGreen font-medium transition-colors"
               >
-                Privacy Policy
-              </Link>
-            </label>
+                  Privacy Policy
+                </Link>
+              </label>
           </motion.div>
 
           <motion.div
@@ -285,15 +284,15 @@ export const SignUpForm = () => {
               type="submit"
               className="w-full bg-green text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen"
               disabled={isSubmitting || !formData.agreeTerms}
-            >
-              {isSubmitting ? (
-                <>
+          >
+            {isSubmitting ? (
+              <>
                   <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
                   <span className="text-sm sm:text-base">Creating account...</span>
-                </>
-              ) : (
+              </>
+            ) : (
                 <span className="text-sm sm:text-base">Create account</span>
-              )}
+            )}
             </Button>
           </motion.div>
         </form>
