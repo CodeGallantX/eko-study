@@ -28,12 +28,33 @@ export const SignUpForm = () => {
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
+      // Validate form data
+      if (!formData.fullName.trim()) {
+        throw new Error('Full name is required');
+      }
+      if (!formData.email.trim()) {
+        throw new Error('Email is required');
+      }
+      if (!formData.username.trim()) {
+        throw new Error('Username is required');
+      }
+      if (!formData.password) {
+        throw new Error('Password is required');
+      }
+      if (formData.password.length < 6) {
+        throw new Error('Password must be at least 6 characters long');
+      }
+      if (!formData.agreeTerms) {
+        throw new Error('You must agree to the terms and conditions');
+      }
+
       // Log the request payload for debugging
       console.log('Sending signup request with data:', {
         fullName: formData.fullName,
@@ -43,10 +64,15 @@ export const SignUpForm = () => {
       });
 
       const response = await axios.post('https://ekustudy.onrender.com/users/createUser', {
-        fullName: formData.fullName,
-        email: formData.email,
-        username: formData.username,
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim().toLowerCase(),
+        username: formData.username.trim().toLowerCase(),
         password: formData.password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
       });
 
       // Log the response for debugging
@@ -54,11 +80,9 @@ export const SignUpForm = () => {
 
       // Check if the response contains a userId
       if (response.data && response.data.userId) {
-        // Extract first name from full name
-        
-        // Store first name in Redux
+        // Store user data in Redux
         dispatch(setUserData({ 
-          username: formData.username, 
+          username: formData.username.trim().toLowerCase(), 
           token: response.data.token || '' 
         }));
         
@@ -76,6 +100,17 @@ export const SignUpForm = () => {
     } catch (error) {
       console.error('Sign up error:', error);
       
+      // Handle validation errors
+      if (error instanceof Error) {
+        toast({
+          title: 'Validation Error',
+          description: error.message,
+          variant: 'destructive',
+        });
+        setIsSubmitting(false);
+        return;
+      }
+      
       // Log more detailed error information
       if (axios.isAxiosError(error) && error.response) {
         console.error('Error response data:', error.response.data);
@@ -88,14 +123,14 @@ export const SignUpForm = () => {
                             'Failed to create account. Please try again.';
         
         toast({
-          title: 'Error',
+          title: 'Sign Up Failed',
           description: errorMessage,
           variant: 'destructive',
         });
       } else {
         toast({
-          title: 'Error',
-          description: 'Failed to create account. Please try again.',
+          title: 'Sign Up Failed',
+          description: 'An unexpected error occurred. Please try again.',
           variant: 'destructive',
         });
       }
@@ -217,10 +252,25 @@ export const SignUpForm = () => {
                 type={passwordVisible ? 'text' : 'password'}
                 placeholder="••••••••"
                 value={formData.password}
-                onChange={handleChange}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  const passwordRegex = /^[A-Za-z0-9]+$/;
+                  if (!value) {
+                    setPasswordError('Password is required');
+                  } else if (value.length < 6) {
+                    setPasswordError('Password must be at least 6 characters long');
+                  } else if (!passwordRegex.test(value)) {
+                    setPasswordError('Password can only contain letters and numbers');
+                  } else {
+                    setPasswordError('');
+                  }
+                  handleChange(e);
+                }}
                 required
-                minLength={8}
-                className="focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-10"
+                minLength={6}
+                className={`focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-10 ${
+                  passwordError ? 'border-red-500' : ''
+                }`}
               />
               <button
                 type="button"
@@ -235,8 +285,11 @@ export const SignUpForm = () => {
                 )}
               </button>
             </div>
+            {passwordError && (
+              <p className="text-sm text-red-500 mt-1">{passwordError}</p>
+            )}
             <p className="text-xs text-gray-500 mt-1">
-              Must be at least 8 characters
+              Must be at least 6 characters and contain only letters and numbers
             </p>
           </motion.div>
 
