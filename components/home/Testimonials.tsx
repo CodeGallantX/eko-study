@@ -112,9 +112,13 @@ export default function Testimonials() {
                   <Image
                     src={testimonial.image}
                     alt={testimonial.name}
-                    width={48}
-                    height={48}
-                    className="rounded-full"
+                    width={80}
+                    height={80}
+                    className="w-20 h-20 rounded-full border-4 border-[#ffca0d] object-cover mb-4"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = '/images/default-avatar.png';
+                    }}
                   />
 
                   {/* Feedback */}

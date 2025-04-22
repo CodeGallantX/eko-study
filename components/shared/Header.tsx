@@ -39,6 +39,11 @@ export default function Header() {
           width={150}
           height={40}
           className="h-10 w-auto"
+          priority
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = '/images/fallback-logo.png';
+          }}
         />
       </Link>
 
@@ -138,6 +143,11 @@ export default function Header() {
               width={150}
               height={40}
               className="h-10 w-auto"
+              priority
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/fallback-logo.png';
+              }}
             />
           </Link>
           <button className="text-white mb-6 hover:rotate-135 transition-all duration-200 ease-in-out" onClick={toggleSidebar}>

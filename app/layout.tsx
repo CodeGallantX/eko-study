@@ -5,16 +5,21 @@ import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Providers } from './providers';
 
+// Configure fonts with fallback
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: 'swap',
+  fallback: ['system-ui', 'arial'],
 });
 
 const merriweather = Merriweather({
   variable: "--font-merriweather",
   subsets: ["latin"],
   weight: ["300", "400", "700", "900"],
+  display: 'swap',
+  fallback: ['Georgia', 'serif'],
 });
 
 type RootLayoutProps = {
@@ -54,7 +59,19 @@ export const metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${outfit.variable} ${merriweather.variable}`}>
+      <head>
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+      </head>
       {/* Google Analytics */}
       <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
       <Script
@@ -69,7 +86,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           `,
         }}
       />
-      <body className={`${outfit.variable} ${merriweather.variable} antialiased`}>
+      <body className="antialiased">
         <Providers>
           {children}
         </Providers>
