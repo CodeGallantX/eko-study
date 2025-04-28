@@ -138,6 +138,10 @@ export default function DashboardLayout({
 
   // Only render the full layout after component is mounted and auth is checked
   return (
+    <html>/
+      <head>
+        <title>Dashboard</title>
+      </head>
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       {/* {mounted && ( */}
         <>
@@ -166,5 +170,6 @@ export default function DashboardLayout({
         </>
       {/* )} */}
     </div>
+    </html>
   );
 }

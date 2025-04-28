@@ -26,7 +26,7 @@ const features = [
 
 export default function Hero() {
   return (
-    <div className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#e8ede6] dark:bg-[#1a1a1a]">
+    <div className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-[#e8ede6] dark:bg-[#1a1a1a] py-28 pt-36">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Animated Blobs */}
@@ -53,7 +53,7 @@ export default function Hero() {
           transition={{ duration: 7, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
         />
         <motion.div 
-          className="absolute w-[450px] h-[450px] bg-[#ffca0d] dark:bg-[#555] rounded-full filter blur-3xl opacity-50 top-20 left-20"
+          className="absolute w-[150px] h-[150px] bg-[#ffca0d] dark:bg-[#555] rounded-full filter blur-3xl opacity-50 top-20 left-20"
           initial={{ x: "-20%", y: "30%", scale: 1, rotate: 0 }}
           animate={{ 
             x: ["-15%", "15%", "-10%"], 
@@ -65,7 +65,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-20 relative z-10">
+      <div className="px-10 lg:px-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <motion.div 
@@ -97,7 +97,7 @@ export default function Hero() {
             </motion.p>
 
             {/* Key Benefits */}
-            <motion.div 
+            {/* <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.5 }}
@@ -127,7 +127,7 @@ export default function Hero() {
                   <span className="font-semibold">Collaborative Study Groups</span> to enhance knowledge sharing and peer learning
                 </p>
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Feature Pills */}
             <motion.div 

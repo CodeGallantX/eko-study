@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Preloader from "@/components/shared/Preloader"
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -132,6 +133,8 @@ export default function ResetPasswordPage() {
   }
 
   return (
+    <>
+    <Preloader />
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -261,5 +264,6 @@ export default function ResetPasswordPage() {
         </div>
       </motion.div>
     </div>
+    </>
   );
 } 

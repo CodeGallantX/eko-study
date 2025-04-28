@@ -98,12 +98,12 @@ body, div, section, a, p, input, textarea, select, label, button {
 
 /* Logo Circle Loader */
 [data-loader] {
-  margin: 8px;
+  margin: 10px;
 }
 
 [data-loader='logo-circle'] {
-  width: 155px;
-  height: 155px;
+  width: 75px;
+  height: 75px;
   -webkit-animation: circle infinite .75s linear;
   -moz-animation: circle infinite .75s linear;
   -o-animation: circle infinite .75s linear;

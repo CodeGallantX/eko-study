@@ -1,8 +1,11 @@
+import Preloader from "@/components/shared/Preloader"
 import { SignUpForm } from '@/components/auth/SignUpForm';
 import Image from 'next/image';
 
 export default function SignUp() {
   return (
+    <>
+    <Preloader />
     <div className="min-h-screen flex items-center justify-center bg-white p-4 md:p-8">
       <div className="flex flex-col lg:flex-row w-full max-w-6xl gap-8 items-center">
         {/* Illustration - Hidden on mobile, visible on lg screens */}
@@ -24,6 +27,7 @@ export default function SignUp() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

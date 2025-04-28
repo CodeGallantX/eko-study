@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FiHome, FiBook, FiUsers, FiShoppingBag, FiHelpCircle, 
   FiSettings, FiLogOut, FiSun, FiMoon, FiBell
 } from 'react-icons/fi';
 import { 
-  PiRobot, PiNotebook, PiUser
+  PiRobot, PiNotebook, PiUser, PiCaretLeft, PiCaretRight
 } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
 
@@ -80,13 +81,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Logo */}
         <div className={`p-4 flex items-center justify-between ${isSidebarCollapsed ? 'justify-center' : ''}`}>
           {!isSidebarCollapsed && (
-            <h1 className="text-xl font-bold text-deepGreen">EkoStudy</h1>
+            <Image
+            src="/images/yellow-logo.png"
+            alt="EkoStudy Logo"
+            width={150}
+            height={40}
+            className="h-10 w-auto"
+            priority
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = '/images/yellow-logo.png';
+            }}
+          />
           )}
           <button 
             onClick={toggleSidebar}
             className={`p-1 rounded-full ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
           >
-            {isSidebarCollapsed ? '→' : '←'}
+            {isSidebarCollapsed ? <PiCaretRight /> : <PiCaretLeft/>}
           </button>
         </div>
 
@@ -150,11 +162,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </li>
             <li>
               <button 
-                onClick={() => navigateToSection('tutorials')}
-                className={`w-full flex items-center p-3 rounded-lg ${activeSection === 'tutorials' ? (isDarkMode ? 'bg-gray-700 text-yellow' : 'bg-green-50 text-deepGreen') : (isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100')}`}
+                onClick={() => navigateToSection('events')}
+                className={`w-full flex items-center p-3 rounded-lg ${activeSection === 'events' ? (isDarkMode ? 'bg-gray-700 text-yellow' : 'bg-green-50 text-deepGreen') : (isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100')}`}
               >
                 <PiNotebook className="text-xl" />
-                {!isSidebarCollapsed && <span className="ml-3">Tutorials</span>}
+                {!isSidebarCollapsed && <span className="ml-3">Events</span>}
               </button>
             </li>
             <li>
@@ -211,7 +223,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <li>
               <button 
                 // onClick={handleSignOut}
-                className="w-full flex items-center p-3 rounded-lg text-red hover:bg-red-50"
+                className={`w-full flex items-center p-3 rounded-lg ${isDarkMode ? 'hover:bg-red-500 text-white' : 'text-red hover:bg-red-50'} `}
               >
                 <FiLogOut className="text-xl" />
                 {!isSidebarCollapsed && <span className="ml-3">Sign Out</span>}

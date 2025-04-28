@@ -31,18 +31,18 @@ export default function Header() {
   }, [isSidebarVisible]);
 
   return (
-    <header className="bg-[#4c5f4e] fixed flex flex-row items-center justify-between py-2 px-6 lg:px-24 z-40 w-full">
-      <Link href="/" className="w-32 lg:w-40">
+    <header className="bg-[#4c5f4e] fixed flex flex-row items-center justify-between py-2 px-6 md:px-12 lg:px-20 xl:px-24 z-40 w-full">
+      <Link href="/" className="w-44 lg:w-64">
         <Image
-          src="/images/logo.png"
+          src="/images/yellow-logo.png"
           alt="EkoStudy Logo"
-          width={150}
-          height={40}
-          className="h-10 w-auto"
+          width={140}
+          height={60}
+          className="w-full"
           priority
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = '/images/fallback-logo.png';
+            target.src = '/images/yellow-logo.png';
           }}
         />
       </Link>
@@ -138,7 +138,7 @@ export default function Header() {
         <div className="relative flex flex-row items-start justify-between py-4">
           <Link href="/" className="w-32" onClick={toggleSidebar}>
             <Image
-              src="/images/logo.png"
+              src="/images/yellow-logo.png"
               alt="EkoStudy Logo"
               width={150}
               height={40}

@@ -2,7 +2,7 @@ import GetStartedBtn from './GetStartedBtn';
 
 export default function FooterBanner () {
   return (
-    <section className="relative pt-32 pb-16 mt-20 px-10 xl:px-24 -bottom-24 ">
+    <section className="relative top-32 pb-16 mt-16 px-10 xl:px-24 -bottom-24 ">
       
       <div
         className="absolute inset-0 mx-10 lg:mx-10 xl:mx-24 h-56 bg-cover bg-fixed object-cover"

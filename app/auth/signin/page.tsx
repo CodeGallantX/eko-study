@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Preloader from "@/components/shared/Preloader"
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { SignInForm } from "@/components/auth/SignInForm";
 import Image from "next/image";
-import { Loader2 } from 'lucide-react';
 
 export default function SignInPage() {
   const router = useRouter();
@@ -31,9 +31,7 @@ export default function SignInPage() {
 
   if (isCheckingAuth) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <Loader2 className="h-8 w-8 animate-spin" />
-      </div>
+      <Preloader />
     );
   }
 

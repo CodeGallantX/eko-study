@@ -65,25 +65,25 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-white md:bg-gray-50 md:dark:bg-gray-900 px-4">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
+        className="w-full md:max-w-md bg-white dark:bg-gray-800 md:rounded-xl md:shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
       >
         <div className="p-8">
           <div className="mb-6">
             <Link 
               href="/auth/signin" 
-              className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
+              className="inline-flex items-center text-sm text-gray-600 dark:text-gray-400 hover:text-green dark:hover:text-green transition-colors border border-gray-700 dark:border-gray-50 px-4 py-2 rounded"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Sign In
+              Sign In
             </Link>
           </div>
           
-          <div className="text-center mb-8">
+          <div className="text-left mb-8">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Forgot Password</h1>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Enter your email address and we'll send you instructions to reset your password
@@ -94,12 +94,12 @@ export default function ForgotPasswordPage() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800"
+              className="text-center p-6 bg-green-50 dark:bg-deepGreen/20 rounded-lg border border-green dark:border-yellow"
             >
-              <h2 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-2">
+              <h2 className="text-lg font-semibold text-green dark:text-yellow mb-2">
                 Check Your Email
               </h2>
-              <p className="text-sm text-green-700 dark:text-green-400 mb-4">
+              <p className="text-sm text-green dark:text-yellow mb-4">
                 We've sent password reset instructions to <span className="font-medium">{email}</span>
               </p>
               <p className="text-xs text-gray-600 dark:text-gray-400 mb-4">
@@ -108,7 +108,7 @@ export default function ForgotPasswordPage() {
               <Button
                 onClick={() => setIsEmailSent(false)}
                 variant="outline"
-                className="w-full border-green-200 dark:border-green-800 text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-900/30"
+                className="w-full border-green-200 dark:border-green-800 text-green dark:text-yellow hover:bg-green-100 dark:hover:bg-green-900/30"
               >
                 Try Another Email
               </Button>
@@ -124,13 +124,13 @@ export default function ForgotPasswordPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                  className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
                 />
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-primary text-white py-2.5 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-primary/90"
+                className="w-full bg-deepGreen text-white py-2.5 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen/90"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (

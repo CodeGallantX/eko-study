@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                     <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-8 xl:gap-16 w-full">
                         <div className="flex flex-col gap-6 w-full">
                             <Link href="/">
-                            <Image src="/yellow-logo.png" alt="EkoStudy logo" width={160} height={40} className="w-32 md:w-40" />
+                            <Image src="/images/yellow-logo.png" alt="EkoStudy logo" width={160} height={40} className="w-32 md:w-40" />
                             </Link>
                             <div className="flex flex-row gap-4">
                                 <Link href="https://facebook.com" target="_blank"><Facebook size={20} /></Link>
