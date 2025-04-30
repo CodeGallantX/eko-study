@@ -11,7 +11,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
 
@@ -55,14 +55,6 @@ export const SignUpForm = () => {
         throw new Error('You must agree to the terms and conditions');
       }
 
-      // Log the request payload for debugging
-      console.log('Sending signup request with data:', {
-        fullName: formData.fullName,
-        email: formData.email,
-        username: formData.username,
-        password: '********', // Don't log the actual password
-      });
-
       const response = await axios.post('https://ekustudy.onrender.com/users/createUser', {
         fullName: formData.fullName.trim(),
         email: formData.email.trim().toLowerCase(),
@@ -75,13 +67,8 @@ export const SignUpForm = () => {
         },
       });
 
-      // Log the response for debugging
-      console.log('Signup response:', response.data);
-
-      // Check if the response contains a userId or _id
       const userId = response.data.userId || response.data._id;
       if (response.data && userId) {
-        // Store user data in Redux
         dispatch(setUserData({ 
           username: formData.username.trim().toLowerCase(), 
           token: response.data.token || '' 
@@ -93,16 +80,13 @@ export const SignUpForm = () => {
           duration: 3000,
         });
         
-        // Redirect to verification page with userId
         router.push(`/auth/verify?userId=${userId}`);
       } else {
-        console.error('Invalid response format:', response.data);
         throw new Error('User ID not found in response. Please try again.');
       }
     } catch (error) {
       console.error('Sign up error:', error);
       
-      // Handle validation errors
       if (error instanceof Error) {
         toast({
           title: 'Validation Error',
@@ -113,21 +97,11 @@ export const SignUpForm = () => {
         return;
       }
       
-      // Log more detailed error information
       if (axios.isAxiosError(error) && error.response) {
-        console.error('Error response data:', error.response.data);
-        console.error('Error status:', error.response.status);
-        console.error('Error headers:', error.response.headers);
-        
-        // Handle specific error cases
         let errorMessage = 'Failed to create account. Please try again.';
         
         if (error.response.status === 409) {
-          // Check for specific conflict messages in the response
           const responseData = error.response.data;
-          
-          // Log the exact error message for debugging
-          console.log('Conflict error details:', responseData);
           
           if (responseData.message === 'User already exists') {
             errorMessage = 'An account with these details already exists.';
@@ -138,7 +112,7 @@ export const SignUpForm = () => {
                 <div className="flex flex-col gap-2">
                   <p>An account with these details already exists.</p>
                   <Button 
-                    onClick={handleSignInClick}
+                    onClick={() => router.push('/auth/signin')}
                     className="w-full mt-2"
                     variant="outline"
                   >
@@ -153,8 +127,6 @@ export const SignUpForm = () => {
             errorMessage = 'This email is already registered. Please use a different email or sign in.';
           } else if (responseData.message?.toLowerCase().includes('username')) {
             errorMessage = 'This username is already taken. Please choose a different username.';
-          } else {
-            errorMessage = 'An account with these details already exists. Please try again with different information.';
           }
         } else if (error.response.status === 400) {
           errorMessage = error.response.data.message || 'Invalid information provided. Please check your details and try again.';
@@ -179,74 +151,76 @@ export const SignUpForm = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [name]: type === 'checkbox' ? checked : value,
-    });
+    }));
   };
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(prev => !prev);
   };
 
-  const handleSignInClick = () => {
-    router.push('/auth/signin');
-  };
-
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200"
+      transition={{ duration: 0.4 }}
+      className="w-full max-w-md mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
     >
-      <div className="p-5 sm:p-6 md:p-8">
+      <div className="p-6 sm:p-8 md:p-10">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          className="text-center mb-6"
+          transition={{ delay: 0.1, duration: 0.3 }}
+          className="text-center mb-8"
         >
-          <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Create an account</h1>
-          <p className="text-sm sm:text-base text-gray-600">
-          Already have an account?{' '}
-          <Link
-            href="/auth/signin"
-              className="text-green hover:text-deepGreen font-medium transition-colors"
+          <motion.h1 
+            initial={{ scale: 0.95 }}
+            animate={{ scale: 1 }}
+            className="text-3xl sm:text-4xl font-bold text-deepGreen dark:text-emerald-400 mb-3"
           >
-            Sign in
-          </Link>
-        </p>
+            Join EkoStudy
+          </motion.h1>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+            Already have an account?{' '}
+            <Link
+              href="/auth/signin"
+              className="text-green dark:text-emerald-400 hover:text-deepGreen dark:hover:text-emerald-300 font-medium transition-colors"
+            >
+              Sign in
+            </Link>
+          </p>
         </motion.div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <motion.div 
-            initial={{ opacity: 0, y: 5 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.2 }}
             className="space-y-2"
           >
-            <Label htmlFor="fullName" className="text-gray-700">Full name</Label>
+            <Label htmlFor="fullName" className="text-gray-700 dark:text-gray-300">Full name</Label>
             <Input
               id="fullName"
               name="fullName"
               placeholder="John Doe"
               value={formData.fullName}
-                onChange={handleChange}
+              onChange={handleChange}
               required
-              className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
+              className="focus:ring-2 focus:ring-green focus:border-transparent dark:bg-gray-800 dark:border-gray-700"
             />
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 5 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.25 }}
             className="space-y-2"
           >
-            <Label htmlFor="email" className="text-gray-700">Email</Label>
+            <Label htmlFor="email" className="text-gray-700 dark:text-gray-300">Email</Label>
             <Input
               id="email"
               name="email"
@@ -255,17 +229,17 @@ export const SignUpForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
+              className="focus:ring-2 focus:ring-green focus:border-transparent dark:bg-gray-800 dark:border-gray-700"
             />
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 5 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.3 }}
             className="space-y-2"
           >
-            <Label htmlFor="username" className="text-gray-700">Username</Label>
+            <Label htmlFor="username" className="text-gray-700 dark:text-gray-300">Username</Label>
             <Input
               id="username"
               name="username"
@@ -273,20 +247,20 @@ export const SignUpForm = () => {
               value={formData.username}
               onChange={handleChange}
               required
-              className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
+              className="focus:ring-2 focus:ring-green focus:border-transparent dark:bg-gray-800 dark:border-gray-700"
             />
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               This will be your unique identifier on the platform
             </p>
           </motion.div>
 
           <motion.div 
-            initial={{ opacity: 0, y: 5 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ delay: 0.35 }}
             className="space-y-2"
           >
-            <Label htmlFor="password" className="text-gray-700">Password</Label>
+            <Label htmlFor="password" className="text-gray-700 dark:text-gray-300">Password</Label>
             <div className="relative">
               <Input
                 id="password"
@@ -310,13 +284,13 @@ export const SignUpForm = () => {
                 }}
                 required
                 minLength={6}
-                className={`focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-10 ${
+                className={`focus:ring-2 focus:ring-green focus:border-transparent dark:bg-gray-800 dark:border-gray-700 pr-10 ${
                   passwordError ? 'border-red-500' : ''
                 }`}
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                 onClick={togglePasswordVisibility}
                 aria-label={passwordVisible ? 'Hide password' : 'Show password'}
               >
@@ -328,9 +302,9 @@ export const SignUpForm = () => {
               </button>
             </div>
             {passwordError && (
-              <p className="text-sm text-red-500 mt-1">{passwordError}</p>
+              <p className="text-sm text-red-500 dark:text-red-400 mt-1">{passwordError}</p>
             )}
-            <p className="text-xs text-gray-500 mt-1">
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Must be at least 6 characters and contain only letters and numbers
             </p>
           </motion.div>
@@ -338,83 +312,96 @@ export const SignUpForm = () => {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
-            className="flex items-start space-x-3 pt-2"
+            transition={{ delay: 0.4 }}
+            className="flex items-start space-x-3 pt-1"
           >
             <Checkbox
               id="agreeTerms"
               checked={formData.agreeTerms}
               onCheckedChange={(checked) =>
-                setFormData({ ...formData, agreeTerms: checked as boolean })
+                setFormData(prev => ({ ...prev, agreeTerms: checked as boolean }))
               }
-              className="mt-0.5 border-gray-300 data-[state=checked]:bg-green data-[state=checked]:border-green"
+              className="mt-0.5 border-gray-300 dark:border-gray-600 data-[state=checked]:bg-green data-[state=checked]:border-green dark:data-[state=checked]:bg-emerald-400 dark:data-[state=checked]:border-emerald-400"
             />
             <label
               htmlFor="agreeTerms"
-              className="text-xs sm:text-sm text-gray-700 leading-snug"
+              className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-snug"
             >
-                I agree to the{' '}
+              I agree to the{' '}
               <Link
                 href="/terms"
-                className="text-green hover:text-deepGreen font-medium transition-colors"
+                className="text-green dark:text-emerald-400 hover:text-deepGreen dark:hover:text-emerald-300 font-medium transition-colors"
               >
-                  Terms of Service
-                </Link>{' '}
-                and{' '}
+                Terms of Service
+              </Link>{' '}
+              and{' '}
               <Link
                 href="/privacy"
-                className="text-green hover:text-deepGreen font-medium transition-colors"
+                className="text-green dark:text-emerald-400 hover:text-deepGreen dark:hover:text-emerald-300 font-medium transition-colors"
               >
-                  Privacy Policy
-                </Link>
-              </label>
+                Privacy Policy
+              </Link>
+            </label>
           </motion.div>
 
           <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45 }}
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             className="pt-2"
           >
             <Button
               type="submit"
-              className="w-full bg-green text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen"
-              disabled={isSubmitting || !formData.agreeTerms}
-          >
-            {isSubmitting ? (
-              <>
+              className="w-full bg-green hover:bg-deepGreen dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white py-3 px-4 rounded-lg font-medium transition-colors shadow-sm"
+              disabled={isSubmitting || !formData.agreeTerms || !!passwordError}
+              size="lg"
+            >
+              {isSubmitting ? (
+                <>
                   <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
                   <span className="text-sm sm:text-base">Creating account...</span>
-              </>
-            ) : (
+                </>
+              ) : (
                 <span className="text-sm sm:text-base">Create account</span>
-            )}
+              )}
             </Button>
           </motion.div>
         </form>
 
         {/* Divider */}
-        <div className="relative my-5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="relative my-6"
+        >
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300" />
+            <div className="w-full border-t border-gray-300 dark:border-gray-700" />
           </div>
           <div className="relative flex justify-center">
-            <span className="px-2 bg-white text-xs sm:text-sm text-gray-500">
+            <span className="px-3 bg-white dark:bg-gray-900 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
               Or continue with
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Google Button */}
         <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.55 }}
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
         >
           <Button
             variant="outline"
-            className="w-full border-gray-300 hover:bg-gray-50 transition-colors py-2.5 sm:py-3"
+            className="w-full border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors py-3"
             type="button"
+            size="lg"
           >
-            <PiGoogleLogoBold className="mr-2 text-red" size={18} />
+            <PiGoogleLogoBold className="mr-2 text-red-500 dark:text-red-400" size={18} />
             <span className="text-sm sm:text-base">Continue with Google</span>
           </Button>
         </motion.div>

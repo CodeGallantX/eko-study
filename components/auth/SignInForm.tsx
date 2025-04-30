@@ -10,19 +10,47 @@ import { Label } from '@/components/ui/label';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import axios, { AxiosError } from 'axios';
+import { useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
+
+interface LoginResponse {
+  _id?: string;
+  fullName?: string;
+  email?: string;
+  username?: string;
+  requiresVerification?: boolean;
+  message?: string;
+}
 
 export const SignInForm = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(prev => !prev);
+  };
+
+  const handleGoogleSignIn = () => {
+    toast({
+      title: 'Coming soon!',
+      description: 'Google sign in will be available soon.',
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,65 +59,44 @@ export const SignInForm = () => {
     try {
       const { email, password } = formData;
       
-      const response = await axios.post('https://ekustudy.onrender.com/auth/login', {
-        email,
-        password,
-      });
+      const response = await axios.post<LoginResponse>(
+        'https://ekustudy.onrender.com/auth/login', 
+        { email, password }
+      );
 
-      // Extract user data from response
-      const { token, firstName, lastName, username } = response.data;
-      
-      // Store token in localStorage
-      if (token) {
-        localStorage.setItem('auth_token', token);
+      if (!response.data._id) {
+        throw new Error('User ID not found in response');
       }
-      
-      // Store user data in localStorage
-      const userData = {
-        firstName,
-        lastName,
-        email,
-        username,
-        token
-      };
-      localStorage.setItem('user', JSON.stringify(userData));
-      
-      // Update Redux state
-      dispatch(setUserData({
-        firstName,
-        token
-      }));
 
+      // Always redirect to verification for this flow
       toast({
-        title: 'Successfully signed in!',
-        description: 'Redirecting to your dashboard...',
+        title: 'Verification Required',
+        description: 'Please enter the OTP sent to your email to continue.',
         duration: 3000,
       });
-      
-      // Use router.push with replace to prevent back navigation to login
-      router.push('/dashboard');
+      router.push(`/auth/verify?userId=${response.data._id}`);
+
     } catch (error) {
       console.error('Sign in error:', error);
+      
+      let errorMessage = 'Invalid email or password. Please try again.';
+      
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || errorMessage;
+        
+        if (error.response?.status === 401) {
+          errorMessage = 'Invalid credentials. Please check your email and password.';
+        }
+      }
+
       toast({
-        title: 'Error',
-        description: 'Invalid email or password. Please try again.',
+        title: 'Sign In Failed',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(prev => !prev);
   };
 
   return (
@@ -164,6 +171,7 @@ export const SignInForm = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
+                minLength={6}
                 className="focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-10"
               />
               <button
@@ -224,6 +232,7 @@ export const SignInForm = () => {
             variant="outline"
             className="w-full border-gray-300 hover:bg-gray-50 transition-colors py-2.5 sm:py-3"
             type="button"
+            onClick={handleGoogleSignIn}
           >
             <PiGoogleLogoBold className="mr-2 text-red" size={18} />
             <span className="text-sm sm:text-base">Continue with Google</span>

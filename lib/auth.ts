@@ -1,3 +1,4 @@
+// hooks/useAuth.ts
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -8,14 +9,16 @@ import { setUserData, clearUserData } from '@/lib/redux/features/userSlice';
 import { RootState } from '@/lib/redux/store';
 
 interface UserData {
+  _id: string;
+  fullName: string;
+  email: string;
   username: string;
-  token: string;
 }
 
 export function useAuth() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { username, token, isAuthenticated } = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -25,18 +28,31 @@ export function useAuth() {
     router.push('/auth/signin');
   }, [dispatch, router]);
 
+  const fetchUserProfile = useCallback(async () => {
+    try {
+      const response = await axios.get('https://ekustudy.onrender.com/users/profile', {
+        withCredentials: true
+      });
+      
+      if (response.data) {
+        dispatch(setUserData(response.data));
+        localStorage.setItem('userData', JSON.stringify(response.data));
+      }
+    } catch (error) {
+      console.error('Failed to fetch user profile:', error);
+      handleSignOut();
+    }
+  }, [dispatch, handleSignOut]);
+
   useEffect(() => {
     const initializeAuth = async () => {
       try {
         const storedData = localStorage.getItem('userData');
         if (storedData) {
           const userData: UserData = JSON.parse(storedData);
-          if (userData.username && userData.token) {
-            // Verify token with backend
-            await axios.get('https://ekustudy.onrender.com/auth/verify', {
-              headers: { Authorization: `Bearer ${userData.token}` }
-            });
-            dispatch(setUserData(userData));
+          if (userData._id) {
+            // Verify session with backend
+            await fetchUserProfile();
           }
         }
       } catch (error) {
@@ -48,37 +64,13 @@ export function useAuth() {
     };
 
     initializeAuth();
-  }, [dispatch, handleSignOut]);
-
-  const signIn = async (credentials: { username: string; password: string }) => {
-    try {
-      setLoading(true);
-      setError(null);
-      const response = await axios.post('https://ekustudy.onrender.com/auth/login', credentials);
-      const { username, token } = response.data;
-      
-      const userData: UserData = { username, token };
-      dispatch(setUserData(userData));
-      localStorage.setItem('userData', JSON.stringify(userData));
-      
-      router.push('/dashboard');
-    } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        setError(error.response.data.message || 'Failed to sign in');
-      } else {
-        setError('An unexpected error occurred');
-      }
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [dispatch, handleSignOut, fetchUserProfile]);
 
   return {
-    user: { username, token, isAuthenticated },
+    user,
     loading,
     error,
-    signIn,
+    fetchUserProfile,
     signOut: handleSignOut
   };
 }

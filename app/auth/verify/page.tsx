@@ -6,7 +6,7 @@ import { OTPInput } from '@/components/ui/otp-input';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
 
@@ -18,21 +18,26 @@ export default function VerifyPage() {
   
   const [otp, setOtp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [timer, setTimer] = useState(60);
+  const [timer, setTimer] = useState(180); // 3 minutes in seconds
   const [canResend, setCanResend] = useState(false);
+
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
 
   useEffect(() => {
     if (!userId) {
       toast({
         title: 'Error',
-        description: 'Invalid verification link. Please try signing up again.',
+        description: 'Invalid verification link. Please try signing in again.',
         variant: 'destructive',
       });
-      router.push('/auth/signup');
+      router.push('/auth/signin');
       return;
     }
 
-    // Start countdown timer
     const interval = setInterval(() => {
       setTimer((prev) => {
         if (prev <= 1) {
@@ -45,7 +50,30 @@ export default function VerifyPage() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [userId, router]);
+  }, [userId, router, canResend]);
+
+  const fetchUserProfile = async () => {
+    try {
+      const response = await axios.get('https://ekustudy.onrender.com/users/profile', {
+        withCredentials: true
+      });
+      
+      if (response.data) {
+        dispatch(setUserData({
+          _id: response.data._id,
+          fullName: response.data.fullName,
+          email: response.data.email,
+          username: response.data.username
+        }));
+        
+        // Store in localStorage for persistence
+        localStorage.setItem('userData', JSON.stringify(response.data));
+      }
+    } catch (error) {
+      console.error('Failed to fetch user profile:', error);
+      throw error;
+    }
+  };
 
   const handleVerify = async () => {
     if (!userId || otp.length !== 6) return;
@@ -53,23 +81,15 @@ export default function VerifyPage() {
     setIsSubmitting(true);
     
     try {
-      const response = await axios.post(`https://ekustudy.onrender.com/auth/verify-login/${userId}`, {
-        otp,
-      });
+      // Verify OTP
+      await axios.post(
+        `https://ekustudy.onrender.com/auth/verify-login/${userId}`,
+        { otp },
+        { withCredentials: true }
+      );
 
-      // Store token and user data in Redux
-      if (response.data.token) {
-        // Extract first name from the response or use a default
-        const firstName = response.data.firstName || 'User';
-        
-        dispatch(setUserData({
-          firstName,
-          token: response.data.token
-        }));
-        
-        // Also store token in localStorage for persistence
-        localStorage.setItem('auth_token', response.data.token);
-      }
+      // Fetch user profile after successful verification
+      await fetchUserProfile();
 
       toast({
         title: 'Verification successful!',
@@ -77,15 +97,20 @@ export default function VerifyPage() {
         duration: 3000,
       });
 
-      // Redirect to dashboard after a short delay
       setTimeout(() => {
         router.push('/dashboard');
       }, 1500);
     } catch (error) {
       console.error('Verification error:', error);
+      
+      let errorMessage = 'Invalid OTP. Please try again.';
+      if (axios.isAxiosError(error) && error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+
       toast({
         title: 'Verification failed',
-        description: 'Invalid OTP. Please try again.',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {
@@ -94,21 +119,19 @@ export default function VerifyPage() {
   };
 
   const handleResendOTP = async () => {
-    if (!canResend) return;
+    if (!canResend || !userId) return;
     
     setIsSubmitting(true);
     
     try {
-      // Assuming there's an endpoint to resend OTP
-      await axios.post(`https://ekustudy.onrender.com/auth/resend-otp/${userId}`);
+      await axios.post('https://ekustudy.onrender.com/auth/resend-otp', { userId });
       
       toast({
-        title: 'OTP resent',
-        description: 'A new OTP has been sent to your email.',
+        title: 'OTP Resent',
+        description: 'A new verification code has been sent to your email.',
       });
       
-      // Reset timer and disable resend button
-      setTimer(60);
+      setTimer(180);
       setCanResend(false);
     } catch (error) {
       console.error('Resend OTP error:', error);
@@ -128,7 +151,7 @@ export default function VerifyPage() {
         <div className="text-center mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Verify your email</h1>
           <p className="text-sm sm:text-base text-gray-600">
-            We've sent a verification code to your email address.
+            We've sent a 6-digit code to your email address.
           </p>
         </div>
 
@@ -166,11 +189,11 @@ export default function VerifyPage() {
                   className="text-green hover:text-deepGreen font-medium transition-colors"
                   disabled={isSubmitting}
                 >
-                  Resend
+                  Resend OTP
                 </button>
               ) : (
                 <span className="text-gray-500">
-                  Resend in <span className="font-medium">{timer}s</span>
+                  Resend in <span className="font-medium">{formatTime(timer)}</span>
                 </span>
               )}
             </p>
@@ -179,4 +202,4 @@ export default function VerifyPage() {
       </div>
     </div>
   );
-} 
+}
