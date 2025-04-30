@@ -131,7 +131,7 @@ export default function CoursesPage() {
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
-        handleSignOut={handleSignOut}
+        onSignOut={handleSignOut}  // Changed from handleSignOut to onSignOut
       />
       
       <TopNav
@@ -165,4 +165,4 @@ export default function CoursesPage() {
       </main>
     </div>
   );
-} 
+}

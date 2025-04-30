@@ -20,7 +20,7 @@ interface SidebarProps {
   toggleDarkMode: () => void;
   toggleSidebar: () => void;
   setActiveSection: (section: string) => void;
-  // handleSignOut: () => void;
+  onSignOut: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -31,7 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   toggleDarkMode,
   toggleSidebar,
   setActiveSection,
-  // handleSignOut
+  onSignOut
 }) => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
@@ -44,6 +44,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const navigateToSection = (section: string) => {
     setActiveSection(section);
     router.push(`/dashboard/${section}`);
+  };
+
+  const handleSignOut = () => {
+    onSignOut(); // Call the sign out handler passed from parent
   };
 
   // Return a placeholder during SSR
@@ -82,17 +86,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className={`p-4 flex items-center justify-between ${isSidebarCollapsed ? 'justify-center' : ''}`}>
           {!isSidebarCollapsed && (
             <Image
-            src="/images/yellow-logo.png"
-            alt="EkoStudy Logo"
-            width={150}
-            height={40}
-            className="h-10 w-auto"
-            priority
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = '/images/yellow-logo.png';
-            }}
-          />
+              src="/images/yellow-logo.png"
+              alt="EkoStudy Logo"
+              width={150}
+              height={40}
+              className="h-10 w-auto"
+              priority
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/yellow-logo.png';
+              }}
+            />
           )}
           <button 
             onClick={toggleSidebar}
@@ -222,8 +226,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </li>
             <li>
               <button 
-                // onClick={handleSignOut}
-                className={`w-full flex items-center p-3 rounded-lg ${isDarkMode ? 'hover:bg-red-500 text-white' : 'text-red hover:bg-red-50'} `}
+                onClick={handleSignOut}
+                className={`w-full flex items-center p-3 rounded-lg ${isDarkMode ? 'hover:bg-red-500 text-white' : 'text-red hover:bg-red-50'} transition-colors`}
               >
                 <FiLogOut className="text-xl" />
                 {!isSidebarCollapsed && <span className="ml-3">Sign Out</span>}
@@ -234,4 +238,4 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </motion.div>
     </AnimatePresence>
   );
-}; 
+};
