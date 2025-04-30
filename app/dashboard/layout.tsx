@@ -21,7 +21,6 @@ export default function DashboardLayout({
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
   const [isLoading, setIsLoading] = useState(true);
-  // const [userProfile, setUserProfile] = useState<any>(null);
   const [mounted, setMounted] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
 
@@ -75,13 +74,12 @@ export default function DashboardLayout({
         
         // Fetch user profile data
         try {
-          const response = await axios.get('https://ekustudy.onrender.com/users/profile', {
+          await axios.get('https://ekustudy.onrender.com/users/profile', {
             headers: {
               'Authorization': `Bearer ${token}`
             }
           });
           
-          // setUserProfile(response.data);
           setIsLoading(false);
         } catch (profileError) {
           console.error('Error fetching profile:', profileError);
@@ -136,40 +134,32 @@ export default function DashboardLayout({
     );
   }
 
-  // Only render the full layout after component is mounted and auth is checked
   return (
-    <html>/
-      <head>
-        <title>Dashboard</title>
-      </head>
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
-      {/* {mounted && ( */}
-        <>
-          <Sidebar
-            isDarkMode={isDarkMode}
-            isSidebarCollapsed={isSidebarCollapsed}
-            activeSection={activeSection}
-            username={username || 'User'}
-            toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-            toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-            setActiveSection={setActiveSection}
-            handleSignOut={handleSignOut}
-          />
-          
-          <TopNav
-            isDarkMode={isDarkMode}
-            isSidebarCollapsed={isSidebarCollapsed}
-            username={username || 'User'}
-            toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-            notifications={notifications}
-          />
+      <>
+        <Sidebar
+          isDarkMode={isDarkMode}
+          isSidebarCollapsed={isSidebarCollapsed}
+          activeSection={activeSection}
+          username={username || 'User'}
+          toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+          toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+          setActiveSection={setActiveSection}
+          handleSignOut={handleSignOut}
+        />
+        
+        <TopNav
+          isDarkMode={isDarkMode}
+          isSidebarCollapsed={isSidebarCollapsed}
+          username={username || 'User'}
+          toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+          notifications={notifications}
+        />
 
-          <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
-            {children}
-          </main>
-        </>
-      {/* )} */}
+        <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
+          {children}
+        </main>
+      </>
     </div>
-    </html>
   );
 }
