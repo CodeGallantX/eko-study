@@ -69,14 +69,12 @@ export default function AssignmentsPage() {
   ];
 
   useEffect(() => {
-    // Check if user is authenticated
     const checkAuth = () => {
       try {
         const userData = localStorage.getItem('user');
         if (!userData && !isAuthenticated) {
           router.push('/auth/signin');
         } else if (userData && !isAuthenticated) {
-          // If we have user data in localStorage but not in Redux, update Redux
           const parsedUserData = JSON.parse(userData);
           dispatch(setUser({
             isAuthenticated: true,
@@ -141,7 +139,7 @@ export default function AssignmentsPage() {
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
-        handleSignOut={handleSignOut}
+        onSignOut={handleSignOut} // Changed from handleSignOut to onSignOut
       />
       
       <TopNav
@@ -223,4 +221,4 @@ export default function AssignmentsPage() {
       </main>
     </div>
   );
-} 
+}
