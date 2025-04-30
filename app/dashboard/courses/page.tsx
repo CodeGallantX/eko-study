@@ -113,6 +113,10 @@ export default function CoursesPage() {
     router.push('/auth/signin');
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -128,10 +132,10 @@ export default function CoursesPage() {
         isSidebarCollapsed={isSidebarCollapsed}
         activeSection={activeSection}
         username={username}
-        toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
+        toggleDarkMode={toggleDarkMode}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
-        onSignOut={handleSignOut}  // Changed from handleSignOut to onSignOut
+        onSignOut={handleSignOut}
       />
       
       <TopNav
@@ -139,6 +143,7 @@ export default function CoursesPage() {
         isSidebarCollapsed={isSidebarCollapsed}
         username={username}
         notifications={notifications}
+        toggleDarkMode={toggleDarkMode}
       />
 
       <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
