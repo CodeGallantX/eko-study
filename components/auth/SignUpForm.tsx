@@ -11,7 +11,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
 

@@ -1,76 +1,76 @@
 'use client';
 
-// import React, { useState, useEffect } from 'react';
-// import { useRouter } from 'next/navigation';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { RootState } from '@/lib/redux/store';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/redux/store';
 // import { clearUserData } from '@/lib/redux/features/userSlice';
-// import { Loader2 } from 'lucide-react';
-// import { useAuth } from '@/lib/auth';
+import { Loader2 } from 'lucide-react';
+import { useAuth } from '@/lib/auth';
 
 export default function App() {
-  // const router = useRouter();
+  const router = useRouter();
   // const dispatch = useDispatch();
-  // const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
-  // const [mounted, setMounted] = useState(false);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const { user, loading, signOut } = useAuth();
+  const { username } = useSelector((state: RootState) => state.user);
+  const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const { user, loading, signOut } = useAuth();
 
   // Set mounted state after component mounts
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Check authentication status
-  // useEffect(() => {
-  //   // Only run on client side
-  //   if (typeof window === 'undefined') return;
+  useEffect(() => {
+    // Only run on client side
+    if (typeof window === 'undefined') return;
     
-  //   const checkAuth = async () => {
-  //     try {
-  //       const userData = localStorage.getItem('user');
-  //       const token = localStorage.getItem('auth_token');
+    const checkAuth = async () => {
+      try {
+        const userData = localStorage.getItem('user');
+        const token = localStorage.getItem('auth_token');
         
-  //       if (!token || !userData) {
-  //         router.push('/auth/signin');
-  //         return;
-  //       }
+        if (!token || !userData) {
+          router.push('/auth/signin');
+          return;
+        }
         
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.error('Error checking authentication:', error);
-  //       setIsLoading(false);
-  //     }
-  //   };
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error checking authentication:', error);
+        setIsLoading(false);
+      }
+    };
     
-  //   if (mounted) {
-  //     checkAuth();
-  //   }
-  // }, [router, mounted]);
+    if (mounted) {
+      checkAuth();
+    }
+  }, [router, mounted]);
 
-  // const handleSignOut = () => {
-  //   signOut();
-  // };
+  const handleSignOut = () => {
+    signOut();
+  };
 
   // Show loading state during SSR or initial client render
-  // if (!mounted || isLoading || loading) {
-  //   return (
-  //     <div className="flex items-center justify-center min-h-screen">
-  //       <Loader2 className="h-8 w-8 animate-spin" />
-  //     </div>
-  //   );
-  // }
+  if (!mounted || isLoading || loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
 
   // Only render the dashboard content after component is mounted and auth is checked
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Welcome, 
-          {/* {user?.username || username || 'Student'} */}
+          {user?.username || username || 'Student'}
           Student
           !</h1>
         <button 
-          // onClick={handleSignOut}
+          onClick={handleSignOut}
           className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
         >
           Sign Out

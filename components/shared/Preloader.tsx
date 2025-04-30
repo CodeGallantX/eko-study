@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 interface PreloaderProps {
   onLoaded?: () => void;
@@ -19,8 +19,8 @@ export default function Preloader({ onLoaded }: PreloaderProps) {
       // After the fade-out animation completes, hide the preloader completely
       setTimeout(() => {
         setIsHidden(true);
-      }, 1000); // This matches the transition duration
-    }, 4000); // Keep animation for 4 seconds before fading out
+      }, 1000); 
+    }, 4000); 
   }, [onLoaded]);
 
   if (isHidden) {

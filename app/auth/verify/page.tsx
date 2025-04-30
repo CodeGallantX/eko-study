@@ -6,7 +6,7 @@ import { OTPInput } from '@/components/ui/otp-input';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
 
@@ -151,7 +151,7 @@ export default function VerifyPage() {
         <div className="text-center mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Verify your email</h1>
           <p className="text-sm sm:text-base text-gray-600">
-            We've sent a 6-digit code to your email address.
+            We&apos;ve sent a 6-digit code to your email address.
           </p>
         </div>
 
@@ -182,7 +182,7 @@ export default function VerifyPage() {
 
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              Didn't receive a code?{' '}
+              Didn&apos;t receive a code?{' '}
               {canResend ? (
                 <button
                   onClick={handleResendOTP}

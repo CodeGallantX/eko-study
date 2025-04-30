@@ -3,7 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { FaArrowRight, FaGraduationCap, FaBookOpen, FaUsers, FaLightbulb, FaChartLine } from "react-icons/fa";
+import { FaArrowRight, FaGraduationCap, FaBookOpen, FaUsers, FaLightbulb
+  //  FaChartLine 
+  } from "react-icons/fa";
 
 const features = [
   {

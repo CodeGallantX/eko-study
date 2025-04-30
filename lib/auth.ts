@@ -1,4 +1,3 @@
-// hooks/useAuth.ts
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -24,22 +23,27 @@ export function useAuth() {
 
   const handleSignOut = useCallback(() => {
     dispatch(clearUserData());
-    localStorage.removeItem('userData');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('userData');
+    }
     router.push('/auth/signin');
   }, [dispatch, router]);
 
   const fetchUserProfile = useCallback(async () => {
     try {
       const response = await axios.get('https://ekustudy.onrender.com/users/profile', {
-        withCredentials: true
+        withCredentials: true,
       });
-      
+
       if (response.data) {
         dispatch(setUserData(response.data));
-        localStorage.setItem('userData', JSON.stringify(response.data));
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('userData', JSON.stringify(response.data));
+        }
       }
-    } catch (error) {
-      console.error('Failed to fetch user profile:', error);
+    } catch (err) {
+      console.error('Failed to fetch user profile:', err);
+      setError('Session expired or unauthorized');
       handleSignOut();
     }
   }, [dispatch, handleSignOut]);
@@ -47,16 +51,18 @@ export function useAuth() {
   useEffect(() => {
     const initializeAuth = async () => {
       try {
+        if (typeof window === 'undefined') return;
+
         const storedData = localStorage.getItem('userData');
         if (storedData) {
           const userData: UserData = JSON.parse(storedData);
-          if (userData._id) {
-            // Verify session with backend
+          if (userData?._id) {
             await fetchUserProfile();
           }
         }
-      } catch (error) {
-        console.error('Auth initialization error:', error);
+      } catch (err) {
+        console.error('Auth initialization error:', err);
+        setError('Auth initialization failed');
         handleSignOut();
       } finally {
         setLoading(false);
@@ -64,13 +70,13 @@ export function useAuth() {
     };
 
     initializeAuth();
-  }, [dispatch, handleSignOut, fetchUserProfile]);
+  }, [fetchUserProfile, handleSignOut]);
 
   return {
     user,
     loading,
     error,
     fetchUserProfile,
-    signOut: handleSignOut
+    signOut: handleSignOut,
   };
 }

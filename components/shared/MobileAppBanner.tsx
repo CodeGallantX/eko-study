@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { FaMobileAlt, FaApple, FaGooglePlay } from "react-icons/fa";
-import { IoMdClose } from "react-icons/io";
 
 export default function MobileAppBanner() {
   return (

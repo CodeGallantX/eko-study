@@ -86,7 +86,7 @@ export default function ForgotPasswordPage() {
           <div className="text-left mb-8">
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Forgot Password</h1>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-              Enter your email address and we'll send you instructions to reset your password
+              Enter your email address and we&apos;ll send you instructions to reset your password
             </p>
           </div>
 
@@ -100,10 +100,10 @@ export default function ForgotPasswordPage() {
                 Check Your Email
               </h2>
               <p className="text-sm text-green dark:text-yellow mb-4">
-                We've sent password reset instructions to <span className="font-medium">{email}</span>
+                We&apos;ve sent password reset instructions to <span className="font-medium">{email}</span>
               </p>
               <p className="text-xs text-gray-600 dark:text-gray-400 mb-4">
-                Didn't receive the email? Check your spam folder or try again.
+                Didn&apos;t receive the email? Check your spam folder or try again.
               </p>
               <Button
                 onClick={() => setIsEmailSent(false)}

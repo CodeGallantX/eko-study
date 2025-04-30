@@ -18,27 +18,27 @@ export const TopNav: React.FC<TopNavProps> = ({
   isSidebarCollapsed,
   username,
 }) => {
-  // const [showNotifications, setShowNotifications] = useState(false);
-  // const [mounted, setMounted] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  // if (!mounted) {
-  //   return (
-  //     <div className={`h-16 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm fixed top-0 right-0 z-10 ${isSidebarCollapsed ? 'left-16' : 'left-64'} transition-all duration-300`}>
-  //       <div className="h-full flex items-center justify-end px-4">
-  //         <div className="flex items-center space-x-4">
-  //           <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
-  //             <PiUser className="text-lg" />
-  //           </div>
-  //           <span className="font-medium">@{username}</span>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  //   }
+  if (!mounted) {
+    return (
+      <div className={`h-16 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-sm fixed top-0 right-0 z-10 ${isSidebarCollapsed ? 'left-16' : 'left-64'} transition-all duration-300`}>
+        <div className="h-full flex items-center justify-end px-4">
+          <div className="flex items-center space-x-4">
+            <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
+              <PiUser className="text-lg" />
+            </div>
+            <span className="font-medium">@{username}</span>
+          </div>
+        </div>
+      </div>
+    );
+    }
     
 
   return (
@@ -54,7 +54,7 @@ export const TopNav: React.FC<TopNavProps> = ({
         </fieldset>
         <div className="flex items-center space-x-4">
           <button 
-            // onClick={() => setShowNotifications(!showNotifications)}
+            onClick={() => setShowNotifications(!showNotifications)}
             className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
           >
             <FiBell className={`text-xl ${isDarkMode ? 'text-white' : 'text-black' }`} />
