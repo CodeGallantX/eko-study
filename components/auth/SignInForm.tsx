@@ -11,8 +11,8 @@ import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import { useAppDispatch } from '@/lib/redux/hooks';
-import { setUserData } from '@/lib/redux/features/userSlice';
+// import { useAppDispatch } from '@/lib/redux/hooks';
+// import { setUserData } from '@/lib/redux/features/userSlice';
 
 interface LoginResponse {
   _id?: string;
@@ -25,7 +25,7 @@ interface LoginResponse {
 
 export const SignInForm = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
