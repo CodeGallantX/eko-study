@@ -6,6 +6,7 @@ interface UserState {
   fullName: string;
   email: string;
   username: string;
+  token: string;
   isAuthenticated: boolean;
 }
 
@@ -14,6 +15,7 @@ const initialState: UserState = {
   fullName: '',
   email: '',
   username: '',
+  token: '',
   isAuthenticated: false,
 };
 
@@ -21,27 +23,15 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUserData: (state, action: PayloadAction<{
-      _id: string;
-      fullName: string;
-      email: string;
-      username: string;
-    }>) => {
-      state._id = action.payload._id;
-      state.fullName = action.payload.fullName;
-      state.email = action.payload.email;
-      state.username = action.payload.username;
-      state.isAuthenticated = true;
+    setUserData: (state, action: PayloadAction<Partial<UserState>>) => {
+      return { ...state, ...action.payload, isAuthenticated: true };
     },
-    clearUserData: (state) => {
-      state._id = '';
-      state.fullName = '';
-      state.email = '';
-      state.username = '';
-      state.isAuthenticated = false;
-    },
+    clearUserData: () => initialState,
+    setAuthToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    }
   },
 });
 
-export const { setUserData, clearUserData } = userSlice.actions;
+export const { setUserData, clearUserData, setAuthToken } = userSlice.actions;
 export default userSlice.reducer;

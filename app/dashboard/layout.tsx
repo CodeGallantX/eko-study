@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/redux/store';
-import { clearUserData, setUserData } from '@/lib/redux/features/userSlice';
+import { clearUserData, setUserData, setAuthToken } from '@/lib/redux/features/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import axios from 'axios';
@@ -16,7 +16,7 @@ export default function DashboardLayout({
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
+  const { username, isAuthenticated, token } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
@@ -49,7 +49,6 @@ export default function DashboardLayout({
 
   // Check authentication status
   useEffect(() => {
-    // Only run on client side
     if (typeof window === 'undefined') return;
     
     const checkAuth = async () => {
@@ -57,22 +56,22 @@ export default function DashboardLayout({
         const userData = localStorage.getItem('user');
         const token = localStorage.getItem('auth_token');
         
-        // If we have user data in localStorage but not in Redux, update Redux
         if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
           dispatch(setUserData({
-            username: parsedUserData.username || '',
-            token: token || ''
+            _id: parsedUserData._id || '',
+            fullName: parsedUserData.fullName || '',
+            email: parsedUserData.email || '',
+            username: parsedUserData.username || ''
           }));
+          dispatch(setAuthToken(token || ''));
         }
         
-        // If no token or user data, redirect to sign in
         if (!token || !userData) {
           router.push('/auth/signin');
           return;
         }
         
-        // Fetch user profile data
         try {
           await axios.get('https://ekustudy.onrender.com/users/profile', {
             headers: {
@@ -83,7 +82,6 @@ export default function DashboardLayout({
           setIsLoading(false);
         } catch (profileError) {
           console.error('Error fetching profile:', profileError);
-          // If profile fetch fails, clear auth and redirect
           dispatch(clearUserData());
           localStorage.removeItem('user');
           localStorage.removeItem('auth_token');
@@ -104,20 +102,20 @@ export default function DashboardLayout({
 
   const handleSignOut = async () => {
     try {
-      // Call the logout API endpoint
       await fetch("https://ekustudy.onrender.com/auth/logout", {
         method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         redirect: 'follow'
       });
       
-      // Clear local state and storage
       dispatch(clearUserData());
       localStorage.removeItem('user');
       localStorage.removeItem('auth_token');
       router.push('/auth/signin');
     } catch (error) {
       console.error('Error during logout:', error);
-      // Still clear local state even if API call fails
       dispatch(clearUserData());
       localStorage.removeItem('user');
       localStorage.removeItem('auth_token');
@@ -125,7 +123,6 @@ export default function DashboardLayout({
     }
   };
 
-  // Show loading state during SSR or initial client render
   if (!mounted || isLoading || !authChecked) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -145,7 +142,7 @@ export default function DashboardLayout({
           toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
           toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           setActiveSection={setActiveSection}
-          handleSignOut={handleSignOut}
+          onSignOut={handleSignOut}
         />
         
         <TopNav
