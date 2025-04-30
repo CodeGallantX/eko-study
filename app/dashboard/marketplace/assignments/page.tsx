@@ -144,6 +144,7 @@ export default function AssignmentsPage() {
       
       <TopNav
         isDarkMode={isDarkMode}
+        toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         isSidebarCollapsed={isSidebarCollapsed}
         username={username}
         notifications={notifications}

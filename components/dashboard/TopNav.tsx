@@ -52,7 +52,7 @@ export const TopNav: React.FC<TopNavProps> = ({
   }
 
   return (
-    <div 
+    <div
       className={`h-16 ${isDarkMode ? 'bg-gray-900' : 'bg-white'} shadow-sm fixed top-0 right-0 z-10 ${isSidebarCollapsed ? 'left-16' : 'left-64'} transition-all duration-300`}
     >
       <div className="h-full flex items-center justify-between px-4">
@@ -61,7 +61,7 @@ export const TopNav: React.FC<TopNavProps> = ({
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <FiSearch className={`${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
             </div>
-            <input 
+            <input
               type="search"
               placeholder="Search..."
               className={`w-full pl-10 pr-4 py-2 border ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300 text-gray-800'} rounded-lg focus:outline-none focus:ring-2 ${isDarkMode ? 'focus:ring-yellow' : 'focus:ring-green'}`}
@@ -70,7 +70,7 @@ export const TopNav: React.FC<TopNavProps> = ({
         </div>
         <div className="flex items-center space-x-4">
           <div className="relative">
-            <button 
+            <button
               onClick={() => setShowNotifications(!showNotifications)}
               className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'} relative`}
             >
@@ -81,7 +81,7 @@ export const TopNav: React.FC<TopNavProps> = ({
                 </span>
               )}
             </button>
-            
+
             {/* Notifications dropdown */}
             {showNotifications && (
               <div className={`absolute right-0 mt-2 w-80 rounded-md shadow-lg ${isDarkMode ? 'bg-gray-800' : 'bg-white'} ring-1 ring-black ring-opacity-5 z-50`}>
@@ -119,14 +119,14 @@ export const TopNav: React.FC<TopNavProps> = ({
               </div>
             )}
           </div>
-          
-          <button 
+
+          <button
             onClick={toggleDarkMode}
             className={`p-2 rounded-full ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
           >
             {isDarkMode ? <FiSun className="text-white text-xl" /> : <FiMoon className="text-xl" />}
           </button>
-          
+
           <div className={`flex items-center space-x-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
             <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
               <PiUser className="text-lg" />
