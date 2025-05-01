@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-// import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FaChevronRight, FaMagnifyingGlass } from "react-icons/fa6";
 import Preloader from "@/components/shared/Preloader";
@@ -29,6 +28,7 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
   const [filters, setFilters] = useState({ college: "", department: "", level: "" });
   const [visibleCourses, setVisibleCourses] = useState(6);
   const [selectedNote, setSelectedNote] = useState<{ url: string; fileName: string } | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const loadMoreRef = useRef(null);
 
   const departments = [...new Set(
@@ -57,7 +57,6 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
     }));
   };
   
-
   const filteredCourses = courses.filter((course) => {
     const regex = new RegExp(searchQuery, "i");
     return (
@@ -84,10 +83,12 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
 
   const openModal = (url: string, fileName: string) => {
     setSelectedNote({ url, fileName });
+    setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setSelectedNote(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -153,7 +154,7 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
               <motion.div
                 key={`${course.id}-${course.code}`}
                 className="bg-white hover:bg-green rounded-md p-3 border border-gray-500/50 flex flex-row items-center justify-between group cursor-pointer transition-all duration-200 ease-in-out"
-                onClick={() => openModal(course.url, `${course.code}_${course.title}.pdf`)} // Pass file name
+                onClick={() => openModal(course.url, `${course.code}_${course.title}.pdf`)}
               >
                 <div>
                   <h2 className="text-base lg:text-lg font-semibold group-hover:text-white">{course.title}</h2>
@@ -174,13 +175,14 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
         )}
       </div>
       
-{selectedNote && (
-  <DownloadModal
-    url={selectedNote.url}
-    fileName={selectedNote.fileName}
-    onClose={closeModal}
-  />
-)}
+      {selectedNote && (
+        <DownloadModal
+          url={selectedNote.url}
+          fileName={selectedNote.fileName}
+          onClose={closeModal}
+          isOpen={isModalOpen}
+        />
+      )}
       <Footer />
     </>
   );
