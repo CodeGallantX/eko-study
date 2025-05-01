@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Preloader from "@/components/shared/Preloader"
+import Preloader from "@/components/shared/Preloader";
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -12,15 +12,12 @@ import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
 
-interface ResetPasswordProps {
-  searchParams: {
-    token?: string;
-  };
+interface ResetPasswordFormProps {
+  token?: string;
 }
 
-export default function ResetPasswordPage({ searchParams }: ResetPasswordProps) {
+export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const router = useRouter();
-  const token = searchParams?.token;
   
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -31,7 +28,6 @@ export default function ResetPasswordPage({ searchParams }: ResetPasswordProps) 
   const [passwordError, setPasswordError] = useState('');
 
   useEffect(() => {
-    // Redirect if no token is provided
     if (!token) {
       toast({
         title: 'Invalid Reset Link',
@@ -63,7 +59,6 @@ export default function ResetPasswordPage({ searchParams }: ResetPasswordProps) 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate passwords
     if (!validatePassword(newPassword)) {
       return;
     }
@@ -80,20 +75,17 @@ export default function ResetPasswordPage({ searchParams }: ResetPasswordProps) 
     setIsSubmitting(true);
 
     try {
-      // Send request to API
       await axios.post('https://ekustudy.onrender.com/auth/reset-password', {
         token,
         newPassword,
       });
 
-      // Show success message
       setIsSuccess(true);
       toast({
         title: 'Password Reset Successful',
         description: 'Your password has been reset successfully',
       });
       
-      // Redirect to sign in page after 3 seconds
       setTimeout(() => {
         router.push('/auth/signin');
       }, 3000);

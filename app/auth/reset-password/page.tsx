@@ -1,4 +1,4 @@
-import ResetPasswordPage from './ResetPasswordClient';
+import ResetPasswordForm from './ResetPasswordForm';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   description: 'Reset your password',
 };
 
-export default function Page({ searchParams }: { searchParams: { token?: string } }) {
-  return <ResetPasswordPage searchParams={searchParams} />;
+export default function ResetPasswordPage({
+  searchParams,
+}: {
+  searchParams: { token?: string };
+}) {
+  return <ResetPasswordForm token={searchParams.token} />;
 }
