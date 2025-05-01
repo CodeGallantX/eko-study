@@ -1,4 +1,4 @@
- 'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
@@ -242,7 +242,7 @@ export default function StudyGroupsPage() {
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
-        handleSignOut={handleSignOut}
+        onSignOut={handleSignOut}
       />
       
       <TopNav
@@ -250,6 +250,7 @@ export default function StudyGroupsPage() {
         isSidebarCollapsed={isSidebarCollapsed}
         username={username}
         notifications={notifications}
+        toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
 
       <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
