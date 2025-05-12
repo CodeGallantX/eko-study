@@ -32,7 +32,8 @@ export default function App() {
         const token = localStorage.getItem('auth_token');
         
         if (!token || !userData) {
-          router.push('/auth/signin');
+          router.push('/dashboard');
+          // router.push('/auth/signin');
           return;
         }
         
