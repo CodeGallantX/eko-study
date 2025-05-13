@@ -1,4 +1,5 @@
 interface VideoThumbnailProps {
+  import Image from 'next/image';
   video: string;
   isActive: boolean;
   onClick: () => void;
@@ -22,9 +23,12 @@ const VideoThumbnail: React.FC<VideoThumbnailProps> = ({ video, isActive, onClic
     >
       {videoId ? (
         <img
-          src={thumbnailUrl}
+          as={Image} // Use the as prop to render as next/image
+          src={thumbnailUrl} // Pass src to next/image
           alt="Video Thumbnail"
-          className="w-full h-20 object-cover"
+          width={120} // Fixed width
+          height={80} // Fixed height
+          objectFit="cover" // Maintain aspect ratio
         />
       ) : (
         <p className="p-4 text-red-700 text-sm font-normal text-center">Video not available yet...</p>

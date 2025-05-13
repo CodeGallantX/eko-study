@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import { motion } from "framer-motion";
 import { FaMobileAlt, FaApple, FaGooglePlay } from "react-icons/fa";
 
@@ -70,9 +71,11 @@ export default function MobileAppBanner() {
           >
             <div className="relative w-64 h-auto">
               <div className="absolute inset-0 bg-yellow-400/20 rounded-3xl blur-xl"></div>
-              <img 
-                src="/images/phone-mockup.png" 
-                alt="EkoStudy Mobile App" 
+              <Image
+                src="/images/phone-mockup.png"
+                alt="EkoStudy Mobile App"
+                width={256} // w-64 equivalent
+                height={512} // Estimated height
                 className="relative z-10 w-full h-auto"
               />
             </div>

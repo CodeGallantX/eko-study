@@ -9,7 +9,6 @@ import { RootState } from '@/lib/redux/store';
 
 interface UserData {
   _id: string;
-  fullName: string;
   email: string;
   username: string;
 }
@@ -36,7 +35,13 @@ export function useAuth() {
       });
 
       if (response.data) {
-        dispatch(setUserData(response.data));
+        // Assuming the API response directly matches the structure needed by setUserData
+        // which now expects fullName
+        dispatch(setUserData({
+          ...response.data,
+          // If your API sends firstName and lastName, you might need to combine them here:
+          // fullName: `${response.data.firstName || ''} ${response.data.lastName || ''}`.trim(),
+        }));
         if (typeof window !== 'undefined') {
           localStorage.setItem('userData', JSON.stringify(response.data));
         }

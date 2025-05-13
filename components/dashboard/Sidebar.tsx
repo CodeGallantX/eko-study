@@ -1,6 +1,6 @@
 'use client';
 
-// import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -34,21 +34,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
   // onSignOut
 }) => {
   const router = useRouter();
-  // const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Only run on client side
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navigateToSection = (section: string) => {
     setActiveSection(section);
     router.push(`/dashboard/${section}`);
   };
 
-  // const handleSignOut = () => {
-  //   onSignOut(); // Call the sign out handler passed from parent
-  // };
+  const handleSignOut = () => {
+    onSignOut(); // Call the sign out handler passed from parent
+  };
 
   // Return a placeholder during SSR
   if (typeof window === 'undefined') {
@@ -62,15 +62,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }
 
   // Show loading state until component is mounted
-  // if (!mounted) {
-  //   return (
-  //     <div className={`${isSidebarCollapsed ? 'w-16' : 'w-64'} ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} shadow-lg h-screen fixed left-0 top-0 z-10`}>
-  //       <div className="p-4 flex items-center justify-center">
-  //         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-deepGreen"></div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (!mounted) {
+    return (
+      <div className={`${isSidebarCollapsed ? 'w-16' : 'w-64'} ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} shadow-lg h-screen fixed left-0 top-0 z-10`}>
+        <div className="p-4 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-deepGreen"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <AnimatePresence mode="wait">

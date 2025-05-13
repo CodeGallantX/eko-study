@@ -2,16 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
   isAuthenticated: boolean;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   email: string;
   username: string;
 }
 
 const initialState: UserState = {
   isAuthenticated: false,
-  firstName: '',
-  lastName: '',
+  fullName: '',
   email: '',
   username: '',
 };
