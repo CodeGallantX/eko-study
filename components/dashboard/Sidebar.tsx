@@ -239,3 +239,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </AnimatePresence>
   );
 };
+
+function onSignOut() {
+  throw new Error('Function not implemented.');
+}

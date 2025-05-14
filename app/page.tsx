@@ -4,7 +4,7 @@ import Hero from "@/components/home/Hero"
 import AboutSection from "@/components/home/AboutSection"
 import Features from "@/components/home/Features"
 import Testimonials from "@/components/home/Testimonials"
-import MobileAppBanner from "@/components/shared/MobileAppBanner"
+// import MobileAppBanner from "@/components/shared/MobileAppBanner"
 import Footer from "@/components/shared/Footer"
 
 export default function App () {
@@ -17,7 +17,7 @@ export default function App () {
       <AboutSection />
       <Features />
       <Testimonials />
-      <MobileAppBanner />
+      {/* <MobileAppBanner /> */}
       <Footer />
     </div>
     </>

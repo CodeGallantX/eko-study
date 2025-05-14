@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { FaQuoteLeft, FaGraduationCap, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-// import Image from 'next/image';
+import Image from 'next/image';
 
 const testimonials = [
   {
@@ -34,8 +34,8 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  return (
-    <section className="relative w-full py-16 bg-[#e6e1d1]/50 overflow-hidden">
+ return (
+    <section className="relative w-full py-16 bg-[#e6e1d1] overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#4c5f4e] to-[#e8ede6] opacity-10 blur-3xl"></div>
 
@@ -100,34 +100,33 @@ export default function Testimonials() {
             {testimonials.map((testimonial, index) => (
               <div key={index} className="px-4">
                 <motion.div
-                  className="relative bg-white/80 backdrop-blur-lg rounded-2xl p-8 text-center transition-all flex flex-col items-center"
+                  className="relative bg-white dark:bg-[#4c5f4e] shadow-lg rounded-xl p-8 text-center transition-all flex flex-col items-center border border-[#ffca0d]/30"
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
                 >
                   {/* Quote Icon */}
-                  <FaQuoteLeft className="absolute top-2 left-5 text-4xl text-[#4c5f4e] opacity-30" />
+                  <FaQuoteLeft className="absolute top-4 left-6 text-4xl text-[#ffca0d] opacity-50" />
 
                   {/* Student Image */}
-                  {/* <Image
+                  <Image
                     src={testimonial.image}
                     alt={testimonial.name}
                     width={80}
                     height={80}
-                    className="w-20 h-20 rounded-full border-4 border-[#ffca0d] object-cover mb-4"
+                    className="w-20 h-20 rounded-full border-4 border-[#4c5f4e] object-cover mb-6"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.src = '/images/default-avatar.png';
                     }}
-                  /> */}
+                  />
 
                   {/* Feedback */}
                   <p className="text-lg text-gray-800 dark:text-gray-200 italic">
                     &ldquo;{testimonial.feedback}&rdquo;
                   </p>
-
                   {/* Name & Level */}
-                  <h3 className="text-xl font-bold text-[#4c5f4e] dark:text-[#ffca0d] mt-4">
+                  <h3 className="text-xl font-bold text-[#4c5f4e] dark:text-[#e6e1d1] mt-6">
                     {testimonial.name}
                   </h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.level}</p>
