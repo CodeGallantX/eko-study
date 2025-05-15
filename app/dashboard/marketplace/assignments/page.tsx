@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter, redirect } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
-import { clearUser, setUser } from '@/store/slices/userSlice';
+import { clearUserData, setUserData } from '@/lib/redux/features/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import { FiCalendar, FiClock, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
@@ -76,15 +76,14 @@ export default function AssignmentsPage() {
           redirect('/auth/signin');
         } else if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
-          dispatch(setUser({
+          // Ensure parsedUserData has necessary fields or default them
+          const fullName = `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim();
+          dispatch(setUserData({
             isAuthenticated: true,
             _id: parsedUserData._id, // Assuming _id exists in parsedUserData
             fullName: `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim() || parsedUserData.fullName || '', // Construct fullName from first and last, or use existing fullName
             email: parsedUserData.email, // Assuming email exists in parsedUserData
-            username: parsedUserData.username, // Assuming username exists in parsedUserData
             token: parsedUserData.token || '', // Assuming token exists in parsedUserData, default to empty string
-            isAuthenticated: true,
-            username: parsedUserData.username || ''
           }));
           setIsLoading(false);
         } else {
@@ -100,7 +99,7 @@ export default function AssignmentsPage() {
   }, [isAuthenticated, router, dispatch]);
 
   const handleSignOut = () => {
-    dispatch(clearUser());
+    dispatch(clearUserData());
     localStorage.removeItem('user');
     localStorage.removeItem('auth_token');
     router.push('/auth/signin');
