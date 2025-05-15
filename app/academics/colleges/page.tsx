@@ -35,15 +35,14 @@ export default async function CollegesPage() {
             // <Link key={college.slug} href={`/colleges/${college.slug}`}>
             <Link key={college.slug} href="">
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <img src={college.image} alt={college.name} className="w-full h-48 object-cover" />
-                <div className="p-4">
                 <Image
- src={college.image}
- alt={college.name}
- className="w-full h-48 object-cover"
- width={400} 
- height={200} 
+                src={college.image}
+                alt={college.name}
+                className="w-full h-48 object-cover"
+                width={400}
+                height={200}
  />
+                <div className="p-4">
                   <h2 className="text-xl font-semibold">{college.name}</h2>
                   <p className="text-gray-600 text-sm mt-1">{college.description.substring(0, 80)}...</p>
                 </div>

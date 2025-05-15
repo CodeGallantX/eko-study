@@ -77,7 +77,6 @@ export default function AssignmentsPage() {
         } else if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
           // Ensure parsedUserData has necessary fields or default them
-          const fullName = `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim();
           dispatch(setUserData({
             isAuthenticated: true,
             _id: parsedUserData._id, // Assuming _id exists in parsedUserData
