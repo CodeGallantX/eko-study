@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, redirect } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
 import { clearUser, setUser } from '@/store/slices/userSlice';
@@ -73,14 +73,17 @@ export default function AssignmentsPage() {
       try {
         const userData = localStorage.getItem('user');
         if (!userData && !isAuthenticated) {
-          router.push('/auth/signin');
+          redirect('/auth/signin');
         } else if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
           dispatch(setUser({
             isAuthenticated: true,
-            firstName: parsedUserData.firstName || '',
-            lastName: parsedUserData.lastName || '',
-            email: parsedUserData.email || '',
+            _id: parsedUserData._id, // Assuming _id exists in parsedUserData
+            fullName: `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim() || parsedUserData.fullName || '', // Construct fullName from first and last, or use existing fullName
+            email: parsedUserData.email, // Assuming email exists in parsedUserData
+            username: parsedUserData.username, // Assuming username exists in parsedUserData
+            token: parsedUserData.token || '', // Assuming token exists in parsedUserData, default to empty string
+            isAuthenticated: true,
             username: parsedUserData.username || ''
           }));
           setIsLoading(false);
@@ -89,7 +92,7 @@ export default function AssignmentsPage() {
         }
       } catch (error) {
         console.error('Error checking authentication:', error);
-        setIsLoading(false);
+        redirect('/auth/signin');
       }
     };
     
