@@ -46,10 +46,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
     router.push(`/dashboard/${section}`);
   };
 
-  const handleSignOut = () => {
-    onSignOut(); // Call the sign out handler passed from parent
-  };
-
   // Return a placeholder during SSR
   if (typeof window === 'undefined') {
     return (

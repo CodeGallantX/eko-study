@@ -20,11 +20,15 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSignOut = useCallback(() => {
-    dispatch(clearUserData());
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('userData');
+  const handleSignOut = useCallback(async () => {
+    try {
+      await axios.get('https://ekustudy.onrender.com/auth/logout');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      // Continue with clearing data even if logout API fails
     }
+    dispatch(clearUserData());
+    localStorage.removeItem('userData');
     router.push('/auth/signin');
   }, [dispatch, router]);
 

@@ -9,8 +9,17 @@ import { Label } from '@/components/ui/label';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useAppDispatch } from '@/lib/redux/hooks';
-import axios from "axios"
+
+// Define the LoginResponse type based on the expected API response structure
+interface LoginResponse {
+  _id: string;
+  fullName: string;
+  email: string;
+  username: string;
+  password?: string; // Password might not be included in the response, make it optional
+  // Add other fields if your API returns more data upon successful login
+}
+import axios from 'axios';
 
 export const SignInForm = () => {
   const router = useRouter();
