@@ -7,9 +7,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ResetPasswordPage({ 
-  searchParams 
-}: { 
-  searchParams: { token?: string } 
-}) {
+  searchParams
+}: { searchParams: { token?: string | string[] } }) {
   return <ResetPasswordForm token={searchParams.token} />;
 }
