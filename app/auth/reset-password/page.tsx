@@ -6,14 +6,13 @@ export const metadata: Metadata = {
   description: 'Reset your password',
 };
 
-type SearchParams = {
-  token?: string;
-};
+interface PageProps {
+  searchParams: {
+    token?: string;
+  };
+}
 
-export default function ResetPasswordPage({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
-  return <ResetPasswordForm token={searchParams.token} />;
+export default function ResetPasswordPage(props: PageProps) {
+  const token = props.searchParams.token;
+  return <ResetPasswordForm token={token} />;
 }
