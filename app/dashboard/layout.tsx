@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState,
-   useEffect
-   } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/redux/store';
-import { clearUserData, setUserData, setAuthToken } from '@/lib/redux/features/userSlice';
+import {
+  clearUserData, setUserData, setAuthToken
+} from '@/lib/redux/features/userSlice';
 import { Sidebar} from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import axios from 'axios';
@@ -22,7 +22,6 @@ export default function DashboardLayout({
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
-  // const { signOut, user, loading, error } = useAuth();
 
   const [isLoading, setIsLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
@@ -105,13 +104,14 @@ export default function DashboardLayout({
     }
   }, [isAuthenticated, router, dispatch, mounted]);
 
-  const handleSignOut = async () => {
+  const signOut = async () => {
     try {
       await fetch("https://ekustudy.onrender.com/auth/logout", {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${token}`
         },
+        // Assuming the server handles the redirect, otherwise remove this
         redirect: 'follow'
       });
       
@@ -121,8 +121,6 @@ export default function DashboardLayout({
       router.push('/auth/signin');
     } catch (error) {
       console.error('Error during logout:', error);
-      // dispatch(clearUserData());
-      localStorage.removeItem('user');
       localStorage.removeItem('auth_token');
       router.push('/auth/signin');
     }
@@ -143,17 +141,15 @@ export default function DashboardLayout({
           isDarkMode={isDarkMode}
           isSidebarCollapsed={isSidebarCollapsed}
           activeSection={activeSection}
-          // username={username || 'User'}
-          username={'User'}
+          username={username || 'User'}
           toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
           toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
           setActiveSection={setActiveSection}
-          onSignOut={() => {}} // Replace with actual signOut from useAuth
+          onSignOut={signOut}
         />
         
         <TopNav
           isDarkMode={isDarkMode}
-          isSidebarCollapsed={isSidebarCollapsed}
           username={'User'}
           // username={username || 'User'}
           toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
