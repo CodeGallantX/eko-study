@@ -1,18 +1,11 @@
+'use client';
+
 import ResetPasswordForm from './ResetPasswordForm';
-import type { Metadata } from 'next';
+import { useSearchParams } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: 'Reset Password',
-  description: 'Reset your password',
-};
+export default function ResetPasswordPage() {
+  const searchParams = useSearchParams();
+  const token = searchParams.get('token') ?? undefined;
 
-interface PageProps {
-  searchParams: {
-    token?: string;
-  };
-}
-
-export default function ResetPasswordPage(props: PageProps) {
-  const token = props.searchParams.token;
   return <ResetPasswordForm token={token} />;
 }
