@@ -10,12 +10,10 @@ import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useAppDispatch } from '@/lib/redux/hooks';
-import { setUserData } from '@/lib/redux/features/userSlice';
 import axios from "axios"
 
 export const SignInForm = () => {
-  const router = useRouter(); // This line is still present, but it was marked as unused in the error message. I will keep it as it is likely used in the commented-out code block for navigation.
-  const dispatch = useAppDispatch();
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
