@@ -151,7 +151,7 @@ export default function DashboardLayout({
         <TopNav
           isDarkMode={isDarkMode}
           isSidebarCollapsed={isSidebarCollapsed}
-          // username={username || 'User'}
+          username={username || 'User'}
           toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
           notifications={notifications}
         />
