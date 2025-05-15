@@ -20,7 +20,7 @@ interface SidebarProps {
   toggleDarkMode: () => void;
   toggleSidebar: () => void;
   setActiveSection: (section: string) => void;
-  // onSignOut: () => void;
+  onSignOut: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -31,7 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   toggleDarkMode,
   toggleSidebar,
   setActiveSection,
-  // onSignOut
+  onSignOut
 }) => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
@@ -222,7 +222,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </li>
             <li>
               <button 
-                // onClick={handleSignOut}
+                onClick={onSignOut}
                 className={`w-full flex items-center p-3 rounded-lg ${isDarkMode ? 'hover:bg-red-500 text-white' : 'text-red hover:bg-red-50'} transition-colors`}
               >
                 <FiLogOut className="text-xl" />
@@ -235,7 +235,3 @@ export const Sidebar: React.FC<SidebarProps> = ({
     </AnimatePresence>
   );
 };
-
-function onSignOut() {
-  throw new Error('Function not implemented.');
-}
