@@ -1,5 +1,6 @@
+import Image from 'next/image';
+
 interface VideoThumbnailProps {
-  import Image from 'next/image';
   video: string;
   isActive: boolean;
   onClick: () => void;
