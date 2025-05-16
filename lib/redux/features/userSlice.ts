@@ -1,22 +1,18 @@
-// lib/redux/features/userSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-  _id: string;
+  isAuthenticated: boolean;
   fullName: string;
   email: string;
   username: string;
-  token: string;
-  isAuthenticated: boolean;
+  token?: string;
 }
 
 const initialState: UserState = {
-  _id: '',
+  isAuthenticated: false,
   fullName: '',
   email: '',
-  username: '',
-  token: '',
-  isAuthenticated: false,
+  username: ''
 };
 
 export const userSlice = createSlice({
@@ -24,7 +20,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUserData: (state, action: PayloadAction<Partial<UserState>>) => {
-      return { ...state, ...action.payload, isAuthenticated: true };
+      return { ...state, ...action.payload };
     },
     clearUserData: () => initialState,
     setAuthToken: (state, action: PayloadAction<string>) => {

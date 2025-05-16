@@ -4,49 +4,113 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
-import { clearUser, setUser } from '@/store/slices/userSlice';
+import { clearUserData, setUserData } from '@/store/slices/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
-import { FiCalendar, FiClock, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import { FiUsers, FiCalendar, FiClock, FiPlus, FiSearch, FiMessageSquare, FiBookOpen, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FaChalkboardTeacher, FaUserFriends } from 'react-icons/fa';
+import { IoMdNotificationsOutline } from 'react-icons/io';
+import { BsThreeDotsVertical, BsFillPeopleFill } from 'react-icons/bs';
 
-export default function AssignmentsPage() {
+export default function StudyGroupsPage() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [activeSection, setActiveSection] = useState('assignments');
+  const [activeSection, setActiveSection] = useState('study-groups');
   const [isLoading, setIsLoading] = useState(true);
-  const [filter, setFilter] = useState('all'); // all, pending, completed
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState('my-groups');
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [expandedGroup, setExpandedGroup] = useState<number | null>(null);
+  const [newGroupForm, setNewGroupForm] = useState({
+    name: '',
+    subject: '',
+    description: '',
+    maxMembers: 10,
+    meetingFrequency: 'weekly'
+  });
 
-  // Mock assignments data
-  const assignments = [
+  // Mock study groups data
+  const myStudyGroups = [
     {
       id: 1,
-      title: 'Computer Science Project',
-      course: 'Introduction to Programming',
-      dueDate: '2024-04-15',
-      status: 'pending',
-      description: 'Create a simple web application using HTML, CSS, and JavaScript.',
-      priority: 'high'
+      name: 'Advanced Calculus Study Group',
+      subject: 'Mathematics',
+      description: 'Focusing on multivariable calculus and differential equations. We meet weekly to solve problems and discuss concepts.',
+      members: [
+        { id: 1, name: 'Alex Johnson', role: 'Admin' },
+        { id: 2, name: 'Sam Wilson', role: 'Member' },
+        { id: 3, name: 'Taylor Smith', role: 'Member' }
+      ],
+      maxMembers: 12,
+      nextMeeting: '2024-04-15T18:00:00',
+      meetingFrequency: 'weekly',
+      isAdmin: true,
+      unreadMessages: 3,
+      recentActivity: '2 hours ago',
+      studyMaterials: [
+        { name: 'Calculus Textbook', link: '#', type: 'pdf' },
+        { name: 'Problem Set 4', link: '#', type: 'doc' }
+      ]
     },
     {
       id: 2,
-      title: 'Physics Lab Report',
-      course: 'Physics 101',
-      dueDate: '2024-04-10',
-      status: 'completed',
-      description: 'Write a lab report on the experiment conducted in class.',
-      priority: 'medium'
-    },
+      name: 'Computer Science Study Group',
+      subject: 'Computer Science',
+      description: 'Data structures and algorithms study sessions with coding practice and interview preparation.',
+      members: [
+        { id: 1, name: 'Jordan Lee', role: 'Admin' },
+        { id: 2, name: username || 'You', role: 'Member' },
+        { id: 3, name: 'Casey Kim', role: 'Member' }
+      ],
+      maxMembers: 10,
+      nextMeeting: '2024-04-12T16:30:00',
+      meetingFrequency: 'bi-weekly',
+      isAdmin: false,
+      unreadMessages: 0,
+      recentActivity: '1 day ago',
+      studyMaterials: [
+        { name: 'Algorithms Book', link: '#', type: 'pdf' },
+        { name: 'Week 3 Slides', link: '#', type: 'ppt' }
+      ]
+    }
+  ];
+
+  const discoverGroups = [
     {
       id: 3,
-      title: 'Mathematics Assignment',
-      course: 'Calculus I',
-      dueDate: '2024-04-20',
-      status: 'pending',
-      description: 'Solve problems from chapters 5 and 6.',
-      priority: 'low'
+      name: 'Physics Study Group',
+      subject: 'Physics',
+      description: 'Quantum mechanics and thermodynamics study group with weekly problem-solving sessions.',
+      members: 6,
+      maxMembers: 15,
+      nextMeeting: '2024-04-14T17:00:00',
+      meetingFrequency: 'weekly',
+      isMember: false
+    },
+    {
+      id: 4,
+      name: 'Literature Circle',
+      subject: 'English',
+      description: 'Discussion group for classic and contemporary literature with monthly book readings.',
+      members: 9,
+      maxMembers: 12,
+      nextMeeting: '2024-04-16T19:00:00',
+      meetingFrequency: 'monthly',
+      isMember: false
+    },
+    {
+      id: 5,
+      name: 'Biology Study Group',
+      subject: 'Biology',
+      description: 'Molecular biology and genetics study sessions with lab report collaboration.',
+      members: 4,
+      maxMembers: 8,
+      nextMeeting: '2024-04-13T15:00:00',
+      meetingFrequency: 'weekly',
+      isMember: false
     }
   ];
 
@@ -54,15 +118,15 @@ export default function AssignmentsPage() {
   const notifications = [
     {
       id: 1,
-      title: 'New Assignment',
-      message: 'New assignment added to Computer Science',
-      time: '2 hours ago',
+      title: 'New Group Invitation',
+      message: 'You have been invited to join the Biology Study Group',
+      time: '3 hours ago',
       read: false
     },
     {
       id: 2,
-      title: 'Assignment Due Soon',
-      message: 'Physics Lab Report is due in 2 days',
+      title: 'Meeting Reminder',
+      message: 'Computer Science Study Group meeting starts in 1 hour',
       time: '1 day ago',
       read: true
     }
@@ -76,11 +140,11 @@ export default function AssignmentsPage() {
           router.push('/auth/signin');
         } else if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
-          dispatch(setUser({
-              isAuthenticated: true,
-              email: parsedUserData.email || '',
-              username: parsedUserData.username || '',
-              fullName: ''
+          dispatch(setUserData({
+            fullName: parsedUserData.fullName || '',
+            email: parsedUserData.email || '',
+            username: parsedUserData.username || '',
+            isAuthenticated: true
           }));
           setIsLoading(false);
         } else {
@@ -96,27 +160,59 @@ export default function AssignmentsPage() {
   }, [isAuthenticated, router, dispatch]);
 
   const handleSignOut = () => {
-    dispatch(clearUser());
+    dispatch(clearUserData());
     localStorage.removeItem('user');
     localStorage.removeItem('auth_token');
     router.push('/auth/signin');
   };
 
-  const filteredAssignments = assignments.filter(assignment => {
-    if (filter === 'all') return true;
-    return assignment.status === filter;
-  });
+  const filteredMyGroups = myStudyGroups.filter(group =>
+    group.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    group.subject.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'high':
-        return 'text-red-500';
-      case 'medium':
-        return 'text-yellow-500';
-      case 'low':
-        return 'text-green-500';
-      default:
-        return 'text-gray-500';
+  const filteredDiscoverGroups = discoverGroups.filter(group =>
+    group.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    group.subject.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const handleCreateGroup = () => {
+    console.log('Creating new group:', newGroupForm);
+    setShowCreateModal(false);
+    setNewGroupForm({
+      name: '',
+      subject: '',
+      description: '',
+      maxMembers: 10,
+      meetingFrequency: 'weekly'
+    });
+  };
+
+  const joinGroup = (groupId: number) => {
+    console.log('Joining group:', groupId);
+  };
+
+  const formatMeetingTime = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const toggleGroupExpand = (groupId: number) => {
+    setExpandedGroup(expandedGroup === groupId ? null : groupId);
+  };
+
+  const getFileIcon = (type: string) => {
+    switch (type) {
+      case 'pdf': return '📄';
+      case 'doc': return '📝';
+      case 'ppt': return '📊';
+      default: return '📁';
     }
   };
 
@@ -138,15 +234,15 @@ export default function AssignmentsPage() {
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
-        onSignOut={handleSignOut} // Changed from handleSignOut to onSignOut
+        onSignOut={handleSignOut}
       />
       
       <TopNav
         isDarkMode={isDarkMode}
-        toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         isSidebarCollapsed={isSidebarCollapsed}
         username={username}
         notifications={notifications}
+        toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
 
       <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
