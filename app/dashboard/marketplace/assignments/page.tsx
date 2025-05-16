@@ -7,10 +7,10 @@ import { RootState } from '@/store/store';
 import { clearUserData, setUserData } from '@/store/slices/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
-import { FiUsers, FiCalendar, FiClock, FiPlus, FiSearch, FiMessageSquare, FiBookOpen, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiUsers, FiCalendar, FiClock, FiPlus, FiSearch, FiMessageSquare, FiBookOpen, FiChevronDown, FiChevronUp, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import { FaChalkboardTeacher, FaUserFriends } from 'react-icons/fa';
 import { IoMdNotificationsOutline } from 'react-icons/io';
-import { BsThreeDotsVertical, BsFillPeopleFill } from 'react-icons/bs';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 
 export default function StudyGroupsPage() {
   const router = useRouter();
@@ -20,9 +20,9 @@ export default function StudyGroupsPage() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('study-groups');
   const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('my-groups');
-  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [searchQuery] = useState('');
+  const [activeTab] = useState('my-groups');
+  const [showCreateModal] = useState(false);
   const [expandedGroup, setExpandedGroup] = useState<number | null>(null);
   const [newGroupForm, setNewGroupForm] = useState({
     name: '',
