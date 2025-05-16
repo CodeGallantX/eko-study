@@ -1,3 +1,4 @@
+// @/store/slices/userSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
@@ -15,7 +16,7 @@ const initialState: UserState = {
   username: ''
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -29,5 +30,8 @@ export const userSlice = createSlice({
   },
 });
 
+// Export the action creators
 export const { setUserData, clearUserData, setAuthToken } = userSlice.actions;
+
+// Export the reducer
 export default userSlice.reducer;
