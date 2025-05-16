@@ -7,10 +7,8 @@ import { RootState } from '@/store/store';
 import { clearUserData, setUserData } from '@/store/slices/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
-import { FiUsers, FiCalendar, FiClock, FiPlus, FiSearch, FiMessageSquare, FiBookOpen, FiChevronDown, FiChevronUp, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
-import { FaChalkboardTeacher, FaUserFriends } from 'react-icons/fa';
-import { IoMdNotificationsOutline } from 'react-icons/io';
-import { BsThreeDotsVertical, BsFillPeopleFill } from 'react-icons/bs';
+import { FiCalendar, FiPlus, FiSearch, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { BsFillPeopleFill } from 'react-icons/bs';
 
 export default function StudyGroupsPage() {
   const router = useRouter();
@@ -22,15 +20,7 @@ export default function StudyGroupsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('my-groups');
-  const [showCreateModal, setShowCreateModal] = useState(false);
   const [expandedGroup, setExpandedGroup] = useState<number | null>(null);
-  const [newGroupForm, setNewGroupForm] = useState({
-    name: '',
-    subject: '',
-    description: '',
-    maxMembers: 10,
-    meetingFrequency: 'weekly'
-  });
 
   // Mock study groups data
   const myStudyGroups = [
@@ -114,24 +104,6 @@ export default function StudyGroupsPage() {
     }
   ];
 
-  // Mock notifications data
-  const notifications = [
-    {
-      id: 1,
-      title: 'New Group Invitation',
-      message: 'You have been invited to join the Biology Study Group',
-      time: '3 hours ago',
-      read: false
-    },
-    {
-      id: 2,
-      title: 'Meeting Reminder',
-      message: 'Computer Science Study Group meeting starts in 1 hour',
-      time: '1 day ago',
-      read: true
-    }
-  ];
-
   useEffect(() => {
     const checkAuth = () => {
       try {
@@ -175,22 +147,6 @@ export default function StudyGroupsPage() {
     group.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     group.subject.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const handleCreateGroup = () => {
-    console.log('Creating new group:', newGroupForm);
-    setShowCreateModal(false);
-    setNewGroupForm({
-      name: '',
-      subject: '',
-      description: '',
-      maxMembers: 10,
-      meetingFrequency: 'weekly'
-    });
-  };
-
-  const joinGroup = (groupId: number) => {
-    console.log('Joining group:', groupId);
-  };
 
   const formatMeetingTime = (dateString: string) => {
     const date = new Date(dateString);
@@ -241,7 +197,7 @@ export default function StudyGroupsPage() {
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         username={username}
-        notifications={notifications}
+        notifications={[]}
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
 
@@ -263,7 +219,6 @@ export default function StudyGroupsPage() {
                 />
               </div>
               <button
-                onClick={() => setShowCreateModal(true)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg ${isDarkMode ? 'bg-green-600 hover:bg-green-700' : 'bg-green hover:bg-deepGreen'} text-white transition-colors`}
               >
                 <FiPlus />
@@ -366,7 +321,6 @@ export default function StudyGroupsPage() {
                     <span>Next meeting: {formatMeetingTime(group.nextMeeting)}</span>
                   </div>
                   <button
-                    onClick={() => joinGroup(group.id)}
                     className={`w-full px-4 py-2 rounded-lg ${isDarkMode ? 'bg-green-600 hover:bg-green-700' : 'bg-green hover:bg-deepGreen'} text-white transition-colors`}
                   >
                     Join Group
