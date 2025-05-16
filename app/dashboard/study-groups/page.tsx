@@ -7,30 +7,9 @@ import { RootState } from '@/store/store';
 import { clearUserData, setUserData } from '@/store/slices/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
-import { FiUsers, FiCalendar, FiClock, FiPlus, FiSearch, FiMessageSquare, FiBookOpen, FiChevronDown, FiChevronUp, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
-import { FaChalkboardTeacher, FaUserFriends } from 'react-icons/fa';
+import { FiCalendar, FiClock, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import { IoMdNotificationsOutline } from 'react-icons/io';
 import { BsThreeDotsVertical } from 'react-icons/bs';
-
-export default function StudyGroupsPage() {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const [activeSection, setActiveSection] = useState('study-groups');
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery] = useState('');
-  const [activeTab] = useState('my-groups');
-  const [showCreateModal] = useState(false);
-  const [expandedGroup, setExpandedGroup] = useState<number | null>(null);
-  const [newGroupForm, setNewGroupForm] = useState({
-    name: '',
-    subject: '',
-    description: '',
-    maxMembers: 10,
-    meetingFrequency: 'weekly'
-  });
 
   // Mock study groups data
   const myStudyGroups = [
@@ -164,56 +143,6 @@ export default function StudyGroupsPage() {
     localStorage.removeItem('user');
     localStorage.removeItem('auth_token');
     router.push('/auth/signin');
-  };
-
-  const filteredMyGroups = myStudyGroups.filter(group =>
-    group.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    group.subject.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const filteredDiscoverGroups = discoverGroups.filter(group =>
-    group.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    group.subject.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleCreateGroup = () => {
-    console.log('Creating new group:', newGroupForm);
-    setShowCreateModal(false);
-    setNewGroupForm({
-      name: '',
-      subject: '',
-      description: '',
-      maxMembers: 10,
-      meetingFrequency: 'weekly'
-    });
-  };
-
-  const joinGroup = (groupId: number) => {
-    console.log('Joining group:', groupId);
-  };
-
-  const formatMeetingTime = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
-  const toggleGroupExpand = (groupId: number) => {
-    setExpandedGroup(expandedGroup === groupId ? null : groupId);
-  };
-
-  const getFileIcon = (type: string) => {
-    switch (type) {
-      case 'pdf': return '📄';
-      case 'doc': return '📝';
-      case 'ppt': return '📊';
-      default: return '📁';
-    }
   };
 
   if (isLoading) {

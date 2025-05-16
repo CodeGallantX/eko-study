@@ -1,4 +1,11 @@
-export const UploadAssignmentModal: React.FC  = ({ onClose, isOpen }: any) => {
+import React from 'react';
+
+interface UploadAssignmentModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onUpload: (data: { courseCode: string; dueDate: string; department: string; file?: File; text?: string }) => void;
+}
+export const UploadAssignmentModal: React.FC<UploadAssignmentModalProps> = ({ onClose, isOpen }) => {
     if (!isOpen) return null;
     // Basic structure, will be expanded with form/image upload and responsiveness
     return (

@@ -1,5 +1,25 @@
 // Placeholder components for modals (will be implemented later)
-export const AssignmentDetailsModal: React.FC = ({ assignment, onClose, isOpen }: any) => {
+import React from 'react';
+
+interface Task {
+  type: 'text' | 'image';
+  content: string; // Text content or image URL
+}
+
+interface Assignment {
+  title: string;
+  dueDate: string; // Or Date type
+  course: string;
+  tasks: Task[];
+}
+
+interface AssignmentDetailsModalProps {
+  assignment: Assignment | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const AssignmentDetailsModal: React.FC<AssignmentDetailsModalProps> = ({ assignment, onClose, isOpen }) => {
     if (!isOpen) return null;
     // Basic structure, will be expanded with assignment details and responsiveness
     return (
@@ -10,6 +30,14 @@ export const AssignmentDetailsModal: React.FC = ({ assignment, onClose, isOpen }
           <p>Course: {assignment.course}</p>
           <p>Due Date: {assignment.dueDate}</p>
           {/* Add tasks, download button etc. */}
+          <div>
+            <h3>Tasks:</h3>
+            <ul>
+              {assignment.tasks.map((task, index) => (
+                <li key={index}>{task.content} - ({task.type})</li> // Basic display, will add download later
+              ))}
+            </ul>
+          </div>
           <button onClick={onClose} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
             Close
           </button>
