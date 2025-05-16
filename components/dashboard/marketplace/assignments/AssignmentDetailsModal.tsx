@@ -1,0 +1,23 @@
+// Placeholder components for modals (will be implemented later)
+export const AssignmentDetailsModal: React.FC = ({ assignment, onClose, isOpen }: any) => {
+    if (!isOpen) return null;
+    // Basic structure, will be expanded with assignment details and responsiveness
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white p-6 rounded-lg max-w-lg w-full">
+          <h2 className="text-xl font-bold mb-4">Assignment Details</h2>
+          {/* Display assignment details here */}
+          <p>Course: {assignment.course}</p>
+          <p>Due Date: {assignment.dueDate}</p>
+          {/* Add tasks, download button etc. */}
+          <button onClick={onClose} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+            Close
+          </button>
+        </div>
+      </div>
+    );
+  };
+  
+
+  
+  
