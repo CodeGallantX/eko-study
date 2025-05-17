@@ -1,3 +1,4 @@
+// app/auth/verify/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -18,7 +19,7 @@ export default function VerifyPage() {
   
   const [otp, setOtp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [timer, setTimer] = useState(180); // 3 minutes in seconds
+  const [timer, setTimer] = useState(180);
   const [canResend, setCanResend] = useState(false);
 
   const formatTime = (seconds: number) => {
@@ -63,10 +64,10 @@ export default function VerifyPage() {
           _id: response.data._id,
           fullName: response.data.fullName,
           email: response.data.email,
-          username: response.data.username
+          username: response.data.username,
+          isAuthenticated: true
         }));
         
-        // Store in localStorage for persistence
         localStorage.setItem('userData', JSON.stringify(response.data));
       }
     } catch (error) {
@@ -81,14 +82,12 @@ export default function VerifyPage() {
     setIsSubmitting(true);
     
     try {
-      // Verify OTP
       await axios.post(
         `https://ekustudy.onrender.com/auth/verify-login/${userId}`,
         { otp },
         { withCredentials: true }
       );
 
-      // Fetch user profile after successful verification
       await fetchUserProfile();
 
       toast({
