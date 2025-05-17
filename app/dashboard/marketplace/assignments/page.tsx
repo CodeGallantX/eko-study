@@ -4,18 +4,25 @@ import React, { useState } from 'react';
 import { AssignmentDetailsModal } from '@/components/dashboard/marketplace/assignments/AssignmentDetailsModal';
 import { UploadAssignmentModal } from '@/components/dashboard/marketplace/assignments/UploadAssignmentModal';
 
+type Assignment = {
+  id: number;
+  course: string;
+  title: string;
+  dueDate: string;
+};
+
 export default function AssignmentsPage() {
-  const [selectedAssignment, setSelectedAssignment] = useState(null);
+  const [selectedAssignment, setSelectedAssignment] = useState<Assignment | null>(null);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
   // Placeholder assignment data
-  const assignments = [
+  const assignments: Assignment[] = [
     { id: 1, course: 'MATH 101', title: 'Homework 1', dueDate: '2023-10-27' },
     { id: 2, course: 'PHYS 201', title: 'Lab Report', dueDate: '2023-11-03' },
   ];
 
-  const handleViewAssignment = (assignment: any) => {
+  const handleViewAssignment = (assignment: Assignment) => {
     setSelectedAssignment(assignment);
     setIsDetailsModalOpen(true);
   };
