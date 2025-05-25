@@ -1,3 +1,4 @@
+// app/auth/verify/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -65,7 +66,8 @@ export default function VerifyPage() {
           _id: response.data._id,
           fullName: response.data.fullName,
           email: response.data.email,
-          username: response.data.username
+          username: response.data.username,
+          isAuthenticated: true
         }));
         
         localStorage.setItem('userData', JSON.stringify(response.data));

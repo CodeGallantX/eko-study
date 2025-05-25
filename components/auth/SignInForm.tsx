@@ -9,22 +9,20 @@ import { Label } from '@/components/ui/label';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import axios from 'axios';
-// import { useAppDispatch } from '@/lib/redux/hooks';
-// import { setUserData } from '@/lib/redux/features/userSlice';
 
+// Define the LoginResponse type based on the expected API response structure
 interface LoginResponse {
-  _id?: string;
-  fullName?: string;
-  email?: string;
-  username?: string;
-  requiresVerification?: boolean;
-  message?: string;
+  _id: string;
+  fullName: string;
+  email: string;
+  username: string;
+  password?: string; // Password might not be included in the response, make it optional
+  // Add other fields if your API returns more data upon successful login
 }
+import axios from 'axios';
 
 export const SignInForm = () => {
   const router = useRouter();
-  // const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -55,47 +53,47 @@ export const SignInForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // try {
-    //   const { email, password } = formData;
+    try {
+      const { email, password } = formData;
       
-    //   const response = await axios.post<LoginResponse>(
-    //     'https://ekustudy.onrender.com/auth/login', 
-    //     { email, password }
-    //   );
+      const response = await axios.post<LoginResponse>(
+        'https://ekustudy.onrender.com/auth/login', 
+        { email, password }
+      );
 
-    //   if (!response.data._id) {
-    //     throw new Error('User ID not found in response');
-    //   }
+      if (!response.data._id) {
+        throw new Error('User ID not found in response');
+      }
 
-    //   // Always redirect to verification for this flow
-    //   toast({
-    //     title: 'Verification Required',
-    //     description: 'Please enter the OTP sent to your email to continue.',
-    //     duration: 3000,
-    //   });
-    //   router.push(`/auth/verify?userId=${response.data._id}`);
+      // Always redirect to verification for this flow
+      toast({
+        title: 'Verification Required',
+        description: 'Please enter the OTP sent to your email to continue.',
+        duration: 3000,
+      });
+      router.push(`/auth/verify?userId=${response.data._id}`);
 
-    // } catch (error) {
-    //   console.error('Sign in error:', error);
+    } catch (error) {
+      console.error('Sign in error:', error);
       
-    //   let errorMessage = 'Invalid email or password. Please try again.';
+      let errorMessage = 'Invalid email or password. Please try again.';
       
-    //   if (axios.isAxiosError(error)) {
-    //     errorMessage = error.response?.data?.message || errorMessage;
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || errorMessage;
         
-    //     if (error.response?.status === 401) {
-    //       errorMessage = 'Invalid credentials. Please check your email and password.';
-    //     }
-    //   }
+        if (error.response?.status === 401) {
+          errorMessage = 'Invalid credentials. Please check your email and password.';
+        }
+      }
 
-    //   toast({
-    //     title: 'Sign In Failed',
-    //     description: errorMessage,
-    //     variant: 'destructive',
-    //   });
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
+      toast({
+        title: 'Sign In Failed',
+        description: errorMessage,
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

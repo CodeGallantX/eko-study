@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface VideoThumbnailProps {
   video: string;
   isActive: boolean;
@@ -15,19 +17,25 @@ const VideoThumbnail: React.FC<VideoThumbnailProps> = ({ video, isActive, onClic
 
   return (
     <div
-      className={`cursor-pointer border-2 rounded-lg overflow-hidden transition-transform transform ${
-        isActive ? "border-green-500 scale-110" : "border-gray-300"
-      }`}
+      className={`cursor-pointer border-2 rounded-lg overflow-hidden transition-transform transform ${isActive ? "border-green-500 scale-110" : "border-gray-300"
+        }`}
       onClick={onClick}
     >
       {videoId ? (
-        <img
-          src={thumbnailUrl}
-          alt="Video Thumbnail"
-          className="w-full h-20 object-cover"
-        />
-      ) : (
-        <p className="p-4 text-red-700 text-sm font-normal text-center">Video not available yet...</p>
+        <div className="relative w-full h-full">
+          <Image
+            src={thumbnailUrl}
+            alt="Video Thumbnail"
+            width={120} // Fixed width
+            height={80} // Fixed height
+            layout="responsive"
+            style={{ objectFit: "cover" }} // Maintain aspect ratio
+
+
+          />
+        </div>
+          ) : (
+          <p className="p-4 text-red-700 text-sm font-normal text-center">Video not available yet...</p>
       )}
     </div>
   );

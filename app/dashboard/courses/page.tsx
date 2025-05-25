@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
-import { clearUser, setUser } from '@/store/slices/userSlice';
+import { clearUserData, setUserData } from '@/lib/redux/features/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import CourseCard from '@/components/CourseCard';
@@ -86,12 +86,15 @@ export default function CoursesPage() {
         } else if (userData && !isAuthenticated) {
           // If we have user data in localStorage but not in Redux, update Redux
           const parsedUserData = JSON.parse(userData);
-          dispatch(setUser({
+          // Ensure parsedUserData has necessary fields or default them
+          const fullName = `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim();
+          dispatch(setUserData({
             isAuthenticated: true,
-            firstName: parsedUserData.firstName || '',
-            lastName: parsedUserData.lastName || '',
+            _id: parsedUserData._id || '', // Include _id if available
+            fullName: fullName || parsedUserData.fullName || '', // Use constructed or existing fullName
             email: parsedUserData.email || '',
-            username: parsedUserData.username || ''
+            username: parsedUserData.username || '',
+            token: parsedUserData.token || '', // Include token if available
           }));
           setIsLoading(false);
         } else {
@@ -107,7 +110,7 @@ export default function CoursesPage() {
   }, [isAuthenticated, router, dispatch]);
 
   const handleSignOut = () => {
-    dispatch(clearUser());
+    dispatch(clearUserData());
     localStorage.removeItem('user');
     localStorage.removeItem('auth_token');
     router.push('/auth/signin');

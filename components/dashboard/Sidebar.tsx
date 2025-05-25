@@ -1,6 +1,6 @@
 'use client';
 
-// import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -20,7 +20,7 @@ interface SidebarProps {
   toggleDarkMode: () => void;
   toggleSidebar: () => void;
   setActiveSection: (section: string) => void;
-  // onSignOut: () => void;
+  onSignOut: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -31,24 +31,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
   toggleDarkMode,
   toggleSidebar,
   setActiveSection,
-  // onSignOut
+  onSignOut
 }) => {
   const router = useRouter();
-  // const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Only run on client side
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navigateToSection = (section: string) => {
     setActiveSection(section);
     router.push(`/dashboard/${section}`);
   };
-
-  // const handleSignOut = () => {
-  //   onSignOut(); // Call the sign out handler passed from parent
-  // };
 
   // Return a placeholder during SSR
   if (typeof window === 'undefined') {
@@ -62,15 +58,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }
 
   // Show loading state until component is mounted
-  // if (!mounted) {
-  //   return (
-  //     <div className={`${isSidebarCollapsed ? 'w-16' : 'w-64'} ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} shadow-lg h-screen fixed left-0 top-0 z-10`}>
-  //       <div className="p-4 flex items-center justify-center">
-  //         <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-deepGreen"></div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (!mounted) {
+    return (
+      <div className={`${isSidebarCollapsed ? 'w-16' : 'w-64'} ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} shadow-lg h-screen fixed left-0 top-0 z-10`}>
+        <div className="p-4 flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-deepGreen"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <AnimatePresence mode="wait">
@@ -226,7 +222,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </li>
             <li>
               <button 
-                // onClick={handleSignOut}
+                onClick={onSignOut}
                 className={`w-full flex items-center p-3 rounded-lg ${isDarkMode ? 'hover:bg-red-500 text-white' : 'text-red hover:bg-red-50'} transition-colors`}
               >
                 <FiLogOut className="text-xl" />
