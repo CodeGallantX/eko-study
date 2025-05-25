@@ -18,7 +18,7 @@ export default function VerifyPage() {
   
   const [otp, setOtp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [timer, setTimer] = useState(180); // 3 minutes in seconds
+  const [timer, setTimer] = useState(180);
   const [canResend, setCanResend] = useState(false);
 
   const formatTime = (seconds: number) => {
@@ -35,9 +35,10 @@ export default function VerifyPage() {
         variant: 'destructive',
       });
       router.push('/auth/signin');
-      return;
     }
+  }, [userId, router]);
 
+  useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prev) => {
         if (prev <= 1) {
@@ -50,7 +51,7 @@ export default function VerifyPage() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [userId, router, canResend]);
+  }, [canResend]);
 
   const fetchUserProfile = async () => {
     try {
@@ -60,13 +61,13 @@ export default function VerifyPage() {
       
       if (response.data) {
         dispatch(setUserData({
+          isAuthenticated: true,
           _id: response.data._id,
           fullName: response.data.fullName,
           email: response.data.email,
           username: response.data.username
         }));
         
-        // Store in localStorage for persistence
         localStorage.setItem('userData', JSON.stringify(response.data));
       }
     } catch (error) {
@@ -81,14 +82,12 @@ export default function VerifyPage() {
     setIsSubmitting(true);
     
     try {
-      // Verify OTP
       await axios.post(
         `https://ekustudy.onrender.com/auth/verify-login/${userId}`,
         { otp },
         { withCredentials: true }
       );
 
-      // Fetch user profile after successful verification
       await fetchUserProfile();
 
       toast({
@@ -97,9 +96,7 @@ export default function VerifyPage() {
         duration: 3000,
       });
 
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 1500);
+      setTimeout(() => router.push('/dashboard'), 1500);
     } catch (error) {
       console.error('Verification error:', error);
       

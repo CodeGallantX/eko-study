@@ -98,38 +98,7 @@ export default function Hero() {
               EkoStudy transforms your university experience with AI-powered study tools, comprehensive resources, and collaborative learning environments designed to maximize your academic potential.
             </motion.p>
 
-            {/* Key Benefits */}
-            {/* <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.5 }}
-              className="mt-6 space-y-3"
-            >
-              <div className="flex items-start gap-3">
-                <div className="mt-1 text-[#4c5f4e] dark:text-[#ffca0d]">
-                  <FaChartLine className="w-5 h-5" />
-                </div>
-                <p className="text-gray-700 dark:text-gray-300">
-                  <span className="font-semibold">Personalized Learning Paths</span> that adapt to your study style and pace
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="mt-1 text-[#4c5f4e] dark:text-[#ffca0d]">
-                  <FaBookOpen className="w-5 h-5" />
-                </div>
-                <p className="text-gray-700 dark:text-gray-300">
-                  <span className="font-semibold">Comprehensive Study Materials</span> covering diverse academic disciplines
-                </p>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="mt-1 text-[#4c5f4e] dark:text-[#ffca0d]">
-                  <FaUsers className="w-5 h-5" />
-                </div>
-                <p className="text-gray-700 dark:text-gray-300">
-                  <span className="font-semibold">Collaborative Study Groups</span> to enhance knowledge sharing and peer learning
-                </p>
-              </div>
-            </motion.div> */}
+            
 
             {/* Feature Pills */}
             <motion.div 

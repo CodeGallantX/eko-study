@@ -2,16 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
   isAuthenticated: boolean;
-  firstName: string;
-  lastName: string;
+  _id: string;
+  fullName: string;
   email: string;
   username: string;
 }
 
 const initialState: UserState = {
   isAuthenticated: false,
-  firstName: '',
-  lastName: '',
+  _id: '',
+  fullName: '',
   email: '',
   username: '',
 };
@@ -20,14 +20,12 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserState>) => {
+    setUserData: (state, action: PayloadAction<Partial<UserState>>) => {
       return { ...state, ...action.payload };
     },
-    clearUser: (state) => {
-      return initialState;
-    },
+    clearUser: () => initialState,
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
-export default userSlice.reducer; 
+export const { setUserData, clearUser } = userSlice.actions;
+export default userSlice.reducer;
