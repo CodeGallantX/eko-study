@@ -21,7 +21,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserData: (state, action: PayloadAction<Partial<UserState>>) => {
-      return { ...state, ...action.payload };
+      // Explicitly merge the state with the payload
+      return {
+        ...state,
+        ...action.payload,
+        // Ensure isAuthenticated is always set if not provided
+        isAuthenticated: action.payload.isAuthenticated ?? state.isAuthenticated
+      };
     },
     clearUser: () => initialState,
   },

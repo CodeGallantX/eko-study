@@ -1,4 +1,3 @@
-// app/auth/verify/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -10,6 +9,13 @@ import { Loader2 } from 'lucide-react';
 import axios from 'axios';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
+
+interface ApiUserResponse {
+  _id: string;
+  fullName: string;
+  email: string;
+  username: string;
+}
 
 export default function VerifyPage() {
   const router = useRouter();
@@ -56,21 +62,21 @@ export default function VerifyPage() {
 
   const fetchUserProfile = async () => {
     try {
-      const response = await axios.get('https://ekustudy.onrender.com/users/profile', {
+      const response = await axios.get<ApiUserResponse>('https://ekustudy.onrender.com/users/profile', {
         withCredentials: true
       });
       
       if (response.data) {
-        dispatch(setUserData({
+        const userData = {
           isAuthenticated: true,
           _id: response.data._id,
           fullName: response.data.fullName,
           email: response.data.email,
-          username: response.data.username,
-          isAuthenticated: true
-        }));
+          username: response.data.username
+        };
         
-        localStorage.setItem('userData', JSON.stringify(response.data));
+        dispatch(setUserData(userData));
+        localStorage.setItem('userData', JSON.stringify(userData));
       }
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
