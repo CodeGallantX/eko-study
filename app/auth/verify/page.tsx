@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
+import Preloader from "@/components/shared/Preloader";
 import { useRouter, useSearchParams } from 'next/navigation';
 import { OTPInput } from '@/components/ui/otp-input';
 import { Button } from '@/components/ui/button';
@@ -17,7 +18,7 @@ interface ApiUserResponse {
   username: string;
 }
 
-export default function VerifyPage() {
+function VerifyContent() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
@@ -29,7 +30,6 @@ export default function VerifyPage() {
   const [canResend, setCanResend] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  // Wait for component to mount before rendering
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -109,7 +109,6 @@ export default function VerifyPage() {
         { withCredentials: true }
       );
 
-      // Check if verification was successful
       if (response.status === 200) {
         await fetchUserProfile();
 
@@ -231,5 +230,13 @@ export default function VerifyPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={<Preloader />}>
+      <VerifyContent />
+    </Suspense>
   );
 }
