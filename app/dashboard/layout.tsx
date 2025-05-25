@@ -4,12 +4,18 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/lib/redux/store';
-import {
-  clearUserData, setUserData, setAuthToken
-} from '@/lib/redux/features/userSlice';
-import { Sidebar} from '@/components/dashboard/Sidebar';
+import { clearUserData, setUserData, setAuthToken } from '@/lib/redux/features/userSlice';
+import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import axios from 'axios';
+
+interface Notification {
+  id: number;
+  title: string;
+  message: string;
+  time: string;
+  read: boolean;
+}
 
 export default function DashboardLayout({
   children,
@@ -22,13 +28,11 @@ export default function DashboardLayout({
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
-
   const [isLoading, setIsLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
 
-  // Mock notifications data
-  const notifications = [
+  const notifications: Notification[] = [
     {
       id: 1,
       title: 'New Course Available',
@@ -45,12 +49,10 @@ export default function DashboardLayout({
     }
   ];
 
-  // Set mounted state after component mounts
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Check authentication status
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
@@ -62,6 +64,7 @@ export default function DashboardLayout({
         if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
           dispatch(setUserData({
+            isAuthenticated: true,
             _id: parsedUserData._id || '',
             fullName: parsedUserData.fullName || '',
             email: parsedUserData.email || '',
@@ -71,8 +74,7 @@ export default function DashboardLayout({
         }
         
         if (!token || !userData) {
-          router.push('/dashboard');
-          // router.push('/auth/signin');
+          router.push('/auth/signin');
           return;
         }
         
@@ -111,11 +113,10 @@ export default function DashboardLayout({
         headers: {
           'Authorization': `Bearer ${token}`
         },
-        // Assuming the server handles the redirect, otherwise remove this
         redirect: 'follow'
       });
       
-      // dispatch(clearUserData());
+      dispatch(clearUserData());
       localStorage.removeItem('user');
       localStorage.removeItem('auth_token');
       router.push('/auth/signin');
