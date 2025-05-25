@@ -27,6 +27,12 @@ export default function VerifyPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timer, setTimer] = useState(180);
   const [canResend, setCanResend] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Wait for component to mount before rendering
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -35,7 +41,7 @@ export default function VerifyPage() {
   };
 
   useEffect(() => {
-    if (!userId) {
+    if (!userId && mounted) {
       toast({
         title: 'Error',
         description: 'Invalid verification link. Please try signing in again.',
@@ -43,9 +49,11 @@ export default function VerifyPage() {
       });
       router.push('/auth/signin');
     }
-  }, [userId, router]);
+  }, [userId, router, mounted]);
 
   useEffect(() => {
+    if (!mounted) return;
+    
     const interval = setInterval(() => {
       setTimer((prev) => {
         if (prev <= 1) {
@@ -58,7 +66,7 @@ export default function VerifyPage() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [canResend]);
+  }, [canResend, mounted]);
 
   const fetchUserProfile = async () => {
     try {
@@ -80,7 +88,6 @@ export default function VerifyPage() {
       }
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
-      // If profile fetch fails but verification succeeded, still proceed to dashboard
       toast({
         title: 'Profile load failed',
         description: 'Your account is verified but we couldn\'t load your profile. You may need to sign in again.',
@@ -91,28 +98,29 @@ export default function VerifyPage() {
   };
 
   const handleVerify = async () => {
-    if (!userId || otp.length !== 6) return;
+    if (!userId || otp.length !== 6 || !mounted) return;
     
     setIsSubmitting(true);
     
     try {
-      // Verify OTP first
-      await axios.post(
+      const response = await axios.post(
         `https://ekustudy.onrender.com/auth/verify-login/${userId}`,
         { otp },
         { withCredentials: true }
       );
 
-      // Then fetch user profile
-      await fetchUserProfile();
+      // Check if verification was successful
+      if (response.status === 200) {
+        await fetchUserProfile();
 
-      toast({
-        title: 'Verification successful!',
-        description: 'Your account has been verified. Redirecting to dashboard...',
-        duration: 3000,
-      });
+        toast({
+          title: 'Verification successful!',
+          description: 'Your account has been verified. Redirecting to dashboard...',
+          duration: 3000,
+        });
 
-      setTimeout(() => router.push('/dashboard'), 1500);
+        setTimeout(() => router.push('/dashboard'), 1500);
+      }
     } catch (error) {
       console.error('Verification error:', error);
       
@@ -137,7 +145,7 @@ export default function VerifyPage() {
   };
 
   const handleResendOTP = async () => {
-    if (!canResend || !userId) return;
+    if (!canResend || !userId || !mounted) return;
     
     setIsSubmitting(true);
     
@@ -162,6 +170,10 @@ export default function VerifyPage() {
       setIsSubmitting(false);
     }
   };
+
+  if (!mounted) {
+    return <div className="min-h-screen flex items-center justify-center bg-gray-50"></div>;
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4 bg-gray-50">

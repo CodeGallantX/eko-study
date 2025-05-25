@@ -1,7 +1,7 @@
-// app/auth/reset-password/page.tsx
 'use client';
 
 import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import ResetPasswordForm from './ResetPasswordForm';
 import Preloader from '@/components/shared/Preloader';
 
