@@ -80,7 +80,13 @@ export default function VerifyPage() {
       }
     } catch (error) {
       console.error('Failed to fetch user profile:', error);
-      throw error;
+      // If profile fetch fails but verification succeeded, still proceed to dashboard
+      toast({
+        title: 'Profile load failed',
+        description: 'Your account is verified but we couldn\'t load your profile. You may need to sign in again.',
+        variant: 'default',
+      });
+      router.push('/dashboard');
     }
   };
 
@@ -90,12 +96,14 @@ export default function VerifyPage() {
     setIsSubmitting(true);
     
     try {
+      // Verify OTP first
       await axios.post(
         `https://ekustudy.onrender.com/auth/verify-login/${userId}`,
         { otp },
         { withCredentials: true }
       );
 
+      // Then fetch user profile
       await fetchUserProfile();
 
       toast({
@@ -109,8 +117,13 @@ export default function VerifyPage() {
       console.error('Verification error:', error);
       
       let errorMessage = 'Invalid OTP. Please try again.';
-      if (axios.isAxiosError(error) && error.response?.data?.message) {
-        errorMessage = error.response.data.message;
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 401) {
+          errorMessage = 'Session expired. Please sign in again.';
+          router.push('/auth/signin');
+        } else if (error.response?.data?.message) {
+          errorMessage = error.response.data.message;
+        }
       }
 
       toast({

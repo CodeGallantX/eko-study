@@ -8,18 +8,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import axios from 'axios';
 
-// Define the LoginResponse type based on the expected API response structure
 interface LoginResponse {
   _id: string;
   fullName: string;
   email: string;
   username: string;
-  password?: string; // Password might not be included in the response, make it optional
-  // Add other fields if your API returns more data upon successful login
+  password?: string;
 }
-import axios from 'axios';
 
 export const SignInForm = () => {
   const router = useRouter();
@@ -65,7 +62,6 @@ export const SignInForm = () => {
         throw new Error('User ID not found in response');
       }
 
-      // Always redirect to verification for this flow
       toast({
         title: 'Verification Required',
         description: 'Please enter the OTP sent to your email to continue.',
@@ -97,20 +93,10 @@ export const SignInForm = () => {
   };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
-      className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200"
-    >
+    <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
       <div className="p-5 sm:p-6 md:p-8">
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          className="text-center mb-6"
-        >
+        {/* Header - Removed motion for stability */}
+        <div className="text-center mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Welcome back</h1>
           <p className="text-sm sm:text-base text-gray-600">
             Don&apos;t have an account?{' '}
@@ -121,16 +107,11 @@ export const SignInForm = () => {
               Sign up
             </Link>
           </p>
-        </motion.div>
+        </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="space-y-2"
-          >
+          <div className="space-y-2">
             <Label htmlFor="email" className="text-gray-700">Email</Label>
             <Input
               id="email"
@@ -142,14 +123,9 @@ export const SignInForm = () => {
               required
               className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
             />
-          </motion.div>
+          </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="space-y-2"
-          >
+          <div className="space-y-2">
             <div className="flex justify-between items-center">
               <Label htmlFor="password" className="text-gray-700">Password</Label>
               <Link
@@ -184,28 +160,22 @@ export const SignInForm = () => {
                 )}
               </button>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
-            className="pt-2"
+          <Button
+            type="submit"
+            className="w-full bg-green text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen"
+            disabled={isSubmitting}
           >
-            <Button
-              type="submit"
-              className="w-full bg-green text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
-                  <span className="text-sm sm:text-base">Signing in...</span>
-                </>
-              ) : (
-                <span className="text-sm sm:text-base">Sign in</span>
-              )}
-            </Button>
-          </motion.div>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+                <span className="text-sm sm:text-base">Signing in...</span>
+              </>
+            ) : (
+              <span className="text-sm sm:text-base">Sign in</span>
+            )}
+          </Button>
         </form>
 
         {/* Divider */}
@@ -221,21 +191,16 @@ export const SignInForm = () => {
         </div>
 
         {/* Google Button */}
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.99 }}
+        <Button
+          variant="outline"
+          className="w-full border-gray-300 hover:bg-gray-50 transition-colors py-2.5 sm:py-3"
+          type="button"
+          onClick={handleGoogleSignIn}
         >
-          <Button
-            variant="outline"
-            className="w-full border-gray-300 hover:bg-gray-50 transition-colors py-2.5 sm:py-3"
-            type="button"
-            onClick={handleGoogleSignIn}
-          >
-            <PiGoogleLogoBold className="mr-2 text-red" size={18} />
-            <span className="text-sm sm:text-base">Continue with Google</span>
-          </Button>
-        </motion.div>
+          <PiGoogleLogoBold className="mr-2 text-red" size={18} />
+          <span className="text-sm sm:text-base">Continue with Google</span>
+        </Button>
       </div>
-    </motion.div>
+    </div>
   );
 };
