@@ -9,6 +9,24 @@ import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import CourseCard from '@/components/CourseCard';
 
+interface Course {
+  id: number;
+  title: string;
+  instructor: string;
+  image: string;
+  progress: number;
+  rating: number;
+  students: number;
+}
+
+interface Notification {
+  id: number;
+  title: string;
+  message: string;
+  time: string;
+  read: boolean;
+}
+
 export default function CoursesPage() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -19,7 +37,7 @@ export default function CoursesPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   // Mock courses data
-  const courses = [
+  const courses: Course[] = [
     {
       id: 1,
       title: 'Introduction to Computer Science',
@@ -59,7 +77,7 @@ export default function CoursesPage() {
   ];
 
   // Mock notifications data
-  const notifications = [
+  const notifications: Notification[] = [
     {
       id: 1,
       title: 'New Course Available',
@@ -77,32 +95,32 @@ export default function CoursesPage() {
   ];
 
   useEffect(() => {
-    // Check if user is authenticated
     const checkAuth = () => {
       try {
         const userData = localStorage.getItem('user');
         if (!userData && !isAuthenticated) {
           router.push('/auth/signin');
-        } else if (userData && !isAuthenticated) {
-          // If we have user data in localStorage but not in Redux, update Redux
+          return;
+        }
+
+        if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
-          // Ensure parsedUserData has necessary fields or default them
-          const fullName = `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim();
-          dispatch(setUserData({
+          const userPayload = {
             isAuthenticated: true,
-            _id: parsedUserData._id || '', // Include _id if available
-            fullName: fullName || parsedUserData.fullName || '', // Use constructed or existing fullName
+            _id: parsedUserData._id || '',
+            fullName: parsedUserData.fullName || `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim(),
             email: parsedUserData.email || '',
             username: parsedUserData.username || '',
-            token: parsedUserData.token || '', // Include token if available
-          }));
-          setIsLoading(false);
-        } else {
-          setIsLoading(false);
+            token: parsedUserData.token || ''
+          };
+          
+          dispatch(setUserData(userPayload));
         }
+        setIsLoading(false);
       } catch (error) {
         console.error('Error checking authentication:', error);
         setIsLoading(false);
+        router.push('/auth/signin');
       }
     };
     

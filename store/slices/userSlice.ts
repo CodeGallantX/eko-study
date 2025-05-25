@@ -6,6 +6,7 @@ interface UserState {
   fullName: string;
   email: string;
   username: string;
+  token: string;
 }
 
 const initialState: UserState = {
@@ -14,6 +15,7 @@ const initialState: UserState = {
   fullName: '',
   email: '',
   username: '',
+  token: '',
 };
 
 const userSlice = createSlice({
@@ -21,13 +23,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserData: (state, action: PayloadAction<Partial<UserState>>) => {
-      // Explicitly merge the state with the payload
-      return {
-        ...state,
-        ...action.payload,
-        // Ensure isAuthenticated is always set if not provided
-        isAuthenticated: action.payload.isAuthenticated ?? state.isAuthenticated
-      };
+      return { ...state, ...action.payload };
     },
     clearUser: () => initialState,
   },
