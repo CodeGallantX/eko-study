@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
-import userSlice from '@/store/slices/userSlice'; // Import the slice directly
+import { setUserData, clearUserData } from '@/lib/redux/features/userSlice'; // Import named actions
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import { FiCalendar, FiPlus, FiSearch, FiChevronDown, FiChevronUp } from 'react-icons/fi';
@@ -112,7 +112,7 @@ export default function StudyGroupsPage() {
           router.push('/auth/signin');
         } else if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
-          dispatch(userSlice.actions.setUserData({ // Use the action through the slice
+          dispatch(setUserData({ // Use the imported action directly
             fullName: parsedUserData.fullName || '',
             email: parsedUserData.email || '',
             username: parsedUserData.username || '',
@@ -132,7 +132,7 @@ export default function StudyGroupsPage() {
   }, [isAuthenticated, router, dispatch]);
 
   const handleSignOut = () => {
-    dispatch(userSlice.actions.clearUserData()); // Use the action through the slice
+    dispatch(clearUserData()); // Use the imported action directly
     localStorage.removeItem('user');
     localStorage.removeItem('auth_token');
     router.push('/auth/signin');
