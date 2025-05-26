@@ -126,7 +126,7 @@ export default function Hero() {
               transition={{ delay: 0.8, duration: 0.5 }}
               className="flex flex-wrap gap-4 mt-8"
             >
-              <Link href="/academics/courses">
+              <Link href="/auth/signup">
                 <motion.button 
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }}
@@ -136,13 +136,13 @@ export default function Hero() {
                   <FaArrowRight className="w-4 h-4" />
                 </motion.button>
               </Link>
-              <Link href="/about">
+              <Link href="/resources/notes">
                 <motion.button 
                   whileHover={{ scale: 1.05 }} 
                   whileTap={{ scale: 0.95 }}
                   className="px-8 py-4 bg-white/80 dark:bg-black/40 backdrop-blur-sm text-[#4c5f4e] dark:text-white rounded-lg font-semibold shadow-lg hover:bg-[#ffca0d] hover:text-white transition-colors"
                 >
-                  Explore Platform
+                  Access Notes
                 </motion.button>
               </Link>
             </motion.div>
