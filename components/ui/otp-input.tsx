@@ -20,14 +20,12 @@ export function OTPInput({
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
-    // Initialize refs array
     inputRefs.current = inputRefs.current.slice(0, maxLength);
   }, [maxLength]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newValue = e.target.value;
     
-    // Only allow numbers
     if (!/^\d*$/.test(newValue)) return;
     
     // Update the value

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from '@/hooks/use-toast';
@@ -15,11 +15,19 @@ import axios from 'axios';
 import { useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
 
+interface FormData {
+  fullName: string;
+  email: string;
+  username: string;
+  password: string;
+  agreeTerms: boolean;
+}
+
 export const SignUpForm = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
     username: '',
@@ -30,106 +38,132 @@ export const SignUpForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [passwordError, setPasswordError] = useState('');
 
+  const validateForm = useCallback(() => {
+    if (!formData.fullName.trim()) {
+      throw new Error('Full name is required');
+    }
+    if (!formData.email.trim()) {
+      throw new Error('Email is required');
+    }
+    if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      throw new Error('Please enter a valid email address');
+    }
+    if (!formData.username.trim()) {
+      throw new Error('Username is required');
+    }
+    if (formData.username.length < 3) {
+      throw new Error('Username must be at least 3 characters');
+    }
+    if (!formData.password) {
+      throw new Error('Password is required');
+    }
+    if (formData.password.length < 6) {
+      throw new Error('Password must be at least 6 characters long');
+    }
+    if (!/^[A-Za-z0-9]+$/.test(formData.password)) {
+      throw new Error('Password can only contain letters and numbers');
+    }
+    if (!formData.agreeTerms) {
+      throw new Error('You must agree to the terms and conditions');
+    }
+  }, [formData]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Validate form data
-      if (!formData.fullName.trim()) {
-        throw new Error('Full name is required');
-      }
-      if (!formData.email.trim()) {
-        throw new Error('Email is required');
-      }
-      if (!formData.username.trim()) {
-        throw new Error('Username is required');
-      }
-      if (!formData.password) {
-        throw new Error('Password is required');
-      }
-      if (formData.password.length < 6) {
-        throw new Error('Password must be at least 6 characters long');
-      }
-      if (!formData.agreeTerms) {
-        throw new Error('You must agree to the terms and conditions');
-      }
+      validateForm();
 
-      const response = await axios.post('https://ekustudy.onrender.com/users/createUser', {
+      const payload = {
         fullName: formData.fullName.trim(),
         email: formData.email.trim().toLowerCase(),
         username: formData.username.trim().toLowerCase(),
         password: formData.password,
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      });
+      };
+
+      const response = await axios.post(
+        'https://ekustudy.onrender.com/users/createUser',
+        payload,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          timeout: 10000,
+        }
+      );
+
+      if (!response.data?.userId && !response.data?._id) {
+        throw new Error('User ID not found in response');
+      }
 
       const userId = response.data.userId || response.data._id;
-      if (response.data && userId) {
-        dispatch(setUserData({ 
-          username: formData.username.trim().toLowerCase(), 
-          token: response.data.token || '' 
-        }));
-        
-        toast({
-          title: 'Account created successfully!',
-          description: 'Please verify your email to continue.',
-          duration: 3000,
-        });
-        
-        router.push(`/auth/verify?userId=${userId}`);
-      } else {
-        throw new Error('User ID not found in response. Please try again.');
-      }
-    } catch (error) {
+      dispatch(setUserData({ 
+        username: formData.username.trim().toLowerCase(), 
+        token: response.data.token || '' 
+      }));
+      
+      toast({
+        title: 'Account created successfully!',
+        description: 'Please verify your email to continue.',
+        duration: 3000,
+      });
+      
+      router.push(`/auth/verify?userId=${userId}`);
+    } catch (error: unknown) {
       console.error('Sign up error:', error);
       
-      if (error instanceof Error) {
+      if (error instanceof Error && !axios.isAxiosError(error)) {
         toast({
           title: 'Validation Error',
           description: error.message,
           variant: 'destructive',
         });
-        setIsSubmitting(false);
         return;
       }
       
-      if (axios.isAxiosError(error) && error.response) {
+      if (axios.isAxiosError(error)) {
         let errorMessage = 'Failed to create account. Please try again.';
         
-        if (error.response.status === 409) {
-          const responseData = error.response.data;
-          
-          if (responseData.message === 'User already exists') {
-            errorMessage = 'An account with these details already exists.';
+        if (error.response) {
+          if (error.response.status === 400) {
+            errorMessage = error.response.data?.message || 
+              'Invalid information provided. Please check your details.';
             
-            toast({
-              title: 'Account Already Exists',
-              description: (
-                <div className="flex flex-col gap-2">
-                  <p>An account with these details already exists.</p>
-                  <Button 
-                    onClick={() => router.push('/auth/signin')}
-                    className="w-full mt-2"
-                    variant="outline"
-                  >
-                    Sign In Instead
-                  </Button>
-                </div>
-              ),
-              variant: 'destructive',
-            });
-            return;
-          } else if (responseData.message?.toLowerCase().includes('email')) {
-            errorMessage = 'This email is already registered. Please use a different email or sign in.';
-          } else if (responseData.message?.toLowerCase().includes('username')) {
-            errorMessage = 'This username is already taken. Please choose a different username.';
+            if (error.response.data?.errors) {
+              const errors = error.response.data.errors;
+              if (errors.email) errorMessage = errors.email;
+              if (errors.username) errorMessage = errors.username;
+              if (errors.password) errorMessage = errors.password;
+            }
+          } else if (error.response.status === 409) {
+            const responseData = error.response.data;
+            
+            if (responseData.message === 'User already exists') {
+              toast({
+                title: 'Account Already Exists',
+                description: (
+                  <div className="flex flex-col gap-2">
+                    <p>An account with these details already exists.</p>
+                    <Button 
+                      onClick={() => router.push('/auth/signin')}
+                      className="w-full mt-2 text-black"
+                      variant="outline"
+                    >
+                      Sign In Instead
+                    </Button>
+                  </div>
+                ),
+                variant: 'destructive',
+              });
+              return;
+            } else if (responseData.message?.toLowerCase().includes('email')) {
+              errorMessage = 'This email is already registered.';
+            } else if (responseData.message?.toLowerCase().includes('username')) {
+              errorMessage = 'This username is already taken.';
+            }
           }
-        } else if (error.response.status === 400) {
-          errorMessage = error.response.data.message || 'Invalid information provided. Please check your details and try again.';
         }
         
         toast({
@@ -149,17 +183,34 @@ export const SignUpForm = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
-  };
+  }, []);
 
-  const togglePasswordVisibility = () => {
+  const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const passwordRegex = /^[A-Za-z0-9]+$/;
+    
+    if (!value) {
+      setPasswordError('Password is required');
+    } else if (value.length < 6) {
+      setPasswordError('Password must be at least 6 characters long');
+    } else if (!passwordRegex.test(value)) {
+      setPasswordError('Password can only contain letters and numbers');
+    } else {
+      setPasswordError('');
+    }
+    
+    setFormData(prev => ({ ...prev, password: value }));
+  }, []);
+
+  const togglePasswordVisibility = useCallback(() => {
     setPasswordVisible(prev => !prev);
-  };
+  }, []);
 
   return (
     <motion.div 
@@ -169,7 +220,6 @@ export const SignUpForm = () => {
       className="w-full max-w-md mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
     >
       <div className="p-6 sm:p-8 md:p-10">
-        {/* Header */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -194,7 +244,6 @@ export const SignUpForm = () => {
           </p>
         </motion.div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
@@ -247,10 +296,11 @@ export const SignUpForm = () => {
               value={formData.username}
               onChange={handleChange}
               required
+              minLength={3}
               className="focus:ring-2 focus:ring-green focus:border-transparent dark:bg-gray-800 dark:border-gray-700"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              This will be your unique identifier on the platform
+              Must be at least 3 characters
             </p>
           </motion.div>
 
@@ -268,20 +318,7 @@ export const SignUpForm = () => {
                 type={passwordVisible ? 'text' : 'password'}
                 placeholder="••••••••"
                 value={formData.password}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  const passwordRegex = /^[A-Za-z0-9]+$/;
-                  if (!value) {
-                    setPasswordError('Password is required');
-                  } else if (value.length < 6) {
-                    setPasswordError('Password must be at least 6 characters long');
-                  } else if (!passwordRegex.test(value)) {
-                    setPasswordError('Password can only contain letters and numbers');
-                  } else {
-                    setPasswordError('');
-                  }
-                  handleChange(e);
-                }}
+                onChange={handlePasswordChange}
                 required
                 minLength={6}
                 className={`focus:ring-2 focus:ring-green focus:border-transparent dark:bg-gray-800 dark:border-gray-700 pr-10 ${
@@ -370,7 +407,6 @@ export const SignUpForm = () => {
           </motion.div>
         </form>
 
-        {/* Divider */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -387,7 +423,6 @@ export const SignUpForm = () => {
           </div>
         </motion.div>
 
-        {/* Google Button */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
