@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { SignInForm } from "@/components/auth/SignInForm";
+import { SignInFormMobile } from "@/components/auth/SignInFormMobile";
 import Image from "next/image";
 
 export default function SignInPage() {
@@ -37,8 +38,11 @@ export default function SignInPage() {
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center p-4 bg-gray-50">
-      <div className="w-full max-w-md lg:max-w-none lg:w-1/2 flex flex-col items-center justify-center p-6">
+      <div className="hidden md:block w-full max-w-md lg:max-w-none lg:w-1/2 flex flex-col items-center justify-center p-6">
         <SignInForm />
+      </div>
+      <div className="block md:hidden w-full flex flex-col items-center justify-center">
+        <SignInFormMobile />
       </div>
       
       <div className="hidden lg:block w-1/2 p-6">
