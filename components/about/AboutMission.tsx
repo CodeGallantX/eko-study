@@ -63,7 +63,7 @@ export default function AboutMission() {
                   transition={{ delay: 0.2, duration: 0.5 }}
                   className="flex items-start gap-4"
                 >
-                  <div className="bg-green-100 p-3 rounded-full text-green-600">
+                  <div className="bg-green p-3 rounded-full text-green-100">
                     <FaLightbulb className="w-5 h-5" />
                   </div>
                   <div>
@@ -79,7 +79,7 @@ export default function AboutMission() {
                   transition={{ delay: 0.4, duration: 0.5 }}
                   className="flex items-start gap-4"
                 >
-                  <div className="bg-green-100 p-3 rounded-full text-green-600">
+                  <div className="bg-green p-3 rounded-full text-green-100">
                     <FaChartLine className="w-5 h-5" />
                   </div>
                   <div>
@@ -95,7 +95,7 @@ export default function AboutMission() {
                   transition={{ delay: 0.6, duration: 0.5 }}
                   className="flex items-start gap-4"
                 >
-                  <div className="bg-green-100 p-3 rounded-full text-green-600">
+                  <div className="bg-green p-3 rounded-full text-green-100">
                     <FaUsers className="w-5 h-5" />
                   </div>
                   <div>

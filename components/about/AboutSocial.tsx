@@ -8,16 +8,16 @@ export default function AboutSocial() {
         Connect with us on social media for updates, tips, and student success stories.
       </p>
       <div className="flex justify-center space-x-6">
-        <a href="#" className="text-2xl text-emerald-700 hover:text-emerald-800 transition-colors">
+        <a href="#" className="text-2xl text-green">
           <FaXTwitter />
         </a>
-        <a href="#" className="text-2xl text-emerald-700 hover:text-emerald-800 transition-colors">
+        <a href="#" className="text-2xl text-green">
           <FaFacebookF />
         </a>
-        <a href="#" className="text-2xl text-emerald-700 hover:text-emerald-800 transition-colors">
+        <a href="#" className="text-2xl text-green">
           <FaInstagram />
         </a>
-        <a href="#" className="text-2xl text-emerald-700 hover:text-emerald-800 transition-colors">
+        <a href="#" className="text-2xl text-green">
           <FaLinkedin />
         </a>
       </div>
