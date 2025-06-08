@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft } from 'lucide-react';
-import axios from 'axios';
+import { supabase } from '@/lib/supabase';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -31,10 +31,15 @@ export default function ForgotPasswordPage() {
         return;
       }
 
-      // Send request to API
-      await axios.post('https://ekustudy.onrender.com/auth/forgot-password', {
-        email: email.trim().toLowerCase(),
-      });
+      // Send password reset email using Supabase
+      const { data, error } = await supabase.auth.resetPasswordForEmail(
+        email.trim().toLowerCase(),
+        {
+          redirectTo: `${window.location.origin}/auth/reset-password`,
+        }
+      );
+
+      if (error) throw error;
 
       // Show success message
       setIsEmailSent(true);
@@ -45,20 +50,22 @@ export default function ForgotPasswordPage() {
     } catch (error) {
       console.error('Forgot password error:', error);
       
-      if (axios.isAxiosError(error) && error.response) {
-        const errorMessage = error.response.data.message || 'Failed to send reset email';
-        toast({
-          title: 'Error',
-          description: errorMessage,
-          variant: 'destructive',
-        });
-      } else {
-        toast({
-          title: 'Error',
-          description: 'An unexpected error occurred. Please try again.',
-          variant: 'destructive',
-        });
+      let errorMessage = 'Failed to send reset email';
+      if (error instanceof Error) {
+        if (error.message.includes('email not found')) {
+          errorMessage = 'No account found with this email address';
+        } else if (error.message.includes('rate limit exceeded')) {
+          errorMessage = 'Please wait before requesting another reset email';
+        } else {
+          errorMessage = error.message;
+        }
       }
+
+      toast({
+        title: 'Error',
+        description: errorMessage,
+        variant: 'destructive',
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -148,4 +155,4 @@ export default function ForgotPasswordPage() {
       </motion.div>
     </div>
   );
-} 
+}

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { supabase } from '@/lib/supabase';
-import { setUserData, clearUserData } from '@/lib/redux/features/userSlice';
+import { setUserData, clearUser } from '@/lib/redux/features/userSlice';
 import { RootState } from '@/lib/redux/store';
 
 interface UserData {
@@ -31,7 +31,7 @@ export function useAuth() {
       console.error('Logout failed:', error);
       // Continue with clearing data even if logout fails
     }
-    dispatch(clearUserData());
+    dispatch(clearUser());
     localStorage.removeItem('userData');
     router.push('/auth/signin');
   }, [dispatch, router]);
@@ -89,7 +89,7 @@ export function useAuth() {
             } else {
               // No active session but stored data - clear it
               localStorage.removeItem('userData');
-              dispatch(clearUserData());
+              dispatch(clearUser());
             }
           }
         } else if (session) {
@@ -113,7 +113,7 @@ export function useAuth() {
         if (session) {
           await fetchUserProfile();
         } else {
-          dispatch(clearUserData());
+          dispatch(clearUser());
           localStorage.removeItem('userData');
         }
       }
