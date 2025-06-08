@@ -3,14 +3,17 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import { supabase } from '@/lib/supabase';
 import { setUserData, clearUserData } from '@/lib/redux/features/userSlice';
 import { RootState } from '@/lib/redux/store';
 
 interface UserData {
-  _id: string;
+  id: string;
   email: string;
-  username: string;
+  user_metadata?: {
+    username?: string;
+    full_name?: string;
+  };
 }
 
 export function useAuth() {
@@ -22,10 +25,11 @@ export function useAuth() {
 
   const handleSignOut = useCallback(async () => {
     try {
-      await axios.get('https://ekustudy.onrender.com/auth/logout');
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
     } catch (error) {
       console.error('Logout failed:', error);
-      // Continue with clearing data even if logout API fails
+      // Continue with clearing data even if logout fails
     }
     dispatch(clearUserData());
     localStorage.removeItem('userData');
@@ -34,21 +38,29 @@ export function useAuth() {
 
   const fetchUserProfile = useCallback(async () => {
     try {
-      const response = await axios.get('https://ekustudy.onrender.com/users/profile', {
-        withCredentials: true,
-      });
+      const { data: { user }, error } = await supabase.auth.getUser();
+      
+      if (error) throw error;
+      if (!user) throw new Error('No user found');
 
-      if (response.data) {
-        // Assuming the API response directly matches the structure needed by setUserData
-        // which now expects fullName
-        dispatch(setUserData({
-          ...response.data,
-          // If your API sends firstName and lastName, you might need to combine them here:
-          // fullName: `${response.data.firstName || ''} ${response.data.lastName || ''}`.trim(),
-        }));
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('userData', JSON.stringify(response.data));
-        }
+      // Get additional user data from profiles table if needed
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError) throw profileError;
+
+      const userData = {
+        id: user.id,
+        email: user.email,
+        ...profile // merge any additional profile data
+      };
+
+      dispatch(setUserData(userData));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userData', JSON.stringify(userData));
       }
     } catch (err) {
       console.error('Failed to fetch user profile:', err);
@@ -62,12 +74,27 @@ export function useAuth() {
       try {
         if (typeof window === 'undefined') return;
 
+        // Check for existing session
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (error) throw error;
+
         const storedData = localStorage.getItem('userData');
         if (storedData) {
           const userData: UserData = JSON.parse(storedData);
-          if (userData?._id) {
-            await fetchUserProfile();
+          if (userData?.id) {
+            if (session) {
+              // If we have a session, refresh user data
+              await fetchUserProfile();
+            } else {
+              // No active session but stored data - clear it
+              localStorage.removeItem('userData');
+              dispatch(clearUserData());
+            }
           }
+        } else if (session) {
+          // No stored data but we have a session - fetch user
+          await fetchUserProfile();
         }
       } catch (err) {
         console.error('Auth initialization error:', err);
@@ -79,7 +106,21 @@ export function useAuth() {
     };
 
     initializeAuth();
-  }, [fetchUserProfile, handleSignOut]);
+
+    // Set up auth state listener
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        if (session) {
+          await fetchUserProfile();
+        } else {
+          dispatch(clearUserData());
+          localStorage.removeItem('userData');
+        }
+      }
+    );
+
+    return () => subscription?.unsubscribe();
+  }, [fetchUserProfile, handleSignOut, dispatch]);
 
   return {
     user,
