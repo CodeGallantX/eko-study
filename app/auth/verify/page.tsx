@@ -8,21 +8,17 @@ import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import axios from 'axios';
-import { useAppDispatch } from '@/lib/redux/hooks';
+import { useAppSelector, useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
-
-interface ApiUserResponse {
-  _id: string;
-  fullName: string;
-  email: string;
-  username: string;
-}
 
 function VerifyContent() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const userId = searchParams.get('userId');
+  
+  // Get user data from Redux store
+  const userData = useAppSelector((state) => state.user);
   
   const [otp, setOtp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,8 +42,10 @@ function VerifyContent() {
         title: 'Error',
         description: 'Invalid verification link. Please try signing in again.',
         variant: 'destructive',
+        duration: 5000,
       });
       router.push('/auth/signin');
+      return;
     }
   }, [userId, router, mounted]);
 
@@ -68,49 +66,65 @@ function VerifyContent() {
     return () => clearInterval(interval);
   }, [canResend, mounted]);
 
-  const fetchUserProfile = async () => {
-    try {
-      const response = await axios.get<ApiUserResponse>('https://ekustudy.onrender.com/users/profile', {
-        withCredentials: true
-      });
-      
-      if (response.data) {
-        const userData = {
-          isAuthenticated: true,
-          _id: response.data._id,
-          fullName: response.data.fullName,
-          email: response.data.email,
-          username: response.data.username
-        };
-        
-        dispatch(setUserData(userData));
-        localStorage.setItem('userData', JSON.stringify(userData));
-      }
-    } catch (error) {
-      console.error('Failed to fetch user profile:', error);
-      toast({
-        title: 'Profile load failed',
-        description: 'Your account is verified but we couldn\'t load your profile. You may need to sign in again.',
-        variant: 'default',
-      });
-      router.push('/dashboard');
-    }
-  };
-
   const handleVerify = async () => {
-    if (!userId || otp.length !== 6 || !mounted) return;
+    if (!mounted) return;
+    
+    if (!userId) {
+      toast({
+        title: 'Error',
+        description: 'Invalid verification link. Please try signing in again.',
+        variant: 'destructive',
+        duration: 5000,
+      });
+      router.push('/auth/signin');
+      return;
+    }
+
+    if (otp.length !== 6) {
+      toast({
+        title: 'Incomplete OTP',
+        description: 'Please enter the full 6-digit code',
+        variant: 'destructive',
+        duration: 3000,
+      });
+      return;
+    }
     
     setIsSubmitting(true);
     
     try {
+      console.log('Attempting verification with:', { userId, otp });
+      
       const response = await axios.post(
         `https://ekustudy.onrender.com/auth/verify-login/${userId}`,
         { otp },
-        { withCredentials: true }
+        { 
+          withCredentials: true,
+          timeout: 10000
+        }
       );
 
-      if (response.status === 200) {
-        await fetchUserProfile();
+      console.log('Verification response:', response.data);
+
+      // Accept both 200 (OK) and 201 (Created) as successful responses
+      if (response.status === 200 || response.status === 201) {
+        // Update user authentication status in Redux
+        dispatch(setUserData({
+          isAuthenticated: true,
+          _id: userData._id,
+          fullName: userData.fullName,
+          email: userData.email,
+          username: userData.username
+        }));
+
+        // Save to localStorage
+        localStorage.setItem('userData', JSON.stringify({
+          isAuthenticated: true,
+          _id: userData._id,
+          fullName: userData.fullName,
+          email: userData.email,
+          username: userData.username
+        }));
 
         toast({
           title: 'Verification successful!',
@@ -118,18 +132,36 @@ function VerifyContent() {
           duration: 3000,
         });
 
-        setTimeout(() => router.push('/dashboard'), 1500);
+        setTimeout(() => router.push('/dashboard'), 3000);
+      } else {
+        console.warn(`Received unexpected status code: ${response.status}`);
+        // For other 2xx status codes, still proceed as success
+        router.push('/dashboard');
       }
     } catch (error) {
       console.error('Verification error:', error);
       
       let errorMessage = 'Invalid OTP. Please try again.';
+      let shouldRedirect = false;
+
       if (axios.isAxiosError(error)) {
-        if (error.response?.status === 401) {
-          errorMessage = 'Session expired. Please sign in again.';
-          router.push('/auth/signin');
-        } else if (error.response?.data?.message) {
-          errorMessage = error.response.data.message;
+        if (error.response) {
+          if (error.response.status === 400) {
+            errorMessage = error.response.data.message || 'Invalid OTP format';
+          } else if (error.response.status === 401) {
+            errorMessage = 'Session expired. Please sign in again.';
+            shouldRedirect = true;
+          } else if (error.response.status === 404) {
+            errorMessage = 'User not found. Please sign up again.';
+            shouldRedirect = true;
+          } else if (error.response.status === 410) {
+            errorMessage = 'OTP expired. Please request a new one.';
+            setCanResend(true);
+          } else if (error.response.data?.message) {
+            errorMessage = error.response.data.message;
+          }
+        } else if (error.code === 'ECONNABORTED') {
+          errorMessage = 'Request timeout. Please check your connection.';
         }
       }
 
@@ -137,7 +169,12 @@ function VerifyContent() {
         title: 'Verification failed',
         description: errorMessage,
         variant: 'destructive',
+        duration: 5000,
       });
+
+      if (shouldRedirect) {
+        router.push('/auth/signin');
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -149,21 +186,33 @@ function VerifyContent() {
     setIsSubmitting(true);
     
     try {
-      await axios.post('https://ekustudy.onrender.com/auth/resend-otp', { userId });
+      const response = await axios.post(
+        'https://ekustudy.onrender.com/auth/resend-otp', 
+        { userId },
+        { withCredentials: true }
+      );
       
       toast({
         title: 'OTP Resent',
         description: 'A new verification code has been sent to your email.',
+        duration: 3000,
       });
       
       setTimer(180);
       setCanResend(false);
     } catch (error) {
       console.error('Resend OTP error:', error);
+      
+      let errorMessage = 'Please try again later.';
+      if (axios.isAxiosError(error) && error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      }
+
       toast({
         title: 'Failed to resend OTP',
-        description: 'Please try again later.',
+        description: errorMessage,
         variant: 'destructive',
+        duration: 5000,
       });
     } finally {
       setIsSubmitting(false);
@@ -191,12 +240,28 @@ function VerifyContent() {
               onChange={setOtp}
               maxLength={6}
               className="justify-center"
+              render={({ slots }) => (
+                <>
+                  {slots.map((slot, idx) => (
+                    <div
+                      key={idx}
+                      className={`w-12 h-14 border-2 rounded-lg flex items-center justify-center ${
+                        slot.isActive
+                          ? 'border-deepGreen ring-2 ring-deepGreen/30'
+                          : 'border-gray-300'
+                      }`}
+                    >
+                      {slot.char}
+                    </div>
+                  ))}
+                </>
+              )}
             />
           </div>
 
           <Button
             onClick={handleVerify}
-            className="w-full bg-green text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen"
+            className="w-full bg-green text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-deepGreen focus-visible:ring-offset-2"
             disabled={isSubmitting || otp.length !== 6}
           >
             {isSubmitting ? (
@@ -215,7 +280,7 @@ function VerifyContent() {
               {canResend ? (
                 <button
                   onClick={handleResendOTP}
-                  className="text-green hover:text-deepGreen font-medium transition-colors"
+                  className="text-green hover:text-deepGreen font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2"
                   disabled={isSubmitting}
                 >
                   Resend OTP

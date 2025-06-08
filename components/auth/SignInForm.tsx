@@ -93,7 +93,7 @@ export const SignInForm = () => {
   };
 
   return (
-    <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+    <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-200">
       <div className="p-5 sm:p-6 md:p-8">
         {/* Header - Removed motion for stability */}
         <div className="text-center mb-6">

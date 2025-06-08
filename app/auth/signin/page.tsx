@@ -37,7 +37,7 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center p-4 bg-gray-50">
+    <div className="min-h-screen flex flex-col lg:flex-row items-center justify-center p-4 bg-gray-50 dark:bg-gray-900">
       <div className="hidden md:block w-full max-w-md lg:max-w-none lg:w-1/2 flex flex-col items-center justify-center p-6">
         <SignInForm />
       </div>
