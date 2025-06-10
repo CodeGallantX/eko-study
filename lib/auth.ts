@@ -4,17 +4,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { supabase } from '@/lib/supabase';
-import { setUserData, clearUser } from '@/lib/redux/features/userSlice';
+import { setUserData, clearUser, updateFromSupabaseSession } from '@/lib/redux/features/userSlice';
 import { RootState } from '@/lib/redux/store';
-
-interface UserData {
-  id: string;
-  email: string;
-  user_metadata?: {
-    username?: string;
-    full_name?: string;
-  };
-}
 
 export function useAuth() {
   const router = useRouter();
@@ -24,82 +15,72 @@ export function useAuth() {
   const [error, setError] = useState<string | null>(null);
 
   const handleSignOut = useCallback(async () => {
+    setLoading(true);
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
     } catch (error) {
       console.error('Logout failed:', error);
-      // Continue with clearing data even if logout fails
+    } finally {
+      dispatch(clearUser());
+      router.push('/auth/signin');
+      setLoading(false);
     }
-    dispatch(clearUser());
-    localStorage.removeItem('userData');
-    router.push('/auth/signin');
   }, [dispatch, router]);
 
-  const fetchUserProfile = useCallback(async () => {
+  const fetchUserProfile = useCallback(async (userId: string) => {
     try {
-      const { data: { user }, error } = await supabase.auth.getUser();
-      
-      if (error) throw error;
-      if (!user) throw new Error('No user found');
-
-      // Get additional user data from profiles table if needed
       const { data: profile, error: profileError } = await supabase
         .from('profiles')
         .select('*')
-        .eq('id', user.id)
+        .eq('id', userId)
         .single();
 
       if (profileError) throw profileError;
-
-      const userData = {
-        id: user.id,
-        email: user.email,
-        ...profile // merge any additional profile data
-      };
-
-      dispatch(setUserData(userData));
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('userData', JSON.stringify(userData));
-      }
-    } catch (err) {
-      console.error('Failed to fetch user profile:', err);
-      setError('Session expired or unauthorized');
-      handleSignOut();
+      return profile;
+    } catch (error) {
+      console.error('Failed to fetch user profile:', error);
+      return null;
     }
-  }, [dispatch, handleSignOut]);
+  }, []);
+
+  const handleAuthStateChange = useCallback(async (event: string, session: any) => {
+    if (session?.user) {
+      try {
+        const profile = await fetchUserProfile(session.user.id);
+        dispatch(updateFromSupabaseSession({
+          ...session,
+          profile: profile || {}
+        }));
+      } catch (error) {
+        console.error('Error updating user session:', error);
+        setError('Failed to update session');
+      }
+    } else {
+      dispatch(clearUser());
+    }
+  }, [dispatch, fetchUserProfile]);
 
   useEffect(() => {
     const initializeAuth = async () => {
+      setLoading(true);
       try {
-        if (typeof window === 'undefined') return;
-
         // Check for existing session
-        const { data: { session }, error } = await supabase.auth.getSession();
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
         
-        if (error) throw error;
+        if (sessionError) throw sessionError;
 
-        const storedData = localStorage.getItem('userData');
-        if (storedData) {
-          const userData: UserData = JSON.parse(storedData);
-          if (userData?.id) {
-            if (session) {
-              // If we have a session, refresh user data
-              await fetchUserProfile();
-            } else {
-              // No active session but stored data - clear it
-              localStorage.removeItem('userData');
-              dispatch(clearUser());
-            }
-          }
-        } else if (session) {
-          // No stored data but we have a session - fetch user
-          await fetchUserProfile();
+        if (session?.user) {
+          const profile = await fetchUserProfile(session.user.id);
+          dispatch(updateFromSupabaseSession({
+            ...session,
+            profile: profile || {}
+          }));
         }
-      } catch (err) {
-        console.error('Auth initialization error:', err);
-        setError('Auth initialization failed');
-        handleSignOut();
+      } catch (error) {
+        console.error('Auth initialization error:', error);
+        setError('Failed to initialize authentication');
+        await handleSignOut();
       } finally {
         setLoading(false);
       }
@@ -108,25 +89,23 @@ export function useAuth() {
     initializeAuth();
 
     // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        if (session) {
-          await fetchUserProfile();
-        } else {
-          dispatch(clearUser());
-          localStorage.removeItem('userData');
-        }
-      }
-    );
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(handleAuthStateChange);
 
-    return () => subscription?.unsubscribe();
-  }, [fetchUserProfile, handleSignOut, dispatch]);
+    return () => {
+      subscription?.unsubscribe();
+    };
+  }, [dispatch, fetchUserProfile, handleAuthStateChange, handleSignOut]);
 
   return {
     user,
     loading,
     error,
-    fetchUserProfile,
     signOut: handleSignOut,
+    refreshSession: async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        await handleAuthStateChange('SIGNED_IN', session);
+      }
+    }
   };
 }

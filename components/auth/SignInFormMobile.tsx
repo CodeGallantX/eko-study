@@ -9,15 +9,7 @@ import { Label } from '@/components/ui/label';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { FaArrowLeft } from "react-icons/fa6";
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import axios from 'axios';
-
-interface LoginResponse {
-  _id: string;
-  fullName: string;
-  email: string;
-  username: string;
-  password?: string;
-}
+import { supabase } from '@/lib/supabase';
 
 export const SignInFormMobile = () => {
   const router = useRouter();
@@ -40,11 +32,32 @@ export const SignInFormMobile = () => {
     setPasswordVisible(prev => !prev);
   };
 
-  const handleGoogleSignIn = () => {
-    toast({
-      title: 'Coming soon!',
-      description: 'Google sign in will be available soon.',
-    });
+  const handleGoogleSignIn = async () => {
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        }
+      });
+
+      if (error) throw error;
+      
+      toast({
+        title: 'Redirecting...',
+        description: 'You are being redirected to Google for authentication.',
+      });
+    } catch (error) {
+      console.error('Google sign in error:', error);
+      toast({
+        title: 'Google Sign In Failed',
+        description: 'There was an error signing in with Google. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -54,32 +67,49 @@ export const SignInFormMobile = () => {
     try {
       const { email, password } = formData;
       
-      const response = await axios.post<LoginResponse>(
-        'https://ekustudy.onrender.com/auth/login', 
-        { email, password }
-      );
-
-      if (!response.data._id) {
-        throw new Error('User ID not found in response');
-      }
-
-      toast({
-        title: 'Verification Required',
-        description: 'Please enter the OTP sent to your email to continue.',
-        duration: 3000,
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
-      router.push(`/auth/verify?userId=${response.data._id}`);
+
+      if (error) throw error;
+
+      // Check if email needs verification
+      if (data.user?.email_confirmed_at === null) {
+        // Send verification email if not confirmed
+        const { error: verificationError } = await supabase.auth.resend({
+          type: 'signup',
+          email: data.user.email!,
+        });
+
+        if (verificationError) throw verificationError;
+
+        toast({
+          title: 'Verification Required',
+          description: 'Please check your email for a verification link.',
+          duration: 3000,
+        });
+        router.push('/auth/verify');
+      } else {
+        // Successful login
+        toast({
+          title: 'Login Successful',
+          description: 'You are being redirected to your dashboard.',
+          duration: 2000,
+        });
+        router.push('/dashboard');
+      }
 
     } catch (error) {
       console.error('Sign in error:', error);
       
       let errorMessage = 'Invalid email or password. Please try again.';
       
-      if (axios.isAxiosError(error)) {
-        errorMessage = error.response?.data?.message || errorMessage;
+      if (error instanceof Error) {
+        errorMessage = error.message || errorMessage;
         
-        if (error.response?.status === 401) {
-          errorMessage = 'Invalid credentials. Please check your email and password.';
+        if (error.message.includes('Email not confirmed')) {
+          errorMessage = 'Please verify your email before signing in.';
         }
       }
 
@@ -96,13 +126,14 @@ export const SignInFormMobile = () => {
   return (
     <div className="w-full overflow-hidden">
       <button
-      onClick={() => {router.push('/')}}
-       className="ml-6 border border-black text-sm px-3 py-2 rounded-lg"> 
+        onClick={() => {router.push('/')}}
+        className="ml-6 border border-black text-sm px-3 py-2 rounded-lg"
+      > 
         <FaArrowLeft className="mr-2 text-base inline-block" />
         Back
       </button>
       <div className="p-6">
-        {/* Header - Removed motion for stability */}
+        {/* Header */}
         <div className="text-left mb-6">
           <h1 className="text-3xl font-bold text-deepGreen mb-2">Welcome back</h1>
           <p className="text-base text-gray-600">
@@ -203,8 +234,13 @@ export const SignInFormMobile = () => {
           className="w-full border-gray-300 hover:bg-gray-50 transition-colors py-2.5 sm:py-3"
           type="button"
           onClick={handleGoogleSignIn}
+          disabled={isSubmitting}
         >
-          <PiGoogleLogoBold className="mr-2 text-red" size={18} />
+          {isSubmitting ? (
+            <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
+          ) : (
+            <PiGoogleLogoBold className="mr-2 text-red" size={18} />
+          )}
           <span className="text-sm sm:text-base">Continue with Google</span>
         </Button>
       </div>

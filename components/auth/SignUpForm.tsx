@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from '@/hooks/use-toast';
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -16,31 +17,112 @@ import { useAppDispatch } from '@/lib/redux/hooks';
 import { setUserData } from '@/lib/redux/features/userSlice';
 
 interface FormData {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  username: string;
+  college: string;
+  department: string;
   password: string;
   agreeTerms: boolean;
 }
+
+interface CollegeDepartmentMap {
+  [key: string]: string[];
+}
+
+const collegeDepartments: CollegeDepartmentMap = {
+  "College of Agriculture": [
+    "Agricultural Economics & Farm Management",
+    "Crop Production",
+    "Agricultural Extension & Rural Development",
+    "Horticulture & Landscape Management",
+    "Animal Production",
+    "Aquaculture & Fisheries Management"
+  ],
+
+  "College of Engineering and Technology": [
+    "Computer Engineering",
+    "Civil and Construction Engineering",
+    "Electrical & Electronics Engineering",
+    "Mechanical Engineering",
+    "Mechatronics Engineering",
+    "Agricultural Engineering",
+    "Chemical Engineering",
+    "Biotechnology & Food Technology"
+  ],
+
+  "College of Environmental Design and Technology": [
+    "Architecture",
+    "Estate Management and Valuation",
+    "Quantity Surveying",
+    "Urban and Regional Planning",
+    "Art and Industrial Design",
+    "Building Technology"
+  ],
+
+  "College of Basic Sciences": [
+    "Industrial Chemistry",
+    "Chemistry",
+    "Mathematics",
+    "Industrial Mathematics",
+    "Statistics",
+    "Microbiology",
+    "Botany",
+    "Zoology",
+    "Physics with Electronics",
+    "Computer Science"
+  ],
+
+  "College of Applied Social Sciences": [
+    "Economic Science (Economics)",
+    "Mass Communication Science & Technology",
+    "Accounting",
+    "Actuarial Science",
+    "Banking & Finance",
+    "Marketing",
+    "Office and Information Technology",
+    "Business Administration",
+    "Insurance",
+    "Tourism & Hospitality Management"
+  ]
+};
 
 export const SignUpForm = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   
   const [formData, setFormData] = useState<FormData>({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    username: '',
+    college: '',
+    department: '',
     password: '',
     agreeTerms: false,
   });
+  
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [passwordError, setPasswordError] = useState('');
+  const [availableDepartments, setAvailableDepartments] = useState<string[]>([]);
+
+  // Update departments when college changes
+  useEffect(() => {
+    if (formData.college && collegeDepartments[formData.college]) {
+      setAvailableDepartments(collegeDepartments[formData.college]);
+      // Reset department when college changes
+      setFormData(prev => ({ ...prev, department: '' }));
+    } else {
+      setAvailableDepartments([]);
+    }
+  }, [formData.college]);
 
   const validateForm = useCallback(() => {
-    if (!formData.fullName.trim()) {
-      throw new Error('Full name is required');
+    if (!formData.firstName.trim()) {
+      throw new Error('First name is required');
+    }
+    if (!formData.lastName.trim()) {
+      throw new Error('Last name is required');
     }
     if (!formData.email.trim()) {
       throw new Error('Email is required');
@@ -48,11 +130,11 @@ export const SignUpForm = () => {
     if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
       throw new Error('Please enter a valid email address');
     }
-    if (!formData.username.trim()) {
-      throw new Error('Username is required');
+    if (!formData.college) {
+      throw new Error('College selection is required');
     }
-    if (formData.username.length < 3) {
-      throw new Error('Username must be at least 3 characters');
+    if (!formData.department) {
+      throw new Error('Department selection is required');
     }
     if (!formData.password) {
       throw new Error('Password is required');
@@ -78,8 +160,10 @@ export const SignUpForm = () => {
         password: formData.password,
         options: {
           data: {
-            full_name: formData.fullName.trim(),
-            username: formData.username.trim().toLowerCase()
+            first_name: formData.firstName.trim(),
+            last_name: formData.lastName.trim(),
+            college: formData.college,
+            department: formData.department,
           }
         }
       });
@@ -92,8 +176,10 @@ export const SignUpForm = () => {
         .upsert({
           id: authData.user?.id,
           email: formData.email.trim().toLowerCase(),
-          username: formData.username.trim().toLowerCase(),
-          full_name: formData.fullName.trim(),
+          first_name: formData.firstName.trim(),
+          last_name: formData.lastName.trim(),
+          college: formData.college,
+          department: formData.department,
           updated_at: new Date().toISOString()
         });
 
@@ -103,8 +189,10 @@ export const SignUpForm = () => {
       dispatch(setUserData({
         id: authData.user?.id,
         email: formData.email.trim().toLowerCase(),
-        username: formData.username.trim().toLowerCase(),
-        fullName: formData.fullName.trim()
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        college: formData.college,
+        department: formData.department
       }));
 
       toast({
@@ -140,10 +228,6 @@ export const SignUpForm = () => {
             variant: 'destructive',
           });
           return;
-        } else if (error.message.includes('Username already exists')) {
-          errorMessage = 'This username is already taken.';
-        } else if (error.message.includes('Password')) {
-          errorMessage = 'Password requirements not met.';
         }
 
         toast({
@@ -243,17 +327,30 @@ export const SignUpForm = () => {
         </motion.div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Full Name Field */}
-          <div className="space-y-2">
-            <Label htmlFor="fullName">Full name</Label>
-            <Input
-              id="fullName"
-              name="fullName"
-              placeholder="John Doe"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-            />
+          {/* Name Fields */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="firstName">First name</Label>
+              <Input
+                id="firstName"
+                name="firstName"
+                placeholder="John"
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="lastName">Last name</Label>
+              <Input
+                id="lastName"
+                name="lastName"
+                placeholder="Doe"
+                value={formData.lastName}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
 
           {/* Email Field */}
@@ -270,21 +367,47 @@ export const SignUpForm = () => {
             />
           </div>
 
-          {/* Username Field */}
+          {/* College Dropdown */}
           <div className="space-y-2">
-            <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              name="username"
-              placeholder="johndoe"
-              value={formData.username}
-              onChange={handleChange}
+            <Label htmlFor="college">College</Label>
+            <Select
+              value={formData.college}
+              onValueChange={(value) => setFormData(prev => ({ ...prev, college: value }))}
               required
-              minLength={3}
-            />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Must be at least 3 characters
-            </p>
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select your college" />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.keys(collegeDepartments).map(college => (
+                  <SelectItem key={college} value={college}>
+                    {college}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Department Dropdown */}
+          <div className="space-y-2">
+            <Label htmlFor="department">Department</Label>
+            <Select
+              value={formData.department}
+              onValueChange={(value) => setFormData(prev => ({ ...prev, department: value }))}
+              disabled={!formData.college}
+              required
+            >
+              <SelectTrigger>
+                <SelectValue placeholder={formData.college ? "Select your department" : "Select college first"} />
+              </SelectTrigger>
+              <SelectContent>
+                {availableDepartments.map(dept => (
+                  <SelectItem key={dept} value={dept}>
+                    {dept}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Password Field */}
@@ -336,7 +459,7 @@ export const SignUpForm = () => {
           <Button
             type="submit"
             className="w-full"
-            disabled={isSubmitting || !formData.agreeTerms || !!passwordError}
+            disabled={isSubmitting || !formData.agreeTerms || !!passwordError || !formData.college || !formData.department}
             size="lg"
           >
             {isSubmitting ? (
