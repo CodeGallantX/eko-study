@@ -8,12 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { useClerk } from '@clerk/nextjs';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
+  const { signIn } = useClerk();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,15 +32,11 @@ export default function ForgotPasswordPage() {
         return;
       }
 
-      // Send password reset email using Supabase
-      const { data, error } = await supabase.auth.resetPasswordForEmail(
-        email.trim().toLowerCase(),
-        {
-          redirectTo: `${window.location.origin}/auth/reset-password`,
-        }
-      );
-
-      if (error) throw error;
+      // Send password reset email using Clerk
+      await signIn.create({
+        strategy: 'reset_password_email_code',
+        identifier: email.trim().toLowerCase(),
+      });
 
       // Show success message
       setIsEmailSent(true);
@@ -52,9 +49,9 @@ export default function ForgotPasswordPage() {
       
       let errorMessage = 'Failed to send reset email';
       if (error instanceof Error) {
-        if (error.message.includes('email not found')) {
+        if (error.message.includes('not found')) {
           errorMessage = 'No account found with this email address';
-        } else if (error.message.includes('rate limit exceeded')) {
+        } else if (error.message.includes('rate limit')) {
           errorMessage = 'Please wait before requesting another reset email';
         } else {
           errorMessage = error.message;

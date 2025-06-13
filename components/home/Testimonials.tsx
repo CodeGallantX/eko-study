@@ -11,30 +11,30 @@ const testimonials = [
     name: "David Oluwadare",
     level: "300L Computer Science",
     feedback: "EkoStudy has completely transformed the way I study. The structured courses and interactive materials have boosted my understanding and grades significantly!",
-    image: "/students/david.jpg",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
   },
   {
     name: "Sarah Adeyemi",
     level: "200L Business Administration",
     feedback: "I love how everything is so organized! The past questions and study groups have made my exam preparations much smoother.",
-    image: "/students/sarah.jpg",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
   },
   {
     name: "Michael Ajibola",
     level: "400L Mechanical Engineering",
     feedback: "The AI-powered recommendations and easy access to lecture notes are game-changers. EkoStudy truly understands students' needs!",
-    image: "/students/michael.jpg",
+    image: "https://randomuser.me/api/portraits/men/75.jpg",
   },
   {
     name: "Esther Okonkwo",
     level: "100L Mass Communication",
     feedback: "As a fresher, EkoStudy helped me transition smoothly into university life. The mentorship programs are amazing!",
-    image: "/students/esther.jpg",
+    image: "https://randomuser.me/api/portraits/women/63.jpg",
   },
 ];
 
 export default function Testimonials() {
- return (
+  return (
     <section className="relative w-full py-16 bg-[#e6e1d1] overflow-hidden">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#4c5f4e] to-[#e8ede6] opacity-10 blur-3xl"></div>

@@ -1,21 +1,19 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft, Eye, EyeOff } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { useClerk } from '@clerk/nextjs';
 
-interface ResetPasswordFormProps {
-  token?: string;
-}
-
-export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
+export default function ResetPasswordForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { signIn } = useClerk();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -24,16 +22,7 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [passwordError, setPasswordError] = useState('');
 
-  useEffect(() => {
-    if (!token) {
-      toast({
-        title: 'Invalid Reset Link',
-        description: 'This password reset link is invalid or has expired.',
-        variant: 'destructive',
-      });
-      router.push('/auth/forgot-password');
-    }
-  }, [token, router]);
+  const token = searchParams.get('token');
 
   const validatePassword = (password: string) => {
     if (!password) {
@@ -68,31 +57,32 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         throw new Error('Reset token is missing');
       }
 
-      // Update password using Supabase
-      const { data, error } = await supabase.auth.updateUser({
-        password: newPassword
-      }, {
-        // For email-based password reset
-        emailRedirectTo: `${window.location.origin}/auth/signin`
+      // Attempt to reset password with Clerk
+      const result = await signIn.attemptFirstFactor({
+        strategy: 'reset_password_email_code',
+        password: newPassword,
+        code: token,
       });
 
-      if (error) throw error;
-
-      setIsSuccess(true);
-      toast({
-        title: 'Password Reset Successful',
-        description: 'Your password has been reset successfully',
-      });
-      
-      setTimeout(() => router.push('/auth/signin'), 3000);
+      if (result.status === 'complete') {
+        setIsSuccess(true);
+        toast({
+          title: 'Password Reset Successful',
+          description: 'Your password has been reset successfully',
+        });
+        
+        setTimeout(() => router.push('/auth/signin'), 3000);
+      } else {
+        throw new Error('Password reset failed');
+      }
     } catch (error) {
       console.error('Reset password error:', error);
       let errorMessage = 'Failed to reset password';
       
       if (error instanceof Error) {
-        if (error.message.includes('Password reset link expired')) {
+        if (error.message.includes('expired')) {
           errorMessage = 'This password reset link has expired. Please request a new one.';
-        } else if (error.message.includes('Invalid token')) {
+        } else if (error.message.includes('invalid')) {
           errorMessage = 'This password reset link is invalid. Please request a new one.';
         } else {
           errorMessage = error.message;
