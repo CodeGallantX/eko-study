@@ -4,14 +4,13 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/redux/store';
-// import { clearUserData } from '@/lib/redux/features/userSlice';
 import { Loader2 } from 'lucide-react';
 import { useAuth } from '@/lib/auth';
 
 export default function App() {
   const router = useRouter();
   // const dispatch = useDispatch();
-  const { username } = useSelector((state: RootState) => state.user);
+  const { firstName } = useSelector((state: RootState) => state.user);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const { user, loading, signOut } = useAuth();
@@ -67,7 +66,7 @@ export default function App() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Welcome, 
-          {user?.username || username || 'Student'}
+          {user?.firstName || firstName || 'Student'}
           Student
           !</h1>
         <button 
