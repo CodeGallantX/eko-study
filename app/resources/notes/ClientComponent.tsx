@@ -7,6 +7,7 @@ import Header from "@/components/shared/Header";
 import Banner from "@/components/shared/Banner";
 import DownloadModal from "@/components/notes/DownloadModal";
 import Footer from "@/components/shared/Footer";
+// import { supabase } from '@/lib/supabase';
 
 interface Course {
   id: number;

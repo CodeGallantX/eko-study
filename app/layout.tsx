@@ -1,9 +1,10 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import { Outfit, Merriweather } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
-import { Providers } from './providers';
+// import { Providers } from './providers';
 
 // Configure fonts with fallback
 const outfit = Outfit({
@@ -87,10 +88,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         }}
       />
       <body className="antialiased">
-        <Providers>
+      <ClerkProvider>
+        {/* <Providers> */}
           {children}
-        </Providers>
+        {/* </Providers> */}
         <Toaster />
+      </ClerkProvider>
       </body>
     </html>
   );
