@@ -1,95 +1,122 @@
 [
-    {
-      "id": 10,
-      "title": "General Mathematics",
-      "code": " MTH101",
-      "college": "College of Basic Science",
-      "department": "Computer Science",
-      "level": "100",
-      "url": "/MTH101(EkoStudy).pdf"
-    },
+  {
+    "id": 12,
+    "title": "Forensic Science",
+    "code": " FRS102",
+    "college": "College of Basic Science",
+    "department": "Computer Science",
+    "semester": "2nd",
+    "level": "100",
+    "url": "/FRS102_ekoStudy.pdf"
+  },
+  {
+    "id": 11,
+    "title": "General Physics II",
+    "code": " PHY102",
+    "college": "College of Basic Science",
+    "department": "Computer Science",
+    "semester": "2nd",
+    "level": "100",
+    "url": "/PHY102_Ekostudy.pdf"
+  },
+  {
+    "id": 10,
+    "title": "General Mathematics",
+    "code": " MTH101",
+    "college": "College of Basic Science",
+    "department": "Computer Science",
+    "semester": "1st",
+    "level": "100",
+    "url": "/MTH101(EkoStudy).pdf"
+  },
   {
     "id": 8,
     "title": "General Chemistry I",
     "code": "CHM101",
+    "semester": "1st",
     "college": "College of Basic Science",
     "department": "Industrial Chemistry",
     "level": "100",
     "url": "/CHM_101(Ekostudy).pdf"
   },
-    {
-      "id": 1,
-      "title": "Introduction to Computer Science",
-      "code": "COS101",
-      "college": "College of Basic Science",
-      "department": "Computer Science",
-      "level": "100",
-      "url": "/COS_101.pdf"
-    },
-    {
-      "id": 9,
-      "title": "Descriptive Statistics",
-      "code": "STA111",
-      "college": "College of Basic Science",
-      "department": "Statistics",
-      "level": "100",
-      "url": "/STA111(EkoStudy).pdf"
-    },
-    {
-      "id": 2,
-      "title": "Communication in English",
-      "code": "GST111",
-      "college": "College of Basic Science",
-      "department": "Microbiology",
-      "level": "300",
-      "url": "/GST111(EkoStudy).pdf"
-    },
-    {
-      "id": 3,
-      "title": "Introduction to Internet Technology",
-      "code": "CSC103",
-      "college": "College of Basic Science",
-      "department": "Computer Science",
-      "level": "100",
-      "url": "/CSC_103(Ekostudy).pdf"
-
-    },
-    {
-      "id": 4,
-      "title": "Communication in Yoruba I",
-      "code": "LASUSTECH-YOR101",
-      "college": "College of Basic Science",
-      "department": "Biochemistry",
-      "level": "100",
-      "url": "/YOR_101(Ekostudy).pdf"
-        
-    },
-    {
-      "id": 5,
-      "title": "Introduction to Physics with Electronics",
-      "code": "PHY103",
-      "college": "College of Basic Science",
-      "department": "Physics with Electronics",
-      "level": "100",
-      "url": "../docs/" 
-    },
-    {
-      "id": 6,
-      "title": "General Physics I",
-      "code": "PHY101",
-      "college": "College of Basic Science",
-      "department": "Physics with Electronics",
-      "level": "100",
-      "url": "/PHY_101(Ekostudy).pdf"
-    },
-    {
-      "id": 7,
-      "title": "Use of Library, Study Skills and ICT",
-      "code": "LASUSTECH-LIB101",
-      "college": "College of Basic Science",
-      "department": "Industrial Chemistry",
-      "level": "100",
-      "url": "/LIB_101(Ekostudy).pdf"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "title": "Introduction to Computer Science",
+    "code": "COS101",
+    "college": "College of Basic Science",
+    "semester": "1st",
+    "department": "Computer Science",
+    "level": "100",
+    "url": "/COS_101.pdf"
+  },
+  {
+    "id": 9,
+    "title": "Descriptive Statistics",
+    "code": "STA111",
+    "semester": "1st",
+    "college": "College of Basic Science",
+    "department": "Statistics",
+    "level": "100",
+    "url": "/STA111(EkoStudy).pdf"
+  },
+  {
+    "id": 2,
+    "title": "Communication in English",
+    "code": "GST111",
+    "college": "College of Basic Science",
+    "department": "Microbiology",
+    "level": "300",
+    "semester": "1st",
+    "url": "/GST111(EkoStudy).pdf"
+  },
+  {
+    "id": 3,
+    "title": "Introduction to Internet Technology",
+    "code": "CSC103",
+    "college": "College of Basic Science",
+    "department": "Computer Science",
+    "level": "100",
+    "semester": "1st",
+    "url": "/CSC_103(Ekostudy).pdf"
+  },
+  {
+    "id": 4,
+    "title": "Communication in Yoruba I",
+    "code": "LASUSTECH-YOR101",
+    "semester": "1st",
+    "college": "College of Basic Science",
+    "department": "Biochemistry",
+    "level": "100",
+    "url": "/YOR_101(Ekostudy).pdf"
+  },
+  {
+    "id": 5,
+    "title": "Introduction to Physics with Electronics",
+    "code": "PHY103",
+    "college": "College of Basic Science",
+    "semester": "1st",
+    "department": "Physics with Electronics",
+    "level": "100",
+    "url": "../docs/"
+  },
+  {
+    "id": 6,
+    "title": "General Physics I",
+    "code": "PHY101",
+    "college": "College of Basic Science",
+    "department": "Physics with Electronics",
+    "semester": "1st",
+    "level": "100",
+    "url": "/PHY_101(Ekostudy).pdf"
+  },
+  {
+    "id": 7,
+    "title": "Use of Library, Study Skills and ICT",
+    "code": "LASUSTECH-LIB101",
+    "semester": "1st",
+    "college": "College of Basic Science",
+    "department": "Industrial Chemistry",
+    "level": "100",
+    "url": "/LIB_101(Ekostudy).pdf"
+  }
+]

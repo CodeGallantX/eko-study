@@ -9,6 +9,7 @@ interface Course {
   code: string;
   college: string;
   department: string;
+  semester: string;
   level: string;
   url: string;
 }

@@ -15,6 +15,7 @@ interface Course {
   code: string;
   college: string;
   department: string;
+  semester: string;
   level: string;
   url: string;
 }
@@ -26,7 +27,7 @@ interface ClientComponentProps {
 
 export default function ClientComponent({ courses, colleges }: ClientComponentProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filters, setFilters] = useState({ college: "", department: "", level: "" });
+  const [filters, setFilters] = useState({ college: "", department: "", semester: "", level: "" });
   const [visibleCourses, setVisibleCourses] = useState(6);
   const [selectedNote, setSelectedNote] = useState<{ url: string; fileName: string } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,6 +69,7 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
         regex.test(course.level)) &&
       (!filters.college || course.college === filters.college) &&
       (!filters.department || course.department === filters.department) &&
+      (!filters.semester || course.semester === filters.semester) &&
       (!filters.level || course.level === filters.level)
     );
   });
@@ -131,6 +133,19 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
             {departments.map((department) => (
               <option key={department} value={department}>
                 {department}
+              </option>
+            ))}
+          </select>
+          <select
+            className="border p-2 w-full rounded-md outline-none focus:ring-2 focus:ring-green"
+            value={filters.semester}
+            onChange={(e) => handleFilterChange("semester", e.target.value)}
+            disabled={!filters.college}
+          >
+            <option value="">All Semesters</option>
+            {['1st', '2nd'].map((semester) => (
+              <option key={semester} value={semester}>
+                {semester}
               </option>
             ))}
           </select>
