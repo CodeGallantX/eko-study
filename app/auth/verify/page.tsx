@@ -95,7 +95,6 @@ function VerifyContent() {
     try {
       console.log('Attempting verification with:', { userId, otp });
       
-      const response = await axios.post(
         `https://ekustudy.onrender.com/auth/verify-login/${userId}`,
         { otp },
         { 
@@ -105,11 +104,11 @@ function VerifyContent() {
       );
 
       console.log('Verification response:', response.data);
-
+      
       // Accept both 200 (OK) and 201 (Created) as successful responses
       if (response.status === 200 || response.status === 201) {
         // Update user authentication status in Redux
-        dispatch(setUserData({
+ dispatch(setUserData({
           isAuthenticated: true,
           _id: userData._id,
           fullName: userData.fullName,

@@ -1,25 +1,23 @@
 // app/dashboard/layout.tsx
 "use client";
-import { useState } from "react"
-import { auth } from '@clerk/nextjs';
+import { useState, useEffect } from "react";
+import { useAuth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 
-export default async function DashboardLayout({
+export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { userId } = auth();
+  const { userId, isLoaded } = useAuth();
 
-  if (!userId) {
+  // Redirect if user is not logged in and auth is loaded
+  if (isLoaded && !userId) {
     redirect('/auth/signin');
   }
 
-  // State for sidebar and dark mode
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('dashboard');
 
   // Mock notifications data
@@ -39,6 +37,10 @@ export default async function DashboardLayout({
       read: true
     }
   ];
+
+  // State for sidebar and dark mode
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
