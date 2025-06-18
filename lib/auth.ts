@@ -1,47 +1,54 @@
-// lib/auth.ts
 'use client';
 
-import { useUser, useClerk } from '@clerk/nextjs';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { clearUser, setUserData } from '@/lib/redux/features/userSlice';
+import { supabase } from './supabase';
 
-export function useAuth() {
-  const { user, isLoaded } = useUser();
-  const { signOut } = useClerk();
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (isLoaded && user) {
-      dispatch(setUserData({
-        isAuthenticated: true,
-        id: user.id,
-        firstName: user.firstName || '',
-        lastName: user.lastName || '',
-        email: user.emailAddresses[0]?.emailAddress || '',
-        avatarUrl: user.imageUrl,
-      }));
+export const signUp = async (email: string, password: string, firstName: string, lastName: string, college: string, department: string) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        first_name: firstName,
+        last_name: lastName,
+        college,
+        department
+      }
     }
-  }, [user, isLoaded, dispatch]);
+  });
 
-  const handleSignOut = async () => {
-    await signOut();
-    dispatch(clearUser());
-    router.push('/auth/signin');
-  };
+  if (error) throw error;
+  return data.user;
+};
 
-  return {
-    user: {
-      isAuthenticated: !!user,
-      id: user?.id,
-      firstName: user?.firstName,
-      lastName: user?.lastName,
-      email: user?.emailAddresses[0]?.emailAddress,
-      avatarUrl: user?.imageUrl,
-    },
-    loading: !isLoaded,
-    signOut: handleSignOut,
-  };
-}
+export const signIn = async (email: string, password: string) => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) throw error;
+  return data.user;
+};
+
+export const signInWithGoogle = async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/auth/callback`
+    }
+  });
+
+  if (error) throw error;
+  return data;
+};
+
+export const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw error;
+};
+
+export const getCurrentUser = async () => {
+  const { data: { user }, error } = await supabase.auth.getUser();
+  if (error) throw error;
+  return user;
+};

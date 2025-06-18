@@ -6,7 +6,7 @@ import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { PiGoogleLogoBold } from 'react-icons/pi';
+import { FaGoogle } from 'react-icons/fa';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
@@ -67,7 +67,7 @@ export const SignInForm = () => {
     try {
       const { email, password } = formData;
       
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data: { user, session }, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -75,11 +75,10 @@ export const SignInForm = () => {
       if (error) throw error;
 
       // Check if email needs verification
-      if (data.user?.email_confirmed_at === null) {
-        // Send verification email if not confirmed
+      if (user && !user.email_confirmed_at) {
         const { error: verificationError } = await supabase.auth.resend({
           type: 'signup',
-          email: data.user.email!,
+          email: user.email!,
         });
 
         if (verificationError) throw verificationError;
@@ -100,13 +99,13 @@ export const SignInForm = () => {
         router.push('/dashboard');
       }
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Sign in error:', error);
       
       let errorMessage = 'Invalid email or password. Please try again.';
       
-      if (error instanceof Error) {
-        errorMessage = error.message || errorMessage;
+      if (error.message) {
+        errorMessage = error.message;
         
         if (error.message.includes('Email not confirmed')) {
           errorMessage = 'Please verify your email before signing in.';
@@ -262,7 +261,7 @@ export const SignInForm = () => {
             {isSubmitting ? (
               <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
             ) : (
-              <PiGoogleLogoBold className="mr-2 text-red" size={18} />
+              <FaGoogle className="mr-2 text-red-500" size={18} />
             )}
             <span className="text-sm sm:text-base">Continue with Google</span>
           </Button>

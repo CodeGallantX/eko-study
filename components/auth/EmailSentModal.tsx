@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, X } from 'lucide-react';
- import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 interface EmailSentModalProps {
   isOpen: boolean;

@@ -9,12 +9,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { PiGoogleLogoBold } from 'react-icons/pi';
+import { FaGoogle } from 'react-icons/fa';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
-import { useAppDispatch } from '@/lib/redux/hooks';
-import { setUserData } from '@/lib/redux/features/userSlice';
 
 interface FormData {
   firstName: string;
@@ -89,8 +87,6 @@ const collegeDepartments: CollegeDepartmentMap = {
 
 export const SignUpForm = () => {
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -106,11 +102,9 @@ export const SignUpForm = () => {
   const [passwordError, setPasswordError] = useState('');
   const [availableDepartments, setAvailableDepartments] = useState<string[]>([]);
 
-  // Update departments when college changes
   useEffect(() => {
     if (formData.college && collegeDepartments[formData.college]) {
       setAvailableDepartments(collegeDepartments[formData.college]);
-      // Reset department when college changes
       setFormData(prev => ({ ...prev, department: '' }));
     } else {
       setAvailableDepartments([]);
@@ -118,33 +112,15 @@ export const SignUpForm = () => {
   }, [formData.college]);
 
   const validateForm = useCallback(() => {
-    if (!formData.firstName.trim()) {
-      throw new Error('First name is required');
-    }
-    if (!formData.lastName.trim()) {
-      throw new Error('Last name is required');
-    }
-    if (!formData.email.trim()) {
-      throw new Error('Email is required');
-    }
-    if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      throw new Error('Please enter a valid email address');
-    }
-    if (!formData.college) {
-      throw new Error('College selection is required');
-    }
-    if (!formData.department) {
-      throw new Error('Department selection is required');
-    }
-    if (!formData.password) {
-      throw new Error('Password is required');
-    }
-    if (formData.password.length < 6) {
-      throw new Error('Password must be at least 6 characters long');
-    }
-    if (!formData.agreeTerms) {
-      throw new Error('You must agree to the terms and conditions');
-    }
+    if (!formData.firstName.trim()) throw new Error('First name is required');
+    if (!formData.lastName.trim()) throw new Error('Last name is required');
+    if (!formData.email.trim()) throw new Error('Email is required');
+    if (!/^\S+@\S+\.\S+$/.test(formData.email)) throw new Error('Please enter a valid email address');
+    if (!formData.college) throw new Error('College selection is required');
+    if (!formData.department) throw new Error('Department selection is required');
+    if (!formData.password) throw new Error('Password is required');
+    if (formData.password.length < 6) throw new Error('Password must be at least 6 characters long');
+    if (!formData.agreeTerms) throw new Error('You must agree to the terms and conditions');
   }, [formData]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -154,46 +130,20 @@ export const SignUpForm = () => {
     try {
       validateForm();
 
-      // Sign up with Supabase
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email: formData.email.trim().toLowerCase(),
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
         password: formData.password,
         options: {
           data: {
-            first_name: formData.firstName.trim(),
-            last_name: formData.lastName.trim(),
+            first_name: formData.firstName,
+            last_name: formData.lastName,
             college: formData.college,
             department: formData.department,
           }
         }
       });
 
-      if (authError) throw authError;
-
-      // Create user profile in your profiles table
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .upsert({
-          id: authData.user?.id,
-          email: formData.email.trim().toLowerCase(),
-          first_name: formData.firstName.trim(),
-          last_name: formData.lastName.trim(),
-          college: formData.college,
-          department: formData.department,
-          updated_at: new Date().toISOString()
-        });
-
-      if (profileError) throw profileError;
-
-      // Update Redux store
-      dispatch(setUserData({
-        id: authData.user?.id,
-        email: formData.email.trim().toLowerCase(),
-        firstName: formData.firstName.trim(),
-        lastName: formData.lastName.trim(),
-        college: formData.college,
-        department: formData.department
-      }));
+      if (error) throw error;
 
       toast({
         title: 'Account created successfully!',
@@ -202,46 +152,38 @@ export const SignUpForm = () => {
       });
 
       router.push('/auth/verify');
-    } catch (error: unknown) {
+    } catch (error: any) {
       console.error('Sign up error:', error);
       
-      if (error instanceof Error) {
-        let errorMessage = error.message;
-        
-        // Handle specific Supabase errors
-        if (error.message.includes('User already registered')) {
-          errorMessage = 'This email is already registered.';
-          toast({
-            title: 'Account Exists',
-            description: (
-              <div className="flex flex-col gap-2">
-                <p>An account with this email already exists.</p>
-                <Button 
-                  onClick={() => router.push('/auth/signin')}
-                  className="w-full mt-2"
-                  variant="outline"
-                >
-                  Sign In Instead
-                </Button>
-              </div>
-            ),
-            variant: 'destructive',
-          });
-          return;
-        }
+      let errorMessage = 'An unexpected error occurred. Please try again.';
+      if (error.message) errorMessage = error.message;
 
+      if (error.message?.includes('User already registered')) {
+        errorMessage = 'This email is already registered.';
         toast({
-          title: 'Sign Up Failed',
-          description: errorMessage,
+          title: 'Account Exists',
+          description: (
+            <div className="flex flex-col gap-2">
+              <p>An account with this email already exists.</p>
+              <Button
+                onClick={() => router.push('/auth/signin')}
+                className="w-full mt-2"
+                variant="outline"
+              >
+                Sign In Instead
+              </Button>
+            </div>
+          ),
           variant: 'destructive',
         });
-      } else {
-        toast({
-          title: 'Sign Up Failed',
-          description: 'An unexpected error occurred. Please try again.',
-          variant: 'destructive',
-        });
+        return;
       }
+
+      toast({
+        title: 'Sign Up Failed',
+        description: errorMessage,
+        variant: 'destructive',
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -254,10 +196,6 @@ export const SignUpForm = () => {
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
-          queryParams: {
-            access_type: 'offline',
-            prompt: 'consent',
-          }
         }
       });
 
@@ -267,11 +205,11 @@ export const SignUpForm = () => {
         title: 'Redirecting...',
         description: 'You are being redirected to Google for authentication.',
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Google sign in error:', error);
       toast({
         title: 'Google Sign In Failed',
-        description: 'There was an error signing in with Google. Please try again.',
+        description: error.message || 'There was an error signing in with Google. Please try again.',
         variant: 'destructive',
       });
     } finally {
@@ -289,15 +227,9 @@ export const SignUpForm = () => {
 
   const handlePasswordChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    
-    if (!value) {
-      setPasswordError('Password is required');
-    } else if (value.length < 6) {
-      setPasswordError('Password must be at least 6 characters long');
-    } else {
-      setPasswordError('');
-    }
-    
+    if (!value) setPasswordError('Password is required');
+    else if (value.length < 6) setPasswordError('Password must be at least 6 characters long');
+    else setPasswordError('');
     setFormData(prev => ({ ...prev, password: value }));
   }, []);
 
@@ -306,14 +238,13 @@ export const SignUpForm = () => {
   }, []);
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className="w-full max-w-md mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
     >
       <div className="p-6 sm:p-8 md:p-10">
-        {/* Form header */}
         <motion.div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-deepGreen dark:text-emerald-400 mb-3">
             Join EkoStudy
@@ -327,7 +258,6 @@ export const SignUpForm = () => {
         </motion.div>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Name Fields */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="firstName">First name</Label>
@@ -353,7 +283,6 @@ export const SignUpForm = () => {
             </div>
           </div>
 
-          {/* Email Field */}
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -367,7 +296,6 @@ export const SignUpForm = () => {
             />
           </div>
 
-          {/* College Dropdown */}
           <div className="space-y-2">
             <Label htmlFor="college">College</Label>
             <Select
@@ -388,7 +316,6 @@ export const SignUpForm = () => {
             </Select>
           </div>
 
-          {/* Department Dropdown */}
           <div className="space-y-2">
             <Label htmlFor="department">Department</Label>
             <Select
@@ -410,7 +337,6 @@ export const SignUpForm = () => {
             </Select>
           </div>
 
-          {/* Password Field */}
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <div className="relative">
@@ -441,7 +367,6 @@ export const SignUpForm = () => {
             </p>
           </div>
 
-          {/* Terms Checkbox */}
           <div className="flex items-start space-x-3 pt-1">
             <Checkbox
               id="agreeTerms"
@@ -455,7 +380,6 @@ export const SignUpForm = () => {
             </label>
           </div>
 
-          {/* Submit Button */}
           <Button
             type="submit"
             className="w-full"
@@ -473,7 +397,6 @@ export const SignUpForm = () => {
           </Button>
         </form>
 
-        {/* Divider */}
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300 dark:border-gray-700" />
@@ -485,7 +408,6 @@ export const SignUpForm = () => {
           </div>
         </div>
 
-        {/* Google Sign In Button */}
         <Button
           variant="outline"
           className="w-full"
@@ -496,7 +418,7 @@ export const SignUpForm = () => {
           {isSubmitting ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            <PiGoogleLogoBold className="mr-2 text-red-500 dark:text-red-400" size={18} />
+            <FaGoogle className="mr-2 text-red-500 dark:text-red-400" size={18} />
           )}
           Continue with Google
         </Button>

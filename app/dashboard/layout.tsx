@@ -1,24 +1,31 @@
-// app/dashboard/layout.tsx
 "use client";
-import { useState, useEffect } from "react";
-import { useAuth } from '@clerk/nextjs';
-import { redirect } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from 'next/navigation';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
+import { getCurrentUser } from '@/lib/auth';
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { userId, isLoaded } = useAuth();
-
-  // Redirect if user is not logged in and auth is loaded
-  if (isLoaded && !userId) {
-    redirect('/auth/signin');
-  }
-
   const [activeSection, setActiveSection] = useState('dashboard');
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const router = useRouter();
+
+  // Check user session
+  const checkSession = async () => {
+    try {
+      const user = await getCurrentUser();
+      if (!user) {
+        router.push('/auth/signin');
+      }
+    } catch (error) {
+      router.push('/auth/signin');
+    }
+  };
 
   // Mock notifications data
   const notifications = [
@@ -38,29 +45,21 @@ export default function DashboardLayout({
     }
   ];
 
-  // State for sidebar and dark mode
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <Sidebar
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         activeSection={activeSection}
-        username={userId} // Using userId as username for now
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
-        onSignOut={() => {
-          // This will be handled by Clerk's signOut in the components
-        }}
+        onSignOut={signOut}
       />
       
       <TopNav
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
-        username={userId} // Using userId as username for now
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         notifications={notifications}
       />

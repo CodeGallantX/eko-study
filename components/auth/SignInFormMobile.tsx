@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { PiGoogleLogoBold } from 'react-icons/pi';
 import { FaArrowLeft } from "react-icons/fa6";
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { signIn, signInWithGoogle } from '@/lib/auth';
 
 export const SignInFormMobile = () => {
   const router = useRouter();
@@ -35,19 +35,8 @@ export const SignInFormMobile = () => {
   const handleGoogleSignIn = async () => {
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-        }
-      });
-
-      if (error) throw error;
-      
-      toast({
-        title: 'Redirecting...',
-        description: 'You are being redirected to Google for authentication.',
-      });
+      await signInWithGoogle();
+      router.push('/dashboard');
     } catch (error) {
       console.error('Google sign in error:', error);
       toast({
@@ -66,51 +55,19 @@ export const SignInFormMobile = () => {
 
     try {
       const { email, password } = formData;
-      
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      await signIn(email, password);
+      toast({
+        title: 'Login Successful',
+        description: 'You are being redirected to your dashboard.',
+        duration: 2000,
       });
-
-      if (error) throw error;
-
-      // Check if email needs verification
-      if (data.user?.email_confirmed_at === null) {
-        // Send verification email if not confirmed
-        const { error: verificationError } = await supabase.auth.resend({
-          type: 'signup',
-          email: data.user.email!,
-        });
-
-        if (verificationError) throw verificationError;
-
-        toast({
-          title: 'Verification Required',
-          description: 'Please check your email for a verification link.',
-          duration: 3000,
-        });
-        router.push('/auth/verify');
-      } else {
-        // Successful login
-        toast({
-          title: 'Login Successful',
-          description: 'You are being redirected to your dashboard.',
-          duration: 2000,
-        });
-        router.push('/dashboard');
-      }
-
+      router.push('/dashboard');
     } catch (error) {
       console.error('Sign in error:', error);
-      
       let errorMessage = 'Invalid email or password. Please try again.';
       
       if (error instanceof Error) {
         errorMessage = error.message || errorMessage;
-        
-        if (error.message.includes('Email not confirmed')) {
-          errorMessage = 'Please verify your email before signing in.';
-        }
       }
 
       toast({
@@ -126,28 +83,23 @@ export const SignInFormMobile = () => {
   return (
     <div className="w-full overflow-hidden">
       <button
-        onClick={() => {router.push('/')}}
+        onClick={() => router.push('/')}
         className="ml-6 border border-black text-sm px-3 py-2 rounded-lg"
       > 
         <FaArrowLeft className="mr-2 text-base inline-block" />
         Back
       </button>
       <div className="p-6">
-        {/* Header */}
         <div className="text-left mb-6">
           <h1 className="text-3xl font-bold text-deepGreen mb-2">Welcome back</h1>
           <p className="text-base text-gray-600">
             Don&apos;t have an account?{' '}
-            <Link
-              href="/auth/signup"
-              className="text-green hover:text-deepGreen font-medium transition-colors"
-            >
+            <Link href="/auth/signup" className="text-green hover:text-deepGreen font-medium transition-colors">
               Sign up
             </Link>
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="email" className="text-gray-700">Email</Label>
@@ -191,11 +143,7 @@ export const SignInFormMobile = () => {
                 onClick={togglePasswordVisibility}
                 aria-label={passwordVisible ? 'Hide password' : 'Show password'}
               >
-                {passwordVisible ? (
-                  <EyeOff className="h-5 w-5" />
-                ) : (
-                  <Eye className="h-5 w-5" />
-                )}
+                {passwordVisible ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
           </div>
@@ -216,7 +164,6 @@ export const SignInFormMobile = () => {
           </Button>
         </form>
 
-        {/* Divider */}
         <div className="relative my-5">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300" />
@@ -228,7 +175,6 @@ export const SignInFormMobile = () => {
           </div>
         </div>
 
-        {/* Google Button */}
         <Button
           variant="outline"
           className="w-full border-gray-300 hover:bg-gray-50 transition-colors py-2.5 sm:py-3"

@@ -1,95 +1,48 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { supabase } from '@/lib/supabase';
-import { setUserData, clearUser, updateFromSupabaseSession } from '@/lib/redux/features/userSlice';
-import { RootState } from '@/lib/redux/store';
+import { useDispatch } from 'react-redux';
+import { getUser, signOutUser } from '@/lib/auth';
+import { clearUser, setUserData } from '@/lib/redux/features/userSlice';
 
 export function useAuth() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const user = useSelector((state: RootState) => state.user);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   const handleSignOut = useCallback(async () => {
-    setLoading(true);
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-    } catch (error) {
-      console.error('Logout failed:', error);
-    } finally {
-      dispatch(clearUser());
-      router.push('/auth/signin');
-      setLoading(false);
-    }
+    await signOutUser();
+    dispatch(clearUser());
+    router.push('/auth/signin');
   }, [dispatch, router]);
 
-  const fetchUserProfile = useCallback(async (userId: string) => {
-    try {
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', userId)
-        .single();
-
-      if (profileError) throw profileError;
-      return profile;
-    } catch (error) {
-      console.error('Failed to fetch user profile:', error);
-      return null;
-    }
-  }, []);
-
-  const handleAuthStateChange = useCallback(async (event: string, session: any) => {
-    if (session?.user) {
-      try {
-        const profile = await fetchUserProfile(session.user.id);
-        dispatch(updateFromSupabaseSession({
-          ...session,
-          profile: profile || {}
-        }));
-      } catch (error) {
-        console.error('Error updating user session:', error);
-        setError('Failed to update session');
-      }
-    } else {
-      dispatch(clearUser());
-    }
-  }, [dispatch, fetchUserProfile]);
-
   useEffect(() => {
-    const initializeAuth = async () => {
-      setLoading(true);
-      try {
-        // Check for existing session
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        
-        if (sessionError) throw sessionError;
-
-        if (session?.user) {
-          const profile = await fetchUserProfile(session.user.id);
-          dispatch(updateFromSupabaseSession({
-            ...session,
-            profile: profile || {}
-          }));
-        }
-      } catch (error) {
-        console.error('Auth initialization error:', error);
-        setError('Failed to initialize authentication');
-        await handleSignOut();
-      } finally {
-        setLoading(false);
+    const fetchUser = async () => {
+      const user = await getUser();
+      if (user) {
+        dispatch(setUserData({
+          isAuthenticated: true,
+          id: user.id,
+          firstName: user.user_metadata?.firstName || '',
+          lastName: user.user_metadata?.lastName || '',
+          email: user.email || '',
+          avatarUrl: user.user_metadata?.avatarUrl || '',
+        }));
+      } else {
+        dispatch(clearUser());
       }
     };
 
-    initializeAuth();
+    fetchUser();
+  }, [dispatch]);
 
-    // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(handleAuthStateChange);
+  return {
+    user: null, // You might want to get the user from the Redux store instead
+    loading: false, // This hook doesn't manage loading state from async operations
+    signOut: handleSignOut,
+    // Add other auth related functions if needed, e.g., signIn, signUp
+  };
+}
 
     return () => {
       subscription?.unsubscribe();
