@@ -1,20 +1,10 @@
-// app/auth/signin/page.tsx
-import { 
-  SignIn,
-  SignedIn,
-  SignedOut,
-  RedirectToUserProfile
-} from '@clerk/nextjs';
+'use client';
+import { SignInForm } from '@/components/auth/SignInForm';
 
 export default function SignInPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <SignedOut>
-        <SignIn path="/auth/signin" routing="path" />
-      </SignedOut>
-      <SignedIn>
-        <RedirectToUserProfile />
-      </SignedIn>
+      <SignInForm />
     </div>
   );
 }
