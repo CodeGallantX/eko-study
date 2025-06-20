@@ -140,7 +140,6 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
             className="border p-2 w-full rounded-md outline-none focus:ring-2 focus:ring-green"
             value={filters.semester}
             onChange={(e) => handleFilterChange("semester", e.target.value)}
-            disabled={!filters.college}
           >
             <option value="">All Semesters</option>
             {['1st', '2nd'].map((semester) => (
