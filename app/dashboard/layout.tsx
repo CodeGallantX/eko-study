@@ -1,9 +1,17 @@
-"use client";
+'use client';
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
-import { getCurrentUser } from '@/lib/auth';
+import { useAuth } from '@/lib/auth';
+
+interface Notification {
+  id: number;
+  title: string;
+  message: string;
+  time: string;
+  read: boolean;
+}
 
 export default function DashboardLayout({
   children,
@@ -13,22 +21,9 @@ export default function DashboardLayout({
   const [activeSection, setActiveSection] = useState('dashboard');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const router = useRouter();
+  const { signOut } = useAuth();
 
-  // Check user session
-  const checkSession = async () => {
-    try {
-      const user = await getCurrentUser();
-      if (!user) {
-        router.push('/auth/signin');
-      }
-    } catch (error) {
-      router.push('/auth/signin');
-    }
-  };
-
-  // Mock notifications data
-  const notifications = [
+  const notifications: Notification[] = [
     {
       id: 1,
       title: 'New Course Available',

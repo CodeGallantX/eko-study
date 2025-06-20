@@ -37,28 +37,6 @@ export function useAuth() {
   }, [dispatch]);
 
   return {
-    user: null, // You might want to get the user from the Redux store instead
-    loading: false, // This hook doesn't manage loading state from async operations
     signOut: handleSignOut,
-    // Add other auth related functions if needed, e.g., signIn, signUp
-  };
-}
-
-    return () => {
-      subscription?.unsubscribe();
-    };
-  }, [dispatch, fetchUserProfile, handleAuthStateChange, handleSignOut]);
-
-  return {
-    user,
-    loading,
-    error,
-    signOut: handleSignOut,
-    refreshSession: async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        await handleAuthStateChange('SIGNED_IN', session);
-      }
-    }
   };
 }

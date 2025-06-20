@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { OTPInput } from '@/components/ui/otp-input';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
@@ -10,7 +10,6 @@ import { supabase } from '@/lib/supabase';
 
 export default function VerifyPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [otp, setOtp] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [timer, setTimer] = useState(180);
@@ -18,16 +17,12 @@ export default function VerifyPage() {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    const checkSession = async () => {
+    const getUserEmail = async () => {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        router.push('/auth/signin');
-      } else {
-        setEmail(user.email || '');
-      }
+      setEmail(user?.email || '');
     };
-    checkSession();
-  }, [router]);
+    getUserEmail();
+  }, []);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -37,18 +32,17 @@ export default function VerifyPage() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          setCanResend(true);
-          return 0;
-        }
-        return prev - 1;
-      });
+      setTimer((prev) => (prev <= 1 ? 0 : prev - 1));
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [canResend]);
+  }, []);
+
+  useEffect(() => {
+    if (timer === 0) {
+      setCanResend(true);
+    }
+  }, [timer]);
 
   const handleVerify = async () => {
     if (otp.length !== 6) {
@@ -56,7 +50,6 @@ export default function VerifyPage() {
         title: 'Incomplete OTP',
         description: 'Please enter the full 6-digit code',
         variant: 'destructive',
-        duration: 3000,
       });
       return;
     }
@@ -74,18 +67,14 @@ export default function VerifyPage() {
 
       toast({
         title: 'Verification successful!',
-        description: 'Your account has been verified. Redirecting to dashboard...',
-        duration: 3000,
+        description: 'Your account has been verified.',
       });
-
-      setTimeout(() => router.push('/dashboard'), 3000);
+      router.push('/dashboard');
     } catch (error) {
-      console.error('Verification error:', error);
       toast({
         title: 'Verification failed',
         description: 'Invalid OTP. Please try again.',
         variant: 'destructive',
-        duration: 5000,
       });
     } finally {
       setIsSubmitting(false);
@@ -108,18 +97,15 @@ export default function VerifyPage() {
       toast({
         title: 'OTP Resent',
         description: 'A new verification code has been sent to your email.',
-        duration: 3000,
       });
       
       setTimer(180);
       setCanResend(false);
     } catch (error) {
-      console.error('Resend OTP error:', error);
       toast({
         title: 'Failed to resend OTP',
         description: 'Please try again later.',
         variant: 'destructive',
-        duration: 5000,
       });
     } finally {
       setIsSubmitting(false);

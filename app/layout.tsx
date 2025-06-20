@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '@/types/supabase'
-import { cookies } from 'next/headers'
+import { Analytics } from "@vercel/analytics/next"
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import SupabaseAuthProvider from '@/providers/SupabaseAuthProvider'
 
@@ -71,16 +71,8 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={`${outfit.variable} ${merriweather.variable}`}>
       <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
       </head>
       {/* Google Analytics */}
       <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
@@ -100,6 +92,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <SupabaseProvider>
           <SupabaseAuthProvider serverSession={session}>
             {children}
+          <Analytics/>
             <Toaster />
           </SupabaseAuthProvider>
         </SupabaseProvider>
