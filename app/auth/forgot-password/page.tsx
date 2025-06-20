@@ -1,3 +1,4 @@
+// app/auth/forgot-password/page.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -8,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft } from 'lucide-react';
-import { createClient } from '@/lib/supabase/client';
+import { createClient } from '@/utils/supabase/client';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
