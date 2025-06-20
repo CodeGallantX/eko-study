@@ -4,7 +4,7 @@
 import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { clearUser, setUserData } from '@/lib/redux/features/userSlice';
+import { clearUserData, setUserData } from '@/lib/redux/features/userSlice';
 import { supabase } from '@/lib/supabase';
 
 export function useAuth() {
@@ -15,7 +15,7 @@ export function useAuth() {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-      dispatch(clearUser());
+      dispatch(clearUserData());
       router.push('/auth/signin');
     } catch (error) {
       console.error('Sign out error:', error);
@@ -38,11 +38,11 @@ export function useAuth() {
           avatarUrl: user.user_metadata?.avatar_url || user.user_metadata?.avatarUrl || '',
         }));
       } else {
-        dispatch(clearUser());
+        dispatch(clearUserData());
       }
     } catch (error) {
       console.error('Error fetching user:', error);
-      dispatch(clearUser());
+      dispatch(clearUserData());
     }
   }, [dispatch]);
 
@@ -54,7 +54,7 @@ export function useAuth() {
       if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
         fetchUser();
       } else if (event === 'SIGNED_OUT') {
-        dispatch(clearUser());
+        dispatch(clearUserData());
       }
     });
 

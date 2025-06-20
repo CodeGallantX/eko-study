@@ -8,13 +8,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft } from 'lucide-react';
-import { useClerk } from '@clerk/nextjs';
+import { createClient } from '@/lib/supabase/client';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
-  const { signIn } = useClerk();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,11 +31,14 @@ export default function ForgotPasswordPage() {
         return;
       }
 
-      // Send password reset email using Clerk
-      await signIn.create({
-        strategy: 'reset_password_email_code',
-        identifier: email.trim().toLowerCase(),
+      const supabase = createClient();
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
+        redirectTo: `${window.location.origin}/auth/update-password`,
       });
+
+      if (error) {
+        throw error;
+      }
 
       // Show success message
       setIsEmailSent(true);
