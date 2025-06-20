@@ -4,7 +4,7 @@ import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Database } from '@/types/supabase'
+import { Database } from '@/types/db.supabase'
 import { Analytics } from "@vercel/analytics/next"
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import SupabaseAuthProvider from '@/providers/SupabaseAuthProvider'

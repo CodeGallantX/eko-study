@@ -3,7 +3,7 @@
 import { Session } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Database } from '@/types/supabase'
+import { Database } from '@/types/db.supabase'
 import { useEffect } from 'react'
 
 export default function SupabaseAuthProvider({
