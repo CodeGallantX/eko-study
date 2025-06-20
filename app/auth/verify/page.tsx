@@ -2,11 +2,53 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { OTPInput } from '@/components/ui/otp-input';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+
+interface OTPInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  length?: number;
+  className?: string;
+}
+
+const OTPInput = ({ value, onChange, length = 6, className = '' }: OTPInputProps) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const newValue = value.split('');
+    newValue[index] = e.target.value.slice(-1); // Take only the last character
+    onChange(newValue.join(''));
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
+    if (e.key === 'Backspace' && !value[index] && index > 0) {
+      // Move focus to previous input on backspace
+      const prevInput = document.getElementById(`otp-input-${index - 1}`) as HTMLInputElement;
+      prevInput?.focus();
+    }
+  };
+
+  return (
+    <div className={`flex justify-center gap-2 ${className}`}>
+      {Array.from({ length }).map((_, index) => (
+        <input
+          key={index}
+          id={`otp-input-${index}`}
+          type="text"
+          maxLength={1}
+          value={value[index] || ''}
+          onChange={(e) => handleChange(e, index)}
+          onKeyDown={(e) => handleKeyDown(e, index)}
+          className="w-12 h-14 border-2 rounded-lg flex items-center justify-center text-center text-xl 
+                    focus:border-deepGreen focus:ring-2 focus:ring-deepGreen/30 focus:outline-none
+                    transition-colors duration-200"
+          autoFocus={index === 0}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default function VerifyPage() {
   const router = useRouter();
@@ -127,24 +169,8 @@ export default function VerifyPage() {
             <OTPInput
               value={otp}
               onChange={setOtp}
-              maxLength={6}
+              length={6}
               className="justify-center"
-              render={({ slots }) => (
-                <>
-                  {slots.map((slot, idx) => (
-                    <div
-                      key={idx}
-                      className={`w-12 h-14 border-2 rounded-lg flex items-center justify-center ${
-                        slot.isActive
-                          ? 'border-deepGreen ring-2 ring-deepGreen/30'
-                          : 'border-gray-300'
-                      }`}
-                    >
-                      {slot.char}
-                    </div>
-                  ))}
-                </>
-              )}
             />
           </div>
 
