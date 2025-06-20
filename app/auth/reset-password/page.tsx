@@ -2,7 +2,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
@@ -13,7 +13,6 @@ import { createClient } from '@/utils/supabase/client';
 
 export default function ResetPasswordForm() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,7 +53,7 @@ export default function ResetPasswordForm() {
       const supabase = createClient();
       
       // Update the user's password using Supabase
-      const { data, error } = await supabase.auth.updateUser({
+      const { error } = await supabase.auth.updateUser({
         password: newPassword
       });
 
