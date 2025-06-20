@@ -16,7 +16,7 @@ interface SidebarProps {
   isDarkMode: boolean;
   isSidebarCollapsed: boolean;
   activeSection: string;
-  username: string;
+  firstName: string;
   toggleDarkMode: () => void;
   toggleSidebar: () => void;
   setActiveSection: (section: string) => void;
@@ -27,7 +27,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isDarkMode,
   isSidebarCollapsed,
   activeSection,
-  username,
+  firstName,
   toggleDarkMode,
   toggleSidebar,
   setActiveSection,
@@ -111,7 +111,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               </div>
               <div>
                 <p className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                  @{username}
+                  @{firstName}
                 </p>
                 <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                   Student

@@ -37,7 +37,6 @@ const collegeDepartments: CollegeDepartmentMap = {
     "Animal Production",
     "Aquaculture & Fisheries Management"
   ],
-
   "College of Engineering and Technology": [
     "Computer Engineering",
     "Civil and Construction Engineering",
@@ -48,7 +47,6 @@ const collegeDepartments: CollegeDepartmentMap = {
     "Chemical Engineering",
     "Biotechnology & Food Technology"
   ],
-
   "College of Environmental Design and Technology": [
     "Architecture",
     "Estate Management and Valuation",
@@ -57,7 +55,6 @@ const collegeDepartments: CollegeDepartmentMap = {
     "Art and Industrial Design",
     "Building Technology"
   ],
-
   "College of Basic Sciences": [
     "Industrial Chemistry",
     "Chemistry",
@@ -70,7 +67,6 @@ const collegeDepartments: CollegeDepartmentMap = {
     "Physics with Electronics",
     "Computer Science"
   ],
-
   "College of Applied Social Sciences": [
     "Economic Science (Economics)",
     "Mass Communication Science & Technology",
@@ -130,7 +126,7 @@ export const SignUpForm = () => {
     try {
       validateForm();
 
-      const { data, error } = await supabase.auth.signUp({
+      const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
@@ -152,31 +148,33 @@ export const SignUpForm = () => {
       });
 
       router.push('/auth/verify');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Sign up error:', error);
       
       let errorMessage = 'An unexpected error occurred. Please try again.';
-      if (error.message) errorMessage = error.message;
+      
+      if (error instanceof Error) {
+        errorMessage = error.message;
 
-      if (error.message?.includes('User already registered')) {
-        errorMessage = 'This email is already registered.';
-        toast({
-          title: 'Account Exists',
-          description: (
-            <div className="flex flex-col gap-2">
-              <p>An account with this email already exists.</p>
-              <Button
-                onClick={() => router.push('/auth/signin')}
-                className="w-full mt-2"
-                variant="outline"
-              >
-                Sign In Instead
-              </Button>
-            </div>
-          ),
-          variant: 'destructive',
-        });
-        return;
+        if (error.message.includes('User already registered')) {
+          toast({
+            title: 'Account Exists',
+            description: (
+              <div className="flex flex-col gap-2">
+                <p>An account with this email already exists.</p>
+                <Button
+                  onClick={() => router.push('/auth/signin')}
+                  className="w-full mt-2"
+                  variant="outline"
+                >
+                  Sign In Instead
+                </Button>
+              </div>
+            ),
+            variant: 'destructive',
+          });
+          return;
+        }
       }
 
       toast({
@@ -205,11 +203,11 @@ export const SignUpForm = () => {
         title: 'Redirecting...',
         description: 'You are being redirected to Google for authentication.',
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error('Google sign in error:', error);
       toast({
         title: 'Google Sign In Failed',
-        description: error.message || 'There was an error signing in with Google. Please try again.',
+        description: 'There was an error signing in with Google. Please try again.',
         variant: 'destructive',
       });
     } finally {

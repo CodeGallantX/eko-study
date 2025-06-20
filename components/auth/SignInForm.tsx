@@ -67,14 +67,13 @@ export const SignInForm = () => {
     try {
       const { email, password } = formData;
       
-      const { data: { user, session }, error } = await supabase.auth.signInWithPassword({
+      const { data: { user }, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error) throw error;
 
-      // Check if email needs verification
       if (user && !user.email_confirmed_at) {
         const { error: verificationError } = await supabase.auth.resend({
           type: 'signup',
@@ -90,7 +89,6 @@ export const SignInForm = () => {
         });
         router.push('/auth/verify');
       } else {
-        // Successful login
         toast({
           title: 'Login Successful',
           description: 'You are being redirected to your dashboard.',
@@ -99,14 +97,13 @@ export const SignInForm = () => {
         router.push('/dashboard');
       }
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Sign in error:', error);
       
       let errorMessage = 'Invalid email or password. Please try again.';
       
-      if (error.message) {
+      if (error instanceof Error) {
         errorMessage = error.message;
-        
         if (error.message.includes('Email not confirmed')) {
           errorMessage = 'Please verify your email before signing in.';
         }

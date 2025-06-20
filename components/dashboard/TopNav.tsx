@@ -16,7 +16,7 @@ interface TopNavProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
   isSidebarCollapsed: boolean;
-  username: string;
+  firstName: string;
   notifications: Notification[];
 }
 
@@ -24,7 +24,7 @@ export const TopNav: React.FC<TopNavProps> = ({
   isDarkMode,
   toggleDarkMode,
   isSidebarCollapsed,
-  username,
+  firstName,
   notifications,
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -44,7 +44,7 @@ export const TopNav: React.FC<TopNavProps> = ({
             <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
               <PiUser className="text-lg" />
             </div>
-            <span className="font-medium">@{username}</span>
+            <span className="font-medium">@{firstName}</span>
           </div>
         </div>
       </div>
@@ -131,7 +131,7 @@ export const TopNav: React.FC<TopNavProps> = ({
             <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
               <PiUser className="text-lg" />
             </div>
-            <span className="font-medium">@{username}</span>
+            <span className="font-medium">@{firstName}</span>
           </div>
         </div>
       </div>
