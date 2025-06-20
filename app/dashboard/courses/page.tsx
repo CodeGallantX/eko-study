@@ -1,10 +1,11 @@
+// app/dashboard/courses/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store/store';
-import { clearUserData, setUserData } from '@/lib/redux/features/userSlice';
+import { RootState } from '@/lib/redux/store';
+import { setUserData, clearUserData } from '@/lib/redux/features/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import CourseCard from '@/components/CourseCard';
@@ -30,7 +31,7 @@ interface Notification {
 export default function CoursesPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
+  const { firstName, isAuthenticated } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('courses');
@@ -108,9 +109,10 @@ export default function CoursesPage() {
           const userPayload = {
             isAuthenticated: true,
             _id: parsedUserData._id || '',
+            firstName: parsedUserData.firstName || '',
+            lastName: parsedUserData.lastName || '',
             fullName: parsedUserData.fullName || `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim(),
             email: parsedUserData.email || '',
-            username: parsedUserData.username || '',
             token: parsedUserData.token || ''
           };
           
@@ -152,7 +154,7 @@ export default function CoursesPage() {
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         activeSection={activeSection}
-        username={username}
+        firstName={firstName}
         toggleDarkMode={toggleDarkMode}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
@@ -162,7 +164,7 @@ export default function CoursesPage() {
       <TopNav
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
-        username={username}
+        firstName={firstName}
         notifications={notifications}
         toggleDarkMode={toggleDarkMode}
       />

@@ -17,13 +17,12 @@ interface OTPInputProps {
 const OTPInput = ({ value, onChange, length = 6, className = '' }: OTPInputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newValue = value.split('');
-    newValue[index] = e.target.value.slice(-1); // Take only the last character
+    newValue[index] = e.target.value.slice(-1);
     onChange(newValue.join(''));
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
     if (e.key === 'Backspace' && !value[index] && index > 0) {
-      // Move focus to previous input on backspace
       const prevInput = document.getElementById(`otp-input-${index - 1}`) as HTMLInputElement;
       prevInput?.focus();
     }
@@ -60,8 +59,12 @@ export default function VerifyPage() {
 
   useEffect(() => {
     const getUserEmail = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setEmail(user?.email || '');
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        setEmail(user?.email || '');
+      } catch (error) {
+        console.error('Error getting user email:', error);
+      }
     };
     getUserEmail();
   }, []);
@@ -105,7 +108,9 @@ export default function VerifyPage() {
         type: 'email',
       });
 
-      if (error) throw error;
+      if (error) {
+        throw new Error(error.message);
+      }
 
       toast({
         title: 'Verification successful!',
@@ -113,9 +118,10 @@ export default function VerifyPage() {
       });
       router.push('/dashboard');
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Invalid OTP. Please try again.';
       toast({
         title: 'Verification failed',
-        description: 'Invalid OTP. Please try again.',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {
@@ -134,7 +140,9 @@ export default function VerifyPage() {
         email,
       });
 
-      if (error) throw error;
+      if (error) {
+        throw new Error(error.message);
+      }
       
       toast({
         title: 'OTP Resent',
@@ -144,9 +152,10 @@ export default function VerifyPage() {
       setTimer(180);
       setCanResend(false);
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : 'Failed to resend OTP. Please try again later.';
       toast({
         title: 'Failed to resend OTP',
-        description: 'Please try again later.',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {

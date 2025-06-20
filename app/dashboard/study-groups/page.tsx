@@ -1,10 +1,11 @@
+// app/dashboard/study-groups/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/store/store';
-import { setUserData, clearUserData } from '@/lib/redux/features/userSlice'; // Import named actions
+import { RootState } from '@/lib/redux/store';
+import { setUserData, clearUserData } from '@/lib/redux/features/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import { FiCalendar, FiPlus, FiSearch, FiChevronDown, FiChevronUp } from 'react-icons/fi';
@@ -13,7 +14,7 @@ import { BsFillPeopleFill } from 'react-icons/bs';
 export default function StudyGroupsPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { username, isAuthenticated } = useSelector((state: RootState) => state.user);
+  const { firstName, isAuthenticated } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('study-groups');
@@ -31,7 +32,7 @@ export default function StudyGroupsPage() {
       description: 'Focusing on multivariable calculus and differential equations. We meet weekly to solve problems and discuss concepts.',
       members: [
         { id: 1, name: 'Alex Johnson', role: 'Admin' },
-        { id: 2, name: 'Sam Wilson', role: 'Member' },
+        { id: 2, name: firstName || 'You', role: 'Member' },
         { id: 3, name: 'Taylor Smith', role: 'Member' }
       ],
       maxMembers: 12,
@@ -52,7 +53,7 @@ export default function StudyGroupsPage() {
       description: 'Data structures and algorithms study sessions with coding practice and interview preparation.',
       members: [
         { id: 1, name: 'Jordan Lee', role: 'Admin' },
-        { id: 2, name: username || 'You', role: 'Member' },
+        { id: 2, name: firstName || 'You', role: 'Member' },
         { id: 3, name: 'Casey Kim', role: 'Member' }
       ],
       maxMembers: 10,
@@ -112,11 +113,14 @@ export default function StudyGroupsPage() {
           router.push('/auth/signin');
         } else if (userData && !isAuthenticated) {
           const parsedUserData = JSON.parse(userData);
-          dispatch(setUserData({ // Use the imported action directly
-            fullName: parsedUserData.fullName || '',
+          dispatch(setUserData({
+            firstName: parsedUserData.firstName || '',
+            lastName: parsedUserData.lastName || '',
+            fullName: parsedUserData.fullName || `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim(),
             email: parsedUserData.email || '',
-            username: parsedUserData.username || '',
-            isAuthenticated: true
+            isAuthenticated: true,
+            _id: parsedUserData._id || '',
+            token: parsedUserData.token || ''
           }));
           setIsLoading(false);
         } else {
@@ -132,7 +136,7 @@ export default function StudyGroupsPage() {
   }, [isAuthenticated, router, dispatch]);
 
   const handleSignOut = () => {
-    dispatch(clearUserData()); // Use the imported action directly
+    dispatch(clearUserData());
     localStorage.removeItem('user');
     localStorage.removeItem('auth_token');
     router.push('/auth/signin');
@@ -186,7 +190,7 @@ export default function StudyGroupsPage() {
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         activeSection={activeSection}
-        username={username}
+        firstName={firstName}
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
@@ -196,7 +200,7 @@ export default function StudyGroupsPage() {
       <TopNav
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
-        username={username}
+        firstName={firstName}
         notifications={[]}
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
