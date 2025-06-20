@@ -1,73 +1,89 @@
-import Header from "@/components/shared/Header";
-import Footer from "@/components/shared/Footer";
-import Preloader from "@/components/shared/Preloader";
-import Banner from "@/components/shared/Banner";
+// app/blog/page.tsx
+'use client';
+
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import Header from '@/components/shared/Header';
+import Footer from '@/components/shared/Footer';
+import Banner from '@/components/shared/Banner';
 
-// Mock data for blog posts
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Importance of Intrinsic Motivation for Students",
-    category: "Education",
-    date: "July 14, 2024",
-    author: {
-      name: "Oliver Adetutu",
-      avatar: "https://ik.imagekit.io/mshcgnjju/team9.png?updatedAt=1710713969991"
-    },
-    excerpt: "Exploring how intrinsic motivation leads to better learning outcomes and long-term success for students.",
-    image: "/mtnight.webp"
-  },
-  {
-    id: 2,
-    title: "Innovative Teaching Methods for the Digital Age",
-    category: "Teaching",
-    date: "August 24, 2024",
-    author: {
-      name: "Kia Smith",
-      avatar: "https://ik.imagekit.io/mshcgnjju/team9.png?updatedAt=1710713969991"
-    },
-    excerpt: "How modern educators are adapting their teaching strategies for today's digital-native students.",
-    image: "/mtnight.webp"
-  },
-  // Add 4 more posts with similar structure
-  ...Array(4).fill(null).map((_, i) => ({
-    id: i + 3,
-    title: `The Future of ${['STEM', 'Arts', 'Language', 'Vocational'][i]} Education`,
-    category: ['Technology', 'Art & Design', 'Languages', 'Career'][i],
-    date: new Date(2024, 8 + i, 1).toLocaleDateString('en-US', { 
-      month: 'long', 
-      day: 'numeric', 
-      year: 'numeric' 
+// Dynamically import components with error boundaries
+const Preloader = dynamic(() => import('@/components/shared/Preloader'), { 
+  ssr: false,
+  loading: () => <div className="preloader-placeholder" />
+});
+
+const MotionDiv = dynamic(() => import('framer-motion').then(mod => mod.motion.div), {
+  ssr: false,
+  loading: () => <div />,
+});
+
+// Types
+interface BlogPost {
+  id: number;
+  title: string;
+  category: string;
+  date: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  excerpt: string;
+  image: string;
+}
+
+interface PageData {
+  title: string;
+  breadcrumb: Array<{
+    name: string;
+    path: string;
+  }>;
+}
+
+// Mock data
+const generateMockPosts = (): BlogPost[] => {
+  const categories = ['Education', 'Teaching', 'Technology', 'Art & Design', 'Languages', 'Career'];
+  const authors = [
+    { name: 'Oliver Adetutu', avatar: 'https://ik.imagekit.io/mshcgnjju/team9.png' },
+    { name: 'Kia Smith', avatar: 'https://ik.imagekit.io/mshcgnjju/team9.png' },
+    { name: 'Dr. Emma Wilson', avatar: 'https://ik.imagekit.io/mshcgnjju/team9.png' },
+    { name: 'James Rodriguez', avatar: 'https://ik.imagekit.io/mshcgnjju/team9.png' },
+  ];
+
+  return Array(6).fill(null).map((_, i) => ({
+    id: i + 1,
+    title: i === 0 
+      ? 'The Importance of Intrinsic Motivation for Students' 
+      : `The Future of ${categories[i % categories.length]} Education`,
+    category: categories[i % categories.length],
+    date: new Date(2024, 6 + i, 1).toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
     }),
-    author: {
-      name: ['Dr. Emma Wilson', 'James Rodriguez', 'Sarah Chen', 'Prof. Ahmed Khan'][i],
-      avatar: "https://ik.imagekit.io/mshcgnjju/team9.png?updatedAt=1710713969991"
-    },
-    excerpt: `Exploring emerging trends in ${['science and technology', 'creative arts', 'language acquisition', 'vocational training'][i]} education.`,
-    image: "/mtnight.webp"
-  }))
-];
+    author: authors[i % authors.length],
+    excerpt: i === 0
+      ? 'Exploring how intrinsic motivation leads to better learning outcomes and long-term success for students.'
+      : `Exploring emerging trends in ${categories[i % categories.length].toLowerCase()} education.`,
+    image: '/mtnight.webp'
+  }));
+};
 
 export default function BlogPage() {
-  const page = {
+  const pageData: PageData = {
     title: "Blog",
     breadcrumb: [
-      {
-        name: "Home",
-        path: "/",
-      },
-      {
-        name: "Blog",
-        path: "/blog",
-      }
+      { name: "Home", path: "/" },
+      { name: "Blog", path: "/blog" }
     ]
   };
 
+  const blogPosts = generateMockPosts();
+  const featuredPost = blogPosts[0];
+
   // Animation variants
-  const container = {
+  const containerVariants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -77,7 +93,7 @@ export default function BlogPage() {
     }
   };
 
-  const item = {
+  const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 }
   };
@@ -87,7 +103,7 @@ export default function BlogPage() {
       <Preloader />
       <div className="min-h-screen flex flex-col">
         <Header />
-        <Banner page={page} />
+        <Banner page={pageData} />
         
         <main className="flex-grow">
           {/* Featured Post Section */}
@@ -103,40 +119,42 @@ export default function BlogPage() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30" />
               
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="relative h-full flex items-end p-8 sm:p-12"
-              >
-                <div className="text-white max-w-2xl">
-                  <Link 
-                    href="/blog/category/art-design" 
-                    className="inline-block px-3 py-1 bg-[#92B76D] text-white rounded-full text-sm font-medium mb-4 hover:bg-[#7a9a59] transition-colors"
-                  >
-                    Art & Design
-                  </Link>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
-                    <Link href="/blog/post" className="hover:text-[#92B76D] transition-colors">
-                      The Importance of Intrinsic Motivation for Students
+              {MotionDiv && (
+                <MotionDiv 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="relative h-full flex items-end p-8 sm:p-12"
+                >
+                  <div className="text-white max-w-2xl">
+                    <Link 
+                      href={`/blog/category/${featuredPost.category.toLowerCase().replace(' ', '-')}`}
+                      className="inline-block px-3 py-1 bg-[#92B76D] text-white rounded-full text-sm font-medium mb-4 hover:bg-[#7a9a59] transition-colors"
+                    >
+                      {featuredPost.category}
                     </Link>
-                  </h1>
-                  <div className="flex items-center mt-6">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white">
-                      <Image
-                        src={blogPosts[0].author.avatar}
-                        alt={blogPosts[0].author.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="ml-4">
-                      <p className="font-medium">{blogPosts[0].author.name}</p>
-                      <p className="text-sm text-gray-300">{blogPosts[0].date}</p>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4">
+                      <Link href={`/blog/post/${featuredPost.id}`} className="hover:text-[#92B76D] transition-colors">
+                        {featuredPost.title}
+                      </Link>
+                    </h1>
+                    <div className="flex items-center mt-6">
+                      <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-white">
+                        <Image
+                          src={featuredPost.author.avatar}
+                          alt={featuredPost.author.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <div className="ml-4">
+                        <p className="font-medium">{featuredPost.author.name}</p>
+                        <p className="text-sm text-gray-300">{featuredPost.date}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                </MotionDiv>
+              )}
             </div>
           </section>
 
@@ -149,58 +167,60 @@ export default function BlogPage() {
               </p>
             </div>
 
-            <motion.div
-              variants={container}
-              initial="hidden"
-              animate="show"
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
-              {blogPosts.map((post) => (
-                <motion.div 
-                  key={post.id}
-                  variants={item}
-                  whileHover={{ y: -5 }}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
-                >
-                  <Link href={`/blog/post/${post.id}`} className="block">
-                    <div className="relative h-48 w-full overflow-hidden">
-                      <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        className="object-cover transition-transform duration-500 hover:scale-105"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <div className="flex justify-between items-center mb-3">
-                        <Link 
-                          href={`/blog/category/${post.category.toLowerCase().replace(' ', '-')}`}
-                          className="text-[#92B76D] text-sm font-medium hover:text-[#7a9a59]"
-                        >
-                          {post.category}
-                        </Link>
-                        <span className="text-gray-500 text-sm">{post.date}</span>
+            {MotionDiv && (
+              <MotionDiv
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {blogPosts.map((post) => (
+                  <MotionDiv 
+                    key={post.id}
+                    variants={itemVariants}
+                    whileHover={{ y: -5 }}
+                    className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300"
+                  >
+                    <Link href={`/blog/post/${post.id}`} className="block">
+                      <div className="relative h-48 w-full overflow-hidden">
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          fill
+                          className="object-cover transition-transform duration-500 hover:scale-105"
+                        />
                       </div>
-                      <h3 className="text-xl font-bold mb-3 hover:text-[#92B76D] transition-colors">
-                        <Link href={`/blog/post/${post.id}`}>{post.title}</Link>
-                      </h3>
-                      <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                      <div className="flex items-center">
-                        <div className="relative w-10 h-10 rounded-full overflow-hidden">
-                          <Image
-                            src={post.author.avatar}
-                            alt={post.author.name}
-                            fill
-                            className="object-cover"
-                          />
+                      <div className="p-6">
+                        <div className="flex justify-between items-center mb-3">
+                          <Link 
+                            href={`/blog/category/${post.category.toLowerCase().replace(' ', '-')}`}
+                            className="text-[#92B76D] text-sm font-medium hover:text-[#7a9a59]"
+                          >
+                            {post.category}
+                          </Link>
+                          <span className="text-gray-500 text-sm">{post.date}</span>
                         </div>
-                        <span className="ml-3 text-sm font-medium">{post.author.name}</span>
+                        <h3 className="text-xl font-bold mb-3 hover:text-[#92B76D] transition-colors">
+                          {post.title}
+                        </h3>
+                        <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                        <div className="flex items-center">
+                          <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                            <Image
+                              src={post.author.avatar}
+                              alt={post.author.name}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          <span className="ml-3 text-sm font-medium">{post.author.name}</span>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
+                    </Link>
+                  </MotionDiv>
+                ))}
+              </MotionDiv>
+            )}
 
             {/* Pagination */}
             <div className="mt-16 flex justify-center">

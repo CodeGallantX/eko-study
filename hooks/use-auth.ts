@@ -7,6 +7,15 @@ import { useDispatch } from 'react-redux';
 import { clearUserData, setUserData } from '@/lib/redux/features/userSlice';
 import { supabase } from '@/lib/supabase';
 
+// Add this interface at the top of the file
+interface UserData {
+  id: string;
+  email?: string;
+  firstName: string;
+  lastName: string;
+  avatarUrl?: string;
+}
+
 export function useAuth() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -34,13 +43,16 @@ export function useAuth() {
 
       if (user) {
         setUser(user);
-        dispatch(setUserData({
-          isAuthenticated: true,
+        const userData: UserData = {
           id: user.id,
+          email: user.email || '',
           firstName: user.user_metadata?.first_name || user.user_metadata?.firstName || '',
           lastName: user.user_metadata?.last_name || user.user_metadata?.lastName || '',
-          email: user.email || '',
           avatarUrl: user.user_metadata?.avatar_url || user.user_metadata?.avatarUrl || '',
+        };
+        dispatch(setUserData({
+          isAuthenticated: true,
+          ...userData
         }));
       } else {
         setUser(null);
