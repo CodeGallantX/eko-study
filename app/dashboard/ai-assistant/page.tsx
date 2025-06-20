@@ -1,11 +1,11 @@
 // app/dashboard/ai-assistant/page.tsx
 'use client';
 
-import { Bot, Send, Sparkles, BrainCircuit } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { Bot, Send, Sparkles, BrainCircuit, User } from 'lucide-react';
 
 export default function AIAssistantPage() {
-  const messages = [
+  const [messages, setMessages] = useState([
     {
       id: 1,
       content: "Hello! I'm your AI assistant. How can I help you today?",
@@ -24,7 +24,39 @@ export default function AIAssistantPage() {
       role: 'assistant',
       time: '10:31 AM'
     }
-  ];
+  ]);
+  const [input, setInput] = useState('');
+
+  const handleSend = () => {
+    if (!input.trim()) return;
+    
+    // Add user message
+    const newUserMessage = {
+      id: messages.length + 1,
+      content: input,
+      role: 'user' as const,
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    };
+    setMessages([...messages, newUserMessage]);
+    setInput('');
+    
+    // Simulate AI response after a delay
+    setTimeout(() => {
+      const aiResponses = [
+        "I understand you're asking about: " + input,
+        "That's an interesting question. Let me think...",
+        "Here's what I found about your query...",
+        "Based on my knowledge, I can tell you that..."
+      ];
+      const newAiMessage = {
+        id: messages.length + 2,
+        content: aiResponses[Math.floor(Math.random() * aiResponses.length)],
+        role: 'assistant' as const,
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages(prev => [...prev, newAiMessage]);
+    }, 1000);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 p-4 md:p-8">
@@ -45,10 +77,8 @@ export default function AIAssistantPage() {
           {/* Messages */}
           <div className="h-[500px] overflow-y-auto p-6 space-y-6">
             {messages.map((message) => (
-              <motion.div
+              <div
                 key={message.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
@@ -62,7 +92,7 @@ export default function AIAssistantPage() {
                     {message.role === 'assistant' ? (
                       <Bot className="h-4 w-4" />
                     ) : (
-                      <span className="h-4 w-4">👤</span>
+                      <User className="h-4 w-4" />
                     )}
                     <span className="text-sm font-medium">
                       {message.role === 'assistant' ? 'StudyBuddy AI' : 'You'}
@@ -71,7 +101,7 @@ export default function AIAssistantPage() {
                   </div>
                   <p>{message.content}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -80,10 +110,16 @@ export default function AIAssistantPage() {
             <div className="relative">
               <input
                 type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Ask me anything..."
                 className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-full py-3 pl-5 pr-12 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-indigo-500 text-white p-2 rounded-full hover:bg-indigo-600 transition-colors">
+              <button 
+                onClick={handleSend}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-indigo-500 text-white p-2 rounded-full hover:bg-indigo-600 transition-colors"
+              >
                 <Send className="h-5 w-5" />
               </button>
             </div>
@@ -113,15 +149,14 @@ export default function AIAssistantPage() {
               icon: "🎯"
             }
           ].map((feature, index) => (
-            <motion.div
+            <div
               key={index}
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700"
+              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 hover:-translate-y-1 transition-transform"
             >
               <div className="text-3xl mb-3">{feature.icon}</div>
               <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{feature.title}</h3>
               <p className="text-gray-600 dark:text-gray-400">{feature.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
