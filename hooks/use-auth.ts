@@ -1,7 +1,7 @@
 // hooks/use-auth.ts
 'use client';
 
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { clearUserData, setUserData } from '@/lib/redux/features/userSlice';
@@ -10,12 +10,15 @@ import { supabase } from '@/lib/supabase';
 export function useAuth() {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
   const handleSignOut = useCallback(async () => {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
       dispatch(clearUserData());
+      setUser(null);
       router.push('/auth/signin');
     } catch (error) {
       console.error('Sign out error:', error);
@@ -23,12 +26,14 @@ export function useAuth() {
   }, [dispatch, router]);
 
   const fetchUser = useCallback(async () => {
+    setLoading(true);
     try {
       const { data: { user }, error } = await supabase.auth.getUser();
       
       if (error) throw error;
 
       if (user) {
+        setUser(user);
         dispatch(setUserData({
           isAuthenticated: true,
           id: user.id,
@@ -38,11 +43,15 @@ export function useAuth() {
           avatarUrl: user.user_metadata?.avatar_url || user.user_metadata?.avatarUrl || '',
         }));
       } else {
+        setUser(null);
         dispatch(clearUserData());
       }
     } catch (error) {
       console.error('Error fetching user:', error);
+      setUser(null);
       dispatch(clearUserData());
+    } finally {
+      setLoading(false);
     }
   }, [dispatch]);
 
@@ -54,14 +63,17 @@ export function useAuth() {
       if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
         fetchUser();
       } else if (event === 'SIGNED_OUT') {
+        setUser(null);
         dispatch(clearUserData());
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [fetchUser]);
+  }, [fetchUser, dispatch]);
 
   return {
+    user,
+    loading,
     signOut: handleSignOut,
     fetchUser,
   };
