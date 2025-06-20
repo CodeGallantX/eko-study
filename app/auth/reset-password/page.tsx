@@ -1,3 +1,4 @@
+// app/auth/reset-password/page.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -8,12 +9,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft, Eye, EyeOff } from 'lucide-react';
-import { useClerk } from '@clerk/nextjs';
+import { createClient } from '@/utils/supabase/client';
 
 export default function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { signIn } = useClerk();
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,8 +21,6 @@ export default function ResetPasswordForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [passwordError, setPasswordError] = useState('');
-
-  const token = searchParams.get('token');
 
   const validatePassword = (password: string) => {
     if (!password) {
@@ -53,28 +51,24 @@ export default function ResetPasswordForm() {
     setIsSubmitting(true);
 
     try {
-      if (!token) {
-        throw new Error('Reset token is missing');
-      }
-
-      // Attempt to reset password with Clerk
-      const result = await signIn.attemptFirstFactor({
-        strategy: 'reset_password_email_code',
-        password: newPassword,
-        code: token,
+      const supabase = createClient();
+      
+      // Update the user's password using Supabase
+      const { data, error } = await supabase.auth.updateUser({
+        password: newPassword
       });
 
-      if (result.status === 'complete') {
-        setIsSuccess(true);
-        toast({
-          title: 'Password Reset Successful',
-          description: 'Your password has been reset successfully',
-        });
-        
-        setTimeout(() => router.push('/auth/signin'), 3000);
-      } else {
-        throw new Error('Password reset failed');
+      if (error) {
+        throw error;
       }
+
+      setIsSuccess(true);
+      toast({
+        title: 'Password Reset Successful',
+        description: 'Your password has been updated successfully',
+      });
+      
+      setTimeout(() => router.push('/auth/signin'), 3000);
     } catch (error) {
       console.error('Reset password error:', error);
       let errorMessage = 'Failed to reset password';
@@ -84,6 +78,8 @@ export default function ResetPasswordForm() {
           errorMessage = 'This password reset link has expired. Please request a new one.';
         } else if (error.message.includes('invalid')) {
           errorMessage = 'This password reset link is invalid. Please request a new one.';
+        } else if (error.message.includes('Auth session missing')) {
+          errorMessage = 'Your session has expired. Please request a new password reset link.';
         } else {
           errorMessage = error.message;
         }
@@ -98,24 +94,6 @@ export default function ResetPasswordForm() {
       setIsSubmitting(false);
     }
   };
-
-  if (!token) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Invalid Reset Link</h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            This password reset link is invalid or has expired.
-          </p>
-          <Link href="/auth/forgot-password">
-            <Button className="bg-primary text-white">
-              Request New Reset Link
-            </Button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
