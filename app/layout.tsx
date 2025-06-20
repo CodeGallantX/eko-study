@@ -1,10 +1,13 @@
-import { ClerkProvider } from '@clerk/nextjs';
 import { Outfit, Merriweather } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
-// import { Providers } from './providers';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Database } from '@/types/supabase'
+import { cookies } from 'next/headers'
+import SupabaseProvider from '@/providers/SupabaseProvider'
+import SupabaseAuthProvider from '@/providers/SupabaseAuthProvider'
 
 // Configure fonts with fallback
 const outfit = Outfit({
@@ -30,16 +33,16 @@ type RootLayoutProps = {
 export const metadata = {
   title: "EkoStudy: Your Gateway to Academic Excellence at LASUSTECH",
   description:
-    "EkoStudy is the ultimate online resource for students of Lagos State University of Science and Technology (LASUSTECH), Ikorodu; offering an extensive collection of lecture notes, study guides, and interactive courses across various departments. Designed to support and enhance academic success, EkoStudy provides everything you need to excel in your studies, from comprehensive materials to engaging learning tools.",
+    "Access free lecture notes, past questions, course outlines, exam guides, and AI-powered study support designed for Lagos State University of Science and Technology (LASUSTECH). Join thousands of students using EkoStudy to stay ahead with departmental resources, updated timetables, real-time group chats, and a personalized dashboard. Study smarter, pass easier, and graduate stronger — all in one platform tailored to your academic journey.",
   keywords:
-    "LASUSTECH study resources, lecture notes LASUSTECH, LASUSTECH online study materials, EkoStudy LASUSTECH, LASUSTECH interactive courses, past questions LASUSTECH, AI study tools LASUSTECH, LASUSTECH academic support, LASUSTECH study guides, LASUSTECH exam preparation, LASUSTECH learning platform, science and technology study resources, LASUSTECH seamless learning, LASUSTECH academic success, LASUSTECH structured learning, LASUSTECH educational resources, LASUSTECH student empowerment, online lecture notes LASUSTECH, Ikorodu LASUSTECH resources, LASUSTECH course materials, LASUSTECH academic excellence, LASUSTECH study tools, interactive learning LASUSTECH, EkoStudy course offerings, LASUSTECH department study aids, LASUSTECH study plans, LASUSTECH digital learning",
+    "LASUSTECH, Lagos State University of Science and Technology, LASUSTECH students, LASUSTECH courses, LASUSTECH past questions, LASUSTECH lecture notes, LASUSTECH study materials, LASUSTECH timetable, LASUSTECH exam guide, LASUSTECH departments, LASUSTECH college of science, LASUSTECH college of engineering, LASUSTECH college of agriculture, LASUSTECH admission, LASUSTECH portal, LASUSTECH fresher guide, LASUSTECH updates, LASUSTECH general studies, LASUSTECH school news, EkoStudy platform, EkoStudy AI tutor, EkoStudy LASUSTECH, best study platform for LASUSTECH, Nigerian university study app, Nigerian student learning platform, Nigerian school notes app, LASUSTECH exam prep, study for LASUSTECH exams, free lecture notes Nigeria, online learning LASUSTECH, LASUSTECH academic calendar, online learning platform for LASUSTECH, LASUSTECH CBT practice, CBT practice for LASUSTECH, free academic materials LASUSTECH, study tips for LASUSTECH, LASUSTECH departmental resources, university learning platform Nigeria, study portal LASUSTECH, academic help LASUSTECH, best LASUSTECH website, AI learning assistant LASUSTECH, past questions and answers LASUSTECH, AI-powered study app, university academic support Nigeria, LASUSTECH course outline, online exam preparation Nigeria, LASUSTECH tutorials, e-learning platform Nigeria, free tutorials LASUSTECH, LASUSTECH e-library, university notes platform Nigeria, LASUSTECH virtual classroom, LASUSTECH school forum, LASUSTECH campus groups, department-based learning app, LASUSTECH faculty access, educational app for Nigerian students, smart study app Nigeria, Nigerian university timetable app, lecture timetable LASUSTECH, university past papers Nigeria, online courseware LASUSTECH, LASUSTECH revision guide, LASUSTECH assessment platform, LASUSTECH school tools, smart study tools for LASUSTECH, eko study notes, LASUSTECH GPA calculator, academic tools Nigeria, Nigerian university student resources, best academic app Nigeria, AI assistant for university students, LASUSTECH learning hub, free learning tools Nigeria, academic community LASUSTECH, online group study LASUSTECH, collaborative learning Nigeria, digital learning Nigeria, remote learning Nigeria, LASUSTECH online platform, school app for LASUSTECH, course-based resources LASUSTECH, LASUSTECH general group, student collaboration LASUSTECH, top Nigerian university apps, student life at LASUSTECH, LASUSTECH e-learning tools, AI chatbot for students Nigeria, Nigerian education platform, LASUSTECH student dashboard, LASUSTECH admin dashboard, mobile learning LASUSTECH, academic support tools Nigeria, AI for Nigerian schools, AI education Nigeria, intelligent study assistant LASUSTECH, LASUSTECH project topics, undergraduate resources Nigeria, best AI tutor for university, custom learning Nigeria, Nigerian academic platform, school assignment support Nigeria",
   metadataBase: new URL("https://eko-study.vercel.app/"),
   openGraph: {
     type: "website",
     url: "https://eko-study.vercel.app/",
     title: "EkoStudy: Your Gateway to Academic Excellence at LASUSTECH",
     description:
-      "EkoStudy is the premier online platform tailored for LASUSTECH students. Offering a comprehensive collection of lecture notes, study materials, and interactive courses across various departments, EkoStudy is designed to enhance your learning experience. Stay updated with the latest lectures, master critical concepts, and prepare effectively for your Computer-Based Tests (CBTs). Join your peers on EkoStudy to elevate your academic journey and achieve your educational goals with ease and confidence.",
+      "Access free lecture notes, past questions, course outlines, exam guides, and AI-powered study support designed for Lagos State University of Science and Technology (LASUSTECH). Join thousands of students using EkoStudy to stay ahead with departmental resources, updated timetables, real-time group chats, and a personalized dashboard. Study smarter, pass easier, and graduate stronger — all in one platform tailored to your academic journey.",
     images: [
       {
         url: "https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png",
@@ -58,7 +61,13 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const supabase = createClientComponentClient<Database>()
+  
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
   return (
     <html lang="en" className={`${outfit.variable} ${merriweather.variable}`}>
       <head>
@@ -88,12 +97,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         }}
       />
       <body className="antialiased">
-      <ClerkProvider>
-        {/* <Providers> */}
-          {children}
-        {/* </Providers> */}
-        <Toaster />
-      </ClerkProvider>
+        <SupabaseProvider>
+          <SupabaseAuthProvider serverSession={session}>
+            {children}
+            <Toaster />
+          </SupabaseAuthProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );

@@ -1,4 +1,4 @@
-import { Testimonial, FAQ, Feature, VisionItem, Page } from '../app/types/about';
+import { Testimonial, FAQ, Feature, VisionItem, Page } from '@/types/about';
 import { visionIcons } from '../components/about/VisionIcons';
 import { featureIcons } from '../components/about/FeaturesIcons';
 
