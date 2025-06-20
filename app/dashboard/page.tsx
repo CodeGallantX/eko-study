@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/redux/store';
 import { Loader2 } from 'lucide-react';
-import { useAuth } from '@/lib/auth';
+import { useAuth } from '@/hooks/use-auth';
 
 export default function App() {
   const router = useRouter();

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from 'next/navigation';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
-import { useAuth } from '@/lib/auth';
+import { useAuth } from '@/hooks/use-auth';
 
 interface Notification {
   id: number;
