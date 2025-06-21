@@ -3,7 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from '@/providers/Providers'
 import SupabaseProvider  from '@/providers/SupabaseProvider'
 import CookieProvider from '@/providers/CookieProvider'
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <CookieProvider>
                 {children}
                 <Analytics />
+                <SpeedInsights />
               </CookieProvider>
             <Toaster />
           </SupabaseProvider>
