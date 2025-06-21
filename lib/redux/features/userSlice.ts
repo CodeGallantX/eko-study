@@ -40,6 +40,7 @@ const userSlice = createSlice({
       email?: string;
       firstName?: string;
       lastName?: string;
+      fullName?: string;
       profile?: Partial<UserProfile>;
     }>) => {
       const { id, email, firstName, lastName, profile } = action.payload;

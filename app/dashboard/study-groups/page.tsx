@@ -10,6 +10,8 @@ import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import { FiCalendar, FiPlus, FiSearch, FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { BsFillPeopleFill } from 'react-icons/bs';
+import { useUser } from '@supabase/auth-helpers-react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function StudyGroupsPage() {
   const router = useRouter();
@@ -22,6 +24,15 @@ export default function StudyGroupsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('my-groups');
   const [expandedGroup, setExpandedGroup] = useState<number | null>(null);
+
+  const user = useUser();
+  const supabase = useSupabaseClient();
+
+  const fullName = user?.user_metadata?.fullName
+  || user?.user_metadata?.name
+  || `${user?.user_metadata?.firstName || ''} ${user?.user_metadata?.lastName || ''}`.trim()
+
+
 
   // Mock study groups data
   const myStudyGroups = [
@@ -106,39 +117,28 @@ export default function StudyGroupsPage() {
   ];
 
   useEffect(() => {
-    const checkAuth = () => {
-      try {
-        const userData = localStorage.getItem('user');
-        if (!userData && !isAuthenticated) {
-          router.push('/auth/signin');
-        } else if (userData && !isAuthenticated) {
-          const parsedUserData = JSON.parse(userData);
-          dispatch(setUserData({
-            firstName: parsedUserData.firstName || '',
-            lastName: parsedUserData.lastName || '',
-            fullName: parsedUserData.fullName || `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim(),
-            email: parsedUserData.email || '',
-            isAuthenticated: true,
-            _id: parsedUserData._id || '',
-            token: parsedUserData.token || ''
-          }));
-          setIsLoading(false);
-        } else {
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error('Error checking authentication:', error);
-        setIsLoading(false);
-      }
-    };
-    
-    checkAuth();
-  }, [isAuthenticated, router, dispatch]);
+    if (!user) return;
+  
+    dispatch(setUserData({
+      id: user.id,
+      email: user.email,
+      firstName: user.user_metadata?.firstName || '',
+      lastName: user.user_metadata?.lastName || '',
+      fullName: fullName,
+      profile: {
+        college: user.user_metadata?.college,
+        department: user.user_metadata?.department,
+        avatarUrl: user.user_metadata?.avatar_url,
+      },
+    }));
+  
+    setIsLoading(false);
+  }, [user, dispatch, fullName]);
+  
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
     dispatch(clearUserData());
-    localStorage.removeItem('user');
-    localStorage.removeItem('auth_token');
     router.push('/auth/signin');
   };
 

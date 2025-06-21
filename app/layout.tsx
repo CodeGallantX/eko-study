@@ -6,7 +6,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next"
 import Providers from '@/providers/Providers'
 import SupabaseProvider  from '@/providers/SupabaseProvider'
-import SupabaseAuthProvider from '@/providers/SupabaseAuthProvider'
 import CookieProvider from '@/providers/CookieProvider'
 
 // Configure fonts with fallback
@@ -84,12 +83,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="antialiased">
         <Providers>
           <SupabaseProvider>
-            <SupabaseAuthProvider>
               <CookieProvider>
                 {children}
                 <Analytics />
               </CookieProvider>
-            </SupabaseAuthProvider>
             <Toaster />
           </SupabaseProvider>
         </Providers>
