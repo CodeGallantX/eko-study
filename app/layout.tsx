@@ -4,8 +4,7 @@ import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next"
-import SupabaseProvider from '@/providers/SupabaseProvider'
-import SupabaseAuthProvider from '@/providers/SupabaseAuthProvider'
+import { Providers } from '@/providers/Providers' 
 
 // Configure fonts with fallback
 const outfit = Outfit({
@@ -80,13 +79,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         }}
       />
       <body className="antialiased">
-        <SupabaseProvider>
-          <SupabaseAuthProvider>
+        <Providers>
             {children}
             <Analytics/>
             <Toaster />
-          </SupabaseAuthProvider>
-        </SupabaseProvider>
+        </Providers>
       </body>
     </html>
   );
