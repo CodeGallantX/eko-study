@@ -99,7 +99,7 @@ export default function ClientComponent({ courses, colleges }: ClientComponentPr
       <Preloader />
       <Header />
       <Banner page={page} />
-      <div className="px-6 xl:px-24 py-10">
+      <div className="px-6 xl:px-24 py-10 bg-white dark:bg-gray-800">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           <fieldset className="relative flex items-center justify-start">
             <FaMagnifyingGlass className="absolute left-3 text-gray-500" />
