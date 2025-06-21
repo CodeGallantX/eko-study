@@ -196,7 +196,7 @@ export const SignInForm = () => {
               />
               <button
                 type="button"
-                className="absolute py-8 right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute py-3 right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 onClick={togglePasswordVisibility}
                 aria-label={passwordVisible ? 'Hide password' : 'Show password'}
               >
@@ -216,7 +216,7 @@ export const SignInForm = () => {
           >
             <Button
               type="submit"
-              className="w-full bg-green text-white py-2.5 sm:py-3 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen"
+              className="w-full bg-green text-white py-4 md:py-6 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
@@ -250,7 +250,7 @@ export const SignInForm = () => {
         >
           <Button
             variant="outline"
-            className="w-full border-gray-300 hover:bg-gray-50 transition-colors py-2.5 sm:py-3"
+            className="w-full border-gray-300 hover:bg-gray-50 transition-colors sm:py-3 py-6"
             type="button"
             onClick={handleGoogleSignIn}
             disabled={isSubmitting}
@@ -258,7 +258,7 @@ export const SignInForm = () => {
             {isSubmitting ? (
               <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
             ) : (
-              <FaGoogle className="mr-2 text-red-500" size={18} />
+              <FaGoogle className="mr-2 text-gray-500" size={18} />
             )}
             <span className="text-sm sm:text-base">Continue with Google</span>
           </Button>
