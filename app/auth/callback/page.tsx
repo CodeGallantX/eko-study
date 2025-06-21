@@ -1,3 +1,4 @@
+// app/auth/callback/page.tsx
 'use client';
 
 import { useEffect } from 'react';
@@ -9,11 +10,15 @@ export default function AuthCallbackPage() {
   const router = useRouter();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'SIGNED_IN') {
         router.push('/dashboard');
       }
     });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [router]);
 
   return (
