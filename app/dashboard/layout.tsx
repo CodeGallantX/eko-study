@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
+import SupabaseProvider from '@/providers/SupabaseProvider'
 import { useAuth } from '@/hooks/use-auth';
 
 interface Notification {
@@ -88,10 +89,11 @@ export default function DashboardLayout({
           toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
           notifications={notifications}
         />
-
+<SupabaseProvider>
         <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
           {children}
         </main>
+</SupabaseProvider>
       </div>
     </>
   );
