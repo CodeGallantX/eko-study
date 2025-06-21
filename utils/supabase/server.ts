@@ -1,28 +1,35 @@
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+// utils/supabase/server.ts
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { cookies as getCookies } from "next/headers";
 
-export const createClient = () => {
-  const cookieStore = cookies();
+export const createSupabaseServerClient = async () => {
+  const cookieStore = await getCookies();
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        getAll() {
-          return cookieStore.getAll();
+        get(name: string) {
+          return cookieStore.get(name)?.value;
         },
-        setAll(cookiesToSet) {
+        set(name: string, value: string, options: CookieOptions) {
           try {
-            cookiesToSet.forEach(({ name, value, options }) => {
-              cookieStore.set(name, value, options);
-            });
-          } catch {
-            // Ignore errors when called from a Server Component
-            // Middleware or edge function will handle session cookies instead
+            cookieStore.set?.({ name, value, ...options });
+          } catch (error) {
+            console.warn(`Supabase cookie set failed for "${name}":`, error);
+          }
+        },
+        remove(name: string, options: CookieOptions) {
+          try {
+            cookieStore.set?.({ name, value: "", ...options });
+          } catch (error) {
+            console.warn(`Supabase cookie remove failed for "${name}":`, error);
           }
         },
       },
     }
   );
 };
+
+export type SupabaseServerClient = Awaited<ReturnType<typeof createSupabaseServerClient>>;
