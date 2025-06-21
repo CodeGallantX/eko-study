@@ -154,7 +154,7 @@ export default function CoursesPage() {
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         activeSection={activeSection}
-        firstName={firstName}
+        
         toggleDarkMode={toggleDarkMode}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
@@ -164,7 +164,7 @@ export default function CoursesPage() {
       <TopNav
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
-        firstName={firstName}
+        
         notifications={notifications}
         toggleDarkMode={toggleDarkMode}
       />

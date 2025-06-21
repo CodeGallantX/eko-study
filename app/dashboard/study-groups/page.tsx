@@ -190,7 +190,7 @@ export default function StudyGroupsPage() {
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         activeSection={activeSection}
-        firstName={firstName}
+        
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
@@ -200,7 +200,7 @@ export default function StudyGroupsPage() {
       <TopNav
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
-        firstName={firstName}
+        
         notifications={[]}
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
       />
