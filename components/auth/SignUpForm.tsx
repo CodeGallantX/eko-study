@@ -240,16 +240,16 @@ export const SignUpForm = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="w-full max-w-md mx-auto bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
+      className="w-full bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700"
     >
-      <div className="p-6 sm:p-8 md:p-10">
-        <motion.div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-deepGreen dark:text-emerald-400 mb-3">
+      <div className="p-6 sm:p-8 md:p-10 lg:p-16">
+        <motion.div className="text-left mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-deepGreen dark:text-green mb-3">
             Join EkoStudy
           </h1>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Already have an account?{' '}
-            <Link href="/auth/signin" className="text-green dark:text-emerald-400 hover:text-deepGreen dark:hover:text-emerald-300 font-medium">
+            <Link href="/auth/signin" className="text-green hover:text-deepGreen font-medium">
               Sign in
             </Link>
           </p>
@@ -258,22 +258,24 @@ export const SignUpForm = () => {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="firstName">First name</Label>
+              <Label className='text-base font-normal' htmlFor="firstName">First name</Label>
               <Input
                 id="firstName"
                 name="firstName"
                 placeholder="John"
+                className='py-5 rounded-lg text-base'
                 value={formData.firstName}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="lastName">Last name</Label>
+              <Label className='text-base font-normal'  htmlFor="lastName">Last name</Label>
               <Input
                 id="lastName"
                 name="lastName"
                 placeholder="Doe"
+                className='py-5 rounded-lg text-base '
                 value={formData.lastName}
                 onChange={handleChange}
                 required
@@ -282,12 +284,13 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label className='text-base font-normal'  htmlFor="email">Email</Label>
             <Input
               id="email"
               name="email"
               type="email"
-              placeholder="you@example.com"
+              placeholder="you@mail.com"
+              className='py-5 rounded-lg text-base '
               value={formData.email}
               onChange={handleChange}
               required
@@ -295,13 +298,13 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="college">College</Label>
+            <Label className='text-base font-normal'  htmlFor="college">College</Label>
             <Select
               value={formData.college}
               onValueChange={(value) => setFormData(prev => ({ ...prev, college: value }))}
               required
             >
-              <SelectTrigger>
+              <SelectTrigger className='py-5 rounded-lg text-base'>
                 <SelectValue placeholder="Select your college" />
               </SelectTrigger>
               <SelectContent>
@@ -315,14 +318,14 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="department">Department</Label>
+            <Label className='text-base font-normal'  htmlFor="department">Department</Label>
             <Select
               value={formData.department}
               onValueChange={(value) => setFormData(prev => ({ ...prev, department: value }))}
               disabled={!formData.college}
               required
             >
-              <SelectTrigger>
+              <SelectTrigger className='py-5 rounded-lg text-base'>
                 <SelectValue placeholder={formData.college ? "Select your department" : "Select college first"} />
               </SelectTrigger>
               <SelectContent>
@@ -336,13 +339,14 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label className='text-base font-normal' htmlFor="password">Password</Label>
             <div className="relative">
               <Input
                 id="password"
                 name="password"
                 type={passwordVisible ? 'text' : 'password'}
-                placeholder="••••••••"
+                placeholder="••••••••••"
+                className='py-5 rounded-lg text-base'
                 value={formData.password}
                 onChange={handlePasswordChange}
                 required
@@ -374,7 +378,7 @@ export const SignUpForm = () => {
               }
             />
             <label htmlFor="agreeTerms" className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-snug">
-              I agree to the <Link href="/terms" className="text-green dark:text-emerald-400 hover:text-deepGreen dark:hover:text-emerald-300">Terms</Link> and <Link href="/privacy" className="text-green dark:text-emerald-400 hover:text-deepGreen dark:hover:text-emerald-300">Privacy Policy</Link>
+              I agree to the <Link href="/terms" className="text-green dark:text-green hover:text-deepGreen ">Terms</Link> and <Link href="/privacy" className="text-green hover:text-deepGreen">Privacy Policy</Link>
             </label>
           </div>
 
@@ -416,7 +420,7 @@ export const SignUpForm = () => {
           {isSubmitting ? (
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
           ) : (
-            <FaGoogle className="mr-2 text-red-500 dark:text-red-400" size={18} />
+            <FaGoogle className="mr-2 text-gray-500" size={18} />
           )}
           Continue with Google
         </Button>

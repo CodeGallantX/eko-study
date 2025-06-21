@@ -20,14 +20,14 @@ export default function AboutCTA() {
         <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/signup"
-            className="px-6 py-3 bg-white text-emerald-700 rounded-lg hover:bg-gray-100 transition-colors flex items-center"
+            className="px-6 py-3 bg-white text-green rounded-lg hover:bg-gray-100 transition-colors flex items-center"
           >
             <span>Get Started for Free</span>
             <FaArrowRight className="ml-2" />
           </Link>
           <Link
             href="/features"
-            className="px-6 py-3 bg-transparent text-white border border-white rounded-lg hover:bg-white hover:text-emerald-700 transition-colors"
+            className="px-6 py-3 bg-transparent text-white border border-white rounded-lg hover:bg-white hover:text-green transition-colors"
           >
             <span>Explore Features</span>
           </Link>

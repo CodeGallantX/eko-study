@@ -124,17 +124,17 @@ export const SignInForm = () => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200"
+      className="w-full bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col items-center justify-center"
     >
-      <div className="p-5 sm:p-6 md:p-8">
+      <div className="p-5 sm:p-6 md:p-8 lg:p-16">
         {/* Header */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
-          className="text-center mb-6"
+          className="text-left mb-6"
         >
-          <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Welcome back</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-deepGreen mb-2">Welcome back!</h1>
           <p className="text-sm sm:text-base text-gray-600">
             Don&apos;t have an account?{' '}
             <Link
@@ -154,7 +154,7 @@ export const SignInForm = () => {
             transition={{ duration: 0.2 }}
             className="space-y-2"
           >
-            <Label htmlFor="email" className="text-gray-700">Email</Label>
+            <Label htmlFor="email" className="text-gray-700 text-base font-normal">Email</Label>
             <Input
               id="email"
               name="email"
@@ -163,7 +163,7 @@ export const SignInForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
+              className="focus:ring-2 focus:ring-green focus:border-transparent transition-all py-5 rounded-lg text-base"
             />
           </motion.div>
 
@@ -174,7 +174,7 @@ export const SignInForm = () => {
             className="space-y-2"
           >
             <div className="flex justify-between items-center">
-              <Label htmlFor="password" className="text-gray-700">Password</Label>
+              <Label htmlFor="password" className="text-gray-700 text-base font-normal">Password</Label>
               <Link
                 href="/auth/forgot-password"
                 className="text-xs sm:text-sm text-green hover:text-deepGreen font-medium transition-colors"
@@ -192,7 +192,7 @@ export const SignInForm = () => {
                 onChange={handleChange}
                 required
                 minLength={6}
-                className="focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-10"
+                className="focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-10 py-5 rounded-lg text-base"
               />
               <button
                 type="button"

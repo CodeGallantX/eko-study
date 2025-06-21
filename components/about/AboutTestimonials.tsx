@@ -23,7 +23,7 @@ export default function AboutTestimonials() {
   return (
     <section className="mb-20">
       <div className="text-center mb-12">
-        <h6 className="text-lg font-semibold text-emerald-700 mb-2">Success Stories</h6>
+        <h6 className="text-lg font-semibold text-green mb-2">Success Stories</h6>
         <h2 className="text-4xl font-bold text-gray-900 mb-6">What LASUSTECH Students Say About EkoStudy</h2>
       </div>
 
@@ -78,7 +78,7 @@ export default function AboutTestimonials() {
                 setCurrentTestimonial(index);
                 setIsPlaying(false);
               }}
-              className={`w-3 h-3 rounded-full transition-colors ${currentTestimonial === index ? 'bg-emerald-700' : 'bg-gray-300'}`}
+              className={`w-3 h-3 rounded-full transition-colors ${currentTestimonial === index ? 'bg-green' : 'bg-gray-300'}`}
               aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}

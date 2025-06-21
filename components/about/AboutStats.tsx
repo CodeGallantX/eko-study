@@ -54,7 +54,7 @@ export default function AboutStats() {
           className="p-4"
           animate={controls}
         >
-          <h3 className="text-4xl font-bold text-emerald-700 mb-2">
+          <h3 className="text-4xl font-bold text-green mb-2">
             {counters.materials.toLocaleString()}+
           </h3>
           <p className="text-gray-600">Study Materials</p>
@@ -64,7 +64,7 @@ export default function AboutStats() {
           className="p-4"
           animate={controls}
         >
-          <h3 className="text-4xl font-bold text-emerald-700 mb-2">
+          <h3 className="text-4xl font-bold text-green mb-2">
             {counters.departments}+
           </h3>
           <p className="text-gray-600">Departments Covered</p>
@@ -74,7 +74,7 @@ export default function AboutStats() {
           className="p-4"
           animate={controls}
         >
-          <h3 className="text-4xl font-bold text-emerald-700 mb-2">
+          <h3 className="text-4xl font-bold text-green mb-2">
             {counters.students.toLocaleString()}+
           </h3>
           <p className="text-gray-600">Active Students</p>
@@ -83,7 +83,7 @@ export default function AboutStats() {
           whileHover={{ scale: 1.05 }}
           className="p-4"
         >
-          <h3 className="text-4xl font-bold text-emerald-700 mb-2">24/7</h3>
+          <h3 className="text-4xl font-bold text-green mb-2">24/7</h3>
           <p className="text-gray-600">Accessibility</p>
         </motion.div>
       </div>

@@ -11,7 +11,7 @@ export default function AboutFAQ() {
   return (
     <section className="mb-20">
       <div className="text-center mb-12">
-        <h6 className="text-lg font-semibold text-emerald-700 mb-2">Have Questions?</h6>
+        <h6 className="text-lg font-semibold text-green mb-2">Have Questions?</h6>
         <h2 className="text-4xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
       </div>
 
@@ -20,7 +20,7 @@ export default function AboutFAQ() {
           <div key={index} className="mb-4 border-b border-gray-200 pb-4">
             <button
               onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-              className="flex justify-between items-center w-full text-left font-semibold text-lg py-4 focus:outline-none hover:text-emerald-700 transition-colors"
+              className="flex justify-between items-center w-full text-left font-semibold text-lg py-4 focus:outline-none hover:text-green transition-colors"
             >
               <span>{faq.question}</span>
               <PiCaretDown className={`w-5 h-5 transition-transform ${activeIndex === index ? 'transform rotate-180' : ''}`} />
