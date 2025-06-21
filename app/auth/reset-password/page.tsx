@@ -1,4 +1,3 @@
-// app/auth/reset-password/page.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -9,7 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft, Eye, EyeOff } from 'lucide-react';
-import { createClient } from '@/utils/supabase/client';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { EmailSentModal } from '@/components/auth/EmailSentModal';
 
 export default function ResetPasswordForm() {
   const router = useRouter();
@@ -50,7 +50,7 @@ export default function ResetPasswordForm() {
     setIsSubmitting(true);
 
     try {
-      const supabase = createClient();
+      const supabase = createClientComponentClient();
       
       // Update the user's password using Supabase
       const { error } = await supabase.auth.updateUser({
@@ -191,6 +191,21 @@ export default function ResetPasswordForm() {
           )}
         </div>
       </div>
+
+      {/* Success Modal */}
+      <EmailSentModal
+        isOpen={isSuccess}
+        onClose={() => {
+          setIsSuccess(false);
+          router.push('/auth/signin');
+        }}
+        email=""
+        type="reset"
+        customMessage={{
+          title: 'Password Reset Successful',
+          description: 'Your password has been updated successfully. Redirecting to sign in...',
+        }}
+      />
     </div>
   );
 }
