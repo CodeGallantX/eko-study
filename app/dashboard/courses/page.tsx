@@ -1,4 +1,3 @@
-// app/dashboard/courses/page.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -9,7 +8,8 @@ import { setUserData, clearUserData } from '@/lib/redux/features/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import CourseCard from '@/components/CourseCard';
-import { useUser } from '@supabase/auth-helpers-react'
+import { useUser } from '@supabase/auth-helpers-react';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 interface Course {
   id: number;
@@ -32,12 +32,12 @@ interface Notification {
 export default function CoursesPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state: RootState) => state.user);
+  const { isAuthenticated, firstName, profile } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('courses');
   const [isLoading, setIsLoading] = useState(true);
-
+  const supabase = createClientComponentClient();
   const user = useUser();
 
   // Mock courses data
@@ -99,26 +99,44 @@ export default function CoursesPage() {
   ];
 
   useEffect(() => {
-    const checkAuth = () => {
+    const checkAuth = async () => {
       try {
-        const userData = localStorage.getItem('user');
-        if (!userData && !isAuthenticated) {
+        if (!user && !isAuthenticated) {
           router.push('/auth/signin');
           return;
         }
 
-        if (userData && !isAuthenticated) {
-          const parsedUserData = JSON.parse(userData);
-          const userPayload = {
-            isAuthenticated: true,
-            _id: parsedUserData._id || '',
-            lastName: parsedUserData.lastName || '',
-            fullName: parsedUserData.fullName || `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim(),
-            email: parsedUserData.email || '',
-            token: parsedUserData.token || ''
-          };
-          
-          dispatch(setUserData(userPayload));
+        if (user && !isAuthenticated) {
+          // Get additional user data from profiles table
+          const { data: userProfile, error } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+
+          if (error) {
+            console.error('Error fetching user profile:', error);
+          }
+
+          dispatch(setUserData({
+            id: user.id,
+            email: user.email || '',
+            firstName: user.user_metadata?.first_name || 
+                      user.user_metadata?.name?.split(' ')[0] || 
+                      user.email?.split('@')[0] || 
+                      '',
+            lastName: user.user_metadata?.last_name || 
+                     user.user_metadata?.name?.split(' ')[1] || 
+                     '',
+            profile: {
+              avatarUrl: user.user_metadata?.avatar_url || 
+                        user.user_metadata?.picture || 
+                        userProfile?.avatar_url || 
+                        '',
+              college: userProfile?.college || '',
+              department: userProfile?.department || ''
+            }
+          }));
         }
         setIsLoading(false);
       } catch (error) {
@@ -129,25 +147,25 @@ export default function CoursesPage() {
     };
     
     checkAuth();
-  }, [isAuthenticated, router, dispatch]);
+  }, [user, isAuthenticated, router, dispatch, supabase]);
 
-  const handleSignOut = () => {
-    dispatch(clearUserData());
-    localStorage.removeItem('user');
-    localStorage.removeItem('auth_token');
-    router.push('/auth/signin');
+  const handleSignOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (!error) {
+      dispatch(clearUserData());
+      router.push('/auth/signin');
+    } else {
+      console.error('Sign out error:', error);
+    }
   };
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const firstName = user?.user_metadata?.name || 'Student'
-  const avatarUrl = user?.user_metadata?.avatar_url
-
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-deepGreen"></div>
       </div>
     );
@@ -159,7 +177,6 @@ export default function CoursesPage() {
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         activeSection={activeSection}
-        
         toggleDarkMode={toggleDarkMode}
         toggleSidebar={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
         setActiveSection={setActiveSection}
@@ -169,7 +186,6 @@ export default function CoursesPage() {
       <TopNav
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
-        
         notifications={notifications}
         toggleDarkMode={toggleDarkMode}
       />
