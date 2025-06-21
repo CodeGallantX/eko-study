@@ -1,20 +1,43 @@
-// app/providers/SupabaseProvider.tsx
+// providers/SupabaseProvider.tsx
 'use client'
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '@/types/db.supabase'
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import { Session } from '@supabase/supabase-js'
 
-const Context = createContext(createClientComponentClient<Database>())
-
-// Make sure you're using default export
-export default function SupabaseProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  const supabase = createClientComponentClient<Database>()
-  return <Context.Provider value={supabase}>{children}</Context.Provider>
+type SupabaseContextType = {
+  supabase: ReturnType<typeof createClientComponentClient<Database>>
+  session: Session | null
 }
 
-export const useSupabase = () => useContext(Context)
+const Context = createContext<SupabaseContextType | null>(null)
+
+export function SupabaseProvider({ children }: { children: React.ReactNode }) {
+  const supabase = createClientComponentClient<Database>()
+  const [session, setSession] = useState<Session | null>(null)
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+
+    return () => {
+      subscription?.unsubscribe()
+    }
+  }, [supabase])
+
+  return (
+    <Context.Provider value={{ supabase, session }}>
+      {children}
+    </Context.Provider>
+  )
+}
+
+export const useSupabase = () => {
+  const context = useContext(Context)
+  if (!context) {
+    throw new Error('useSupabase must be used within a SupabaseProvider')
+  }
+  return context
+}
