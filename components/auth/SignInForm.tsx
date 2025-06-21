@@ -196,7 +196,7 @@ export const SignInForm = () => {
               />
               <button
                 type="button"
-                className="absolute py-6 right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute py-8 right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 onClick={togglePasswordVisibility}
                 aria-label={passwordVisible ? 'Hide password' : 'Show password'}
               >
