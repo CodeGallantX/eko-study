@@ -4,7 +4,7 @@ import SideIllustration from '@/components/shared/SideIllustration';
 
 export default function SignInPage() {
   return (
-    <div className="min-h-screen grid grid-cols-2">
+    <div className="min-h-screen gri d grid-cols-2">
       <SideIllustration />
       <SignInForm />
     </div>
