@@ -7,12 +7,14 @@ import { Loader2, LogOut, BookOpen, Users, User, Notebook, Bot } from 'lucide-re
 import { Button } from '@/components/ui/button'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import { useSession } from '@supabase/auth-helpers-react'
 import { useSupabase } from '@/providers/SupabaseProvider'
 
 export default function DashboardPage() {
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
-  const { supabase, session } = useSupabase()
+  const supabase = useSupabase()
+  const session = useSession()
   const user = session?.user
 
   useEffect(() => {
