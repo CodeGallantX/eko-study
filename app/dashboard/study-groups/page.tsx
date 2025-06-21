@@ -16,7 +16,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 export default function StudyGroupsPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { firstName, isAuthenticated } = useSelector((state: RootState) => state.user);
+  const { firstName } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('study-groups');
