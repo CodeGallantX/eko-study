@@ -4,7 +4,7 @@ import SideIllustration from '@/components/shared/SideIllustration';
 
 export default function SignInPage() {
   return (
-    <div className="min-h-screen flex flex-row items-center justify-center p-4">
+    <div className="min-h-screen flex flex-row items-center justify-center">
       <SideIllustration />
       <SignInForm />
     </div>

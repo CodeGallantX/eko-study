@@ -3,7 +3,7 @@ const SideIll = () => {
       <div className="hidden md:block h-full relative font-onest">
         <div className="w-full h-full">
           <img
-            src="/illustration.jpg"
+            src="/images/illustration.jpg"
             alt="grainy background - EkoStudy"
             className="object-cover w-full h-full"
           />
@@ -12,7 +12,7 @@ const SideIll = () => {
         <div className="w-4/5 lg:w-3/4 absolute flex flex-col items-start justify-center top-10 lg:top-20 gap-10 lg:gap-20 left-10 lg:left-12">
           {/* Logo */}
           <div>
-            <img src="/ekostudy-logo.png" alt="EkoStudy logo" className="w-28 lg:w-36" />
+            <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-28 lg:w-36" />
           </div>
   
           {/* Hero Text */}

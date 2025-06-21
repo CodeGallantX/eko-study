@@ -70,7 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             `,
           }}
         />
-        <div className={`${outfit.variable} ${merriweather.variable} antialiased min-h-screen bg-[#e8ede6] dark:bg-[#1a1a1a]`}>
+        <div className={`${outfit.variable} ${merriweather.variable} antialiased min-h-screen`}>
           {children}
         </div>
         <Toaster />
