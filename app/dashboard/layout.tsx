@@ -43,7 +43,6 @@ export default function DashboardLayout({
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <Sidebar
-      firstName="John"
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         activeSection={activeSection}
@@ -54,7 +53,6 @@ export default function DashboardLayout({
       />
       
       <TopNav
-        firstName="John"
         isDarkMode={isDarkMode}
         isSidebarCollapsed={isSidebarCollapsed}
         toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
