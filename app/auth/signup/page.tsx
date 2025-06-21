@@ -1,9 +1,11 @@
 'use client';
 import { SignUpForm } from '@/components/auth/SignUpForm';
+import SideIllustration from '@/components/shared/SideIllustration';
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen grid grid-cols-2 p-4">
+      <SideIllustration />
       <SignUpForm />
     </div>
   );
