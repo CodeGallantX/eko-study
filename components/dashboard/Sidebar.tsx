@@ -3,20 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  FiHome, FiBook, FiUsers, FiShoppingBag, FiHelpCircle, 
-  FiSettings, FiLogOut, FiSun, FiMoon, FiBell
-} from 'react-icons/fi';
-import { 
-  PiRobot, PiNotebook, PiUser, PiCaretLeft, PiCaretRight
-} from 'react-icons/pi';
+import { FiHome, FiBook, FiUsers, FiShoppingBag, FiHelpCircle, FiSettings, FiLogOut, FiSun, FiMoon, FiBell } from 'react-icons/fi';
+import { PiRobot, PiNotebook, PiUser, PiCaretLeft, PiCaretRight } from 'react-icons/pi';
 import { useRouter } from 'next/navigation';
+import { useSupabase } from '@/providers/SupabaseProvider';
 
 interface SidebarProps {
   isDarkMode: boolean;
   isSidebarCollapsed: boolean;
   activeSection: string;
-  firstName: string;
   toggleDarkMode: () => void;
   toggleSidebar: () => void;
   setActiveSection: (section: string) => void;
@@ -27,7 +22,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   isDarkMode,
   isSidebarCollapsed,
   activeSection,
-  firstName,
   toggleDarkMode,
   toggleSidebar,
   setActiveSection,
@@ -35,8 +29,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const { session } = useSupabase();
+  const user = session?.user;
 
-  // Only run on client side
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -46,7 +41,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
     router.push(`/dashboard/${section}`);
   };
 
-  // Return a placeholder during SSR
   if (typeof window === 'undefined') {
     return (
       <div className={`${isSidebarCollapsed ? 'w-16' : 'w-64'} ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} shadow-lg h-screen fixed left-0 top-0 z-10`}>
@@ -57,7 +51,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
     );
   }
 
-  // Show loading state until component is mounted
   if (!mounted) {
     return (
       <div className={`${isSidebarCollapsed ? 'w-16' : 'w-64'} ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-black'} shadow-lg h-screen fixed left-0 top-0 z-10`}>
@@ -67,6 +60,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
     );
   }
+
+  const firstName = user?.user_metadata?.name || 'Student';
+  const avatarUrl = user?.user_metadata?.avatar_url;
 
   return (
     <AnimatePresence mode="wait">
@@ -106,9 +102,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {!isSidebarCollapsed && (
           <div className={`px-4 py-3 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
             <div className="flex items-center">
-              <div className={`h-10 w-10 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center mr-3`}>
-                <PiUser className="text-xl" />
-              </div>
+              {avatarUrl ? (
+                <div className="h-10 w-10 rounded-full overflow-hidden mr-3">
+                  <Image
+                    src={avatarUrl}
+                    alt="User Avatar"
+                    width={40}
+                    height={40}
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div className={`h-10 w-10 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center mr-3`}>
+                  <PiUser className="text-xl" />
+                </div>
+              )}
               <div>
                 <p className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   @{firstName}

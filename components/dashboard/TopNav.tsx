@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { FiBell, FiSun, FiMoon, FiSearch } from 'react-icons/fi';
 import { PiUser } from 'react-icons/pi';
+import { useSupabase } from '@/providers/SupabaseProvider';
+import Image from 'next/image';
 
 interface Notification {
   id: number;
@@ -16,7 +18,6 @@ interface TopNavProps {
   isDarkMode: boolean;
   toggleDarkMode: () => void;
   isSidebarCollapsed: boolean;
-  firstName: string;
   notifications: Notification[];
 }
 
@@ -24,17 +25,20 @@ export const TopNav: React.FC<TopNavProps> = ({
   isDarkMode,
   toggleDarkMode,
   isSidebarCollapsed,
-  firstName,
   notifications,
 }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { session } = useSupabase();
+  const user = session?.user;
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const unreadCount = notifications.filter(n => !n.read).length;
+  const firstName = user?.user_metadata?.name || 'Student';
+  const avatarUrl = user?.user_metadata?.avatar_url;
 
   if (!mounted) {
     return (
@@ -82,7 +86,6 @@ export const TopNav: React.FC<TopNavProps> = ({
               )}
             </button>
 
-            {/* Notifications dropdown */}
             {showNotifications && (
               <div className={`absolute right-0 mt-2 w-80 rounded-md shadow-lg ${isDarkMode ? 'bg-gray-800' : 'bg-white'} ring-1 ring-black ring-opacity-5 z-50`}>
                 <div className="p-2">
@@ -128,9 +131,21 @@ export const TopNav: React.FC<TopNavProps> = ({
           </button>
 
           <div className={`flex items-center space-x-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
-              <PiUser className="text-lg" />
-            </div>
+            {avatarUrl ? (
+              <div className="h-8 w-8 rounded-full overflow-hidden">
+                <Image
+                  src={avatarUrl}
+                  alt="User Avatar"
+                  width={32}
+                  height={32}
+                  className="object-cover"
+                />
+              </div>
+            ) : (
+              <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
+                <PiUser className="text-lg" />
+              </div>
+            )}
             <span className="font-medium">@{firstName}</span>
           </div>
         </div>
