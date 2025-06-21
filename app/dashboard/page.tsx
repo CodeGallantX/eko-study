@@ -53,7 +53,7 @@ export default function DashboardPage() {
               Welcome, {user?.user_metadata?.name || user?.email?.split('@')[0] || 'Student'}!
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
-              Here's what's happening with your learning
+              Here&apos;s what&apos;s happening with your learning
             </p>
           </div>
           

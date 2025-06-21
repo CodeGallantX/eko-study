@@ -9,6 +9,7 @@ import { setUserData, clearUserData } from '@/lib/redux/features/userSlice';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import CourseCard from '@/components/CourseCard';
+import { useUser } from '@supabase/auth-helpers-react'
 
 interface Course {
   id: number;
@@ -31,11 +32,13 @@ interface Notification {
 export default function CoursesPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { firstName, isAuthenticated } = useSelector((state: RootState) => state.user);
+  const { isAuthenticated } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('courses');
   const [isLoading, setIsLoading] = useState(true);
+
+  const user = useUser();
 
   // Mock courses data
   const courses: Course[] = [
@@ -109,7 +112,6 @@ export default function CoursesPage() {
           const userPayload = {
             isAuthenticated: true,
             _id: parsedUserData._id || '',
-            firstName: parsedUserData.firstName || '',
             lastName: parsedUserData.lastName || '',
             fullName: parsedUserData.fullName || `${parsedUserData.firstName || ''} ${parsedUserData.lastName || ''}`.trim(),
             email: parsedUserData.email || '',
@@ -139,6 +141,9 @@ export default function CoursesPage() {
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
+
+  const firstName = user?.user_metadata?.name || 'Student'
+  const avatarUrl = user?.user_metadata?.avatar_url
 
   if (isLoading) {
     return (

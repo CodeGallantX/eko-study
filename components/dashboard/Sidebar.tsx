@@ -12,8 +12,8 @@ import {
   PiRobot, PiNotebook, PiUser, PiCaretLeft, PiCaretRight 
 } from 'react-icons/pi'
 import { useRouter } from 'next/navigation'
-import { useSessionContext, useUser } from '@supabase/auth-helpers-react'
-import Link from 'next/link'
+// import { useSessionContext } from '@supabase/auth-helpers-react'
+import { useUser } from '@supabase/auth-helpers-react'
 
 interface SidebarProps {
   isDarkMode: boolean
@@ -37,7 +37,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const session = useSessionContext()
+  // const session = useSessionContext()
   const user = useUser()
 
   useEffect(() => {

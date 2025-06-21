@@ -4,7 +4,8 @@
 import { useState, useEffect } from 'react'
 import { FiBell, FiSun, FiMoon, FiSearch } from 'react-icons/fi'
 import { PiUser } from 'react-icons/pi'
-import { useSessionContext, useUser } from '@supabase/auth-helpers-react'
+// import { useSessionContext } from '@supabase/auth-helpers-react'
+import { useUser } from '@supabase/auth-helpers-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -31,7 +32,7 @@ export const TopNav: React.FC<TopNavProps> = ({
 }) => {
   const [showNotifications, setShowNotifications] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const session = useSessionContext()
+  // const session = useSessionContext()
   const user = useUser()
 
   useEffect(() => {
