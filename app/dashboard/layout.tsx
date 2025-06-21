@@ -1,11 +1,30 @@
 'use client';
+
 import { useState } from "react";
-import Head from 'next/head';
 import Script from 'next/script';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
-import SupabaseProvider from '@/providers/SupabaseProvider'
+import SupabaseProvider from '@/providers/SupabaseProvider';
 import { useAuth } from '@/hooks/use-auth';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Dashboard - EkoStudy",
+  description: "Your personalized learning dashboard with courses, study groups, and AI assistance",
+  openGraph: {
+    title: "EkoStudy - Student Dashboard",
+    description: "Your personalized learning dashboard with courses, study groups, and AI assistance",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "EkoStudy - Student Dashboard",
+    description: "Your personalized learning dashboard with courses, study groups, and AI assistance",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 interface Notification {
   id: number;
@@ -31,32 +50,19 @@ export default function DashboardLayout({
       title: 'New Course Available',
       message: 'Introduction to Computer Science is now available',
       time: '2 hours ago',
-      read: false
+      read: false,
     },
     {
       id: 2,
       title: 'Study Group Invitation',
       message: 'You have been invited to join the Physics study group',
       time: '1 day ago',
-      read: true
-    }
+      read: true,
+    },
   ];
 
   return (
     <>
-      <Head>
-        <title>Dashboard - EkoStudy</title>
-        <meta name="description" content="Your personalized learning dashboard with courses, study groups, and AI assistance" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="EkoStudy - Student Dashboard" />
-        <meta property="og:description" content="Your personalized learning dashboard with courses, study groups, and AI assistance" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="EkoStudy - Student Dashboard" />
-        <meta name="twitter:description" content="Your personalized learning dashboard with courses, study groups, and AI assistance" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       {/* Google Analytics */}
       <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
       <Script
@@ -82,18 +88,19 @@ export default function DashboardLayout({
           setActiveSection={setActiveSection}
           onSignOut={signOut}
         />
-        
+
         <TopNav
           isDarkMode={isDarkMode}
           isSidebarCollapsed={isSidebarCollapsed}
           toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
           notifications={notifications}
         />
-<SupabaseProvider>
-        <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
-          {children}
-        </main>
-</SupabaseProvider>
+
+        <SupabaseProvider>
+          <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
+            {children}
+          </main>
+        </SupabaseProvider>
       </div>
     </>
   );
