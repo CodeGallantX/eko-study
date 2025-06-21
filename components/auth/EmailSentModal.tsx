@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
 
 interface EmailSentModalProps {
   isOpen: boolean;
@@ -55,18 +56,25 @@ export function EmailSentModal({ isOpen, onClose, email, type }: EmailSentModalP
               </motion.div>
 
               <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
-                {type === 'verification' ? 'Verification Email Sent' : 'Reset Link Sent'}
+                {type === 'verification' ? 'Verification Email Sent' : 'Password Reset Link Sent'}
               </h3>
               <p className="mb-4 text-gray-600 dark:text-gray-300">
                 {type === 'verification'
-                  ? 'We&apos;ve sent a verification code to your email address. Please check your inbox and enter the code to verify your account.'
-                  : 'We&apos;ve sent a password reset link to your email address. Please check your inbox to reset your password.'}
+                  ? 'We\'ve sent a verification code to your email address. Please check your inbox and enter the code to verify your account.'
+                  : 'We\'ve sent a password reset link to your email address. Please check your inbox to reset your password.'}
               </p>
-              <p className="text-sm font-medium text-gray-900 dark:text-white">{email}</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-white mb-6">{email}</p>
+              
+              <Button
+                onClick={onClose}
+                className="w-full bg-deepGreen hover:bg-deepGreen/90"
+              >
+                Got it!
+              </Button>
             </div>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
   );
-} 
+}

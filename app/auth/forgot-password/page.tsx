@@ -1,4 +1,3 @@
-// app/auth/forgot-password/page.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -9,12 +8,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Loader2, ArrowLeft } from 'lucide-react';
-import { createClient } from '@/utils/supabase/client';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { EmailSentModal } from '@/components/auth/EmailSentModal';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isEmailSent, setIsEmailSent] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ export default function ForgotPasswordPage() {
         return;
       }
 
-      const supabase = createClient();
+      const supabase = createClientComponentClient();
       const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), {
         redirectTo: `${window.location.origin}/auth/update-password`,
       });
@@ -41,12 +41,8 @@ export default function ForgotPasswordPage() {
         throw error;
       }
 
-      // Show success message
-      setIsEmailSent(true);
-      toast({
-        title: 'Email Sent',
-        description: 'Check your inbox for password reset instructions',
-      });
+      // Show success modal
+      setIsModalOpen(true);
     } catch (error) {
       console.error('Forgot password error:', error);
       
@@ -97,62 +93,44 @@ export default function ForgotPasswordPage() {
             </p>
           </div>
 
-          {isEmailSent ? (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center p-6 bg-green-50 dark:bg-deepGreen/20 rounded-lg border border-green dark:border-yellow"
-            >
-              <h2 className="text-lg font-semibold text-green dark:text-yellow mb-2">
-                Check Your Email
-              </h2>
-              <p className="text-sm text-green dark:text-yellow mb-4">
-                We&apos;ve sent password reset instructions to <span className="font-medium">{email}</span>
-              </p>
-              <p className="text-xs text-gray-600 dark:text-gray-400 mb-4">
-                Didn&apos;t receive the email? Check your spam folder or try again.
-              </p>
-              <Button
-                onClick={() => setIsEmailSent(false)}
-                variant="outline"
-                className="w-full border-green-200 dark:border-green-800 text-green dark:text-yellow hover:bg-green-100 dark:hover:bg-green-900/30"
-              >
-                Try Another Email
-              </Button>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-gray-700 dark:text-gray-300">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
-                />
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-gray-700 dark:text-gray-300">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="focus:ring-2 focus:ring-green focus:border-transparent transition-all"
+              />
+            </div>
 
-              <Button
-                type="submit"
-                className="w-full bg-deepGreen text-white py-2.5 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen/90"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    <span>Sending Instructions...</span>
-                  </>
-                ) : (
-                  <span>Send Reset Instructions</span>
-                )}
-              </Button>
-            </form>
-          )}
+            <Button
+              type="submit"
+              className="w-full bg-deepGreen text-white py-2.5 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen/90"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <span>Sending Instructions...</span>
+                </>
+              ) : (
+                <span>Send Reset Instructions</span>
+              )}
+            </Button>
+          </form>
         </div>
       </motion.div>
+
+      <EmailSentModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        email={email}
+        type="reset"
+      />
     </div>
   );
 }
