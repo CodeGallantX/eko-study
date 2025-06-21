@@ -16,7 +16,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const { firstName } = useSelector((state: RootState) => state.user);
   const [mounted, setMounted] = useState(false);
-  const { user, loading, signOut } = useAuth();
+  const { user, loading } = useAuth();
 
   const supabase = useSupabase()
 

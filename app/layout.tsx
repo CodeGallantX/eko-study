@@ -23,9 +23,9 @@ const merriweather = Merriweather({
   fallback: ['Georgia', 'serif'],
 });
 
-type RootLayoutProps = {
-  children: ReactNode;
-};
+// type RootLayoutProps = {
+//   children: ReactNode;
+// };
 
 export const metadata = {
   title: "EkoStudy: Your Gateway to Academic Excellence at LASUSTECH",
