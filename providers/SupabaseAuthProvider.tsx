@@ -1,8 +1,10 @@
+// app/providers/SupabaseAuthProvider.tsx
 'use client'
 
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
 import { useSupabase } from './SupabaseProvider'
 import { useEffect, useState } from 'react'
+import { Session } from '@supabase/supabase-js'
 
 export default function SupabaseAuthProvider({
   children,
@@ -10,19 +12,25 @@ export default function SupabaseAuthProvider({
   children: React.ReactNode
 }) {
   const supabase = useSupabase()
-  const [session, setSession] = useState(null)
+  const [session, setSession] = useState<Session | null>(null)
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session)
-    })
+    let mounted = true
+    let subscription: any
 
-    // Fetch initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (mounted) setSession(session)
+    }
+
+    getSession()
+
+    subscription = supabase.auth.onAuthStateChange((_event, session) => {
+      if (mounted) setSession(session)
+    }).data.subscription
 
     return () => {
+      mounted = false
       subscription?.unsubscribe()
     }
   }, [supabase])

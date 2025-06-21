@@ -1,24 +1,26 @@
-'use client';
+// components/dashboard/TopNav.tsx
+'use client'
 
-import { useState, useEffect } from 'react';
-import { FiBell, FiSun, FiMoon, FiSearch } from 'react-icons/fi';
-import { PiUser } from 'react-icons/pi';
-import { useSupabase } from '@/providers/SupabaseProvider';
-import Image from 'next/image';
+import { useState, useEffect } from 'react'
+import { FiBell, FiSun, FiMoon, FiSearch } from 'react-icons/fi'
+import { PiUser } from 'react-icons/pi'
+import { useSessionContext, useUser } from '@supabase/auth-helpers-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface Notification {
-  id: number;
-  title: string;
-  message: string;
-  time: string;
-  read: boolean;
+  id: number
+  title: string
+  message: string
+  time: string
+  read: boolean
 }
 
 interface TopNavProps {
-  isDarkMode: boolean;
-  toggleDarkMode: () => void;
-  isSidebarCollapsed: boolean;
-  notifications: Notification[];
+  isDarkMode: boolean
+  toggleDarkMode: () => void
+  isSidebarCollapsed: boolean
+  notifications: Notification[]
 }
 
 export const TopNav: React.FC<TopNavProps> = ({
@@ -27,18 +29,18 @@ export const TopNav: React.FC<TopNavProps> = ({
   isSidebarCollapsed,
   notifications,
 }) => {
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const { session } = useSupabase();
-  const user = session?.user;
+  const [showNotifications, setShowNotifications] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const session = useSessionContext()
+  const user = useUser()
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
-  const unreadCount = notifications.filter(n => !n.read).length;
-  const firstName = user?.user_metadata?.name || 'Student';
-  const avatarUrl = user?.user_metadata?.avatar_url;
+  const unreadCount = notifications.filter(n => !n.read).length
+  const firstName = user?.user_metadata?.name || 'Student'
+  const avatarUrl = user?.user_metadata?.avatar_url
 
   if (!mounted) {
     return (
@@ -52,7 +54,7 @@ export const TopNav: React.FC<TopNavProps> = ({
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -131,25 +133,27 @@ export const TopNav: React.FC<TopNavProps> = ({
           </button>
 
           <div className={`flex items-center space-x-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            {avatarUrl ? (
-              <div className="h-8 w-8 rounded-full overflow-hidden">
-                <Image
-                  src={avatarUrl}
-                  alt="User Avatar"
-                  width={32}
-                  height={32}
-                  className="object-cover"
-                />
-              </div>
-            ) : (
-              <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center`}>
-                <PiUser className="text-lg" />
-              </div>
-            )}
+            <Link href="/dashboard/profile" passHref>
+              {avatarUrl ? (
+                <div className="h-8 w-8 rounded-full overflow-hidden cursor-pointer">
+                  <Image
+                    src={avatarUrl}
+                    alt="User Avatar"
+                    width={32}
+                    height={32}
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <div className={`h-8 w-8 rounded-full ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} flex items-center justify-center cursor-pointer`}>
+                  <PiUser className="text-lg" />
+                </div>
+              )}
+            </Link>
             <span className="font-medium">@{firstName}</span>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

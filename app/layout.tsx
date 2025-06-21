@@ -4,7 +4,10 @@ import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next"
-import { Providers } from '@/providers/Providers' 
+import Providers from '@/providers/Providers'
+import SupabaseProvider from '@/providers/SupabaseProvider'
+import SupabaseAuthProvider from '@/providers/SupabaseAuthProvider'
+import CookieProvider from '@/providers/CookieProvider'
 
 // Configure fonts with fallback
 const outfit = Outfit({
@@ -62,8 +65,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${outfit.variable} ${merriweather.variable}`}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
       <Script
@@ -80,9 +83,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       />
       <body className="antialiased">
         <Providers>
-            {children}
-            <Analytics/>
+          <SupabaseProvider>
+            <SupabaseAuthProvider>
+              <CookieProvider>
+                {children}
+                <Analytics />
+              </CookieProvider>
+            </SupabaseAuthProvider>
             <Toaster />
+          </SupabaseProvider>
         </Providers>
       </body>
     </html>
