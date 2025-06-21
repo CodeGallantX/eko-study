@@ -32,7 +32,7 @@ interface Notification {
 export default function CoursesPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { isAuthenticated, firstName, profile } = useSelector((state: RootState) => state.user);
+  const { isAuthenticated } = useSelector((state: RootState) => state.user);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState('courses');
