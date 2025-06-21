@@ -1,34 +1,35 @@
 'use client'
 
-import { Session } from '@supabase/auth-helpers-nextjs'
-import { useRouter } from 'next/navigation'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Database } from '@/types/db.supabase'
-import { useEffect } from 'react'
+import { SessionContextProvider } from '@supabase/auth-helpers-react'
+import { useSupabase } from './SupabaseProvider'
+import { useEffect, useState } from 'react'
 
 export default function SupabaseAuthProvider({
-  serverSession,
   children,
 }: {
-  serverSession: Session | null
   children: React.ReactNode
 }) {
-  const router = useRouter()
-  const supabase = createClientComponentClient<Database>()
+  const supabase = useSupabase()
+  const [session, setSession] = useState(null)
 
   useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.access_token !== serverSession?.access_token) {
-        router.refresh()
-      }
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setSession(session)
+    })
+
+    // Fetch initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
     })
 
     return () => {
-      subscription.unsubscribe()
+      subscription?.unsubscribe()
     }
-  }, [router, supabase, serverSession?.access_token])
+  }, [supabase])
 
-  return children
+  return (
+    <SessionContextProvider supabaseClient={supabase} initialSession={session}>
+      {children}
+    </SessionContextProvider>
+  )
 }

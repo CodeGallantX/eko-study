@@ -3,8 +3,6 @@ import Script from "next/script";
 import "./globals.css";
 import { ReactNode } from "react";
 import { Toaster } from "@/components/ui/toaster";
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Database } from '@/types/db.supabase'
 import { Analytics } from "@vercel/analytics/next"
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import SupabaseAuthProvider from '@/providers/SupabaseAuthProvider'
@@ -61,20 +59,13 @@ export const metadata = {
   },
 };
 
-export default async function RootLayout({ children }: RootLayoutProps) {
-  const supabase = createClientComponentClient<Database>()
-  
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${outfit.variable} ${merriweather.variable}`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
       </head>
-      {/* Google Analytics */}
       <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
       <Script
         id="google-analytics"
@@ -90,9 +81,9 @@ export default async function RootLayout({ children }: RootLayoutProps) {
       />
       <body className="antialiased">
         <SupabaseProvider>
-          <SupabaseAuthProvider serverSession={session}>
+          <SupabaseAuthProvider>
             {children}
-          <Analytics/>
+            <Analytics/>
             <Toaster />
           </SupabaseAuthProvider>
         </SupabaseProvider>

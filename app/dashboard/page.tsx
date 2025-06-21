@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/redux/store';
+import { useSupabase } from '@/providers/SupabaseProvider'
 import { Loader2, LogOut, BookOpen, Users, User } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
@@ -16,6 +17,8 @@ export default function DashboardPage() {
   const { firstName } = useSelector((state: RootState) => state.user);
   const [mounted, setMounted] = useState(false);
   const { user, loading, signOut } = useAuth();
+
+  const supabase = useSupabase()
 
   // Set mounted state after component mounts
   useEffect(() => {
@@ -29,10 +32,15 @@ export default function DashboardPage() {
     }
   }, [mounted, loading, user, router]);
 
+  // const handleSignOut = async () => {
+  //   await signOut();
+  //   router.push('/auth/signin');
+  // };
+
   const handleSignOut = async () => {
-    await signOut();
-    router.push('/auth/signin');
-  };
+    await supabase.auth.signOut()
+    window.location.href = '/auth/signin'
+  }
 
   // Show loading state during initial render or auth check
   if (!mounted || loading) {
