@@ -1,9 +1,9 @@
+// app/providers/SupabaseProvider.tsx
 'use client'
 
 import { createContext, useContext } from 'react'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider } from '@supabase/auth-helpers-react'
-
 import { Database } from '@/types/db.supabase'
 
 const SupabaseContext = createContext<ReturnType<typeof createClientComponentClient<Database>> | null>(null)

@@ -36,9 +36,9 @@ export default function Header() {
         <Image
           src="/images/yellow-logo.png"
           alt="EkoStudy Logo"
-          width={120}
-          height={40}
-          className="w-full"
+          width={100}
+          height={30}
+          className="w-56"
           priority
           onError={(e) => {
             const target = e.target as HTMLImageElement;

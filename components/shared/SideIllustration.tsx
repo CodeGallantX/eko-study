@@ -12,7 +12,7 @@ const SideIll = () => {
         <div className="w-4/5 lg:w-3/4 absolute flex flex-col items-start justify-center top-10 lg:top-20 gap-10 lg:gap-20 left-10 lg:left-12">
           {/* Logo */}
           <div>
-            <img src="/yellow-logo.png" alt="EkoStudy logo" className="w-28 lg:w-36" />
+            <img src="/images/yellow-logo.png" alt="EkoStudy logo" className="w-28 lg:w-36" />
           </div>
   
           {/* Hero Text */}
@@ -34,7 +34,7 @@ const SideIll = () => {
             </p>
             <div className="flex items-center gap-4">
               <img
-                src="/avatar-placeholder.png"
+                src="https://ik.imagekit.io/mshcgnjju/penguin_avatar"
                 alt="Student avatar"
                 className="w-12 h-12 rounded-full object-cover"
               />

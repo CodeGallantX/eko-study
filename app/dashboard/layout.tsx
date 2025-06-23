@@ -1,11 +1,13 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Head from 'next/head';
 import Script from 'next/script';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { TopNav } from '@/components/dashboard/TopNav';
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import { useAuth } from '@/hooks/use-auth';
+import Preloader from '@/components/shared/Preloader'
 
 interface Notification {
   id: number;
@@ -18,12 +20,24 @@ interface Notification {
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const [activeSection, setActiveSection] = useState('dashboard');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-  const { signOut } = useAuth();
+  const router = useRouter()
+  const { loading, isAuthenticated } = useAuth()
+  const [activeSection, setActiveSection] = useState('dashboard')
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
+  const { signOut } = useAuth()
+
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      router.push('/auth/signin')
+    }
+  }, [loading, isAuthenticated, router])
+
+  if (loading || !isAuthenticated) {
+    return <Preloader />
+  }
 
   const notifications: Notification[] = [
     {
@@ -57,7 +71,6 @@ export default function DashboardLayout({
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* Google Analytics */}
       <Script strategy="afterInteractive" src="https://www.googletagmanager.com/gtag/js?id=G-DZMYQ5NQT0" />
       <Script
         id="google-analytics"
@@ -89,11 +102,11 @@ export default function DashboardLayout({
           toggleDarkMode={() => setIsDarkMode(!isDarkMode)}
           notifications={notifications}
         />
-<SupabaseProvider>
-        <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
-          {children}
-        </main>
-</SupabaseProvider>
+        <SupabaseProvider>
+          <main className={`${isSidebarCollapsed ? 'ml-16' : 'ml-64'} pt-16 p-6 transition-all duration-300 ease-in-out`}>
+            {children}
+          </main>
+        </SupabaseProvider>
       </div>
     </>
   );

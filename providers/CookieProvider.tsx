@@ -14,7 +14,20 @@ export default function CookieProvider({
   const supabase = createClientComponentClient()
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      // Persist session to cookies on auth changes
+      await fetch('/auth/set', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          event,
+          session,
+        }),
+      })
+      
+      // Refresh server components
       router.refresh()
     })
 

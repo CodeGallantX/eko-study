@@ -5,33 +5,38 @@ import { useEffect, useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAppDispatch } from '@/lib/redux/store'
 import { clearUserData, setUserData } from '@/lib/redux/features/userSlice'
-import { supabase } from '@/lib/supabase'
-
-interface UserData {
-  id: string
-  email?: string
-  firstName: string
-  lastName: string
-  avatarUrl?: string
-}
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export function useAuth() {
   const router = useRouter()
-  const dispatch = useAppDispatch() // Using our typed dispatch
+  const dispatch = useAppDispatch()
   const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const supabase = createClientComponentClient()
 
   const handleSignOut = useCallback(async () => {
     try {
       const { error } = await supabase.auth.signOut()
       if (error) throw error
-      dispatch(clearUserData())
+      
       setUser(null)
+      dispatch(clearUserData())
+      
+      // Ensure cookies are cleared
+      await fetch('/auth/set', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ session: null }),
+      })
+      
       router.push('/auth/signin')
     } catch (error) {
       console.error('Sign out error:', error)
+      throw error
     }
-  }, [dispatch, router])
+  }, [dispatch, router, supabase])
 
   const fetchUser = useCallback(async () => {
     setLoading(true)
@@ -42,16 +47,25 @@ export function useAuth() {
 
       if (user) {
         setUser(user)
-        const userData: UserData = {
+        const { data: profile, error: profileError } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single()
+
+        if (profileError) throw profileError
+
+        dispatch(setUserData({
           id: user.id,
           email: user.email || '',
-          firstName: user.user_metadata?.first_name || user.user_metadata?.firstName || '',
-          lastName: user.user_metadata?.last_name || user.user_metadata?.lastName || '',
-          avatarUrl: user.user_metadata?.avatar_url || user.user_metadata?.avatarUrl || '',
-        }
-        dispatch(setUserData({
-          // isAuthenticated: true,
-          ...userData
+          firstName: profile?.first_name || '',
+          lastName: profile?.last_name || '',
+          fullName: `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim(),
+          profile: {
+            college: profile?.college || '',
+            department: profile?.department || '',
+            avatarUrl: profile?.avatar_url || '',
+          }
         }))
       } else {
         setUser(null)
@@ -64,13 +78,13 @@ export function useAuth() {
     } finally {
       setLoading(false)
     }
-  }, [dispatch])
+  }, [dispatch, supabase])
 
   useEffect(() => {
     fetchUser()
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
+      if (event === 'SIGNED_IN' || event === 'USER_UPDATED' || event === 'TOKEN_REFRESHED') {
         fetchUser()
       } else if (event === 'SIGNED_OUT') {
         setUser(null)
@@ -78,13 +92,16 @@ export function useAuth() {
       }
     })
 
-    return () => subscription.unsubscribe()
+    return () => {
+      subscription?.unsubscribe()
+    }
   }, [fetchUser, dispatch])
 
   return {
     user,
     loading,
+    isAuthenticated: !!user,
     signOut: handleSignOut,
-    fetchUser,
+    refreshUser: fetchUser,
   }
 }

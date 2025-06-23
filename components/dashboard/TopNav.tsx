@@ -134,7 +134,7 @@ export const TopNav: React.FC<TopNavProps> = ({
           </button>
 
           <div className={`flex items-center space-x-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            <Link href="/dashboard/profile" passHref>
+            <Link href="/dashboard" passHref>
               {avatarUrl ? (
                 <div className="h-8 w-8 rounded-full overflow-hidden cursor-pointer">
                   <Image

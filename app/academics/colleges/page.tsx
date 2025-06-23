@@ -15,42 +15,72 @@ interface College {
   image: string;
 }
 
-async function fetchColleges(): Promise<College[]> {
-  const filePath = path.join(process.cwd(), "data", "colleges.json");
-  const jsonData = fs.readFileSync(filePath, "utf8");
-  return JSON.parse(jsonData || "[]");
+async function getColleges(): Promise<College[]> {
+  try {
+    const filePath = path.join(process.cwd(), "public", "data", "colleges.json");
+    const jsonData = await fs.promises.readFile(filePath, "utf8");
+    return JSON.parse(jsonData);
+  } catch (error) {
+    console.error("Error loading colleges data:", error);
+    return [];
+  }
 }
 
 export default async function CollegesPage() {
-  const colleges = await fetchColleges();
+  const colleges = await getColleges();
+
+  if (!colleges || colleges.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg">No colleges data available at the moment.</p>
+      </div>
+    );
+  }
 
   return (
     <>
       <Preloader />
       <Header />
-      <Banner page={{ title: "Colleges", breadcrumb: [{ name: "Colleges", path: "/academics/colleges" }] }} />
-      <div className="min-h-screen px-6 lg:px-24 py-10 bg-white">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {colleges.map((college) => (
-            // <Link key={college.slug} href={`/colleges/${college.slug}`}>
-            <Link key={college.slug} href="">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <Image
-                src={college.image}
-                alt={college.name}
-                className="w-full h-48 object-cover"
-                width={400}
-                height={200}
- />
-                <div className="p-4">
-                  <h2 className="text-xl font-semibold">{college.name}</h2>
-                  <p className="text-gray-600 text-sm mt-1">{college.description.substring(0, 80)}...</p>
+      <Banner 
+        page={{ 
+          title: "Colleges", 
+          breadcrumb: [{ name: "Home", path: "/" }, { name: "Colleges", path: "/academics/colleges" }] 
+        }} 
+      />
+      
+      <main className="min-h-screen px-6 lg:px-24 py-10 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="text-3xl font-bold mb-8">LASUSTECH Colleges</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {colleges.map((college) => (
+              <Link 
+                key={college.id}
+                href={`/academics/colleges/${college.slug}`}
+                className="group block rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              >
+                <div className="relative h-48 w-full">
+                  <Image
+                    src={college.image}
+                    alt={college.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
                 </div>
-              </div>
-            </Link>
-          ))}
+                <div className="p-6 bg-white">
+                  <h2 className="text-xl font-semibold mb-2 group-hover:text-blue-600 transition-colors">
+                    {college.name}
+                  </h2>
+                  <p className="text-gray-600 line-clamp-2">
+                    {college.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      </main>
+
       <Footer />
     </>
   );

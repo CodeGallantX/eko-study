@@ -6,10 +6,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from '@/providers/Providers'
-import SupabaseProvider  from '@/providers/SupabaseProvider'
+import SupabaseProvider from '@/providers/SupabaseProvider'
 import CookieProvider from '@/providers/CookieProvider'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
-// Configure fonts with fallback
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
@@ -26,37 +27,33 @@ const merriweather = Merriweather({
   fallback: ['Georgia', 'serif'],
 });
 
-// type RootLayoutProps = {
-//   children: ReactNode;
-// };
-
 export const metadata = {
-  title: "EkoStudy | Centralized Learning & Study Tools for Nigerian University Students",
+  title: "EkoStudy | Smarter Learning, Streamlined Success",
   description:
-    "EkoStudy offers curated academic resources, structured course materials, past questions, and AI-powered assistance to help Nigerian university students study efficiently and succeed. Built to support departmental learning, real-time collaboration, and personalized academic planning.",
+    "EkoStudy delivers curated course materials, past questions, academic tools, and real-time collaboration features—designed to elevate your learning experience and help you stay organized, confident, and exam-ready.",
   keywords:
-  "lecture notes Nigeria, Nigerian university past questions, university course outlines, academic support platform Nigeria, Nigerian e-learning tools, CBT practice Nigeria, AI study assistant, AI tutor Nigeria, Nigerian student portal, study app for Nigerian students, university exam prep tools, undergraduate academic planner, departmental study groups, personalized study dashboard, Nigerian university timetable, free school notes Nigeria, academic materials Nigeria, Nigerian student collaboration, best learning platform Nigeria, LASUSTECH course materials, LASUSTECH past papers, LASUSTECH tutorials, university revision guides Nigeria, smart study tools, Nigerian student GPA calculator, course-based learning Nigeria, Nigerian school dashboard, e-learning for undergraduates Nigeria, student productivity tools Nigeria, Nigerian academic portal, AI for education Nigeria, virtual classroom Nigeria, Nigerian student-focused platform, mobile learning Nigeria, exam preparation tools Nigeria, collaborative study Nigeria, university academic calendar Nigeria, online tutorials Nigeria, LASUSTECH CBT, university group chat Nigeria, online lecture access Nigeria, Nigerian student learning hub, university study resources Nigeria, AI-powered learning Nigeria, structured learning Nigeria, Nigerian university assignments, digital study assistant Nigeria, academic tools Nigeria, Nigerian student education tools, LASUSTECH academic tools, school note-sharing platform, Nigerian course management system, student-friendly learning platform, effective study platform Nigeria",
+    "university study tools, academic dashboard, past exam papers, course outlines, lecture notes, AI-powered study assistant, academic calendar, student productivity tools, collaborative learning, department-based resources, smart learning platform, structured revision, study planner, lecture archive, digital academic support, course management platform, virtual study groups, educational tools, academic success tools, intelligent learning assistant, school timetable tools, AI learning engine, student-focused edtech, academic resource hub, exam preparation platform, high-impact study tools, peer-based learning, course-driven education, modern academic app, efficient learning systems, EkoStudy, ekostudy LASUSTECH, LASUSTECH resources, LASUSTECH past questions, LASUSTECH course materials, LASUSTECH lecture notes, LASUSTECH academic support, LASUSTECH study dashboard, LASUSTECH timetable, LASUSTECH study portal, LASUSTECH learning app, LASUSTECH departmental courses, LASUSTECH academic calendar, LASUSTECH CBT practice, LASUSTECH tutorials, LASUSTECH online study, LASUSTECH revision tools, LASUSTECH e-learning, LASUSTECH exam prep, LASUSTECH lecture archive, LASUSTECH course outline, LASUSTECH digital learning, study platform LASUSTECH, LASUSTECH dashboard, university study dashboard, academic tools LASUSTECH, best LASUSTECH app, LASUSTECH student assistant, LASUSTECH course planner, LASUSTECH notes downloader, LASUSTECH semester planner, LASUSTECH study materials, LASUSTECH-focused app, school dashboard LASUSTECH, university portal LASUSTECH, academic resource platform LASUSTECH, AI tutor LASUSTECH, AI assistant LASUSTECH, AI-powered study LASUSTECH, structured learning LASUSTECH, course-based learning LASUSTECH, personalized study platform LASUSTECH, LASUSTECH exam planner, exam guide LASUSTECH, smart learning LASUSTECH, university study tools, academic dashboard, past exam papers, course outlines, lecture notes, AI-powered study assistant, academic calendar, student productivity tools, collaborative learning, department-based resources, smart learning platform, structured revision, study planner, lecture archive, digital academic support, course management platform, virtual study groups, educational tools, academic success tools, intelligent learning assistant, school timetable tools, AI learning engine, student-focused edtech, academic resource hub, exam preparation platform, high-impact study tools, peer-based learning, course-driven education, modern academic app, efficient learning systems, LASUSTECH study resources, LASUSTECH past questions, LASUSTECH course materials, LASUSTECH departmental notes, LASUSTECH revision guides, LASUSTECH academic planner, LASUSTECH timetable, LASUSTECH AI tutor, LASUSTECH student portal, LASUSTECH collaborative learning",
   metadataBase: new URL("https://eko-study.vercel.app/"),
   openGraph: {
     type: "website",
     url: "https://eko-study.vercel.app/",
-    title: "EkoStudy | Centralized Learning & Study Tools for Nigerian University Students",
+    title: "EkoStudy | Smarter Learning, Streamlined Success",
     description:
-      "Access structured academic tools, free departmental resources, past questions, lecture notes, and personalized study support. EkoStudy empowers students across Nigerian universities to stay organized, learn effectively, and collaborate through department-specific communities.",
+      "Discover powerful academic resources, AI-powered guidance, structured revision tools, and department-specific materials—all in one seamless platform built for focused learners.",
     images: [
       {
         url: "https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png",
         width: 1200,
         height: 630,
-        alt: "EkoStudy Preview Image",
+        alt: "EkoStudy Platform Preview",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "EkoStudy | Academic Support Platform for Nigerian Students",
+    title: "EkoStudy | Smarter Learning, Streamlined Success",
     description:
-      "EkoStudy provides course-level materials, past papers, timetables, and study groups for Nigerian university students. Start strong, stay on track, and finish with confidence.",
+      "EkoStudy combines clarity, structure, and intelligent tools to transform how you prepare, revise, and collaborate. Elevate your academic journey with confidence.",
     images: ["https://ik.imagekit.io/mshcgnjju/EkoStudy/ScreenShot%20Tool%20-20240805011237.png"],
   },
   alternates: {
@@ -64,8 +61,13 @@ export const metadata = {
   },
 };
 
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const cookieStore = cookies()
+  const supabase = createServerComponentClient({ cookies: () => cookieStore })
+  
+  // Initialize auth state but don't use session directly
+  await supabase.auth.getSession()
 
-export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${outfit.variable} ${merriweather.variable}`}>
       <head>
@@ -88,11 +90,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="antialiased">
         <Providers>
           <SupabaseProvider>
-              <CookieProvider>
-                {children}
-                <Analytics />
-                <SpeedInsights />
-              </CookieProvider>
+            <CookieProvider>
+              {children}
+              <Analytics />
+              <SpeedInsights />
+            </CookieProvider>
             <Toaster />
           </SupabaseProvider>
         </Providers>
