@@ -1,8 +1,10 @@
+import Image from "next/image";
+
 const SideIll = () => {
     return (
       <div className="hidden md:block h-full relative font-onest">
         <div className="w-full h-full">
-          <img
+          <Image
             src="/images/illustration.jpg"
             alt="grainy background - EkoStudy"
             className="object-cover w-full h-full"
@@ -12,7 +14,9 @@ const SideIll = () => {
         <div className="w-4/5 lg:w-3/4 absolute flex flex-col items-start justify-center top-10 lg:top-20 gap-10 lg:gap-20 left-10 lg:left-12">
           {/* Logo */}
           <div>
-            <img src="/images/yellow-logo.png" alt="EkoStudy logo" className="w-28 lg:w-36" />
+            <Image src="/images/yellow-logo.png" alt="EkoStudy logo"
+             width={28}
+             className="w-full lg:w-36" />
           </div>
   
           {/* Hero Text */}
@@ -33,10 +37,12 @@ const SideIll = () => {
               had a single place for everything I needed.
             </p>
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 src="https://ik.imagekit.io/mshcgnjju/penguin_avatar"
                 alt="Student avatar"
-                className="w-12 h-12 rounded-full object-cover"
+                className="w-full rounded-full object-cover"
+                width={12}
+                height={12}
               />
               <div>
                 <h4 className="text-sm font-bold">Emeka Ojo</h4>

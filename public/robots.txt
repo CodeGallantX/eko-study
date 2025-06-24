@@ -1,34 +1,20 @@
-# -------------------------------------
-# EkoStudy Robots.txt
-# For: https://eko-study.vercel.app
-# Purpose: Guide search engine bots to the most valuable content
-# -------------------------------------
-
+# *
 User-agent: *
-# Allow full access to public pages
 Allow: /
-
-# Disallow sensitive or non-SEO valuable pages
+Disallow: /login
+Disallow: /signup
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /account
 Disallow: /api/
-Disallow: /admin/
-Disallow: /auth/
-Disallow: /dashboard/
-Disallow: /login/
-Disallow: /register/
-Disallow: /verify/
-Disallow: /reset-password/
-Disallow: /settings/
-Disallow: /profile/
-Disallow: /user/
-Disallow: /notifications/
-Disallow: /messages/
+Disallow: /verify-email
+Disallow: /reset-password
+Disallow: /forgot-password
 
-# Disallow URL parameters and filtered queries
-Disallow: /*?*
-Disallow: /*&*
+# Host
+Host: https://eko-study.vercel.app
 
-# Optional: Delay crawl rate to prevent server overload (optional, adjust as needed)
-# Crawl-delay: 10
-
-# Sitemap location for all bots
+# Sitemaps
 Sitemap: https://eko-study.vercel.app/sitemap.xml
+Sitemap: https://eko-study.vercel.app/server-sitemap.xml
