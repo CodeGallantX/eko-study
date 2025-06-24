@@ -92,7 +92,7 @@ export const SignUpForm = () => {
     password: '',
     agreeTerms: false,
   });
-  
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [passwordError, setPasswordError] = useState('');
@@ -135,7 +135,8 @@ export const SignUpForm = () => {
             last_name: formData.lastName,
             college: formData.college,
             department: formData.department,
-          }
+          },
+          emailRedirectTo: `${window.location.origin}/auth/verify`
         }
       });
 
@@ -143,16 +144,16 @@ export const SignUpForm = () => {
 
       toast({
         title: 'Account created successfully!',
-        description: 'Please check your email for verification.',
+        description: 'Please check your email to verify your account.',
         duration: 3000,
       });
 
       router.push('/auth/verify');
     } catch (error: unknown) {
       console.error('Sign up error:', error);
-      
+
       let errorMessage = 'An unexpected error occurred. Please try again.';
-      
+
       if (error instanceof Error) {
         errorMessage = error.message;
 
@@ -198,7 +199,7 @@ export const SignUpForm = () => {
       });
 
       if (error) throw error;
-      
+
       toast({
         title: 'Redirecting...',
         description: 'You are being redirected to Google for authentication.',

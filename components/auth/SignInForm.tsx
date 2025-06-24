@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
@@ -43,13 +44,13 @@ export const SignInForm = () => {
       });
 
       if (error) throw error;
-      
+
       toast({
         title: 'Redirecting...',
         description: 'You are being redirected to Google for authentication.',
       });
     } catch (error) {
-      console.error('Google sign in error:', error);
+      console.error('Google sign-in error:', error);
       toast({
         title: 'Google Sign In Failed',
         description: 'There was an error signing in with Google. Please try again.',
@@ -66,46 +67,40 @@ export const SignInForm = () => {
 
     try {
       const { email, password } = formData;
-      
-      const { data: { user }, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) throw error;
 
-      if (user && !user.email_confirmed_at) {
-        const { error: verificationError } = await supabase.auth.resend({
-          type: 'signup',
-          email: user.email!,
-        });
+      const user = data?.user;
 
-        if (verificationError) throw verificationError;
-
+      if (!user?.email_confirmed_at) {
         toast({
-          title: 'Verification Required',
-          description: 'Please check your email for a verification link.',
-          duration: 3000,
+          title: 'Verify Your Email',
+          description: 'Your email is not verified yet. Please check your inbox.',
+          variant: 'default',
         });
         router.push('/auth/verify');
-      } else {
-        toast({
-          title: 'Login Successful',
-          description: 'You are being redirected to your dashboard.',
-          duration: 2000,
-        });
-        router.push('/dashboard');
+        return;
       }
 
+      toast({
+        title: 'Login Successful',
+        description: 'Redirecting to dashboard...',
+      });
+
+      router.push('/dashboard');
     } catch (error: unknown) {
-      console.error('Sign in error:', error);
-      
+      console.error('Sign-in error:', error);
       let errorMessage = 'Invalid email or password. Please try again.';
-      
+
       if (error instanceof Error) {
-        errorMessage = error.message;
-        if (error.message.includes('Email not confirmed')) {
-          errorMessage = 'Please verify your email before signing in.';
+        if (error.message.toLowerCase().includes('invalid login credentials')) {
+          errorMessage = 'Incorrect email or password.';
+        } else if (error.message.toLowerCase().includes('email not confirmed')) {
+          errorMessage = 'Email not verified. Check your inbox.';
+        } else {
+          errorMessage = error.message;
         }
       }
 
@@ -120,41 +115,33 @@ export const SignInForm = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="w-full bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 flex flex-col items-center justify-center"
+      className="w-full bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700"
     >
-      <div className="w-full p-5 sm:p-6 md:p-8 lg:p-20">
-        {/* Header */}
-        <motion.div 
+      <div className="w-full p-6 sm:p-8 md:p-12 lg:p-16">
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.2 }}
-          className="text-left mb-6"
+          className="mb-6"
         >
-          <h1 className="sm:text-3xl text-5xl font-bold text-deepGreen mb-2">Welcome back!</h1>
-          <p className="sm:text-base text-lg text-gray-600">
+          <h1 className="text-3xl md:text-4xl font-bold text-deepGreen dark:text-green mb-2">
+            Welcome back!
+          </h1>
+          <p className="text-base text-gray-600 dark:text-gray-400">
             Don&apos;t have an account?{' '}
-            <Link
-              href="/auth/signup"
-              className="text-green hover:text-deepGreen font-medium transition-colors"
-            >
+            <Link href="/auth/signup" className="text-green hover:text-deepGreen font-medium">
               Sign up
             </Link>
           </p>
         </motion.div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="space-y-2"
-          >
-            <Label htmlFor="email" className="text-gray-700 text-lg font-normal">Email</Label>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-base font-normal">Email</Label>
             <Input
               id="email"
               name="email"
@@ -163,22 +150,14 @@ export const SignInForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="focus:ring-2 focus:ring-green focus:border-transparent transition-all py-6 rounded-lg text-lg"
+              className="py-5 rounded-lg text-base"
             />
-          </motion.div>
+          </div>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2 }}
-            className="space-y-2"
-          >
+          <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <Label htmlFor="password" className="text-gray-700 text-lg font-normal">Password</Label>
-              <Link
-                href="/auth/forgot-password"
-                className="text-xs sm:text-sm text-green hover:text-deepGreen font-medium transition-colors"
-              >
+              <Label htmlFor="password" className="text-base font-normal">Password</Label>
+              <Link href="/auth/forgot-password" className="text-sm text-green hover:text-deepGreen">
                 Forgot password?
               </Link>
             </div>
@@ -192,77 +171,59 @@ export const SignInForm = () => {
                 onChange={handleChange}
                 required
                 minLength={6}
-                className="focus:ring-2 focus:ring-green focus:border-transparent transition-all pr-10 py-6 rounded-lg text-lg"
+                className="py-5 pr-10 rounded-lg text-base"
               />
               <button
                 type="button"
-                className="absolute py-3 right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 onClick={togglePasswordVisibility}
-                aria-label={passwordVisible ? 'Hide password' : 'Show password'}
               >
-                {passwordVisible ? (
-                  <EyeOff className="h-5 w-5" />
-                ) : (
-                  <Eye className="h-5 w-5" />
-                )}
+                {passwordVisible ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
-            className="pt-2"
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-5 text-base"
           >
-            <Button
-              type="submit"
-              className="w-full bg-green text-white py-4 md:py-6 px-4 rounded-lg font-medium transition-colors shadow-sm hover:bg-deepGreen"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
-                  <span className="text-sm sm:text-base">Signing in...</span>
-                </>
-              ) : (
-                <span className="text-sm sm:text-base">Sign in</span>
-              )}
-            </Button>
-          </motion.div>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Signing in...
+              </>
+            ) : (
+              'Sign in'
+            )}
+          </Button>
         </form>
 
-        {/* Divider */}
-        <div className="relative my-5">
+        <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300" />
+            <div className="w-full border-t border-gray-300 dark:border-gray-700" />
           </div>
           <div className="relative flex justify-center">
-            <span className="px-2 bg-white text-xs sm:text-sm text-gray-500">
+            <span className="px-3 bg-white dark:bg-gray-900 text-sm text-gray-500 dark:text-gray-400">
               Or continue with
             </span>
           </div>
         </div>
 
-        {/* Google Button */}
-        <motion.div
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.99 }}
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full py-5"
+          onClick={handleGoogleSignIn}
+          disabled={isSubmitting}
         >
-          <Button
-            variant="outline"
-            className="w-full border-gray-300 hover:bg-gray-50 transition-colors sm:py-3 py-6"
-            type="button"
-            onClick={handleGoogleSignIn}
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              <Loader2 className="mr-2 h-4 w-4 sm:h-5 sm:w-5 animate-spin" />
-            ) : (
-              <FaGoogle className="mr-2 text-gray-500" size={18} />
-            )}
-            <span className="text-sm sm:text-base">Continue with Google</span>
-          </Button>
-        </motion.div>
+          {isSubmitting ? (
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          ) : (
+            <FaGoogle className="mr-2 text-gray-500" size={18} />
+          )}
+          Continue with Google
+        </Button>
       </div>
     </motion.div>
   );
