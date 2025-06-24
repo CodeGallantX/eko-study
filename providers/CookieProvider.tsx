@@ -1,9 +1,9 @@
-// app/providers/CookieProvider.tsx
 'use client'
 
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/supabase'
+import type { AuthChangeEvent, Session } from '@supabase/supabase-js'
 
 export default function CookieProvider({
   children,
@@ -11,30 +11,28 @@ export default function CookieProvider({
   children: React.ReactNode
 }) {
   const router = useRouter()
-  const supabase = createClientComponentClient()
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-      // Persist session to cookies on auth changes
-      await fetch('/auth/set', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          event,
-          session,
-        }),
-      })
-      
-      // Refresh server components
-      router.refresh()
-    })
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(
+      async (event: AuthChangeEvent, session: Session | null) => {
+        await fetch('/auth/set', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ event, session }),
+        })
+
+        router.refresh()
+      }
+    )
 
     return () => {
       subscription?.unsubscribe()
     }
-  }, [router, supabase])
+  }, [router])
 
   return <>{children}</>
 }

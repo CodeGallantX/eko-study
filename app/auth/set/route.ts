@@ -1,11 +1,9 @@
-// app/auth/set/route.ts
-import { cookies as getCookies } from 'next/headers'
+import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
 
 export async function POST(request: Request) {
-  // Await the cookies promise
-  const cookieStore = await getCookies()
+  const cookieStore = await cookies() // Await this line to fix the error
 
   try {
     const supabase = createServerClient(
@@ -18,29 +16,22 @@ export async function POST(request: Request) {
           },
           set(name: string, value: string, options: CookieOptions) {
             try {
-              cookieStore.set?.({
+              cookieStore.set({
                 name,
                 value,
                 ...options,
                 secure: process.env.NODE_ENV === 'production',
                 sameSite: 'lax',
                 path: '/',
+                maxAge: 60 * 60 * 24 * 7, // 1 week
               })
             } catch (err) {
               console.warn(`Failed to set cookie "${name}":`, err)
             }
           },
-          remove(name: string, options: CookieOptions) {
+          remove(name: string) {
             try {
-              cookieStore.set?.({
-                name,
-                value: '',
-                ...options,
-                maxAge: -1,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'lax',
-                path: '/',
-              })
+              cookieStore.delete(name)
             } catch (err) {
               console.warn(`Failed to remove cookie "${name}":`, err)
             }
@@ -56,8 +47,6 @@ export async function POST(request: Request) {
         access_token: session.access_token,
         refresh_token: session.refresh_token,
       })
-    } else {
-      await supabase.auth.getSession()
     }
 
     return NextResponse.json({ success: true })

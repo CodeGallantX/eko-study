@@ -1,28 +1,26 @@
-// hooks/use-auth.ts
 'use client'
 
 import { useEffect, useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAppDispatch } from '@/lib/redux/store'
 import { clearUserData, setUserData } from '@/lib/redux/features/userSlice'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { supabase } from '@/lib/supabase'
+import type { AuthChangeEvent, Session, User } from '@supabase/supabase-js'
 
 export function useAuth() {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
-  const supabase = createClientComponentClient()
 
   const handleSignOut = useCallback(async () => {
     try {
       const { error } = await supabase.auth.signOut()
       if (error) throw error
-      
+
       setUser(null)
       dispatch(clearUserData())
-      
-      // Ensure cookies are cleared
+
       await fetch('/auth/set', {
         method: 'POST',
         headers: {
@@ -30,23 +28,27 @@ export function useAuth() {
         },
         body: JSON.stringify({ session: null }),
       })
-      
+
       router.push('/auth/signin')
     } catch (error) {
       console.error('Sign out error:', error)
       throw error
     }
-  }, [dispatch, router, supabase])
+  }, [dispatch, router])
 
   const fetchUser = useCallback(async () => {
     setLoading(true)
     try {
-      const { data: { user }, error } = await supabase.auth.getUser()
-      
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser()
+
       if (error) throw error
 
       if (user) {
         setUser(user)
+
         const { data: profile, error: profileError } = await supabase
           .from('profiles')
           .select('*')
@@ -55,18 +57,20 @@ export function useAuth() {
 
         if (profileError) throw profileError
 
-        dispatch(setUserData({
-          id: user.id,
-          email: user.email || '',
-          firstName: profile?.first_name || '',
-          lastName: profile?.last_name || '',
-          fullName: `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim(),
-          profile: {
-            college: profile?.college || '',
-            department: profile?.department || '',
-            avatarUrl: profile?.avatar_url || '',
-          }
-        }))
+        dispatch(
+          setUserData({
+            id: user.id,
+            email: user.email || '',
+            firstName: profile?.first_name || '',
+            lastName: profile?.last_name || '',
+            fullName: `${profile?.first_name || ''} ${profile?.last_name || ''}`.trim(),
+            profile: {
+              college: profile?.college || '',
+              department: profile?.department || '',
+              avatarUrl: profile?.avatar_url || '',
+            },
+          })
+        )
       } else {
         setUser(null)
         dispatch(clearUserData())
@@ -78,19 +82,27 @@ export function useAuth() {
     } finally {
       setLoading(false)
     }
-  }, [dispatch, supabase])
+  }, [dispatch])
 
   useEffect(() => {
     fetchUser()
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' || event === 'USER_UPDATED' || event === 'TOKEN_REFRESHED') {
-        fetchUser()
-      } else if (event === 'SIGNED_OUT') {
-        setUser(null)
-        dispatch(clearUserData())
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(
+      (event: AuthChangeEvent, session: Session | null) => {
+        if (
+          event === 'SIGNED_IN' ||
+          event === 'USER_UPDATED' ||
+          event === 'TOKEN_REFRESHED'
+        ) {
+          fetchUser()
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null)
+          dispatch(clearUserData())
+        }
       }
-    })
+    )
 
     return () => {
       subscription?.unsubscribe()

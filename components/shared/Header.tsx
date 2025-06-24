@@ -1,17 +1,18 @@
-"use client";
+'use client';
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown, Plus } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from 'next/image';
+import { useUser } from '@supabase/auth-helpers-react';
 
 export default function Header() {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
+  const user = useUser();
 
   const toggleSidebar = () => setSidebarVisible(!isSidebarVisible);
 
-  // Close sidebar on "Escape" key
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -63,10 +64,8 @@ export default function Header() {
           {
             label: "RESOURCES",
             submenu: [
-              // { label: "Book Store", href: "/resources/book-store" },
               { label: "Notes", href: "/resources/notes" },
               { label: "Past Questions", href: "/resources/Past-Questions" },
-              // { label: "CBT Practice", href: "/resources/cbt-practice" },
               { label: "Products", href: "/resources/products" },
             ],
           },
@@ -112,10 +111,10 @@ export default function Header() {
       </nav>
 
       <Link
-        href="/auth/signup"
+        href={user ? "/dashboard" : "/auth/signup"}
         className="hidden lg:block px-4 py-3 text-white border-2 border-white uppercase font-semibold"
       >
-        Get Started
+        {user ? "Dashboard" : "Get Started"}
       </Link>
 
       {/* Mobile Menu Button */}
@@ -171,10 +170,8 @@ export default function Header() {
             {
               label: "RESOURCES",
               submenu: [
-                // { label: "Book Store", href: "/resources/book-store" },
                 { label: "Notes", href: "/resources/notes" },
                 { label: "Past Questions", href: "/resources/Past-Questions" },
-                // { label: "CBT", href: "/resources/cbt" },
                 { label: "Products", href: "/resources/products" },
               ],
             },
@@ -216,4 +213,4 @@ export default function Header() {
       </motion.aside>
     </header>
   );
-};
+}

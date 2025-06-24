@@ -1,25 +1,27 @@
-// app/auth/callback/page.tsx
-'use client';
+'use client'
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-import { Loader2 } from 'lucide-react';
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/supabase'
+import { Loader2 } from 'lucide-react'
+import type { AuthChangeEvent } from '@supabase/supabase-js'
 
 export default function AuthCallbackPage() {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
       if (event === 'SIGNED_IN') {
-        router.push('/dashboard');
+        router.push('/dashboard')
       }
-    });
+    })
 
     return () => {
-      subscription.unsubscribe();
-    };
-  }, [router]);
+      subscription?.unsubscribe()
+    }
+  }, [router])
 
   return (
     <div className="flex items-center justify-center h-screen">
@@ -28,5 +30,5 @@ export default function AuthCallbackPage() {
         <p className="mt-4">Completing authentication...</p>
       </div>
     </div>
-  );
+  )
 }
