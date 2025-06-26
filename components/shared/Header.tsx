@@ -37,8 +37,8 @@ export default function Header() {
         <Image
           src="/images/yellow-logo.png"
           alt="EkoStudy Logo"
-          width={80}
-          height={20}
+          width={70}
+          height={15}
           className="w-40"
           priority
           onError={(e) => {
@@ -139,8 +139,8 @@ export default function Header() {
             <Image
               src="/images/yellow-logo.png"
               alt="EkoStudy Logo"
-              width={150}
-              height={40}
+              width={160}
+              height={80}
               className="h-10 w-auto"
               priority
               onError={(e) => {
