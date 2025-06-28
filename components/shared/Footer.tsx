@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Facebook, Twitter, Youtube, Mail } from 'lucide-react';
+import { FaFacebookF, FaXTwitter, FaYoutube, FaEnvelope } from 'react-icons/fa6';
 import FooterBanner from './FooterBanner';
 
 const Footer: React.FC = () => {
@@ -17,9 +17,9 @@ const Footer: React.FC = () => {
                             <Image src="/images/yellow-logo.png" alt="EkoStudy logo" width={160} height={40} className="w-32 md:w-40" />
                             </Link>
                             <div className="flex flex-row gap-4">
-                                <Link href="https://facebook.com" target="_blank"><Facebook size={20} /></Link>
-                                <Link href="https://x.com" target="_blank"><Twitter size={20} /></Link>
-                                <Link href="https://youtube.com" target="_blank"><Youtube size={20} /></Link>
+                                <Link href="https://facebook.com" target="_blank"><FaFacebookF size={20} /></Link>
+                                <Link href="https://x.com" target="_blank"><FaXTwitter size={20} /></Link>
+                                <Link href="https://youtube.com" target="_blank"><FaYoutube size={20} /></Link>
                             </div>
                         </div>
                         <div className="flex flex-col gap-6 w-full">
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
                             <div className='flex flex-col gap-1 mt-2 lg:mt-0'>
                                 
                                 <Link href="mailto:ekostudy-73bec1@smtpexpress.email" className="flex flex-row items-center">
-                                    <Mail size={20} />
+                                    <FaEnvelope size={20} />
                                     <span className="ml-2">contact@ekostudy.io</span>
                                 </Link>
                             </div>
@@ -63,9 +63,9 @@ const Footer: React.FC = () => {
                 <div className='px-10 xl:px-24 mt-4 flex flex-col lg:flex-row gap-2 lg:gap-0 items-start lg:items-center justify-between'>
                     <span>EkoStudy 2025 - <Link href="https://github.com/codegallantx" target="_blank" className="text-[#4C5F4E] hover:text-[#FFCA0D] transition-all duration-300 ease-in-out">CodeGallantX</Link></span>
                     <span className="flex flex-row gap-2 lg:gap-4">
-                        <Link href="#" className="hover:text-[#FFCA0D] transition-all duration-300 ease-in-out">Privacy Policy</Link>
+                        <Link href="/privacy-policy" className="hover:text-[#FFCA0D] transition-all duration-300 ease-in-out">Privacy Policy</Link>
                         <span className='text-[#FFCA0D] text-lg font-thin'>|</span>
-                        <Link href="#" className="hover:text-[#FFCA0D] transition-all duration-300 ease-in-out">Our Terms</Link>
+                        <Link href="/terms-of-service" className="hover:text-[#FFCA0D] transition-all duration-300 ease-in-out">Our Terms</Link>
                     </span>
                 </div>
             </div>
