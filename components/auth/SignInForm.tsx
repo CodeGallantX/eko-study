@@ -143,7 +143,7 @@ export const SignInForm = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-deepGreen dark:text-green mb-2">
             Welcome back!
           </h1>
-          <p className="text-green text-gray-600 dark:text-gray-400">
+          <p className="text-base text-gray-600 dark:text-gray-400">
             Don&apos;t have an account?{' '}
             <Link href="/auth/signup" className="text-green hover:text-deepGreen font-medium">
               Sign up
@@ -153,7 +153,7 @@ export const SignInForm = () => {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-green font-normal">Email</Label>
+            <Label htmlFor="email" className="text-base font-normal">Email</Label>
             <Input
               id="email"
               name="email"
@@ -162,13 +162,13 @@ export const SignInForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="py-5 rounded-lg text-green"
+              className="py-5 rounded-lg text-base"
             />
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <Label htmlFor="password" className="text-green font-normal">Password</Label>
+              <Label htmlFor="password" className="text-base font-normal">Password</Label>
               <Link href="/auth/forgot-password" className="text-sm text-green hover:text-deepGreen">
                 Forgot password?
               </Link>
@@ -183,7 +183,7 @@ export const SignInForm = () => {
                 onChange={handleChange}
                 required
                 minLength={6}
-                className="py-5 pr-10 rounded-lg text-green"
+                className="py-5 pr-10 rounded-lg text-base"
               />
               <button
                 type="button"
@@ -198,7 +198,7 @@ export const SignInForm = () => {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-5 text-green"
+            className="w-full py-5 text-base"
           >
             {isSubmitting ? (
               <>

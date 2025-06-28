@@ -179,7 +179,7 @@ export const SignUpForm = () => {
           <h1 className="text-3xl sm:text-4xl font-bold text-deepGreen dark:text-green mb-3">
             Join Us
           </h1>
-          <p className="text-sm sm:text-green text-gray-600 dark:text-gray-400">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Already have an account?{' '}
             <Link href="/auth/signin" className="text-green hover:text-deepGreen font-medium">
               Sign in
@@ -190,24 +190,24 @@ export const SignUpForm = () => {
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label className='text-green font-normal' htmlFor="firstName">First name</Label>
+              <Label className='text-base font-normal' htmlFor="firstName">First name</Label>
               <Input
                 id="firstName"
                 name="firstName"
                 placeholder="John"
-                className='py-5 rounded-lg text-green'
+                className='py-5 rounded-lg text-base'
                 value={formData.firstName}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label className='text-green font-normal' htmlFor="lastName">Last name</Label>
+              <Label className='text-base font-normal' htmlFor="lastName">Last name</Label>
               <Input
                 id="lastName"
                 name="lastName"
                 placeholder="Doe"
-                className='py-5 rounded-lg text-green'
+                className='py-5 rounded-lg text-base'
                 value={formData.lastName}
                 onChange={handleChange}
                 required
@@ -216,13 +216,13 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label className='text-green font-normal' htmlFor="email">Email</Label>
+            <Label className='text-base font-normal' htmlFor="email">Email</Label>
             <Input
               id="email"
               name="email"
               type="email"
               placeholder="you@mail.com"
-              className='py-5 rounded-lg text-green'
+              className='py-5 rounded-lg text-base'
               value={formData.email}
               onChange={handleChange}
               required
@@ -230,13 +230,13 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label className='text-green font-normal' htmlFor="phone">Phone Number</Label>
+            <Label className='text-base font-normal' htmlFor="phone">Phone Number</Label>
             <Input
               id="phone"
               name="phone"
               type="tel"
               placeholder="+1234567890"
-              className='py-5 rounded-lg text-green'
+              className='py-5 rounded-lg text-base'
               value={formData.phone}
               onChange={handleChange}
               required
@@ -244,14 +244,14 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label className='text-green font-normal' htmlFor="password">Password</Label>
+            <Label className='text-base font-normal' htmlFor="password">Password</Label>
             <div className="relative">
               <Input
                 id="password"
                 name="password"
                 type={passwordVisible ? 'text' : 'password'}
                 placeholder="••••••••••"
-                className='py-5 rounded-lg text-green'
+                className='py-5 rounded-lg text-base'
                 value={formData.password}
                 onChange={handlePasswordChange}
                 required
