@@ -2,11 +2,12 @@ import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
 export async function POST(request: Request) {
+  // Parse cookies from request headers
   const cookieHeader = request.headers.get('cookie') || ''
-  const cookies = Object.fromEntries(
-    cookieHeader.split('; ').map(c => {
+  const cookieMap = new Map(
+    cookieHeader.split('; ').map((c) => {
       const [key, ...v] = c.split('=')
-      return [key, v.join('=')]
+      return [key.trim(), v.join('=')]
     })
   )
 
@@ -15,16 +16,14 @@ export async function POST(request: Request) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get: (key) => cookies[key],
-        set: () => {},
-        remove: () => {},
+        get: (key) => cookieMap.get(key),
+        set: () => {},     // Not needed here
+        remove: () => {},  // Not needed here
       },
     }
   )
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+  const { data: { session } } = await supabase.auth.getSession()
 
   if (!session) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
