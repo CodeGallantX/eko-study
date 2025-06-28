@@ -1,22 +1,25 @@
-import { cookies as getCookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
-export async function POST() {
-  const maybePromise = getCookies()
-  const cookieStore = maybePromise instanceof Promise ? await maybePromise : maybePromise
-
+export async function POST(request: Request) {
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string) {
-          return cookieStore.get(name)?.value
+        get: (name) => {
+          const cookieHeader = request.headers.get('cookie') || ''
+          const cookies = Object.fromEntries(
+            cookieHeader.split('; ').map(c => {
+              const [key, ...v] = c.split('=')
+              return [key, v.join('=')]
+            })
+          )
+          return cookies[name]
         },
-        set() {},     // no-op
-        remove() {},  // no-op
-      },
+        set() {},
+        remove() {}
+      }
     }
   )
 
@@ -25,10 +28,7 @@ export async function POST() {
   } = await supabase.auth.getSession()
 
   if (!session) {
-    return NextResponse.json(
-      { error: 'Not authenticated' },
-      { status: 401 }
-    )
+    return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
   }
 
   return NextResponse.json({

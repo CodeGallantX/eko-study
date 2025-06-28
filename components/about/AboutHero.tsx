@@ -22,7 +22,7 @@ export default function AboutHero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-block mb-4 px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-medium"
+              className="inline-block mb-4 px-4 py-2 bg-green text-deepGreen rounded-full text-sm font-medium"
             >
               Transforming Education
             </motion.div>
@@ -51,14 +51,14 @@ export default function AboutHero() {
             >
               <Link
                 href="/auth/signup"
-                className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center group"
+                className="bg-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-deepGreen transition-colors flex items-center group"
               >
                 <span>Get Started</span>
                 <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/contact"
-                className="bg-white text-green-600 border border-green-600 px-6 py-3 rounded-lg font-semibold hover:bg-green-50 transition-colors"
+                className="bg-white text-green border border-green px-6 py-3 rounded-lg font-semibold hover:bg-green/50 transition-colors"
               >
                 Contact Us
               </Link>
