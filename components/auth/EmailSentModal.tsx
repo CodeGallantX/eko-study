@@ -96,9 +96,9 @@ export function EmailSentModal({
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="mb-4 rounded-full bg-green-100 p-3 dark:bg-green-900/30"
+                className="mb-4 rounded-full bg-green p-3 dark:bg-green"
               >
-                <CheckCircle2 className="h-8 w-8 text-green-500 dark:text-green-400" />
+                <CheckCircle2 className="h-8 w-8 text-green dark:text-green" />
               </motion.div>
 
               <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
@@ -116,7 +116,7 @@ export function EmailSentModal({
 
               {isRedirecting ? (
                 <div className="flex items-center justify-center w-full py-2">
-                  <Loader2 className="h-5 w-5 animate-spin text-green-600 dark:text-green-400 mr-2" />
+                  <Loader2 className="h-5 w-5 animate-spin text-green dark:text-green mr-2" />
                   <span className="text-sm text-gray-600 dark:text-gray-400">
                     Redirecting...
                   </span>

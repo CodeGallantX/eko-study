@@ -98,7 +98,7 @@ export default function DownloadModal({ url, fileName, onClose, isOpen }: Downlo
 
       {/* Alert Notification */}
       {showAlert && (
-        <div className="fixed bottom-5 right-5 bg-green-500 text-white p-4 rounded-lg shadow-lg flex items-center gap-3 animate-fade-in">
+        <div className="fixed bottom-5 right-5 bg-green text-white p-4 rounded-lg shadow-lg flex items-center gap-3 animate-fade-in">
           <FaCheckCircle size={20} />
           <span>
             <FaDownload className="mr-1 inline-block" />

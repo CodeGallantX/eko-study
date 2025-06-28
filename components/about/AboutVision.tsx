@@ -29,7 +29,7 @@ export default function AboutVision() {
             whileHover={{ y: -10, transition: { duration: 0.3 } }}
             className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all"
           >
-            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-green">
+            <div className="bg-green w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white">
               <FaAccessibleIcon className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-semibold mb-4 text-gray-900">Accessibility</h3>
@@ -46,7 +46,7 @@ export default function AboutVision() {
             whileHover={{ y: -10, transition: { duration: 0.3 } }}
             className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all"
           >
-            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-green">
+            <div className="bg-green w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white">
               <FaLightbulb className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-semibold mb-4 text-gray-900">Innovation</h3>
@@ -63,7 +63,7 @@ export default function AboutVision() {
             whileHover={{ y: -10, transition: { duration: 0.3 } }}
             className="bg-white p-8 rounded-xl shadow-md text-center hover:shadow-lg transition-all"
           >
-            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-green">
+            <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-white">
               <FaUsers className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-semibold mb-4 text-gray-900">Community</h3>
