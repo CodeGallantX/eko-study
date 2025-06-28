@@ -8,8 +8,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import Providers from '@/providers/Providers'
 import SupabaseProvider from '@/providers/SupabaseProvider'
 import CookieProvider from '@/providers/CookieProvider'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
+// import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+// import { cookies } from 'next/headers'
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -61,13 +61,7 @@ export const metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
-  const cookieStore = cookies()
-  const supabase = createServerComponentClient({ cookies: () => cookieStore })
-  
-  // Initialize auth state but don't use session directly
-  await supabase.auth.getSession()
-
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${outfit.variable} ${merriweather.variable}`}>
       <head>

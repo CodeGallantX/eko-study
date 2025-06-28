@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { toast } from '@/hooks/use-toast';
@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FaGoogle } from 'react-icons/fa';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -18,68 +17,10 @@ interface FormData {
   firstName: string;
   lastName: string;
   email: string;
-  college: string;
-  department: string;
+  phone: string;
   password: string;
   agreeTerms: boolean;
 }
-
-interface CollegeDepartmentMap {
-  [key: string]: string[];
-}
-
-const collegeDepartments: CollegeDepartmentMap = {
-  "College of Agriculture": [
-    "Agricultural Economics & Farm Management",
-    "Crop Production",
-    "Agricultural Extension & Rural Development",
-    "Horticulture & Landscape Management",
-    "Animal Production",
-    "Aquaculture & Fisheries Management"
-  ],
-  "College of Engineering and Technology": [
-    "Computer Engineering",
-    "Civil and Construction Engineering",
-    "Electrical & Electronics Engineering",
-    "Mechanical Engineering",
-    "Mechatronics Engineering",
-    "Agricultural Engineering",
-    "Chemical Engineering",
-    "Biotechnology & Food Technology"
-  ],
-  "College of Environmental Design and Technology": [
-    "Architecture",
-    "Estate Management and Valuation",
-    "Quantity Surveying",
-    "Urban and Regional Planning",
-    "Art and Industrial Design",
-    "Building Technology"
-  ],
-  "College of Basic Sciences": [
-    "Industrial Chemistry",
-    "Chemistry",
-    "Mathematics",
-    "Industrial Mathematics",
-    "Statistics",
-    "Microbiology",
-    "Botany",
-    "Zoology",
-    "Physics with Electronics",
-    "Computer Science"
-  ],
-  "College of Applied Social Sciences": [
-    "Economic Science (Economics)",
-    "Mass Communication Science & Technology",
-    "Accounting",
-    "Actuarial Science",
-    "Banking & Finance",
-    "Marketing",
-    "Office and Information Technology",
-    "Business Administration",
-    "Insurance",
-    "Tourism & Hospitality Management"
-  ]
-};
 
 export const SignUpForm = () => {
   const router = useRouter();
@@ -87,8 +28,7 @@ export const SignUpForm = () => {
     firstName: '',
     lastName: '',
     email: '',
-    college: '',
-    department: '',
+    phone: '',
     password: '',
     agreeTerms: false,
   });
@@ -96,24 +36,13 @@ export const SignUpForm = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [passwordError, setPasswordError] = useState('');
-  const [availableDepartments, setAvailableDepartments] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (formData.college && collegeDepartments[formData.college]) {
-      setAvailableDepartments(collegeDepartments[formData.college]);
-      setFormData(prev => ({ ...prev, department: '' }));
-    } else {
-      setAvailableDepartments([]);
-    }
-  }, [formData.college]);
 
   const validateForm = useCallback(() => {
     if (!formData.firstName.trim()) throw new Error('First name is required');
     if (!formData.lastName.trim()) throw new Error('Last name is required');
     if (!formData.email.trim()) throw new Error('Email is required');
     if (!/^\S+@\S+\.\S+$/.test(formData.email)) throw new Error('Please enter a valid email address');
-    if (!formData.college) throw new Error('College selection is required');
-    if (!formData.department) throw new Error('Department selection is required');
+    if (!formData.phone.trim()) throw new Error('Phone number is required');
     if (!formData.password) throw new Error('Password is required');
     if (formData.password.length < 6) throw new Error('Password must be at least 6 characters long');
     if (!formData.agreeTerms) throw new Error('You must agree to the terms and conditions');
@@ -129,14 +58,15 @@ export const SignUpForm = () => {
       const { error } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
+        phone: formData.phone,
         options: {
           data: {
             first_name: formData.firstName,
             last_name: formData.lastName,
-            college: formData.college,
-            department: formData.department,
+            phone: formData.phone,
           },
-          emailRedirectTo: `${window.location.origin}/auth/verify`
+          // Redirect users to login page after email confirmation
+          emailRedirectTo: `${window.location.origin}/auth/signin`
         }
       });
 
@@ -144,11 +74,12 @@ export const SignUpForm = () => {
 
       toast({
         title: 'Account created successfully!',
-        description: 'Please check your email to verify your account.',
-        duration: 3000,
+        description: 'Please check your email to confirm your account. You can now sign in.',
+        duration: 5000,
       });
 
-      router.push('/auth/verify');
+      // Redirect to login page immediately after signup
+      router.push('/auth/signin');
     } catch (error: unknown) {
       console.error('Sign up error:', error);
 
@@ -246,7 +177,7 @@ export const SignUpForm = () => {
       <div className="p-6 sm:p-8 md:p-10 lg:p-16">
         <motion.div className="text-left mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-deepGreen dark:text-green mb-3">
-            Join EkoStudy
+            Join Us
           </h1>
           <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Already have an account?{' '}
@@ -271,12 +202,12 @@ export const SignUpForm = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label className='text-base font-normal'  htmlFor="lastName">Last name</Label>
+              <Label className='text-base font-normal' htmlFor="lastName">Last name</Label>
               <Input
                 id="lastName"
                 name="lastName"
                 placeholder="Doe"
-                className='py-5 rounded-lg text-base '
+                className='py-5 rounded-lg text-base'
                 value={formData.lastName}
                 onChange={handleChange}
                 required
@@ -285,13 +216,13 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label className='text-base font-normal'  htmlFor="email">Email</Label>
+            <Label className='text-base font-normal' htmlFor="email">Email</Label>
             <Input
               id="email"
               name="email"
               type="email"
               placeholder="you@mail.com"
-              className='py-5 rounded-lg text-base '
+              className='py-5 rounded-lg text-base'
               value={formData.email}
               onChange={handleChange}
               required
@@ -299,44 +230,17 @@ export const SignUpForm = () => {
           </div>
 
           <div className="space-y-2">
-            <Label className='text-base font-normal'  htmlFor="college">College</Label>
-            <Select
-              value={formData.college}
-              onValueChange={(value) => setFormData(prev => ({ ...prev, college: value }))}
+            <Label className='text-base font-normal' htmlFor="phone">Phone Number</Label>
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              placeholder="+1234567890"
+              className='py-5 rounded-lg text-base'
+              value={formData.phone}
+              onChange={handleChange}
               required
-            >
-              <SelectTrigger className='py-5 rounded-lg text-base'>
-                <SelectValue placeholder="Select your college" />
-              </SelectTrigger>
-              <SelectContent>
-                {Object.keys(collegeDepartments).map(college => (
-                  <SelectItem key={college} value={college}>
-                    {college}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="space-y-2">
-            <Label className='text-base font-normal'  htmlFor="department">Department</Label>
-            <Select
-              value={formData.department}
-              onValueChange={(value) => setFormData(prev => ({ ...prev, department: value }))}
-              disabled={!formData.college}
-              required
-            >
-              <SelectTrigger className='py-5 rounded-lg text-base'>
-                <SelectValue placeholder={formData.college ? "Select your department" : "Select college first"} />
-              </SelectTrigger>
-              <SelectContent>
-                {availableDepartments.map(dept => (
-                  <SelectItem key={dept} value={dept}>
-                    {dept}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            />
           </div>
 
           <div className="space-y-2">
@@ -379,14 +283,14 @@ export const SignUpForm = () => {
               }
             />
             <label htmlFor="agreeTerms" className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-snug">
-              I agree to the <Link href="/terms" className="text-green dark:text-green hover:text-deepGreen ">Terms</Link> and <Link href="/privacy" className="text-green hover:text-deepGreen">Privacy Policy</Link>
+              I agree to the <Link href="/terms" className="text-green dark:text-green hover:text-deepGreen">Terms</Link> and <Link href="/privacy" className="text-green hover:text-deepGreen">Privacy Policy</Link>
             </label>
           </div>
 
           <Button
             type="submit"
             className="w-full"
-            disabled={isSubmitting || !formData.agreeTerms || !!passwordError || !formData.college || !formData.department}
+            disabled={isSubmitting || !formData.agreeTerms || !!passwordError}
             size="lg"
           >
             {isSubmitting ? (

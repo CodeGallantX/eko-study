@@ -20,6 +20,7 @@ export const SignInForm = () => {
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -34,30 +35,34 @@ export const SignInForm = () => {
   };
 
   const handleGoogleSignIn = async () => {
-    setIsSubmitting(true);
+    setIsGoogleLoading(true);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/auth/callback`,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          },
         }
       });
 
       if (error) throw error;
 
       toast({
-        title: 'Redirecting...',
-        description: 'You are being redirected to Google for authentication.',
+        title: 'Redirecting to Google...',
+        description: 'You will be redirected to Google for authentication.',
       });
     } catch (error) {
       console.error('Google sign-in error:', error);
       toast({
         title: 'Google Sign In Failed',
-        description: 'There was an error signing in with Google. Please try again.',
+        description: error instanceof Error ? error.message : 'There was an error signing in with Google.',
         variant: 'destructive',
       });
     } finally {
-      setIsSubmitting(false);
+      setIsGoogleLoading(false);
     }
   };
 
@@ -68,40 +73,47 @@ export const SignInForm = () => {
     try {
       const { email, password } = formData;
 
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error: signInError } = await supabase.auth.signInWithPassword({ 
+        email, 
+        password 
+      });
 
-      if (error) throw error;
+      if (signInError) {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (user) {
+          throw new Error('Incorrect password. Please try again.');
+        } else {
+          throw new Error('No account found with this email. Please sign up.');
+        }
+      }
 
       const user = data?.user;
 
-      if (!user?.email_confirmed_at) {
-        toast({
-          title: 'Verify Your Email',
-          description: 'Your email is not verified yet. Please check your inbox.',
-          variant: 'default',
-        });
-        router.push('/auth/verify');
+      // Check if profile is complete
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('college, department')
+        .eq('id', user.id)
+        .single();
+
+      if (!profile?.college || !profile?.department) {
+        router.push('/auth/complete-profile');
         return;
       }
 
       toast({
         title: 'Login Successful',
-        description: 'Redirecting to dashboard...',
+        description: 'Welcome back! Redirecting to your dashboard...',
       });
-
       router.push('/dashboard');
+
     } catch (error: unknown) {
       console.error('Sign-in error:', error);
-      let errorMessage = 'Invalid email or password. Please try again.';
-
+      
+      let errorMessage = 'An error occurred during sign in.';
       if (error instanceof Error) {
-        if (error.message.toLowerCase().includes('invalid login credentials')) {
-          errorMessage = 'Incorrect email or password.';
-        } else if (error.message.toLowerCase().includes('email not confirmed')) {
-          errorMessage = 'Email not verified. Check your inbox.';
-        } else {
-          errorMessage = error.message;
-        }
+        errorMessage = error.message;
       }
 
       toast({
@@ -215,14 +227,19 @@ export const SignInForm = () => {
           variant="outline"
           className="w-full py-5"
           onClick={handleGoogleSignIn}
-          disabled={isSubmitting}
+          disabled={isGoogleLoading || isSubmitting}
         >
-          {isSubmitting ? (
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          {isGoogleLoading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Signing in with Google...
+            </>
           ) : (
-            <FaGoogle className="mr-2 text-gray-500" size={18} />
+            <>
+              <FaGoogle className="mr-2 text-gray-500" size={18} />
+              Continue with Google
+            </>
           )}
-          Continue with Google
         </Button>
       </div>
     </motion.div>

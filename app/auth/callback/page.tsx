@@ -1,28 +1,31 @@
-'use client'
-
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
+// app/auth/callback/page.tsx
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
-import type { AuthChangeEvent } from '@supabase/supabase-js'
 
-export default function AuthCallbackPage() {
-  const router = useRouter()
+export default async function AuthCallbackPage() {
+  const supabase = createServerComponentClient({ cookies })
+  
+  // Get the session
+  const { data: { session } } = await supabase.auth.getSession()
 
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
-      if (event === 'SIGNED_IN') {
-        router.push('/dashboard')
-      }
-    })
+  if (session) {
+    // Check if profile is complete
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('college, department')
+      .eq('id', session.user.id)
+      .single()
 
-    return () => {
-      subscription?.unsubscribe()
+    if (!profile?.college || !profile?.department) {
+      redirect('/auth/complete-profile')
+    } else {
+      redirect('/dashboard')
     }
-  }, [router])
+  }
 
+  // Fallback UI that will be briefly shown before redirect
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="text-center">

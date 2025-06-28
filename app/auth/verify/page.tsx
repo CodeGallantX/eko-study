@@ -4,8 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Loader2, CheckCircle2, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface OTPInputProps {
   value: string;
@@ -56,6 +57,7 @@ export default function VerifyPage() {
   const [timer, setTimer] = useState(180);
   const [canResend, setCanResend] = useState(false);
   const [email, setEmail] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     const getUserEmail = async () => {
@@ -112,11 +114,12 @@ export default function VerifyPage() {
         throw new Error(error.message);
       }
 
-      toast({
-        title: 'Verification successful!',
-        description: 'Your account has been verified.',
-      });
-      router.push('/dashboard');
+      setShowSuccessModal(true);
+      
+      // Redirect after showing success message
+      setTimeout(() => {
+        router.push('/auth/complete-profile');
+      }, 3000);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Invalid OTP. Please try again.';
       toast({
@@ -218,6 +221,63 @@ export default function VerifyPage() {
           </div>
         </div>
       </div>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-lg mx-4"
+            >
+              <button
+                onClick={() => setShowSuccessModal(false)}
+                className="absolute right-4 top-4 rounded-full p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="flex flex-col items-center text-center">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="mb-4 rounded-full bg-green-100 p-3"
+                >
+                  <CheckCircle2 className="h-8 w-8 text-green-500" />
+                </motion.div>
+
+                <h3 className="mb-2 text-xl font-semibold text-gray-900">
+                  Verification Successful!
+                </h3>
+                <p className="mb-4 text-gray-600">
+                  Your account has been verified. Redirecting to onboarding...
+                </p>
+                
+                {email && (
+                  <p className="text-sm font-medium text-gray-900 mb-6">
+                    {email}
+                  </p>
+                )}
+
+                <div className="flex items-center justify-center w-full py-2">
+                  <Loader2 className="h-5 w-5 animate-spin text-green-600 mr-2" />
+                  <span className="text-sm text-gray-600">
+                    Redirecting...
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

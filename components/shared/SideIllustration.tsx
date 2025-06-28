@@ -8,6 +8,8 @@ const SideIll = () => {
             src="/images/illustration.jpg"
             alt="grainy background - EkoStudy"
             className="object-cover w-full h-full"
+            width={100}
+            height={100}
           />
         </div>
   
@@ -15,7 +17,8 @@ const SideIll = () => {
           {/* Logo */}
           <div>
             <Image src="/images/yellow-logo.png" alt="EkoStudy logo"
-             width={28}
+             width={150}
+             height={75}
              className="w-full lg:w-36" />
           </div>
   
