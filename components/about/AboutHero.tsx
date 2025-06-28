@@ -98,14 +98,14 @@ export default function AboutHero() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow-200 rounded-full opacity-20 blur-xl"
+              className="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow rounded-full opacity-20 blur-xl"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 1, duration: 0.5 }}
-              className="absolute -top-6 -left-6 w-32 h-32 bg-green-200 rounded-full opacity-20 blur-xl"
+              className="absolute -top-6 -left-6 w-32 h-32 bg-green rounded-full opacity-20 blur-xl"
             />
           </motion.div>
         </div>
