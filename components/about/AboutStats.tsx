@@ -21,7 +21,7 @@ export default function AboutStats() {
       const targets = {
         materials: 10000,
         departments: 15,
-        students: 5000
+        students: 300
       };
 
       const animate = () => {

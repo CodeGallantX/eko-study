@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
                             <h3 className="text-[#92B76D] font-bold text-base">LINKS</h3>
                             <ul className="space-y-1">
                                 <li><Link href="#">Be a Partner</Link></li>
-                                <li><Link href="/academics/colleges">Colleges</Link></li>
+                                <li><Link href="#">Colleges</Link></li>
                                 <li><Link href="#">Campus Tour</Link></li>
                                 <li><Link href="#">Help Center</Link></li>
                                 <li><Link href="#">Resources</Link></li>

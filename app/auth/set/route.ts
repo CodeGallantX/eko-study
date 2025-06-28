@@ -10,16 +10,16 @@ export async function POST(request: Request) {
         get: (name) => {
           const cookieHeader = request.headers.get('cookie') || ''
           const cookies = Object.fromEntries(
-            cookieHeader.split('; ').map(c => {
-              const [key, ...v] = c.split('=')
-              return [key, v.join('=')]
+            cookieHeader.split('; ').map((cookie) => {
+              const [key, ...value] = cookie.split('=')
+              return [key.trim(), value.join('=')]
             })
           )
           return cookies[name]
         },
         set() {},
-        remove() {}
-      }
+        remove() {},
+      },
     }
   )
 

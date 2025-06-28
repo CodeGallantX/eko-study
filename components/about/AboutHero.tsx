@@ -22,7 +22,7 @@ export default function AboutHero() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-block mb-4 px-4 py-2 bg-green text-deepGreen rounded-full text-sm font-medium"
+              className="inline-block mb-4 px-4 py-2 bg-green text-white rounded-full text-sm font-medium"
             >
               Transforming Education
             </motion.div>
@@ -58,7 +58,7 @@ export default function AboutHero() {
               </Link>
               <Link
                 href="/contact"
-                className="bg-white text-green border border-green px-6 py-3 rounded-lg font-semibold hover:bg-green/50 transition-colors"
+                className="bg-white text-green border border-green px-6 py-3 rounded-lg font-semibold hover:bg-green/20 transition-colors"
               >
                 Contact Us
               </Link>

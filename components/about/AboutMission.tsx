@@ -7,8 +7,8 @@ import { FaLightbulb, FaChartLine, FaUsers } from 'react-icons/fa';
 
 export default function AboutMission() {
   return (
-    <section className="mb-20 py-12">
-      <div className="container mx-auto px-4">
+    <section className="mb-20 py-12 md:px-12 lg:px-20 xl:px-24">
+      <div className="">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,7 +63,7 @@ export default function AboutMission() {
                   transition={{ delay: 0.2, duration: 0.5 }}
                   className="flex items-start gap-4"
                 >
-                  <div className="bg-green p-3 rounded-full text-green-100">
+                  <div className="bg-green p-3 rounded-full text-gray-50">
                     <FaLightbulb className="w-5 h-5" />
                   </div>
                   <div>

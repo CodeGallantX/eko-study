@@ -8,38 +8,38 @@ export default function AboutFeatures() {
     {
       title: "AI-Powered Study Assistant",
       description: "Get personalized study recommendations based on your courses and performance.",
-      icon: <FaRobot className="w-10 h-10 text-green-600" />
+      icon: <FaRobot className="w-10 h-10 text-deepGreen" />
     },
     {
       title: "Department-Specific Resources",
       description: "Access curated materials for your exact department and courses.",
-      icon: <FaBook className="w-10 h-10 text-green-600" />
+      icon: <FaBook className="w-10 h-10 text-deepGreen" />
     },
     {
       title: "Exam Preparation Suite",
       description: "Past questions, marking schemes, and timed practice tests.",
-      icon: <FaFileAlt className="w-10 h-10 text-green-600" />
+      icon: <FaFileAlt className="w-10 h-10 text-deepGreen" />
     },
     {
       title: "Offline Access",
       description: "Download materials for studying without internet connection.",
-      icon: <FaDownload className="w-10 h-10 text-green-600" />
+      icon: <FaDownload className="w-10 h-10 text-deepGreen" />
     },
     {
       title: "Collaborative Learning",
       description: "Departmental discussion forums and study groups.",
-      icon: <FaUsers className="w-10 h-10 text-green-600" />
+      icon: <FaUsers className="w-10 h-10 text-deepGreen" />
     },
     {
       title: "Progress Tracking",
       description: "Monitor your study habits and improvement over time.",
-      icon: <FaChartLine className="w-10 h-10 text-green-600" />
+      icon: <FaChartLine className="w-10 h-10 text-deepGreen" />
     }
   ];
 
   return (
     <section className="mb-20 py-12 bg-gradient-to-b from-green-50 to-white">
-      <div className="container mx-auto px-4">
+      <div className="">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

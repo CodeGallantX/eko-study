@@ -57,8 +57,8 @@ export default function Header() {
             label: "ACADEMICS",
             submenu: [
               { label: "Courses", href: "/academics/courses" },
-              { label: "Colleges", href: "/academics/colleges" },
-              { label: "Departments", href: "/academics/departments" },
+              // { label: "Colleges", href: "/academics/colleges" },
+              // { label: "Departments", href: "/academics/departments" },
             ],
           },
           {
@@ -66,7 +66,7 @@ export default function Header() {
             submenu: [
               { label: "Notes", href: "/resources/notes" },
               { label: "Past Questions", href: "/resources/Past-Questions" },
-              { label: "Products", href: "/resources/products" },
+              // { label: "Products", href: "/resources/products" },
             ],
           },
           { label: "CONTACT", href: "/contact" },
@@ -163,8 +163,8 @@ export default function Header() {
               label: "ACADEMICS",
               submenu: [
                 { label: "Courses", href: "/academics/courses" },
-                { label: "Colleges", href: "/academics/colleges" },
-                { label: "Departments", href: "/academics/departments" },
+                // { label: "Colleges", href: "/academics/colleges" },
+                // { label: "Departments", href: "/academics/departments" },
               ],
             },
             {
@@ -172,7 +172,7 @@ export default function Header() {
               submenu: [
                 { label: "Notes", href: "/resources/notes" },
                 { label: "Past Questions", href: "/resources/Past-Questions" },
-                { label: "Products", href: "/resources/products" },
+                // { label: "Products", href: "/resources/products" },
               ],
             },
             { label: "CONTACT", href: "/contact" },

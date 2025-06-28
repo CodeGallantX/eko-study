@@ -28,7 +28,7 @@ export default function AboutPage() {
         <Header />
         <Banner page={pageData} />
 
-        <div className="container mx-auto px-4 py-12">
+        <div className="px-6 md:px-12 lg:px-20 xl:px-24 py-12">
           <AboutHero />
           <AboutMission />
           <AboutVision />
