@@ -2,23 +2,22 @@ import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
 export async function POST(request: Request) {
+  const cookieHeader = request.headers.get('cookie') || ''
+  const cookies = Object.fromEntries(
+    cookieHeader.split('; ').map(c => {
+      const [key, ...v] = c.split('=')
+      return [key, v.join('=')]
+    })
+  )
+
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get: (name) => {
-          const cookieHeader = request.headers.get('cookie') || ''
-          const cookies = Object.fromEntries(
-            cookieHeader.split('; ').map((cookie) => {
-              const [key, ...value] = cookie.split('=')
-              return [key.trim(), value.join('=')]
-            })
-          )
-          return cookies[name]
-        },
-        set() {},
-        remove() {},
+        get: (key) => cookies[key],
+        set: () => {},
+        remove: () => {},
       },
     }
   )
