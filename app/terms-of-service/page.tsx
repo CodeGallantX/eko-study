@@ -70,7 +70,7 @@ export default function TermsPage() {
         <p>
           For questions, reach out to us:
           <br />📧 <Link href="mailto:ekostudy.uni@gmail.com" className="text-green hover:underline">support@ekostudy.com</Link>
-          <br />🌐 <Link href="/privacy" className="text-green hover:underline">Privacy Policy</Link>
+          <br />🌐 <Link href="/privacy-policy" className="text-green hover:underline">Privacy Policy</Link>
         </p>
       </section>
     </div>

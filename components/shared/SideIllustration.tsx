@@ -5,7 +5,7 @@ const SideIll = () => {
       <div className="hidden md:block h-full relative font-onest">
         <div className="w-full h-full">
           <Image
-            src="/images/illustration.jpg"
+            src="/images/illustration.jpeg"
             alt="grainy background - EkoStudy"
             className="object-cover w-full h-full"
             width={100}
