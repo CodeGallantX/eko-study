@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
 export async function POST(request: Request) {
-  // Parse cookies from request headers
+  // Parse cookies from request header
   const cookieHeader = request.headers.get('cookie') || ''
   const cookieMap = new Map(
     cookieHeader.split('; ').map((c) => {
@@ -17,13 +17,15 @@ export async function POST(request: Request) {
     {
       cookies: {
         get: (key) => cookieMap.get(key),
-        set: () => {},     // Not needed here
-        remove: () => {},  // Not needed here
+        set: () => {},
+        remove: () => {},
       },
     }
   )
 
-  const { data: { session } } = await supabase.auth.getSession()
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
 
   if (!session) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
