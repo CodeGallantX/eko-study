@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 
 export async function POST() {
   try {
-    const cookieStore = await cookies() // ✅ Use await to get cookies
+    const cookieStore = await cookies()
     const response = new NextResponse()
 
     const supabase = createServerClient(
@@ -22,6 +22,7 @@ export async function POST() {
               secure: process.env.NODE_ENV === 'production',
               sameSite: 'lax',
               path: '/',
+              domain: process.env.NODE_ENV === 'production' ? '.eko-study.vercel.app' : undefined,
             })
           },
           remove(name: string, options: CookieOptions) {
@@ -32,6 +33,7 @@ export async function POST() {
               sameSite: 'lax',
               path: '/',
               maxAge: 0,
+              domain: process.env.NODE_ENV === 'production' ? '.eko-study.vercel.app' : undefined,
             })
           },
         },
