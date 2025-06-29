@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 
 export async function POST(request: Request) {
-  // Parse cookies from request header
+  // Parse cookies manually from header
   const cookieHeader = request.headers.get('cookie') || ''
   const cookieMap = new Map(
     cookieHeader.split('; ').map((c) => {
@@ -11,6 +11,7 @@ export async function POST(request: Request) {
     })
   )
 
+  // Create Supabase server client using parsed cookies
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
