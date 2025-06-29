@@ -22,8 +22,8 @@ export default function CookieProvider({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ event, session }),
           credentials: 'include',
+          body: JSON.stringify({ event, session }),
         })
 
         router.refresh()
