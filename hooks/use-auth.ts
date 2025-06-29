@@ -27,6 +27,7 @@ export function useAuth() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ session: null }),
+        credentials: 'include',
       })
 
       router.push('/auth/signin')

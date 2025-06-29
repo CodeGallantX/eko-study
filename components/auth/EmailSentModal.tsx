@@ -98,7 +98,7 @@ export function EmailSentModal({
                 transition={{ delay: 0.2 }}
                 className="mb-4 rounded-full bg-green p-3 dark:bg-green"
               >
-                <CheckCircle2 className="h-8 w-8 text-green dark:text-green" />
+                <CheckCircle2 className="h-8 w-8 text-white" />
               </motion.div>
 
               <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">

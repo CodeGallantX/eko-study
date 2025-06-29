@@ -23,6 +23,7 @@ export default function CookieProvider({
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ event, session }),
+          credentials: 'include',
         })
 
         router.refresh()
