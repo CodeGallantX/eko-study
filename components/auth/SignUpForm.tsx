@@ -283,7 +283,7 @@ export const SignUpForm = () => {
               }
             />
             <label htmlFor="agreeTerms" className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-snug">
-              I agree to the <Link href="/terms" className="text-green dark:text-green hover:text-deepGreen">Terms</Link> and <Link href="/privacy" className="text-green hover:text-deepGreen">Privacy Policy</Link>
+              I agree to the <Link href="/terms-of-service" className="text-green dark:text-green hover:text-deepGreen">Terms</Link> and <Link href="/privacy-policy" className="text-green hover:text-deepGreen">Privacy Policy</Link>
             </label>
           </div>
 
