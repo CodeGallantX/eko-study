@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
 import { createServerClient, type CookieOptions } from '@supabase/ssr'
-import { cookies } from 'next/headers'
+import { cookies as getCookies } from 'next/headers'
 
 export async function POST() {
   try {
-    const cookieStore = await cookies()
+    const cookieStore = await getCookies() // ✅ Await is REQUIRED here
     const response = new NextResponse()
 
     const supabase = createServerClient(
@@ -22,7 +22,10 @@ export async function POST() {
               secure: process.env.NODE_ENV === 'production',
               sameSite: 'lax',
               path: '/',
-              domain: process.env.NODE_ENV === 'production' ? '.eko-study.vercel.app' : undefined,
+              domain:
+                process.env.NODE_ENV === 'production'
+                  ? '.eko-study.vercel.app'
+                  : undefined,
             })
           },
           remove(name: string, options: CookieOptions) {
@@ -33,7 +36,10 @@ export async function POST() {
               sameSite: 'lax',
               path: '/',
               maxAge: 0,
-              domain: process.env.NODE_ENV === 'production' ? '.eko-study.vercel.app' : undefined,
+              domain:
+                process.env.NODE_ENV === 'production'
+                  ? '.eko-study.vercel.app'
+                  : undefined,
             })
           },
         },

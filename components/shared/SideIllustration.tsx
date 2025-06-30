@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const SideIll = () => {
     return (
-      <div className="hidden md:block h-full relative font-onest">
+      <div className="hidden md:block max-h-screen relative font-onest">
         <div className="w-full h-full">
           <Image
             src="/images/illustration.jpeg"
