@@ -1,5 +1,25 @@
 [
   {
+    "id": 14,
+    "title": "Probability",
+    "code": " STA112",
+    "college": "College of Basic Science",
+    "department": "Computer Science",
+    "semester": "2nd",
+    "level": "100",
+    "url": "/STA112_ekostudy.pdf"
+  },
+  {
+    "id": 13,
+    "title": "Website Design and Management",
+    "code": "CSC106",
+    "college": "College of Basic Science",
+    "department": "Computer Science",
+    "semester": "2nd",
+    "level": "100",
+    "url": "/CSC106_ekostudy.pdf"
+  },
+  {
     "id": 12,
     "title": "Forensic Science",
     "code": " FRS102",
